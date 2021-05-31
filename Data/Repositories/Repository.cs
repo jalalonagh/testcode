@@ -246,16 +246,7 @@ namespace Data.Repositories
 
             Assert.NotNull(entities, nameof(entities));
 
-            foreach (var entity in entities)
-            {
-                var deleteProperty = entity.GetType().GetProperty("deleted");
-                if (deleteProperty != null)
-                {
-                    deleteProperty.SetValue(entity, true);
-                    Entities.Attach(entity).State = EntityState.Modified;
-                    Entities.Update(entity);
-                }
-            }
+            entities.SetDeletedToProperty(Entities);
 
             Result = await DbContext.SaveChangesAsync(cancellationToken);
 
@@ -285,16 +276,7 @@ namespace Data.Repositories
 
             IEnumerable<TEntity> entities = await query.ToListAsync();
 
-            foreach (var entity in entities)
-            {
-                var deleteProperty = entity.GetType().GetProperty("deleted");
-                if (deleteProperty != null)
-                {
-                    deleteProperty.SetValue(entity, true);
-                    Entities.Attach(entity).State = EntityState.Modified;
-                    Entities.Update(entity);
-                }
-            }
+            entities.SetDeletedToProperty(Entities);
 
             Result = await DbContext.SaveChangesAsync(cancellationToken);
 
