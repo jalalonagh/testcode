@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 namespace ManaAutoMapper.Models
 {
     [Serializable]
-    public abstract class AutoMapperDTO<TDto, TEntity, TKey> : JsonDTO<TDto, TEntity>, IHaveCustomMapping
+    public abstract class AutoMapperDTO<TDto, TEntity, TKey> : AutoMapperBaseDTO<TDto, TEntity, TKey>
         where TDto : class, new()
         where TEntity : BaseEntity, new()
         where TKey : struct
@@ -40,32 +40,6 @@ namespace ManaAutoMapper.Models
             var mapper = LazySingleton.Instance;
 
             return mapper.GetMapper().Map<TDto>(baseInstance);
-        }
-
-        public void CreateMappings(AutoMapper.Profile profile)
-        {
-            var mappingExpression = profile.CreateMap<TDto, TEntity>();
-            var mappingExpressionReverse = profile.CreateMap<TEntity, TDto>();
-
-            var dtoType = typeof(TDto);
-            var entityType = typeof(TEntity);
-
-            foreach (var property in entityType.GetProperties())
-            {
-                if (dtoType.GetProperty(property.Name) == null)
-                    mappingExpression.ForMember(property.Name, opt => opt.Ignore());
-            }
-
-            CustomMappings(mappingExpressionReverse);
-            CustomMappingsReverse(mappingExpression);
-        }
-
-        public virtual void CustomMappings(IMappingExpression<TEntity, TDto> mapping)
-        {
-        }
-
-        public virtual void CustomMappingsReverse(IMappingExpression<TDto, TEntity> mapping)
-        {
         }
     }
 }

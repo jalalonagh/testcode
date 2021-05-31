@@ -19,21 +19,7 @@ namespace Common.FileManager
         {
             if (file.Length > 0)
             {
-                var todayFolder = DateTime.Now.ToPersianDateFolderName();
-                var filePath = !string.IsNullOrEmpty(path) ? path : "";
-                filePath = !string.IsNullOrEmpty(userId) ? Path.Combine(filePath, userId.Replace("-", "_")) : filePath;
-                filePath = Path.Combine(filePath, todayFolder);
-                filePath = !string.IsNullOrEmpty(folder) ? Path.Combine(filePath, folder) : filePath;
-                filePath = !string.IsNullOrEmpty(series) ? Path.Combine(filePath, series) : filePath;
-                filePath = !string.IsNullOrEmpty(filename) ? Path.Combine(filePath, filename) : Path.Combine(filePath, Path.GetRandomFileName() + Path.GetExtension(file.FileName));
-
-                CreateFolder(path, userId);
-                CreateFolder(Path.Combine(path, userId.Replace("-", "_").Replace(" ", "_")), todayFolder);
-                CreateFolder(Path.Combine(path, userId.Replace("-", "_").Replace(" ", "_"), todayFolder), folder);
-                if (!string.IsNullOrEmpty(series))
-                {
-                    CreateFolder(Path.Combine(path, userId.Replace("-", "_").Replace(" ", "_"), todayFolder, folder), series);
-                }
+                var filePath = CreateFilePath(path, userId, folder, series, filename, file);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
@@ -52,23 +38,7 @@ namespace Common.FileManager
         {
             if (file.Length > 0)
             {
-                var todayFolder = DateTime.Now.ToPersianDateFolderName();
-                var filePath = !string.IsNullOrEmpty(path) ? path : "";
-
-                filePath = !string.IsNullOrEmpty(userId) ? Path.Combine(filePath, userId.Replace("-", "_")) : filePath;
-                filePath = Path.Combine(filePath, todayFolder);
-                filePath = !string.IsNullOrEmpty(folder) ? Path.Combine(filePath, folder) : filePath;
-                filePath = !string.IsNullOrEmpty(series) ? Path.Combine(filePath, series) : filePath;
-                filePath = !string.IsNullOrEmpty(filename) ? Path.Combine(filePath, filename) : Path.Combine(filePath, Path.GetRandomFileName() + Path.GetExtension(file.FileName));
-
-                CreateFolder(path, userId);
-                CreateFolder(Path.Combine(path, userId.Replace("-", "_").Replace(" ", "_")), todayFolder);
-                CreateFolder(Path.Combine(path, userId.Replace("-", "_").Replace(" ", "_"), todayFolder), folder);
-
-                if (!string.IsNullOrEmpty(series))
-                {
-                    CreateFolder(Path.Combine(path, userId.Replace("-", "_").Replace(" ", "_"), todayFolder, folder), series);
-                }
+                var filePath = CreateFilePath(path, userId, folder, series, filename, file);
 
                 using (var stream = file.OpenReadStream())
                 {
@@ -143,6 +113,28 @@ namespace Common.FileManager
             }
 
             return files;
+        }
+
+        public static string CreateFilePath(string path, string userId, string folder, string series, string filename, IFormFile file)
+        {
+            var todayFolder = DateTime.Now.ToPersianDateFolderName();
+            var filePath = !string.IsNullOrEmpty(path) ? path : "";
+            filePath = !string.IsNullOrEmpty(userId) ? Path.Combine(filePath, userId.Replace("-", "_")) : filePath;
+            filePath = Path.Combine(filePath, todayFolder);
+            filePath = !string.IsNullOrEmpty(folder) ? Path.Combine(filePath, folder) : filePath;
+            filePath = !string.IsNullOrEmpty(series) ? Path.Combine(filePath, series) : filePath;
+            filePath = !string.IsNullOrEmpty(filename) ? Path.Combine(filePath, filename) : Path.Combine(filePath, Path.GetRandomFileName() + Path.GetExtension(file.FileName));
+
+            CreateFolder(path, userId);
+            CreateFolder(Path.Combine(path, userId.Replace("-", "_").Replace(" ", "_")), todayFolder);
+            CreateFolder(Path.Combine(path, userId.Replace("-", "_").Replace(" ", "_"), todayFolder), folder);
+
+            if (!string.IsNullOrEmpty(series))
+            {
+                CreateFolder(Path.Combine(path, userId.Replace("-", "_").Replace(" ", "_"), todayFolder, folder), series);
+            }
+
+            return filePath;
         }
     }
 }
