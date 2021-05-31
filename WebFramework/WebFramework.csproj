@@ -35,8 +35,4 @@
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BusinessPlan\BusinessLayout.csproj" />
-  </ItemGroup>
-
 </Project>
