@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ManaAutoMapper.Models
 {
-    public class AutoMapperBaseDTO<TDto, TEntity, TKey> : JsonDTO<TDto, TEntity>, IHaveCustomMapping
+    public class AutoMapperBaseDTO<TDto, TEntity, TKey> : JsonDTO<TDto, TEntity, TKey>, IHaveCustomMapping
         where TDto : class, new()
         where TEntity : class, IEntity, new()
         where TKey : struct

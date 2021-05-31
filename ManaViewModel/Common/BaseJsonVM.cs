@@ -3,16 +3,10 @@ using System;
 
 namespace ManaViewModel.Common
 {
-    public abstract class BaseJsonVM<TDTO, TEntity> : JsonDTO<TDTO, TEntity>
+    public abstract class BaseJsonVM<TDTO, TEntity, TKey> : JsonDTO<TDTO, TEntity, TKey>
         where TDTO : class, new()
         where TEntity : class, new()
+        where TKey : struct
     {
-        public DateTime? CreateTime { get; set; }
-        public string CreatePersianTime { get; set; }
-        public DateTime? LastUpdateTime { get; set; }
-        public string LastUpdatePersianTime { get; set; }
-        public int? Order { get; set; }
-        public bool? IsActive { get; set; }
-        public bool? IsDeleted { get; set; }
     }
 }
