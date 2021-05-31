@@ -509,11 +509,6 @@ namespace Data.Repositories
             }
             return null;
         }
-
-        public Task<TEntity> ItemSync(TEntity Target, TEntity Origin, CancellationToken cancel)
-        {
-            return Target.ItemSync<TEntity>(Origin, new CancellationToken());
-        }
         #endregion JalalQuery
     }
     public static class HackyDbSetGetContextTrick

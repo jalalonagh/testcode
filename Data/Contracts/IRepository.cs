@@ -38,7 +38,5 @@ namespace Data.Repositories
         Task<IEnumerable<TEntity>> SearchRangeAsync(TEntity entity, string text, CancellationToken cancel, int total = 0, int more = int.MaxValue);
         Task<TEntity> UpdateFieldRangeAsync(CancellationToken cancellation, TEntity entity, params string[] fields);
         Task<TEntity> UpdateFieldRangeAsync(CancellationToken cancellation, int Id, params KeyValuePair<string, dynamic>[] fields);
-
-        Task<TEntity> ItemSync(TEntity Target, TEntity Origin, CancellationToken cancel);
     }
 }

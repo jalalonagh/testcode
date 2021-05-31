@@ -13,11 +13,9 @@ namespace Entities.Profile
         {
             builder.ToTable(nameof(Profile), nameof(SchemaEnum.PROFILE));
             builder.Property(p => p.UserId).IsRequired();
-            builder.HasOne(p => p.User).WithOne(u => u.Profile).HasForeignKey<Profile>(p => p.UserId);
             builder.Property(p => p.FirstName).IsRequired(false).HasMaxLength(30);
             builder.Property(p => p.LastName).IsRequired(false).HasMaxLength(30);
             builder.Property(p => p.PhoneNumberId).IsRequired();
-            builder.HasOne(p => p.PhoneNumber).WithOne(p => p.Profile).HasForeignKey<Profile>(p => p.PhoneNumberId);
             builder.Property(p => p.NationalCode).IsRequired(false).HasMaxLength(25);
             builder.Property(p => p.TelePhoneNumber).IsRequired(false).HasMaxLength(25);
             builder.Property(p => p.EmailAddress).IsRequired(false).HasMaxLength(35);
@@ -27,13 +25,12 @@ namespace Entities.Profile
             builder.Property(p => p.ImageAddress).IsRequired(false).HasMaxLength(100);
             builder.Property(p => p.Points).IsRequired().HasDefaultValue(0);
             builder.Property(p => p.ProfileTypeId).IsRequired(false).HasDefaultValue((int)ProfileType.END_USER);
-            //builder.HasMany(p => p.Addresses).WithOne(a => a.Profile).HasForeignKey(z => z.ProfileId);
-            builder.HasMany(p => p.FavoriteProducts).WithOne(f => f.Profile).HasForeignKey(f => f.ProfileId);
-            //builder.HasMany(p => p.OrderHeaders).WithOne(f => f.Buyer).HasForeignKey(f => f.BuyerId);
-            //builder.HasMany(p => p.CartHeaders).WithOne(f => f.Profile).HasForeignKey(f => f.ProfileId);
-            //builder.HasMany(p => p.PricingHeaders).WithOne(h => h.Profile).HasForeignKey(h => h.ProductId);
             builder.Property(x => x.ExtensionNumber).HasMaxLength(50).IsRequired(false);
-            // builder.HasOne(p => p.Wallet).WithOne(f => f.Profile).HasForeignKey<Wallet.Wallet>(f => f.ProfileId);
+
+            builder.HasOne(p => p.PhoneNumber).WithOne(p => p.Profile).HasForeignKey<Profile>(p => p.PhoneNumberId);
+            builder.HasOne(p => p.User).WithOne(u => u.Profile).HasForeignKey<Profile>(p => p.UserId);
+
+            builder.HasMany(p => p.FavoriteProducts).WithOne(f => f.Profile).HasForeignKey(f => f.ProfileId);
 
             builder.HasIndex(i => i.UserId);
             builder.HasIndex(i => i.ProfileTypeId);
