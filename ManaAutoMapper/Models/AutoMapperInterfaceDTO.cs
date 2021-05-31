@@ -7,9 +7,9 @@ using System.ComponentModel.DataAnnotations;
 namespace ManaAutoMapper.Models
 {
     [Serializable]
-    public abstract class AutoMapperInterfaceDTO<TDto, TEntity, TKey> : IHaveCustomMapping
+    public abstract class AutoMapperInterfaceDTO<TDto, TEntity, TKey> : JsonDTO<TDto, TEntity>, IHaveCustomMapping
         where TDto : class, new()
-        where TEntity : IEntity, new()
+        where TEntity : class, IEntity, new()
         where TKey : struct
     {
         public TKey Id { get; set; }
@@ -19,16 +19,6 @@ namespace ManaAutoMapper.Models
             var mapper = LazySingleton.Instance;
 
             return mapper.GetMapper().Map<TEntity>(CastToDerivedClass(this));
-        }
-
-        public string ToJson(TEntity entity)
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(entity);
-        }
-
-        public string ToJson(TDto model)
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(model);
         }
 
         public TEntity ToEntity(TEntity entity)
@@ -43,11 +33,6 @@ namespace ManaAutoMapper.Models
             var mapper = LazySingleton.Instance;
 
             return mapper.GetMapper().Map<TDto>(model);
-        }
-
-        public static TDto FromJson(string json)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<TDto>(json);
         }
 
         protected TDto CastToDerivedClass(AutoMapperInterfaceDTO<TDto, TEntity, TKey> baseInstance)
