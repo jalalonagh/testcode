@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="80" height="24" viewBox="0 0 80 24">
+  <defs>
+    <clipPath id="clip-ITALY">
+      <rect width="80" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="ITALY" clip-path="url(#clip-ITALY)">
+    <rect width="80" height="24" fill="#fff"/>
+    <g id="Group_62" data-name="Group 62" transform="translate(313.993 -234.473)">
+      <path id="Path_254" data-name="Path 254" d="M-303.993,239.473h4.278v14h-4.278Z" transform="translate(0 0)" fill="#6d6d6d"/>
+      <path id="Path_255" data-name="Path 255" d="M-300.032,239.473h12.976v3.457h-4.354v10.543h-4.269V242.93h-4.354Z" transform="translate(2.41 0)" fill="#6d6d6d"/>
+      <path id="Path_256" data-name="Path 256" d="M-282.561,251.162h-4.846l-.674,2.311h-4.359l5.193-14h4.656l5.192,14h-4.47Zm-.885-3.028-1.525-5.031-1.51,5.031Z" transform="translate(7.029 0)" fill="#6d6d6d"/>
+      <path id="Path_257" data-name="Path 257" d="M-282.243,239.473h4.269v10.553h6.663v3.447h-10.932Z" transform="translate(13.231 0)" fill="#6d6d6d"/>
+      <path id="Path_258" data-name="Path 258" d="M-276.032,239.473h4.741l2.784,4.721,2.789-4.721H-261l-5.372,8.136v5.864h-4.278v-5.864Z" transform="translate(17.009 0)" fill="#6d6d6d"/>
+    </g>
+  </g>
+</svg>

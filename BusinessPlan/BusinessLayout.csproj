@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="CSharpFunctionalExtensions" Version="2.14.1" />
+    <PackageReference Include="FluentValidation" Version="9.4.0" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="BaseBusiness\Share\" />
+    <Folder Include="Profile\Share\Dto\" />
+    <Folder Include="Profile\Share\ViewModels\" />
+    <Folder Include="Share\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ManaDataTransferObject\ManaDataTransferObject.csproj" />
+  </ItemGroup>
+
+</Project>

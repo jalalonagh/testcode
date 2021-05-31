@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="80" height="24" viewBox="0 0 80 24">
+  <defs>
+    <clipPath id="clip-TAIHO">
+      <rect width="80" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="TAIHO" clip-path="url(#clip-TAIHO)">
+    <rect width="80" height="24" fill="#fff"/>
+    <g id="Group_33" data-name="Group 33" transform="translate(-172.484 -61.451)">
+      <path id="Path_108" data-name="Path 108" d="M185.351,79.451H189.9v-8h3.02v-4H182.484v4h2.868Z" fill="#e72526"/>
+      <path id="Path_109" data-name="Path 109" d="M218.593,67.451v3.736h3.02V67.451h4.545v12h-4.545V75.324h-3.02v4.127h-4.454v-12Z" fill="#e72526"/>
+      <path id="Path_110" data-name="Path 110" d="M203.444,79.451h3.582l-3.815-12h-4.982l-3.816,12h3.582l.7-1.98h4.053Zm-4.116-3.78,1.392-3.945,1.391,3.945Z" fill="#e72526"/>
+      <rect id="Rectangle_10" data-name="Rectangle 10" width="4.12" height="12" transform="translate(208.522 67.451)" fill="#e72526"/>
+      <g id="Group_32" data-name="Group 32">
+        <g id="Group_31" data-name="Group 31">
+          <g id="Group_29" data-name="Group 29">
+            <path id="Path_111" data-name="Path 111" d="M236.041,78.383l-.108-.552a4.47,4.47,0,0,0,2.639-4.388c0-2.5-1.571-4.532-3.5-4.532s-3.5,2.033-3.5,4.532a4.69,4.69,0,0,0,2.16,4.186l-.169.526a5.278,5.278,0,0,1-2.431-4.712c0-2.813,1.769-5.1,3.943-5.1s3.943,2.289,3.943,5.1C239.012,75.777,237.791,77.808,236.041,78.383Z" fill="#e72526"/>
+          </g>
+          <g id="Group_30" data-name="Group 30">
+            <path id="Path_112" data-name="Path 112" d="M233.789,78l.413.013.171-9.384-.413-.013Z" fill="#e72526"/>
+            <path id="Path_113" data-name="Path 113" d="M235.165,73.134l.082-4.48-.413-.013-.171,9.384.413.013.082-4.48.487.015-.082,4.48.413.013.082-4.48.008-.419v0Z" fill="#e72526"/>
+          </g>
+        </g>
+        <path id="Path_114" data-name="Path 114" d="M237.952,67.465v-.014h-5.906v.023c-2.456.238-4.391,2.82-4.391,5.977s1.935,5.738,4.391,5.976v.024h5.906v-.015c2.522-.151,4.532-2.769,4.532-5.985S240.474,67.616,237.952,67.465Zm-2.883,11.544c-2.426,0-4.393-2.489-4.393-5.558s1.967-5.559,4.393-5.559,4.393,2.489,4.393,5.559S237.495,79.009,235.069,79.009Z" fill="#e72526"/>
+      </g>
+    </g>
+  </g>
+</svg>
