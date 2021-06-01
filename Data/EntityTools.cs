@@ -50,28 +50,17 @@ namespace Data
             return query;
         }
 
-        public static string FixedSqlQueryParameters<TEntity>(this string query, bool or = false)
-            where TEntity : class, IEntity
-        {
-            if (or)
-            {
-                return $"{query} ([deleted] is null or [deleted] = 0) or ([isActive] is null or [isActive] = 1) or";
-            }
-
-            return $"{query} ([deleted] is null or [deleted] = 0) and ([isActive] is null or [isActive] = 1) and";
-        }
-
         public static TEntity SetCreationTime<TEntity>(this TEntity entity)
             where TEntity : class, IEntity
         {
             var nowDT = DateTime.Now;
-            var propertyCreate = entity.GetType().GetProperty("creationDateTime");
+            var propertyCreate = entity.GetType().GetProperty("CreateTime");
             if (propertyCreate != null)
             {
                 propertyCreate.SetValue(entity, nowDT);
             }
 
-            var propertyPersianCreate = entity.GetType().GetProperty("creationPersianDateTime");
+            var propertyPersianCreate = entity.GetType().GetProperty("CreatePersianTime");
             if (propertyPersianCreate != null)
             {
                 var dt = $"{pc.GetYear(nowDT)}/{pc.GetMonth(nowDT)}/{pc.GetDayOfMonth(nowDT)} {nowDT.Hour}:{nowDT.Minute}:{nowDT.Second}";
@@ -88,21 +77,7 @@ namespace Data
 
             foreach (var entity in entities)
             {
-                var nowDT = DateTime.Now;
-                var propertyCreate = entity.GetType().GetProperty("creationDateTime");
-                if (propertyCreate != null)
-                {
-                    propertyCreate.SetValue(entity, nowDT);
-                }
-
-                var propertyPersianCreate = entity.GetType().GetProperty("creationPersianDateTime");
-                if (propertyPersianCreate != null)
-                {
-                    var dt = $"{pc.GetYear(nowDT)}/{pc.GetMonth(nowDT)}/{pc.GetDayOfMonth(nowDT)} {nowDT.Hour}:{nowDT.Minute}:{nowDT.Second}";
-                    propertyPersianCreate.SetValue(entity, dt);
-                }
-
-                newEntities = newEntities.Append(entity);
+                newEntities = newEntities.Append(SetCreationTime<TEntity>(entity));
             }
 
             return newEntities;

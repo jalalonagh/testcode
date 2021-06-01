@@ -45,5 +45,20 @@ namespace Data
 
             return Expression.Lambda<Func<TEntity, bool>>(clause, parameter);
         }
+
+        public static Expression<Func<TEntity, bool>> ApplyWhereLikeFunc<TEntity, TSearch>(this string propertyName, dynamic propertyValue)
+            where TEntity : class, IEntity
+            where TSearch : class, ISearchEntity
+        {
+            MethodInfo contains = typeof(string).GetMethod("Contains");
+
+            ParameterExpression parameter = Expression.Parameter(typeof(TSearch), $"{nameof(TSearch).Substring(0, 2)}");
+
+            var property = Expression.Property(parameter, propertyName);
+
+            var call = Expression.Call(property, contains, Expression.Constant(propertyValue, typeof(string)));
+
+            return Expression.Lambda<Func<TEntity, bool>>(call, parameter);
+        }
     }
 }

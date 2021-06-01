@@ -34,7 +34,6 @@ namespace Data.Repositories
             Entities = DbContext.Set<TEntity>(); // City => Cities
         }
 
-        #region Async Method
         public async Task<TEntity> GetByIdAsync(CancellationToken cancellationToken, params object[] ids)
         {
             var table = Entities.GetContext().Model.FindEntityType(typeof(TEntity)).GetTableName();
@@ -309,9 +308,7 @@ namespace Data.Repositories
 
             return null;
         }
-        #endregion
 
-        #region Attach & Detach
         public TEntity Detach(TEntity entity)
         {
             Assert.NotNull(entity, nameof(entity));
@@ -330,9 +327,7 @@ namespace Data.Repositories
 
             return entity;
         }
-        #endregion
 
-        #region JalalQuery
         public async Task<IEnumerable<TEntity>> FilterRangeAsync(TSearchEntity entity, CancellationToken cancel, int total = 0, int more = int.MaxValue)
         {
             var properties = entity.GetType()
@@ -367,45 +362,19 @@ namespace Data.Repositories
 
         public async Task<IEnumerable<TEntity>> SearchRangeAsync(TEntity entity, string text, CancellationToken cancel, int total = 0, int more = int.MaxValue)
         {
-            var deletedProp = entity.GetType().GetProperty("deleted");
-            if (deletedProp != null)
-                deletedProp.SetValue(entity, null);
-
             var properties = entity.GetType()
                 .GetProperties()
                 .Where(x => x.PropertyType == typeof(string))
                 .ToList();
 
-            var entityType = Database.Model.FindEntityType(typeof(TEntity));
-            var schema = entityType.GetSchema();
-            var tableName = entityType.GetTableName();
-            var sql = $"select * from {schema}.{tableName} ";
-
-            if (!properties.Equals(null) && properties.Count() > 0)
-            {
-                sql += "where (";
-                properties.ForEach(delegate (PropertyInfo info)
-                {
-                    // check and deactivate default numbers like 0 into search and filter action
-                    //if (info.PropertyType == typeof(string))
-                    sql += $" [{info.Name}] like N'%{text}%' or";
-                });
-
-                sql = sql.Substring(0, sql.Length - 2);
-
-                sql = sql + ") and ";
-
-                sql += sql.FixedSqlQueryParameters<TEntity>();
-
-                sql = sql.Substring(0, sql.Length - 3);
-                //sql += ";";
-            }
-
-            var query = Entities.FromSqlRaw(sql)
-                .AsNoTracking()
+            var query = Entities
                 .Skip(total)
                 .Take(more)
                 .AsQueryable();
+
+            if (properties != null && properties.Any())
+                foreach (var item in properties)
+                    query = query.Where(EntityFuncs.ApplyWhereLikeFunc<TEntity, TSearchEntity>(item.Name, text));
 
             foreach (var property in DbContext.Model.FindEntityType(typeof(TEntity)).GetNavigations())
                 query = query.Include(property.Name);
@@ -509,7 +478,6 @@ namespace Data.Repositories
             }
             return null;
         }
-        #endregion JalalQuery
     }
     public static class HackyDbSetGetContextTrick
     {
