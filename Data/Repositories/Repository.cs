@@ -200,27 +200,15 @@ namespace Data.Repositories
 
         public async Task<TEntity> DeleteByIdAsync(int id)
         {
-            int Result = 0;
-
             var query = Entities
                 .Where(w => w.Id == id)
                 .AsQueryable();
 
             var entity = await query.FirstOrDefaultAsync();
 
-            var deleteProperty = entity.GetType().GetProperty(nameof(entity.IsDeleted));
+            entity = await DeleteAsync(entity);
 
-            if (deleteProperty != null)
-            {
-                deleteProperty.SetValue(entity, true);
-                Entities.Attach(entity).State = EntityState.Modified;
-                Entities.Update(entity);
-                Result = await DbContext.SaveChangesAsync();
-
-                return entity;
-            }
-
-            if (Result > 0)
+            if (entity != null)
                 return entity;
 
             return null;

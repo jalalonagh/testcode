@@ -15,14 +15,7 @@ namespace Common.Security
             if (string.IsNullOrEmpty(plainText) || string.IsNullOrEmpty(key))
                 return "";
 
-            RijndaelManaged aes = new RijndaelManaged();
-            aes.KeySize = 256;
-            aes.BlockSize = 128;
-            aes.Padding = PaddingMode.PKCS7;
-            aes.Mode = CipherMode.CBC;
-
-            aes.Key = encoding.GetBytes(key);
-            aes.GenerateIV();
+            RijndaelManaged aes = GenerateRij();
 
             ICryptoTransform AESEncrypt = aes.CreateEncryptor(aes.Key, aes.IV);
             byte[] buffer = encoding.GetBytes(plainText);
@@ -48,12 +41,7 @@ namespace Common.Security
             if (string.IsNullOrEmpty(plainText) || string.IsNullOrEmpty(key))
                 return "";
 
-            RijndaelManaged aes = new RijndaelManaged();
-            aes.KeySize = 256;
-            aes.BlockSize = 128;
-            aes.Padding = PaddingMode.PKCS7;
-            aes.Mode = CipherMode.CBC;
-            aes.Key = encoding.GetBytes(key);
+            RijndaelManaged aes = GenerateRij();
 
             // Base 64 decode
             byte[] base64Decoded = Convert.FromBase64String(plainText);
@@ -76,6 +64,20 @@ namespace Common.Security
             {
                 return hmac.ComputeHash(encoding.GetBytes(data));
             }
+        }
+
+        private static RijndaelManaged GenerateRij()
+        {
+            RijndaelManaged aes = new RijndaelManaged();
+            aes.KeySize = 256;
+            aes.BlockSize = 128;
+            aes.Padding = PaddingMode.PKCS7;
+            aes.Mode = CipherMode.CBC;
+
+            aes.Key = encoding.GetBytes(key);
+            aes.GenerateIV();
+
+            return aes;
         }
     }
 }
