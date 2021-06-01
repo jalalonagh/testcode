@@ -30,11 +30,9 @@ namespace Services
             {
                 var secretKey = Encoding.UTF8.GetBytes(_siteSetting.JwtSettings.SecretKey); // longer that 16 character
                 var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature);
-
                 var encryptionkey = Encoding.UTF8.GetBytes(_siteSetting.JwtSettings.Encryptkey); //must be 16 character
                 var encryptingCredentials = new EncryptingCredentials(new SymmetricSecurityKey(encryptionkey), SecurityAlgorithms.Aes128KW, SecurityAlgorithms.Aes128CbcHmacSha256);
                 var claims = await _getClaimsAsync(user);
-
                 var descriptor = new SecurityTokenDescriptor
                 {
                     Issuer = _siteSetting.JwtSettings.Issuer,
@@ -46,11 +44,8 @@ namespace Services
                     EncryptingCredentials = encryptingCredentials,
                     Subject = new ClaimsIdentity(claims)
                 };
-
                 var tokenHandler = new JwtSecurityTokenHandler();
-
                 var securityToken = tokenHandler.CreateJwtSecurityToken(descriptor);
-
                 return new AccessToken(securityToken);
             }
             catch (Exception ex)
@@ -61,39 +56,19 @@ namespace Services
                     fs.Write(title, 0, title.Length);
                 }
                 throw;
-
             }
-
         }
 
         public async Task<IEnumerable<Claim>> ReadClaimsAsync(string token)
         {
-            try
-            {
-                var secretKey = Encoding.UTF8.GetBytes(_siteSetting.JwtSettings.SecretKey); // longer that 16 character
-                var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature);
-
-                var encryptionkey = Encoding.UTF8.GetBytes(_siteSetting.JwtSettings.Encryptkey); //must be 16 character
-                var encryptingCredentials = new EncryptingCredentials(new SymmetricSecurityKey(encryptionkey), SecurityAlgorithms.Aes128KW, SecurityAlgorithms.Aes128CbcHmacSha256);
-
-                var tokenHandler = new JwtSecurityTokenHandler();
-
-                var securityToken = tokenHandler.ReadJwtToken(token);
-
-                IEnumerable<Claim> claims = securityToken.Claims;
-
-                return claims;
-            }
-            catch (Exception ex)
-            {
-                using (FileStream fs = System.IO.File.Create(Path.Combine(Directory.GetCurrentDirectory(), "errorStart.txt")))
-                {
-                    Byte[] title = new UTF8Encoding(true).GetBytes(ex.Message);
-                    fs.Write(title, 0, title.Length);
-                }
-            }
-
-            return null;
+            var secretKey = Encoding.UTF8.GetBytes(_siteSetting.JwtSettings.SecretKey); // longer that 16 character
+            var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature);
+            var encryptionkey = Encoding.UTF8.GetBytes(_siteSetting.JwtSettings.Encryptkey); //must be 16 character
+            var encryptingCredentials = new EncryptingCredentials(new SymmetricSecurityKey(encryptionkey), SecurityAlgorithms.Aes128KW, SecurityAlgorithms.Aes128CbcHmacSha256);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var securityToken = tokenHandler.ReadJwtToken(token);
+            IEnumerable<Claim> claims = securityToken.Claims;
+            return claims;
         }
 
         private async Task<IEnumerable<Claim>> _getClaimsAsync(User user)

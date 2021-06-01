@@ -167,7 +167,7 @@ namespace Data
         }
 
         public static TEntity SetModifiedTimeToProperty<TEntity>(this TEntity entity)
-            where TEntity: class, IEntity
+            where TEntity : class, IEntity
         {
             var nowDT = DateTime.Now;
             var propertyCreate = entity.GetType().GetProperty("LastUpdateTime");
@@ -223,30 +223,38 @@ namespace Data
 
         public static TEntity SyncFeildsData<TEntity>(this TEntity entity, IEnumerable<KeyValuePair<string, dynamic>> keyValues)
         {
-            if(keyValues != null && keyValues.Any() && entity != null)
+            if (keyValues != null && keyValues.Any() && entity != null)
             {
                 var properties = entity.GetType().GetProperties();
-
                 if (properties != null && properties.Length > 0)
-                {
                     if (entity != null)
-                    {
                         foreach (var field in keyValues)
                         {
                             var prop = properties.Where(w => w.Name == field.Key).FirstOrDefault();
-
                             if (prop != null)
-                            {
                                 prop.SetValue(entity, field.Value);
-                            }
                         }
-                    }
+                return entity;
+            }
+            return default(TEntity);
+        }
 
-                    return entity;
+        public static TEntity SetFieldsValue<TEntity>(this TEntity entity, string[] fields, IEnumerable<PropertyInfo> properties)
+            where TEntity : class, IEntity
+        {
+            if (entity != null)
+            {
+                foreach (var field in fields)
+                {
+                    var prop = properties.Where(w => w.Name == field).FirstOrDefault();
+                    if (prop != null)
+                    {
+                        prop.SetValue(entity, prop.GetValue(entity));
+                    }
                 }
             }
 
-            return default(TEntity);
+            return entity;
         }
     }
 }

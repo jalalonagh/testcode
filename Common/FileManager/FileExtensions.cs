@@ -18,13 +18,10 @@ namespace Common.FileManager
             if (file.Length > 0)
             {
                 var filePath = CreateFilePath(inputModel, file);
-
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     await file.CopyToAsync(stream);
-
                     filePath = filePath.Remove(0, filePath.IndexOf("uploads") + 8).Replace("\\", "/");
-
                     return filePath;
                 }
             }
@@ -37,23 +34,16 @@ namespace Common.FileManager
             if (file.Length > 0)
             {
                 var filePath = CreateFilePath(inputModel, file);
-
                 using (var stream = file.OpenReadStream())
                 {
                     Image image = Image.FromStream(stream);
-
                     var temp = RoundImageToCreateThumbnail(image);
-
                     Image thumb = temp.GetThumbnailImage(150, 150, () => false, IntPtr.Zero);
-
                     thumb.Save(filePath);
-
                     filePath = filePath.Remove(0, filePath.IndexOf("uploads") + 8).Replace("\\", "/");
-
                     return filePath;
                 }
             }
-
             return null;
         }
 

@@ -271,17 +271,7 @@ namespace Data.Repositories
                         .Where(w => w.Id == entity.Id)
                         .AsQueryable();
                     var data = await query.FirstOrDefaultAsync();
-                    if (data != null)
-                    {
-                        foreach (var field in fields)
-                        {
-                            var prop = properties.Where(w => w.Name == field).FirstOrDefault();
-                            if (prop != null)
-                            {
-                                prop.SetValue(data, prop.GetValue(entity));
-                            }
-                        }
-                    }
+                    data = data.SetFieldsValue<TEntity>(fields, properties);
                     var result = -1;
                     Entities.Update(data);
                     result = await DbContext.SaveChangesAsync();

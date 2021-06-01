@@ -26,12 +26,9 @@ namespace Entities.Profile
             builder.Property(p => p.Points).IsRequired().HasDefaultValue(0);
             builder.Property(p => p.ProfileTypeId).IsRequired(false).HasDefaultValue((int)ProfileType.END_USER);
             builder.Property(x => x.ExtensionNumber).HasMaxLength(50).IsRequired(false);
-
             builder.HasOne(p => p.PhoneNumber).WithOne(p => p.Profile).HasForeignKey<Profile>(p => p.PhoneNumberId);
             builder.HasOne(p => p.User).WithOne(u => u.Profile).HasForeignKey<Profile>(p => p.UserId);
-
             builder.HasMany(p => p.FavoriteProducts).WithOne(f => f.Profile).HasForeignKey(f => f.ProfileId);
-
             builder.HasIndex(i => i.UserId);
             builder.HasIndex(i => i.ProfileTypeId);
             builder.HasIndex(i => i.PhoneNumberId);
