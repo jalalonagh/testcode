@@ -35,7 +35,7 @@ namespace Data.Repositories
             Entities = DbContext.Set<TEntity>(); // City => Cities
         }
 
-        public async Task<TEntity> GetByIdAsync(CancellationToken cancellationToken, params object[] ids)
+        public async Task<TEntity> GetByIdAsync(params object[] ids)
         {
             var query = Entities
                 .Where(w => ids.Contains(w.Id))
@@ -47,7 +47,7 @@ namespace Data.Repositories
             return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<TEntity>> FetchByIdAsync(CancellationToken cancellationToken, int id)
+        public async Task<IEnumerable<TEntity>> FetchByIdAsync(int id)
         {
             var query = Entities
                 .Where(w => w.Id == id)
@@ -59,7 +59,7 @@ namespace Data.Repositories
             return await query.Take(1).ToListAsync();
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken, int total = 0, int more = int.MaxValue)
+        public async Task<IEnumerable<TEntity>> GetAllAsync(int total = 0, int more = int.MaxValue)
         {
             var query = Entities
                 .Skip(total)
@@ -76,7 +76,7 @@ namespace Data.Repositories
             return await query.ToListAsync();
         }
 
-        public async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken, bool saveNow = true)
+        public async Task<TEntity> AddAsync(TEntity entity)
         {
             int Result = 0;
 
@@ -86,9 +86,9 @@ namespace Data.Repositories
 
             entity = entity.SetCreationTime();
 
-            await Entities.AddAsync(entity, cancellationToken).ConfigureAwait(false);
+            await Entities.AddAsync(entity, new CancellationToken()).ConfigureAwait(false);
 
-            Result = await DbContext.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+            Result = await DbContext.SaveChangesAsync().ConfigureAwait(false);
 
             if (Result > 0)
                 return entity;
@@ -96,7 +96,7 @@ namespace Data.Repositories
             return null;
         }
 
-        public async Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken, bool saveNow = true)
+        public async Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities)
         {
             int Result = 0;
 
@@ -106,9 +106,9 @@ namespace Data.Repositories
 
             entities = entities.SetCreationTimes();
 
-            await Entities.AddRangeAsync(entities, cancellationToken).ConfigureAwait(false);
+            await Entities.AddRangeAsync(entities, new CancellationToken()).ConfigureAwait(false);
 
-            Result = await DbContext.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+            Result = await DbContext.SaveChangesAsync();
 
             if (Result > 0)
             {
@@ -122,7 +122,7 @@ namespace Data.Repositories
             return null;
         }
 
-        public async Task<TEntity> UpdateAsync(TEntity entity, CancellationToken cancellationToken, bool saveNow = true)
+        public async Task<TEntity> UpdateAsync(TEntity entity)
         {
             int Result = 0;
 
@@ -134,7 +134,7 @@ namespace Data.Repositories
 
             Entities.Update(entity);
 
-            Result = await DbContext.SaveChangesAsync(cancellationToken);
+            Result = await DbContext.SaveChangesAsync();
 
             if (Result > 0)
                 return entity;
@@ -142,7 +142,7 @@ namespace Data.Repositories
             return null;
         }
 
-        public async Task<IEnumerable<TEntity>> UpdateRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken, bool saveNow = true)
+        public async Task<IEnumerable<TEntity>> UpdateRangeAsync(IEnumerable<TEntity> entities)
         {
             int Result = 0;
 
@@ -160,7 +160,7 @@ namespace Data.Repositories
 
             Entities.UpdateRange(entities);
 
-            Result = await DbContext.SaveChangesAsync(cancellationToken);
+            Result = await DbContext.SaveChangesAsync();
 
             if (Result > 0)
             {
@@ -174,7 +174,7 @@ namespace Data.Repositories
             return null;
         }
 
-        public async Task<TEntity> DeleteAsync(TEntity entity, CancellationToken cancellationToken, bool saveNow = true)
+        public async Task<TEntity> DeleteAsync(TEntity entity)
         {
             int Result = 0;
 
@@ -198,7 +198,7 @@ namespace Data.Repositories
             return null;
         }
 
-        public async Task<TEntity> DeleteByIdAsync(int id, CancellationToken cancellationToken, bool saveNow = true)
+        public async Task<TEntity> DeleteByIdAsync(int id)
         {
             int Result = 0;
 
@@ -226,7 +226,7 @@ namespace Data.Repositories
             return null;
         }
 
-        public async Task<IEnumerable<TEntity>> DeleteRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken, bool saveNow = true)
+        public async Task<IEnumerable<TEntity>> DeleteRangeAsync(IEnumerable<TEntity> entities)
         {
             int Result = 0;
 
@@ -234,7 +234,7 @@ namespace Data.Repositories
 
             entities.SetDeletedToProperty(Entities);
 
-            Result = await DbContext.SaveChangesAsync(cancellationToken);
+            Result = await DbContext.SaveChangesAsync();
 
             if (Result > 0)
             {
@@ -248,7 +248,7 @@ namespace Data.Repositories
             return null;
         }
 
-        public async Task<IEnumerable<TEntity>> DeleteRangeByIdsAsync(IEnumerable<int> ids, CancellationToken cancellationToken, bool saveNow = true)
+        public async Task<IEnumerable<TEntity>> DeleteRangeByIdsAsync(IEnumerable<int> ids)
         {
             int Result = 0;
 
@@ -263,7 +263,7 @@ namespace Data.Repositories
 
             entities.SetDeletedToProperty(Entities);
 
-            Result = await DbContext.SaveChangesAsync(cancellationToken);
+            Result = await DbContext.SaveChangesAsync();
 
             if (Result > 0)
             {
@@ -352,7 +352,7 @@ namespace Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<TEntity> UpdateFieldRangeAsync(CancellationToken cancellation, TEntity entity, params string[] fields)
+        public async Task<TEntity> UpdateFieldRangeAsync(TEntity entity, params string[] fields)
         {
             if (entity != null && fields.Length > 0)
             {
@@ -384,7 +384,7 @@ namespace Data.Repositories
 
                     Entities.Update(data);
 
-                    result = await DbContext.SaveChangesAsync(cancellation);
+                    result = await DbContext.SaveChangesAsync();
 
                     if (result > 0)
                         return data;
@@ -395,7 +395,7 @@ namespace Data.Repositories
             return null;
         }
 
-        public async Task<TEntity> UpdateFieldRangeAsync(CancellationToken cancellation, int Id, params KeyValuePair<string, dynamic>[] fields)
+        public async Task<TEntity> UpdateFieldRangeAsync(int Id, params KeyValuePair<string, dynamic>[] fields)
         {
             if (fields != null && Id > 0 && fields.Length > 0)
             {
@@ -411,7 +411,7 @@ namespace Data.Repositories
 
                 Entities.Update(data);
 
-                result = await DbContext.SaveChangesAsync(cancellation);
+                result = await DbContext.SaveChangesAsync();
 
                 if (result > 0)
                     return data;
