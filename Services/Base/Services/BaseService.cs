@@ -23,14 +23,14 @@ namespace Services.Base.Services
             this.repository = repository;
         }
 
-        public async Task<ServiceResult<TEntity>> AddAsync(TEntity entity, CancellationToken cancellationToken, bool saveNow = true)
+        public async Task<ServiceResult<TEntity>> AddAsync(TEntity entity)
         {
-            return await repository.AddAsync(entity, cancellationToken, saveNow);
+            return await repository.AddAsync(entity);
         }
 
-        public async Task<ServiceResult<IEnumerable<TEntity>>> AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken, bool saveNow = true)
+        public async Task<ServiceResult<IEnumerable<TEntity>>> AddRangeAsync(IEnumerable<TEntity> entities)
         {
-            var result = await repository.AddRangeAsync(entities, cancellationToken, saveNow);
+            var result = await repository.AddRangeAsync(entities);
 
             if (result != null && result.Any())
                 return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result, "");
@@ -41,19 +41,19 @@ namespace Services.Base.Services
             return new ServiceResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "مشکلی در سرور رخ داده است");
         }
 
-        public async Task<ServiceResult<TEntity>> DeleteAsync(TEntity entity, CancellationToken cancellationToken, bool saveNow = true)
+        public async Task<ServiceResult<TEntity>> DeleteAsync(TEntity entity)
         {
-            return await repository.DeleteAsync(entity, cancellationToken, saveNow);
+            return await repository.DeleteAsync(entity);
         }
 
-        public async Task<ServiceResult<TEntity>> DeleteByIdAsync(int id, CancellationToken cancellationToken, bool saveNow = true)
+        public async Task<ServiceResult<TEntity>> DeleteByIdAsync(int id)
         {
-            return await repository.DeleteByIdAsync(id, cancellationToken, saveNow);
+            return await repository.DeleteByIdAsync(id);
         }
 
-        public async Task<ServiceResult<IEnumerable<TEntity>>> DeleteRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken, bool saveNow = true)
+        public async Task<ServiceResult<IEnumerable<TEntity>>> DeleteRangeAsync(IEnumerable<TEntity> entities)
         {
-            var result = await repository.DeleteRangeAsync(entities, cancellationToken, saveNow);
+            var result = await repository.DeleteRangeAsync(entities);
 
             if (result != null && result.Any())
                 return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result, "");
@@ -64,9 +64,9 @@ namespace Services.Base.Services
             return new ServiceResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "مشکلی در سرور رخ داده است");
         }
 
-        public async Task<ServiceResult<IEnumerable<TEntity>>> DeleteRangeByIdsAsync(IEnumerable<int> ids, CancellationToken cancellationToken, bool saveNow = true)
+        public async Task<ServiceResult<IEnumerable<TEntity>>> DeleteRangeByIdsAsync(IEnumerable<int> ids)
         {
-            var result = await repository.DeleteRangeByIdsAsync(ids, cancellationToken, saveNow);
+            var result = await repository.DeleteRangeByIdsAsync(ids);
 
             if (result != null && result.Any())
                 return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result, "");
@@ -90,9 +90,9 @@ namespace Services.Base.Services
             return new ServiceResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "مشکلی در سرور رخ داده است");
         }
 
-        public async Task<ServiceResult<IEnumerable<TEntity>>> GetAllAsync(CancellationToken cancellationToken, int total = 0, int more = int.MaxValue)
+        public async Task<ServiceResult<IEnumerable<TEntity>>> GetAllAsync(int total = 0, int more = int.MaxValue)
         {
-            var result = await repository.GetAllAsync(cancellationToken, total, more);
+            var result = await repository.GetAllAsync(total, more);
 
             if (result != null && result.Any())
                 return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result, "");
@@ -103,14 +103,14 @@ namespace Services.Base.Services
             return new ServiceResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "مشکلی در سرور رخ داده است");
         }
 
-        public async Task<ServiceResult<TEntity>> GetByIdAsync(CancellationToken cancellationToken, params object[] ids)
+        public async Task<ServiceResult<TEntity>> GetByIdAsync(params object[] ids)
         {
-            return await repository.GetByIdAsync(cancellationToken, ids);
+            return await repository.GetByIdAsync(ids);
         }
 
-        public async Task<ServiceResult<TEntity>> ItemSync(TEntity Target, TEntity Origin, CancellationToken cancel)
+        public async Task<ServiceResult<TEntity>> ItemSync(TEntity Target, TEntity Origin)
         {
-            return await ItemSync(Target, Origin, cancel);
+            return await ItemSync(Target, Origin);
         }
 
         public async Task<ServiceResult<IEnumerable<TEntity>>> SearchRangeAsync(SearchRangeModel<TEntity> search)
@@ -126,24 +126,24 @@ namespace Services.Base.Services
             return new ServiceResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "مشکلی در سرور رخ داده است");
         }
 
-        public async Task<ServiceResult<TEntity>> UpdateAsync(TEntity entity, CancellationToken cancellationToken, bool saveNow = true)
+        public async Task<ServiceResult<TEntity>> UpdateAsync(TEntity entity)
         {
-            return await repository.UpdateAsync(entity, cancellationToken, saveNow);
+            return await repository.UpdateAsync(entity);
         }
 
-        public async Task<ServiceResult<TEntity>> UpdateFieldRangeAsync(CancellationToken cancellation, TEntity entity, params string[] fields)
+        public async Task<ServiceResult<TEntity>> UpdateFieldRangeAsync(TEntity entity, params string[] fields)
         {
-            return await repository.UpdateFieldRangeAsync(cancellation, entity, fields);
+            return await repository.UpdateFieldRangeAsync(entity, fields);
         }
 
-        public async Task<ServiceResult<TEntity>> UpdateFieldRangeAsync(CancellationToken cancellation, int Id, params KeyValuePair<string, dynamic>[] fields)
+        public async Task<ServiceResult<TEntity>> UpdateFieldRangeAsync(int Id, params KeyValuePair<string, dynamic>[] fields)
         {
-            return await repository.UpdateFieldRangeAsync(cancellation, Id, fields);
+            return await repository.UpdateFieldRangeAsync(Id, fields);
         }
 
-        public async Task<ServiceResult<IEnumerable<TEntity>>> UpdateRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken, bool saveNow = true)
+        public async Task<ServiceResult<IEnumerable<TEntity>>> UpdateRangeAsync(IEnumerable<TEntity> entities)
         {
-            var result = await repository.UpdateRangeAsync(entities, cancellationToken, saveNow);
+            var result = await repository.UpdateRangeAsync(entities);
 
             if (result != null && result.Any())
                 return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result, "");

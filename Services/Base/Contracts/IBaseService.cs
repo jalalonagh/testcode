@@ -16,18 +16,18 @@ namespace Services.Base.Contracts
     {
         IRepository<TEntity, TSearchEntity> repository { get; }
 
-        Task<ServiceResult<TEntity>> AddAsync(TEntity entity, CancellationToken cancellationToken, bool saveNow = true);
-        Task<ServiceResult<IEnumerable<TEntity>>> AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken, bool saveNow = true);
-        Task<ServiceResult<TEntity>> DeleteAsync(TEntity entity, CancellationToken cancellationToken, bool saveNow = true);
-        Task<ServiceResult<IEnumerable<TEntity>>> DeleteRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken, bool saveNow = true);
-        Task<ServiceResult<TEntity>> GetByIdAsync(CancellationToken cancellationToken, params object[] ids);
-        Task<ServiceResult<IEnumerable<TEntity>>> GetAllAsync(CancellationToken cancellationToken, int total = 0, int more = int.MaxValue);
-        Task<ServiceResult<TEntity>> UpdateAsync(TEntity entity, CancellationToken cancellationToken, bool saveNow = true);
-        Task<ServiceResult<IEnumerable<TEntity>>> UpdateRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken, bool saveNow = true);
+        Task<ServiceResult<TEntity>> AddAsync(TEntity entity);
+        Task<ServiceResult<IEnumerable<TEntity>>> AddRangeAsync(IEnumerable<TEntity> entities);
+        Task<ServiceResult<TEntity>> DeleteAsync(TEntity entity);
+        Task<ServiceResult<IEnumerable<TEntity>>> DeleteRangeAsync(IEnumerable<TEntity> entities);
+        Task<ServiceResult<TEntity>> GetByIdAsync(params object[] ids);
+        Task<ServiceResult<IEnumerable<TEntity>>> GetAllAsync(int total = 0, int more = int.MaxValue);
+        Task<ServiceResult<TEntity>> UpdateAsync(TEntity entity);
+        Task<ServiceResult<IEnumerable<TEntity>>> UpdateRangeAsync(IEnumerable<TEntity> entities);
         Task<ServiceResult<IEnumerable<TEntity>>> FilterRangeAsync(FilterRangeModel<TSearchEntity> filter);
         Task<ServiceResult<IEnumerable<TEntity>>> SearchRangeAsync(SearchRangeModel<TEntity> search);
-        Task<ServiceResult<TEntity>> UpdateFieldRangeAsync(CancellationToken cancellation, TEntity entity, params string[] fields);
-        Task<ServiceResult<TEntity>> UpdateFieldRangeAsync(CancellationToken cancellation, int Id, params KeyValuePair<string, dynamic>[] fields);
-        Task<ServiceResult<TEntity>> ItemSync(TEntity Target, TEntity Origin, CancellationToken cancel);
+        Task<ServiceResult<TEntity>> UpdateFieldRangeAsync(TEntity entity, params string[] fields);
+        Task<ServiceResult<TEntity>> UpdateFieldRangeAsync(int Id, params KeyValuePair<string, dynamic>[] fields);
+        Task<ServiceResult<TEntity>> ItemSync(TEntity Target, TEntity Origin);
     }
 }

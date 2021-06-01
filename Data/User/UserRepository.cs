@@ -27,24 +27,24 @@ namespace Data.User
             Entities = DbContext.Set<Entities.User.User>();
         }
 
-        public Task<Entities.User.User> GetByUserAndPass(string username, string password, CancellationToken cancellationToken)
+        public Task<Entities.User.User> GetByUserAndPass(string username, string password)
         {
             var passwordHash = SecurityHelper.GetSha256Hash(password);
-            return Table.Where(p => p.UserName == username && p.PasswordHash == passwordHash).SingleOrDefaultAsync(cancellationToken);
+            return Table.Where(p => p.UserName == username && p.PasswordHash == passwordHash).SingleOrDefaultAsync();
         }
 
-        public Task UpdateSecuirtyStampAsync(Entities.User.User user, CancellationToken cancellationToken)
+        public Task UpdateSecuirtyStampAsync(Entities.User.User user)
         {
-            return UpdateAsync(user, cancellationToken);
+            return UpdateAsync(user);
         }
 
-        public Task UpdateLastLoginDateAsync(Entities.User.User user, CancellationToken cancellationToken)
+        public Task UpdateLastLoginDateAsync(Entities.User.User user)
         {
             user.LastLoginDate = DateTimeOffset.Now;
-            return UpdateAsync(user, cancellationToken);
+            return UpdateAsync(user);
         }
 
-        public async Task AddAsync(Entities.User.User user, string password, CancellationToken cancellationToken)
+        public async Task AddAsync(Entities.User.User user, string password)
         {
             var exists = await TableNoTracking.AnyAsync(p => p.UserName == user.UserName);
             if (exists)
@@ -52,7 +52,7 @@ namespace Data.User
 
             var passwordHash = SecurityHelper.GetSha256Hash(password);
             user.PasswordHash = passwordHash;
-            await base.AddAsync(user, cancellationToken);
+            await base.AddAsync(user);
         }
 
         new public virtual async Task<Entities.User.User> GetByIdAsync(CancellationToken cancellationToken, params object[] ids)
