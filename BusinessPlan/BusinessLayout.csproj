@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Product\Share\ViewModels\**" />
+    <EmbeddedResource Remove="Product\Share\ViewModels\**" />
+    <None Remove="Product\Share\ViewModels\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CSharpFunctionalExtensions" Version="2.14.1" />
+    <PackageReference Include="FluentValidation" Version="9.4.0" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Product\Command\" />
+    <Folder Include="Product\Share\" />
+    <Folder Include="Profile\Command\" />
+    <Folder Include="Profile\Query\" />
+    <Folder Include="Profile\Share\" />
+    <Folder Include="Share\" />
+    <Folder Include="User\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ManaDapper\ManaDapper.csproj" />
+    <ProjectReference Include="..\ManaDataTransferObject\ManaDataTransferObject.csproj" />
+    <ProjectReference Include="..\ManaViewModel\ManaViewModel.csproj" />
+  </ItemGroup>
+
+</Project>
