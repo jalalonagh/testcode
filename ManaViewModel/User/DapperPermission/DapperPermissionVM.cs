@@ -30,16 +30,16 @@ namespace ManaViewModel.User.DapperPermission
         [JsonProperty("RolesDescription")]
         public string Description { get; set; }
         [JsonProperty("RolesNormalizedName")]
-        public string NormalizedName { get; set; }
+        public string NormalName { get; set; }
         [JsonProperty("ChairsName")]
         public string Chairs { get; set; }
         [JsonProperty("ChairsId")]
-        public int ChairsId { get; set; }
+        public int ChairsIds { get; set; }
         [JsonProperty("Permitted")]
         public bool Permitted { get; set; }
         [JsonProperty("RolesName")]
         public string Roles { get; set; }
         [JsonProperty("RolesId")]
-        public int? RolesId { get; set; }
+        public int? RolesIds { get; set; }
     }
 }
