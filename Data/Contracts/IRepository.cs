@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Common;
+using Data.Repositories.Models;
 using Entities;
 using Entities.Common;
 using Microsoft.EntityFrameworkCore;
@@ -34,8 +35,8 @@ namespace Data.Repositories
         Task<TEntity> UpdateAsync(TEntity entity, CancellationToken cancellationToken, bool saveNow = true);
         Task<IEnumerable<TEntity>> UpdateRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken, bool saveNow = true);
 
-        Task<IEnumerable<TEntity>> FilterRangeAsync(TSearchEntity entity, CancellationToken cancel, int total = 0, int more = int.MaxValue);
-        Task<IEnumerable<TEntity>> SearchRangeAsync(TEntity entity, string text, CancellationToken cancel, int total = 0, int more = int.MaxValue);
+        Task<IEnumerable<TEntity>> FilterRangeAsync(FilterRangeModel<TSearchEntity> filter);
+        Task<IEnumerable<TEntity>> SearchRangeAsync(SearchRangeModel<TEntity> search);
         Task<TEntity> UpdateFieldRangeAsync(CancellationToken cancellation, TEntity entity, params string[] fields);
         Task<TEntity> UpdateFieldRangeAsync(CancellationToken cancellation, int Id, params KeyValuePair<string, dynamic>[] fields);
     }

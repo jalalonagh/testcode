@@ -1,4 +1,5 @@
 ﻿using Data.Repositories;
+using Data.Repositories.Models;
 using Entities;
 using Entities.Common;
 using System;
@@ -23,8 +24,8 @@ namespace Services.Base.Contracts
         Task<ServiceResult<IEnumerable<TEntity>>> GetAllAsync(CancellationToken cancellationToken, int total = 0, int more = int.MaxValue);
         Task<ServiceResult<TEntity>> UpdateAsync(TEntity entity, CancellationToken cancellationToken, bool saveNow = true);
         Task<ServiceResult<IEnumerable<TEntity>>> UpdateRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken, bool saveNow = true);
-        Task<ServiceResult<IEnumerable<TEntity>>> FilterRangeAsync(TSearchEntity entity, CancellationToken cancel, int total = 0, int more = int.MaxValue);
-        Task<ServiceResult<IEnumerable<TEntity>>> SearchRangeAsync(TEntity entity, string text, CancellationToken cancel, int total = 0, int more = int.MaxValue);
+        Task<ServiceResult<IEnumerable<TEntity>>> FilterRangeAsync(FilterRangeModel<TSearchEntity> filter);
+        Task<ServiceResult<IEnumerable<TEntity>>> SearchRangeAsync(SearchRangeModel<TEntity> search);
         Task<ServiceResult<TEntity>> UpdateFieldRangeAsync(CancellationToken cancellation, TEntity entity, params string[] fields);
         Task<ServiceResult<TEntity>> UpdateFieldRangeAsync(CancellationToken cancellation, int Id, params KeyValuePair<string, dynamic>[] fields);
         Task<ServiceResult<TEntity>> ItemSync(TEntity Target, TEntity Origin, CancellationToken cancel);

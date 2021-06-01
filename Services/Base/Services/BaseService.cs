@@ -1,4 +1,5 @@
 ﻿using Data.Repositories;
+using Data.Repositories.Models;
 using Entities;
 using Entities.Common;
 using Services.Base.Contracts;
@@ -76,9 +77,9 @@ namespace Services.Base.Services
             return new ServiceResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "مشکلی در سرور رخ داده است");
         }
 
-        public async Task<ServiceResult<IEnumerable<TEntity>>> FilterRangeAsync(TSearchEntity entity, CancellationToken cancel, int total = 0, int more = int.MaxValue)
+        public async Task<ServiceResult<IEnumerable<TEntity>>> FilterRangeAsync(FilterRangeModel<TSearchEntity> filter)
         {
-            var result = await repository.FilterRangeAsync(entity, cancel, total, more);
+            var result = await repository.FilterRangeAsync(filter);
 
             if (result != null && result.Any())
                 return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result, "");
@@ -112,9 +113,9 @@ namespace Services.Base.Services
             return await ItemSync(Target, Origin, cancel);
         }
 
-        public async Task<ServiceResult<IEnumerable<TEntity>>> SearchRangeAsync(TEntity entity, string text, CancellationToken cancel, int total = 0, int more = int.MaxValue)
+        public async Task<ServiceResult<IEnumerable<TEntity>>> SearchRangeAsync(SearchRangeModel<TEntity> search)
         {
-            var result = await repository.SearchRangeAsync(entity, text, cancel, total, more);
+            var result = await repository.SearchRangeAsync(search);
 
             if (result != null && result.Any())
                 return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result, "");

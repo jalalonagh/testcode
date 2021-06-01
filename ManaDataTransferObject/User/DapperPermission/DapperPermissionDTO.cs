@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace ManaDataTransferObject.User.DapperPermission
 {
-    public class DapperPermissionDTO: BaseJsonDTO<DapperPermissionDTO, Entities.User.DapperPermission.DapperPermission>
+    public class DapperPermissionDTO: BaseJsonDTO<DapperPermissionDTO, Entities.User.DapperPermission.DapperPermission, int>
     {
         [JsonProperty("NavigationMenusActionName")]
         public string MenusActionName { get; set; }

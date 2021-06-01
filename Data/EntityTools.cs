@@ -54,19 +54,7 @@ namespace Data
         public static TEntity SetCreationTime<TEntity>(this TEntity entity)
             where TEntity : class, IEntity
         {
-            var nowDT = DateTime.Now;
-            var propertyCreate = entity.GetType().GetProperty("CreateTime");
-            if (propertyCreate != null)
-            {
-                propertyCreate.SetValue(entity, nowDT);
-            }
-
-            var propertyPersianCreate = entity.GetType().GetProperty("CreatePersianTime");
-            if (propertyPersianCreate != null)
-            {
-                var dt = $"{pc.GetYear(nowDT)}/{pc.GetMonth(nowDT)}/{pc.GetDayOfMonth(nowDT)} {nowDT.Hour}:{nowDT.Minute}:{nowDT.Second}";
-                propertyPersianCreate.SetValue(entity, dt);
-            }
+            entity = SetCreatedToProperty<TEntity>(entity);
 
             return entity;
         }
@@ -160,7 +148,11 @@ namespace Data
         {
             var properties = typeof(TEntity).GetProperties();
 
-            var ordered = properties.Where(w => w.CustomAttributes.Any() && w.CustomAttributes.Where(ww => ww.AttributeType.FullName == "System.ComponentModel.DataAnnotations.Schema.ColumnAttribute").Any()).ToList();
+            var ordered = properties.Where(w => w.CustomAttributes.Any()
+            && w.CustomAttributes
+            .Where(ww => ww.AttributeType.FullName == "System.ComponentModel.DataAnnotations.Schema.ColumnAttribute")
+            .Any())
+                .ToList();
 
             var custom = ordered.Select(s => new
             {
@@ -207,6 +199,26 @@ namespace Data
                     db.Update(entity);
                 }
             }
+        }
+
+        public static TEntity SetCreatedToProperty<TEntity>(TEntity entity)
+            where TEntity : class, IEntity
+        {
+            var nowDT = DateTime.Now;
+            var propertyCreate = entity.GetType().GetProperty("CreateTime");
+            if (propertyCreate != null)
+            {
+                propertyCreate.SetValue(entity, nowDT);
+            }
+
+            var propertyPersianCreate = entity.GetType().GetProperty("CreatePersianTime");
+            if (propertyPersianCreate != null)
+            {
+                var dt = $"{pc.GetYear(nowDT)}/{pc.GetMonth(nowDT)}/{pc.GetDayOfMonth(nowDT)} {nowDT.Hour}:{nowDT.Minute}:{nowDT.Second}";
+                propertyPersianCreate.SetValue(entity, dt);
+            }
+
+            return entity;
         }
     }
 }

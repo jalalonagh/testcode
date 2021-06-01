@@ -1,5 +1,6 @@
 ﻿
 using Common.Utilities;
+using Data.Repositories.Models;
 using Entities;
 using Entities.Common;
 using Microsoft.EntityFrameworkCore;
@@ -310,11 +311,11 @@ namespace Data.Repositories
             return entity;
         }
 
-        public async Task<IEnumerable<TEntity>> FilterRangeAsync(TSearchEntity entity, CancellationToken cancel, int total = 0, int more = int.MaxValue)
+        public async Task<IEnumerable<TEntity>> FilterRangeAsync(FilterRangeModel<TSearchEntity> filter)
         {
-            var properties = entity.GetType()
+            var properties = filter.Entity.GetType()
                 .GetProperties()
-                .Where(x => (x.PropertyType != typeof(string) && x.GetValue(entity) != null) || (x.PropertyType == typeof(string) && !string.IsNullOrEmpty(x.GetValue(entity).ToString())))
+                .Where(x => (x.PropertyType != typeof(string) && x.GetValue(filter.Entity) != null) || (x.PropertyType == typeof(string) && !string.IsNullOrEmpty(x.GetValue(filter.Entity).ToString())))
                 .ToList();
 
             var entityType = Database.Model.FindEntityType(typeof(TEntity));
@@ -323,13 +324,13 @@ namespace Data.Repositories
 
             var query = Entities
                 .AsNoTracking()
-                .Skip(total)
-                .Take(more)
+                .Skip(filter.Total)
+                .Take(filter.More)
                 .AsQueryable();
 
             query = query.ClearDeletedOrNotActiveEntity<TEntity>();
 
-            query = query.SetWhere<TEntity, TSearchEntity>(properties, entity);
+            query = query.SetWhere<TEntity, TSearchEntity>(properties, filter.Entity);
 
             foreach (var property in DbContext.Model.FindEntityType(typeof(TEntity)).GetNavigations())
                 query = query.Include(property.Name);
@@ -342,24 +343,26 @@ namespace Data.Repositories
             return await query.ToListAsync();
         }
 
-        public async Task<IEnumerable<TEntity>> SearchRangeAsync(TEntity entity, string text, CancellationToken cancel, int total = 0, int more = int.MaxValue)
+        public async Task<IEnumerable<TEntity>> SearchRangeAsync(SearchRangeModel<TEntity> search)
         {
-            var properties = entity.GetType()
+            var properties = search.Entity.GetType()
                 .GetProperties()
                 .Where(x => x.PropertyType == typeof(string))
                 .ToList();
 
             var query = Entities
-                .Skip(total)
-                .Take(more)
+                .Skip(search.Total)
+                .Take(search.More)
                 .AsQueryable();
 
             if (properties != null && properties.Any())
                 foreach (var item in properties)
-                    query = query.Where(EntityFuncs.ApplyWhereLikeFunc<TEntity, TSearchEntity>(item.Name, text));
+                    query = query.Where(EntityFuncs.ApplyWhereLikeFunc<TEntity, TSearchEntity>(item.Name, search.Text));
 
             foreach (var property in DbContext.Model.FindEntityType(typeof(TEntity)).GetNavigations())
                 query = query.Include(property.Name);
+
+            query = query.ClearDeletedOrNotActiveEntity<TEntity>();
 
             var feilds = query.GetOrderFeilds<TEntity>();
 

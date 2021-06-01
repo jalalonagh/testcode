@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace ManaViewModel.User.DapperPermission
 {
-    public class DapperPermissionVM : BaseJsonVM<DapperPermissionVM, Entities.User.DapperPermission.DapperPermission>
+    public class DapperPermissionVM : BaseJsonVM<DapperPermissionVM, Entities.User.DapperPermission.DapperPermission, int>
     {
         [JsonProperty("NavigationMenusActionName")]
         public string ActionName { get; set; }
