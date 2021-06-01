@@ -21,7 +21,7 @@ namespace Common.Utilities
 
         public static string ToNumeric(this int value)
         {
-            return value.ToString("N0"); //"123,456"
+            return value.ToString("N0");
         }
 
         public static string ToNumeric(this decimal value)
@@ -83,7 +83,7 @@ namespace Common.Utilities
                 .Replace("ي", "ی")
                 .Replace(" ", " ")
                 .Replace("‌", " ")
-                .Replace("ھ", "ه");//.Replace("ئ", "ی");
+                .Replace("ھ", "ه");
         }
 
         public static string CleanString(this string str)

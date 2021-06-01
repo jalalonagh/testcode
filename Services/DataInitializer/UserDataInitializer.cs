@@ -1,5 +1,7 @@
 ﻿using Data.Repositories;
+using Data.User;
 using Entities;
+using Entities.User;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
 
@@ -10,31 +12,34 @@ namespace Services.DataInitializer
     /// </summary>
     public class UserDataInitializer : IDataInitializer
     {
-
-        public UserDataInitializer()
+        private readonly IUserRepository userRepository;
+        private readonly UserManager<User> manager;
+        public UserDataInitializer(IUserRepository repository, UserManager<User> user)
         {
+            userRepository = repository;
+            manager = user;
         }
 
         public void InitializeData()
         {
-            //if (!userRepository.TableNoTracking.Any(p => p.UserName == "Admin"))
-            //{
+            if (!userRepository.TableNoTracking.Any(p => p.UserName == "Admin"))
+            {
 
-            //    var result = UserManager.CreateAsync(new User
-            //    {
-            //        EmailConfirmed = false,
-            //        PhoneNumber = "09354320819",
-            //        TwoFactorEnabled = false,
-            //        LockoutEnabled = false,
-            //        AccessFailedCount = 0,
-            //        isActive = true,
-            //        UserName = "Admin",
-            //        Email = "admin@site.com",
-            //        age = 25,
-            //        fullname = "administrator",
-            //        gender = Common.GENDER_TYPE.MALE,
-            //    }, "1234567").Result;
-            //}
+                var result = manager.CreateAsync(new User
+                {
+                    EmailConfirmed = false,
+                    PhoneNumber = "09354320819",
+                    TwoFactorEnabled = false,
+                    LockoutEnabled = false,
+                    AccessFailedCount = 0,
+                    IsActive = true,
+                    UserName = "Admin",
+                    Email = "admin@site.com",
+                    Age = 25,
+                    FullName = "administrator",
+                    Gender = ManaEnums.Entity.User.UserGenderType.MALE,
+                }, "1234567").Result;
+            }
         }
     }
 }

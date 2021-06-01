@@ -34,7 +34,7 @@ namespace Common.Utilities
             Pluralizer pluralizer = new Pluralizer();
             foreach (IMutableEntityType entityType in modelBuilder.Model.GetEntityTypes())
             {
-                string tableName = entityType.GetTableName();//.Relational().TableName;
+                string tableName = entityType.GetTableName();
                 entityType.SetTableName(pluralizer.Pluralize(tableName));
             }
         }

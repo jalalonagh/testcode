@@ -17,8 +17,6 @@ namespace Common.Utilities
         public static bool HasAttribute(this MemberInfo type, Type attribute, bool inherit = false)
         {
             return Attribute.IsDefined(type, attribute, inherit);
-            //return type.IsDefined(attribute, inherit);
-            //return type.GetCustomAttributes(attribute, inherit).Length > 0;
         }
 
         public static bool IsInheritFrom<T>(this Type type)
@@ -28,7 +26,6 @@ namespace Common.Utilities
 
         public static bool IsInheritFrom(this Type type, Type parentType)
         {
-            //the 'is' keyword do this too for values (new ChildClass() is ParentClass)
             return parentType.IsAssignableFrom(type);
         }
 
@@ -85,7 +82,6 @@ namespace Common.Utilities
 
         public static bool IsCustomType(this Type type)
         {
-            //return type.Assembly.GetName().Name != "mscorlib";
             return type.IsCustomValueType() || type.IsCustomReferenceType();
         }
 

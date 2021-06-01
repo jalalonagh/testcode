@@ -28,29 +28,5 @@ namespace Common.Utilities
             var foundMethod = matchingMethods.Single();
             return foundMethod.Name;
         }
-
-        public static void LogMethod(ILogger logger, MethodBase method, string username, params object[] parameters)
-        {
-            try
-            {
-                //var methodName = GetMethodName(method);
-
-                //var infoMessage = $"{methodName} Executed";
-                //infoMessage += username == null ? "." : $" By {username} .";
-                //logger.LogInformation(infoMessage);
-
-                //if (parameters == null)
-                //{
-                //    return;
-                //}
-
-                //var jsonParameters = JsonConvert.SerializeObject(parameters);
-                //var traceMessage = $"{methodName} Parameters : {jsonParameters}";
-                //logger.LogTrace(traceMessage);
-            }
-            catch (Exception e)
-            {
-            }
-        }
     }
 }
