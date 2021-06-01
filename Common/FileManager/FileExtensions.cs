@@ -73,8 +73,6 @@ namespace Common.FileManager
         public static IEnumerable<string> DirSearch(this string sDir)
         {
             List<string> files = new List<string>();
-            try
-            {
                 foreach (string f in Directory.GetFiles(sDir))
                 {
                     files.Add(f);
@@ -83,10 +81,6 @@ namespace Common.FileManager
                 {
                     files.AddRange(DirSearch(d));
                 }
-            }
-            catch (System.Exception excpt)
-            {
-            }
 
             return files;
         }

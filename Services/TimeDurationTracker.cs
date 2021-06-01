@@ -57,7 +57,7 @@ namespace Services
             }
             catch (Exception Ex)
             {
-
+                Console.Write(Ex.Message);
             }
         }
     }
