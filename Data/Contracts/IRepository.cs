@@ -19,21 +19,20 @@ namespace Data.Repositories
         IQueryable<TEntity> Table { get; }
         IQueryable<TEntity> TableNoTracking { get; }
 
-        Task<TEntity> AddAsync(TEntity entity);
-        Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities);
-        Task<TEntity> DeleteAsync(TEntity entity);
-        Task<TEntity> DeleteByIdAsync(int id);
-        Task<IEnumerable<TEntity>> DeleteRangeAsync(IEnumerable<TEntity> entities);
-        Task<IEnumerable<TEntity>> DeleteRangeByIdsAsync(IEnumerable<int> ids);
-        Task<TEntity> GetByIdAsync(params object[] ids);
-        Task<IEnumerable<TEntity>> FetchByIdAsync(int id);
-        Task<IEnumerable<TEntity>> GetAllAsync(int total = 0, int more = int.MaxValue);
-        Task<TEntity> UpdateAsync(TEntity entity);
-        Task<IEnumerable<TEntity>> UpdateRangeAsync(IEnumerable<TEntity> entities);
-
-        Task<IEnumerable<TEntity>> FilterRangeAsync(FilterRangeModel<TSearchEntity> filter);
-        Task<IEnumerable<TEntity>> SearchRangeAsync(SearchRangeModel<TEntity> search);
-        Task<TEntity> UpdateFieldRangeAsync(TEntity entity, params string[] fields);
-        Task<TEntity> UpdateFieldRangeAsync(int Id, params KeyValuePair<string, dynamic>[] fields);
+        Task<RepositoryResult<TEntity>> AddAsync(TEntity entity);
+        Task<RepositoryResult<IEnumerable<TEntity>>> AddRangeAsync(IEnumerable<TEntity> entities);
+        Task<RepositoryResult<TEntity>> DeleteAsync(TEntity entity);
+        Task<RepositoryResult<TEntity>> DeleteByIdAsync(int id);
+        Task<RepositoryResult<IEnumerable<TEntity>>> DeleteRangeAsync(IEnumerable<TEntity> entities);
+        Task<RepositoryResult<IEnumerable<TEntity>>> DeleteRangeByIdsAsync(IEnumerable<int> ids);
+        Task<RepositoryResult<TEntity>> GetByIdAsync(params object[] ids);
+        Task<RepositoryResult<IEnumerable<TEntity>>> FetchByIdAsync(int id);
+        Task<RepositoryResult<IEnumerable<TEntity>>> GetAllAsync(int total = 0, int more = int.MaxValue);
+        Task<RepositoryResult<TEntity>> UpdateAsync(TEntity entity);
+        Task<RepositoryResult<IEnumerable<TEntity>>> UpdateRangeAsync(IEnumerable<TEntity> entities);
+        Task<RepositoryResult<IEnumerable<TEntity>>> FilterRangeAsync(FilterRangeModel<TSearchEntity> filter);
+        Task<RepositoryResult<IEnumerable<TEntity>>> SearchRangeAsync(SearchRangeModel<TEntity> search);
+        Task<RepositoryResult<TEntity>> UpdateFieldRangeAsync(TEntity entity, params string[] fields);
+        Task<RepositoryResult<TEntity>> UpdateFieldRangeAsync(int Id, params KeyValuePair<string, dynamic>[] fields);
     }
 }

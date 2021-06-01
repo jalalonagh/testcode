@@ -1,10 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.User
 {
@@ -21,6 +16,10 @@ namespace Entities.User
             builder.Property(z => z.IsPerson).HasDefaultValue(false);
             builder.HasOne(u => u.Profile).WithOne(p => p.User).HasForeignKey<Profile.Profile>(p => p.UserId);
             builder.Property(z => z.AccountingUserReferenceId).IsRequired(false);
+
+            builder.HasIndex(i => i.UserType);
+            builder.HasIndex(i => i.Order);
+            builder.HasIndex(i => i.IsPerson);
         }
     }
 }

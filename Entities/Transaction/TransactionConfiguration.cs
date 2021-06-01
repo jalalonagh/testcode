@@ -13,6 +13,9 @@ namespace Entities.Transaction
             builder.Property(p => p.smsId).IsRequired();
             builder.Property(p => p.transaction).IsRequired();
             builder.Property(p => p.type).IsRequired();
+
+            builder.HasIndex(i => i.type);
+            builder.HasIndex(i => i.phoneId);
         }
     }
 }

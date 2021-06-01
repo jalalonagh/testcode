@@ -14,8 +14,9 @@ namespace Entities.Profile.PhoneNumberType
 
             builder.Property(p => p.Description).IsRequired().HasMaxLength(10);
             builder.Property(p => p.Id).ValueGeneratedNever();
-
             builder.HasMany(p => p.PhoneNumbers).WithOne(p => p.PhoneNumberType).HasForeignKey(p => p.PhoneNumberTypeId);
+
+            builder.HasIndex(i => i.Order);
         }
     }
 }

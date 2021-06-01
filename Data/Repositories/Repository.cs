@@ -24,7 +24,6 @@ namespace Data.Repositories
         protected readonly ApplicationDbContext DbContext;
 
         public DbContext Database { get { return DbContext; } }
-
         public DbSet<TEntity> Entities { get; }
         public IQueryable<TEntity> Table => Entities;
         public IQueryable<TEntity> TableNoTracking => Entities.AsNoTracking();
@@ -35,27 +34,31 @@ namespace Data.Repositories
             Entities = DbContext.Set<TEntity>(); // City => Cities
         }
 
-        public async Task<TEntity> GetByIdAsync(params object[] ids)
+        public async Task<RepositoryResult<TEntity>> GetByIdAsync(params object[] ids)
         {
             var query = Entities
                 .Where(w => ids.Contains(w.Id))
                 .AsQueryable();
             foreach (var property in DbContext.Model.FindEntityType(typeof(TEntity)).GetNavigations())
                 query = query.Include(property.Name);
+            query = query.ClearDeletedOrNotActiveEntity<TEntity>();
+            var feilds = query.GetOrderFeilds<TEntity>();
+            query = query.SetOrder<TEntity, TSearchEntity>(feilds);
             return await query.FirstOrDefaultAsync();
         }
-
-        public async Task<IEnumerable<TEntity>> FetchByIdAsync(int id)
+        public async Task<RepositoryResult<IEnumerable<TEntity>>> FetchByIdAsync(int id)
         {
             var query = Entities
                 .Where(w => w.Id == id)
                 .AsQueryable();
             foreach (var property in DbContext.Model.FindEntityType(typeof(TEntity)).GetNavigations())
                 query = query.Include(property.Name);
+            query = query.ClearDeletedOrNotActiveEntity<TEntity>();
+            var feilds = query.GetOrderFeilds<TEntity>();
+            query = query.SetOrder<TEntity, TSearchEntity>(feilds);
             return await query.Take(1).ToListAsync();
         }
-
-        public async Task<IEnumerable<TEntity>> GetAllAsync(int total = 0, int more = int.MaxValue)
+        public async Task<RepositoryResult<IEnumerable<TEntity>>> GetAllAsync(int total = 0, int more = int.MaxValue)
         {
             var query = Entities
                 .Skip(total)
@@ -63,12 +66,12 @@ namespace Data.Repositories
                 .AsQueryable();
             foreach (var property in DbContext.Model.FindEntityType(typeof(TEntity)).GetNavigations())
                 query = query.Include(property.Name);
+            query = query.ClearDeletedOrNotActiveEntity<TEntity>();
             var feilds = query.GetOrderFeilds<TEntity>();
             query = query.SetOrder<TEntity, TSearchEntity>(feilds);
             return await query.ToListAsync();
         }
-
-        public async Task<TEntity> AddAsync(TEntity entity)
+        public async Task<RepositoryResult<TEntity>> AddAsync(TEntity entity)
         {
             int Result = 0;
             Assert.NotNull(entity, nameof(entity));
@@ -78,10 +81,10 @@ namespace Data.Repositories
             Result = await DbContext.SaveChangesAsync().ConfigureAwait(false);
             if (Result > 0)
                 return entity;
-            return null;
-        }
 
-        public async Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities)
+            return new RepositoryResult<TEntity>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "خطایی رخ داده است");
+        }
+        public async Task<RepositoryResult<IEnumerable<TEntity>>> AddRangeAsync(IEnumerable<TEntity> entities)
         {
             int Result = 0;
             Assert.NotNull(entities, nameof(entities));
@@ -95,10 +98,9 @@ namespace Data.Repositories
                 query = entities.SetOrder<TEntity, TSearchEntity>(query.GetOrderFeilds<TEntity>());
                 return await query.ToListAsync();
             }
-            return null;
+            return new RepositoryResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "خطایی رخ داده است");
         }
-
-        public async Task<TEntity> UpdateAsync(TEntity entity)
+        public async Task<RepositoryResult<TEntity>> UpdateAsync(TEntity entity)
         {
             int Result = 0;
             Assert.NotNull(entity, nameof(entity));
@@ -108,10 +110,9 @@ namespace Data.Repositories
             Result = await DbContext.SaveChangesAsync();
             if (Result > 0)
                 return entity;
-            return null;
+            return new RepositoryResult<TEntity>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "خطایی رخ داده است");
         }
-
-        public async Task<IEnumerable<TEntity>> UpdateRangeAsync(IEnumerable<TEntity> entities)
+        public async Task<RepositoryResult<IEnumerable<TEntity>>> UpdateRangeAsync(IEnumerable<TEntity> entities)
         {
             int Result = 0;
             Entities.Local.Clear();
@@ -130,40 +131,31 @@ namespace Data.Repositories
                 query = entities.SetOrder<TEntity, TSearchEntity>(query.GetOrderFeilds<TEntity>());
                 return await query.ToListAsync();
             }
-            return null;
+            return new RepositoryResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "خطایی رخ داده است");
         }
-
-        public async Task<TEntity> DeleteAsync(TEntity entity)
+        public async Task<RepositoryResult<TEntity>> DeleteAsync(TEntity entity)
         {
             int Result = 0;
             Assert.NotNull(entity, nameof(entity));
-            var deleteProperty = entity.GetType().GetProperty("deleted");
-            if (deleteProperty != null)
-            {
-                deleteProperty.SetValue(entity, true);
-                Entities.Attach(entity).State = EntityState.Modified;
-                Entities.Update(entity);
-                Result = await DbContext.SaveChangesAsync();
-                return entity;
-            }
+            entity.SetDeletedToEntity<TEntity>(Entities);
+            Result = await DbContext.SaveChangesAsync();
             if (Result > 0)
                 return entity;
-            return null;
+            return new RepositoryResult<TEntity>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "خطایی رخ داده است");
         }
-
-        public async Task<TEntity> DeleteByIdAsync(int id)
+        public async Task<RepositoryResult<TEntity>> DeleteByIdAsync(int id)
         {
             var query = Entities
                 .Where(w => w.Id == id)
                 .AsQueryable();
             var entity = await query.FirstOrDefaultAsync();
-            entity = await DeleteAsync(entity);
+            var result = await DeleteAsync(entity);
+            entity = result.Data;
             if (entity != null)
                 return entity;
-            return null;
+            return new RepositoryResult<TEntity>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "خطایی رخ داده است");
         }
-
-        public async Task<IEnumerable<TEntity>> DeleteRangeAsync(IEnumerable<TEntity> entities)
+        public async Task<RepositoryResult<IEnumerable<TEntity>>> DeleteRangeAsync(IEnumerable<TEntity> entities)
         {
             int Result = 0;
             Assert.NotNull(entities, nameof(entities));
@@ -175,10 +167,9 @@ namespace Data.Repositories
                 query = entities.SetOrder<TEntity, TSearchEntity>(query.GetOrderFeilds<TEntity>());
                 return await query.ToListAsync();
             }
-            return null;
+            return new RepositoryResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "خطایی رخ داده است");
         }
-
-        public async Task<IEnumerable<TEntity>> DeleteRangeByIdsAsync(IEnumerable<int> ids)
+        public async Task<RepositoryResult<IEnumerable<TEntity>>> DeleteRangeByIdsAsync(IEnumerable<int> ids)
         {
             int Result = 0;
             var schema = Entities.GetContext().Model.FindEntityType(typeof(TEntity)).GetSchema();
@@ -195,10 +186,9 @@ namespace Data.Repositories
                 query1 = entities.SetOrder<TEntity, TSearchEntity>(query.GetOrderFeilds<TEntity>());
                 return await query1.ToListAsync();
             }
-            return null;
+            return new RepositoryResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "خطایی رخ داده است");
         }
-
-        public TEntity Detach(TEntity entity)
+        public RepositoryResult<TEntity> Detach(TEntity entity)
         {
             Assert.NotNull(entity, nameof(entity));
             var entry = DbContext.Entry(entity);
@@ -207,8 +197,7 @@ namespace Data.Repositories
 
             return entity;
         }
-
-        public TEntity Attach(TEntity entity)
+        public RepositoryResult<TEntity> Attach(TEntity entity)
         {
             Assert.NotNull(entity, nameof(entity));
             if (DbContext.Entry(entity).State == EntityState.Detached)
@@ -216,8 +205,7 @@ namespace Data.Repositories
 
             return entity;
         }
-
-        public async Task<IEnumerable<TEntity>> FilterRangeAsync(FilterRangeModel<TSearchEntity> filter)
+        public async Task<RepositoryResult<IEnumerable<TEntity>>> FilterRangeAsync(FilterRangeModel<TSearchEntity> filter)
         {
             var properties = filter.Entity.GetType()
                 .GetProperties()
@@ -229,15 +217,15 @@ namespace Data.Repositories
                 .AsQueryable();
             query = query.ClearDeletedOrNotActiveEntity<TEntity>();
             query = query.SetWhere<TEntity, TSearchEntity>(properties, filter.Entity);
+            var feilds = query.GetOrderFeilds<TEntity>();
+            query = query.SetOrder<TEntity, TSearchEntity>(feilds);
             foreach (var property in DbContext.Model.FindEntityType(typeof(TEntity)).GetNavigations())
                 query = query.Include(property.Name);
             IEnumerable<TEntity> data = await query
                 .ToListAsync();
-            query = query.SetOrder<TEntity, TSearchEntity>(query.GetOrderFeilds<TEntity>());
             return await query.ToListAsync();
         }
-
-        public async Task<IEnumerable<TEntity>> SearchRangeAsync(SearchRangeModel<TEntity> search)
+        public async Task<RepositoryResult<IEnumerable<TEntity>>> SearchRangeAsync(SearchRangeModel<TEntity> search)
         {
             var properties = search.Entity.GetType()
                 .GetProperties()
@@ -258,8 +246,7 @@ namespace Data.Repositories
             return await query
                 .ToListAsync();
         }
-
-        public async Task<TEntity> UpdateFieldRangeAsync(TEntity entity, params string[] fields)
+        public async Task<RepositoryResult<TEntity>> UpdateFieldRangeAsync(TEntity entity, params string[] fields)
         {
             if (entity != null && fields.Length > 0)
             {
@@ -277,13 +264,12 @@ namespace Data.Repositories
                     result = await DbContext.SaveChangesAsync();
                     if (result > 0)
                         return data;
-                    return null;
+                    return new RepositoryResult<TEntity>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "خطایی رخ داده است");
                 }
             }
-            return null;
+            return new RepositoryResult<TEntity>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, "داده ورودی نامناسب");
         }
-
-        public async Task<TEntity> UpdateFieldRangeAsync(int Id, params KeyValuePair<string, dynamic>[] fields)
+        public async Task<RepositoryResult<TEntity>> UpdateFieldRangeAsync(int Id, params KeyValuePair<string, dynamic>[] fields)
         {
             if (fields != null && Id > 0 && fields.Length > 0)
             {
@@ -297,9 +283,9 @@ namespace Data.Repositories
                 result = await DbContext.SaveChangesAsync();
                 if (result > 0)
                     return data;
-                return null;
+                return new RepositoryResult<TEntity>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "خطایی رخ داده است");
             }
-            return null;
+            return new RepositoryResult<TEntity>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, "داده ورودی نامناسب");
         }
     }
     public static class HackyDbSetGetContextTrick

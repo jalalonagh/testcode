@@ -13,6 +13,8 @@ namespace Entities.SMSConfirmation
             builder.Property(p => p.smsId).IsRequired();
             builder.Property(p => p.phoneId).IsRequired();
             builder.Property(p => p.confirmationText).IsRequired();
+
+            builder.HasIndex(i => i.CreateTime);
         }
     }
 }

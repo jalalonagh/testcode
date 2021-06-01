@@ -12,6 +12,8 @@ namespace Entities.ConfirmedTransaction
             builder.ToTable(nameof(ConfirmedTransaction), nameof(SchemaEnum.TRANSACTION));
             builder.Property(p => p.phoneId).IsRequired();
             builder.Property(p => p.transactionId).IsRequired();
+
+            builder.HasIndex(i => i.Order);
         }
     }
 }

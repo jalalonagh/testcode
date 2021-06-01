@@ -25,17 +25,19 @@ namespace Services.Base.Services
 
         public async Task<ServiceResult<TEntity>> AddAsync(TEntity entity)
         {
-            return await repository.AddAsync(entity);
+            var result = await repository.AddAsync(entity);
+
+            return result.ToServiceResult();
         }
 
         public async Task<ServiceResult<IEnumerable<TEntity>>> AddRangeAsync(IEnumerable<TEntity> entities)
         {
             var result = await repository.AddRangeAsync(entities);
 
-            if (result != null && result.Any())
-                return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result, "");
+            if (result.IsSuccess && result.Data.Any())
+                return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result.Data, "");
 
-            if (result != null && !result.Any())
+            if (result.IsSuccess && !result.Data.Any())
                 return new ServiceResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.NOT_FOUND, null, "موردی یافت نشد");
 
             return new ServiceResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "مشکلی در سرور رخ داده است");
@@ -43,22 +45,26 @@ namespace Services.Base.Services
 
         public async Task<ServiceResult<TEntity>> DeleteAsync(TEntity entity)
         {
-            return await repository.DeleteAsync(entity);
+            var result = await repository.DeleteAsync(entity);
+
+            return result.ToServiceResult();
         }
 
         public async Task<ServiceResult<TEntity>> DeleteByIdAsync(int id)
         {
-            return await repository.DeleteByIdAsync(id);
+            var result = await repository.DeleteByIdAsync(id);
+
+            return result.ToServiceResult();
         }
 
         public async Task<ServiceResult<IEnumerable<TEntity>>> DeleteRangeAsync(IEnumerable<TEntity> entities)
         {
             var result = await repository.DeleteRangeAsync(entities);
 
-            if (result != null && result.Any())
-                return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result, "");
+            if (result.IsSuccess && result.Data.Any())
+                return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result.Data, "");
 
-            if (result != null && !result.Any())
+            if (result.IsSuccess && !result.Data.Any())
                 return new ServiceResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.NOT_FOUND, null, "موردی یافت نشد");
 
             return new ServiceResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "مشکلی در سرور رخ داده است");
@@ -68,10 +74,10 @@ namespace Services.Base.Services
         {
             var result = await repository.DeleteRangeByIdsAsync(ids);
 
-            if (result != null && result.Any())
-                return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result, "");
+            if (result.IsSuccess && result.Data.Any())
+                return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result.Data, "");
 
-            if (result != null && !result.Any())
+            if (result.IsSuccess && !result.Data.Any())
                 return new ServiceResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.NOT_FOUND, null, "موردی یافت نشد");
 
             return new ServiceResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "مشکلی در سرور رخ داده است");
@@ -81,10 +87,10 @@ namespace Services.Base.Services
         {
             var result = await repository.FilterRangeAsync(filter);
 
-            if (result != null && result.Any())
-                return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result, "");
+            if (result.IsSuccess && result.Data.Any())
+                return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result.Data, "");
 
-            if (result != null && !result.Any())
+            if (result.IsSuccess && !result.Data.Any())
                 return new ServiceResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.NOT_FOUND, null, "موردی یافت نشد");
 
             return new ServiceResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "مشکلی در سرور رخ داده است");
@@ -94,10 +100,10 @@ namespace Services.Base.Services
         {
             var result = await repository.GetAllAsync(total, more);
 
-            if (result != null && result.Any())
-                return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result, "");
+            if (result.IsSuccess && result.Data.Any())
+                return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result.Data, "");
 
-            if (result != null && !result.Any())
+            if (result.IsSuccess && !result.Data.Any())
                 return new ServiceResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.NOT_FOUND, null, "موردی یافت نشد");
 
             return new ServiceResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "مشکلی در سرور رخ داده است");
@@ -105,7 +111,9 @@ namespace Services.Base.Services
 
         public async Task<ServiceResult<TEntity>> GetByIdAsync(params object[] ids)
         {
-            return await repository.GetByIdAsync(ids);
+            var result = await repository.GetByIdAsync(ids);
+
+            return result.ToServiceResult();
         }
 
         public async Task<ServiceResult<TEntity>> ItemSync(TEntity Target, TEntity Origin)
@@ -117,10 +125,10 @@ namespace Services.Base.Services
         {
             var result = await repository.SearchRangeAsync(search);
 
-            if (result != null && result.Any())
-                return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result, "");
+            if (result.IsSuccess && result.Data.Any())
+                return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result.Data, "");
 
-            if (result != null && !result.Any())
+            if (result.IsSuccess && !result.Data.Any())
                 return new ServiceResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.NOT_FOUND, null, "موردی یافت نشد");
 
             return new ServiceResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "مشکلی در سرور رخ داده است");
@@ -128,27 +136,33 @@ namespace Services.Base.Services
 
         public async Task<ServiceResult<TEntity>> UpdateAsync(TEntity entity)
         {
-            return await repository.UpdateAsync(entity);
+            var result = await repository.UpdateAsync(entity);
+
+            return result.ToServiceResult();
         }
 
         public async Task<ServiceResult<TEntity>> UpdateFieldRangeAsync(TEntity entity, params string[] fields)
         {
-            return await repository.UpdateFieldRangeAsync(entity, fields);
+            var result = await repository.UpdateFieldRangeAsync(entity, fields);
+
+            return result.ToServiceResult();
         }
 
         public async Task<ServiceResult<TEntity>> UpdateFieldRangeAsync(int Id, params KeyValuePair<string, dynamic>[] fields)
         {
-            return await repository.UpdateFieldRangeAsync(Id, fields);
+            var result = await repository.UpdateFieldRangeAsync(Id, fields);
+
+            return result.ToServiceResult();
         }
 
         public async Task<ServiceResult<IEnumerable<TEntity>>> UpdateRangeAsync(IEnumerable<TEntity> entities)
         {
             var result = await repository.UpdateRangeAsync(entities);
 
-            if (result != null && result.Any())
-                return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result, "");
+            if (result.IsSuccess && result.Data.Any())
+                return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result.Data, "");
 
-            if (result != null && !result.Any())
+            if (result.IsSuccess && !result.Data.Any())
                 return new ServiceResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.NOT_FOUND, null, "موردی یافت نشد");
 
             return new ServiceResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "مشکلی در سرور رخ داده است");

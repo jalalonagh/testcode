@@ -13,6 +13,9 @@ namespace Entities.SMS
 
             builder.Property(p => p.phone).IsRequired();
             builder.Property(p => p.smsText).IsRequired();
+
+            builder.HasIndex(i => i.phone);
+            builder.HasIndex(i => i.CreateTime);
         }
     }
 }

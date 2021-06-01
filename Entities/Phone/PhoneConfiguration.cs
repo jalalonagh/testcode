@@ -11,6 +11,9 @@ namespace Entities.Phone
         {
             builder.ToTable(nameof(Phone), nameof(SchemaEnum.SMS));
             builder.Property(p => p.phoneNumber).IsRequired();
+
+            builder.HasIndex(i => i.Order);
+            builder.HasIndex(i => i.type);
         }
     }
 }

@@ -186,18 +186,28 @@ namespace Data
             return entity;
         }
 
-        public static void SetDeletedToProperty<TEntity>(this IEnumerable<TEntity> entities, DbSet<TEntity> db)
+        public static TEntity SetDeletedToEntity<TEntity>(this TEntity entity, DbSet<TEntity> db)
             where TEntity : class, IEntity
         {
-            foreach (var entity in entities)
+            if(entity != null && db != null)
             {
-                var deleteProperty = entity.GetType().GetProperty("IsDeleted");
+                var deleteProperty = entity.GetType().GetProperty(nameof(entity.IsDeleted));
                 if (deleteProperty != null)
                 {
                     deleteProperty.SetValue(entity, true);
                     db.Attach(entity).State = EntityState.Modified;
                     db.Update(entity);
                 }
+            }
+
+            return entity;
+        }
+        public static void SetDeletedToProperty<TEntity>(this IEnumerable<TEntity> entities, DbSet<TEntity> db)
+            where TEntity : class, IEntity
+        {
+            foreach (var entity in entities)
+            {
+                entity.SetDeletedToEntity<TEntity>(db);
             }
         }
 
