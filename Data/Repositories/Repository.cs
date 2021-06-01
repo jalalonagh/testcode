@@ -40,10 +40,8 @@ namespace Data.Repositories
             var query = Entities
                 .Where(w => ids.Contains(w.Id))
                 .AsQueryable();
-
             foreach (var property in DbContext.Model.FindEntityType(typeof(TEntity)).GetNavigations())
                 query = query.Include(property.Name);
-
             return await query.FirstOrDefaultAsync();
         }
 
@@ -52,10 +50,8 @@ namespace Data.Repositories
             var query = Entities
                 .Where(w => w.Id == id)
                 .AsQueryable();
-
             foreach (var property in DbContext.Model.FindEntityType(typeof(TEntity)).GetNavigations())
                 query = query.Include(property.Name);
-
             return await query.Take(1).ToListAsync();
         }
 
@@ -65,136 +61,93 @@ namespace Data.Repositories
                 .Skip(total)
                 .Take(more)
                 .AsQueryable();
-
             foreach (var property in DbContext.Model.FindEntityType(typeof(TEntity)).GetNavigations())
                 query = query.Include(property.Name);
-
             var feilds = query.GetOrderFeilds<TEntity>();
-
             query = query.SetOrder<TEntity, TSearchEntity>(feilds);
-
             return await query.ToListAsync();
         }
 
         public async Task<TEntity> AddAsync(TEntity entity)
         {
             int Result = 0;
-
             Assert.NotNull(entity, nameof(entity));
-
             entity = entity.FixPersianText();
-
             entity = entity.SetCreationTime();
-
             await Entities.AddAsync(entity, new CancellationToken()).ConfigureAwait(false);
-
             Result = await DbContext.SaveChangesAsync().ConfigureAwait(false);
-
             if (Result > 0)
                 return entity;
-
             return null;
         }
 
         public async Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities)
         {
             int Result = 0;
-
             Assert.NotNull(entities, nameof(entities));
-
             entities = entities.FixPersianText();
-
             entities = entities.SetCreationTimes();
-
             await Entities.AddRangeAsync(entities, new CancellationToken()).ConfigureAwait(false);
-
             Result = await DbContext.SaveChangesAsync();
-
             if (Result > 0)
             {
                 var query = entities.AsQueryable<TEntity>();
-
                 query = entities.SetOrder<TEntity, TSearchEntity>(query.GetOrderFeilds<TEntity>());
-
                 return await query.ToListAsync();
             }
-
             return null;
         }
 
         public async Task<TEntity> UpdateAsync(TEntity entity)
         {
             int Result = 0;
-
             Assert.NotNull(entity, nameof(entity));
-
             entity = entity.FixPersianText();
-
             entity = entity.SetModifiedTime();
-
             Entities.Update(entity);
-
             Result = await DbContext.SaveChangesAsync();
-
             if (Result > 0)
                 return entity;
-
             return null;
         }
 
         public async Task<IEnumerable<TEntity>> UpdateRangeAsync(IEnumerable<TEntity> entities)
         {
             int Result = 0;
-
             Entities.Local.Clear();
-
             entities.ToList().ForEach(delegate (TEntity entity)
             {
                 Assert.NotNull(entity, nameof(entity));
                 Entities.Attach(entity).State = EntityState.Modified;
             });
-
             entities = entities.FixPersianText();
-
             entities = entities.SetModifiedTimes();
-
             Entities.UpdateRange(entities);
-
             Result = await DbContext.SaveChangesAsync();
-
             if (Result > 0)
             {
                 var query = entities.AsQueryable<TEntity>();
-
                 query = entities.SetOrder<TEntity, TSearchEntity>(query.GetOrderFeilds<TEntity>());
-
                 return await query.ToListAsync();
             }
-
             return null;
         }
 
         public async Task<TEntity> DeleteAsync(TEntity entity)
         {
             int Result = 0;
-
             Assert.NotNull(entity, nameof(entity));
-
             var deleteProperty = entity.GetType().GetProperty("deleted");
             if (deleteProperty != null)
             {
                 deleteProperty.SetValue(entity, true);
                 Entities.Attach(entity).State = EntityState.Modified;
                 Entities.Update(entity);
-
                 Result = await DbContext.SaveChangesAsync();
-
                 return entity;
             }
-
             if (Result > 0)
                 return entity;
-
             return null;
         }
 
@@ -203,65 +156,45 @@ namespace Data.Repositories
             var query = Entities
                 .Where(w => w.Id == id)
                 .AsQueryable();
-
             var entity = await query.FirstOrDefaultAsync();
-
             entity = await DeleteAsync(entity);
-
             if (entity != null)
                 return entity;
-
             return null;
         }
 
         public async Task<IEnumerable<TEntity>> DeleteRangeAsync(IEnumerable<TEntity> entities)
         {
             int Result = 0;
-
             Assert.NotNull(entities, nameof(entities));
-
             entities.SetDeletedToProperty(Entities);
-
             Result = await DbContext.SaveChangesAsync();
-
             if (Result > 0)
             {
                 var query = entities.AsQueryable<TEntity>();
-
                 query = entities.SetOrder<TEntity, TSearchEntity>(query.GetOrderFeilds<TEntity>());
-
                 return await query.ToListAsync();
             }
-
             return null;
         }
 
         public async Task<IEnumerable<TEntity>> DeleteRangeByIdsAsync(IEnumerable<int> ids)
         {
             int Result = 0;
-
             var schema = Entities.GetContext().Model.FindEntityType(typeof(TEntity)).GetSchema();
             var table = Entities.GetContext().Model.FindEntityType(typeof(TEntity)).GetTableName();
-
             var query = Entities
                 .FromSqlRaw($"select * from [{schema}].[{table}] where [Id] in ({string.Join(",", ids)})")
                 .AsQueryable();
-
             IEnumerable<TEntity> entities = await query.ToListAsync();
-
             entities.SetDeletedToProperty(Entities);
-
             Result = await DbContext.SaveChangesAsync();
-
             if (Result > 0)
             {
                 var query1 = entities.AsQueryable<TEntity>();
-
                 query1 = entities.SetOrder<TEntity, TSearchEntity>(query.GetOrderFeilds<TEntity>());
-
                 return await query1.ToListAsync();
             }
-
             return null;
         }
 
@@ -290,24 +223,17 @@ namespace Data.Repositories
                 .GetProperties()
                 .Where(x => (x.PropertyType != typeof(string) && x.GetValue(filter.Entity) != null) || (x.PropertyType == typeof(string) && !string.IsNullOrEmpty(x.GetValue(filter.Entity).ToString())))
                 .ToList();
-
             var query = Entities
                 .Skip(filter.Total)
                 .Take(filter.More)
                 .AsQueryable();
-
             query = query.ClearDeletedOrNotActiveEntity<TEntity>();
-
             query = query.SetWhere<TEntity, TSearchEntity>(properties, filter.Entity);
-
             foreach (var property in DbContext.Model.FindEntityType(typeof(TEntity)).GetNavigations())
                 query = query.Include(property.Name);
-
             IEnumerable<TEntity> data = await query
                 .ToListAsync();
-
             query = query.SetOrder<TEntity, TSearchEntity>(query.GetOrderFeilds<TEntity>());
-
             return await query.ToListAsync();
         }
 
@@ -317,25 +243,18 @@ namespace Data.Repositories
                 .GetProperties()
                 .Where(x => x.PropertyType == typeof(string))
                 .ToList();
-
             var query = Entities
                 .Skip(search.Total)
                 .Take(search.More)
                 .AsQueryable();
-
             if (properties != null && properties.Any())
                 foreach (var item in properties)
                     query = query.Where(EntityFuncs.ApplyWhereLikeFunc<TEntity, TSearchEntity>(item.Name, search.Text));
-
             foreach (var property in DbContext.Model.FindEntityType(typeof(TEntity)).GetNavigations())
                 query = query.Include(property.Name);
-
             query = query.ClearDeletedOrNotActiveEntity<TEntity>();
-
             var feilds = query.GetOrderFeilds<TEntity>();
-
             query = query.SetOrder<TEntity, TSearchEntity>(feilds);
-
             return await query
                 .ToListAsync();
         }
@@ -345,17 +264,13 @@ namespace Data.Repositories
             if (entity != null && fields.Length > 0)
             {
                 var properties = entity.GetType().GetProperties();
-
                 if (properties != null && properties.Length > 0)
                 {
                     var id = entity.GetType().GetProperties().Where(w => w.Name == "Id").FirstOrDefault();
-
                     var query = Entities
                         .Where(w => w.Id == entity.Id)
                         .AsQueryable();
-
                     var data = await query.FirstOrDefaultAsync();
-
                     if (data != null)
                     {
                         foreach (var field in fields)
@@ -367,16 +282,11 @@ namespace Data.Repositories
                             }
                         }
                     }
-
                     var result = -1;
-
                     Entities.Update(data);
-
                     result = await DbContext.SaveChangesAsync();
-
                     if (result > 0)
                         return data;
-
                     return null;
                 }
             }
@@ -390,20 +300,13 @@ namespace Data.Repositories
                 var query = Entities
                     .Where(w => w.Id == Id)
                     .AsQueryable();
-
                 var data = await query.FirstOrDefaultAsync();
-
                 data = data.SyncFeildsData(fields);
-
                 var result = -1;
-
                 Entities.Update(data);
-
                 result = await DbContext.SaveChangesAsync();
-
                 if (result > 0)
                     return data;
-
                 return null;
             }
             return null;
