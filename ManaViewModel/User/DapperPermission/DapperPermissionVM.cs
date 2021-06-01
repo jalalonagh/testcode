@@ -1,26 +1,45 @@
 ﻿using ManaViewModel.Common;
+using Newtonsoft.Json;
 
 namespace ManaViewModel.User.DapperPermission
 {
     public class DapperPermissionVM : BaseJsonVM<DapperPermissionVM, Entities.User.DapperPermission.DapperPermission>
     {
-        public string NavigationMenusActionName { get; set; }
-        public string NavigationMenusArea { get; set; }
-        public string NavigationMenusControllerName { get; set; }
-        public int? NavigationMenusDisplayOrder { get; set; }
-        public string NavigationMenusDomain { get; set; }
-        public string NavigationMenusExternalUrl { get; set; }
-        public string NavigationMenusId { get; set; }
-        public bool? NavigationMenusIsExternal { get; set; }
-        public string NavigationMenusName { get; set; }
-        public string NavigationMenusParentMenuId { get; set; }
-        public bool? NavigationMenusVisible { get; set; }
-        public string RolesDescription { get; set; }
-        public string RolesNormalizedName { get; set; }
-        public string ChairsName { get; set; }
+        [JsonProperty("NavigationMenusActionName")]
+        public string ActionName { get; set; }
+        [JsonProperty("NavigationMenusArea")]
+        public string Area { get; set; }
+        [JsonProperty("NavigationMenusControllerName")]
+        public string ControllerName { get; set; }
+        [JsonProperty("NavigationMenusDisplayOrder")]
+        public int? DisplayOrder { get; set; }
+        [JsonProperty("NavigationMenusDomain")]
+        public string Domain { get; set; }
+        [JsonProperty("NavigationMenusExternalUrl")]
+        public string ExternalUrl { get; set; }
+        [JsonProperty("NavigationMenusId")]
+        public string MenuId { get; set; }
+        [JsonProperty("NavigationMenusIsExternal")]
+        public bool? IsExternal { get; set; }
+        [JsonProperty("NavigationMenusName")]
+        public string Name { get; set; }
+        [JsonProperty("NavigationMenusParentMenuId")]
+        public string ParentMenuId { get; set; }
+        [JsonProperty("NavigationMenusVisible")]
+        public bool? Visible { get; set; }
+        [JsonProperty("RolesDescription")]
+        public string Description { get; set; }
+        [JsonProperty("RolesNormalizedName")]
+        public string NormalizedName { get; set; }
+        [JsonProperty("ChairsName")]
+        public string Chairs { get; set; }
+        [JsonProperty("ChairsId")]
         public int ChairsId { get; set; }
+        [JsonProperty("Permitted")]
         public bool Permitted { get; set; }
-        public string RolesName { get; set; }
+        [JsonProperty("RolesName")]
+        public string Roles { get; set; }
+        [JsonProperty("RolesId")]
         public int? RolesId { get; set; }
     }
 }

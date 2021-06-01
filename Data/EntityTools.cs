@@ -1,6 +1,7 @@
 ﻿using Common.Utilities;
 using Entities;
 using Entities.Common;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,19 +87,7 @@ namespace Data
         public static TEntity SetModifiedTime<TEntity>(this TEntity entity)
             where TEntity : class, IEntity
         {
-            var nowDT = DateTime.Now;
-            var propertyCreate = entity.GetType().GetProperty("modifiedDateTime");
-            if (propertyCreate != null)
-            {
-                propertyCreate.SetValue(entity, nowDT);
-            }
-
-            var propertyPersianCreate = entity.GetType().GetProperty("modifiedPersianDateTime");
-            if (propertyPersianCreate != null)
-            {
-                var dt = $"{pc.GetYear(nowDT)}/{pc.GetMonth(nowDT)}/{pc.GetDayOfMonth(nowDT)} {nowDT.Hour}:{nowDT.Minute}:{nowDT.Second}";
-                propertyPersianCreate.SetValue(entity, dt);
-            }
+            entity = SetModifiedTimeToProperty(entity);
 
             return entity;
         }
@@ -110,21 +99,9 @@ namespace Data
 
             foreach (var entity in entities)
             {
-                var nowDT = DateTime.Now;
-                var propertyCreate = entity.GetType().GetProperty("modifiedDateTime");
-                if (propertyCreate != null)
-                {
-                    propertyCreate.SetValue(entity, nowDT);
-                }
+                var e = SetModifiedTimeToProperty(entity);
 
-                var propertyPersianCreate = entity.GetType().GetProperty("modifiedPersianDateTime");
-                if (propertyPersianCreate != null)
-                {
-                    var dt = $"{pc.GetYear(nowDT)}/{pc.GetMonth(nowDT)}/{pc.GetDayOfMonth(nowDT)} {nowDT.Hour}:{nowDT.Minute}:{nowDT.Second}";
-                    propertyPersianCreate.SetValue(entity, dt);
-                }
-
-                newEntities = newEntities.Append(entity);
+                newEntities = newEntities.Append(e);
             }
 
             return newEntities;
@@ -195,6 +172,41 @@ namespace Data
             });
 
             return custom.OrderBy(o => o.index).Select(s => s.name);
+        }
+
+        public static TEntity SetModifiedTimeToProperty<TEntity>(this TEntity entity)
+            where TEntity: class, IEntity
+        {
+            var nowDT = DateTime.Now;
+            var propertyCreate = entity.GetType().GetProperty("LastUpdateTime");
+            if (propertyCreate != null)
+            {
+                propertyCreate.SetValue(entity, nowDT);
+            }
+
+            var propertyPersianCreate = entity.GetType().GetProperty("LastUpdatePersianTime");
+            if (propertyPersianCreate != null)
+            {
+                var dt = $"{pc.GetYear(nowDT)}/{pc.GetMonth(nowDT)}/{pc.GetDayOfMonth(nowDT)} {nowDT.Hour}:{nowDT.Minute}:{nowDT.Second}";
+                propertyPersianCreate.SetValue(entity, dt);
+            }
+
+            return entity;
+        }
+
+        public static void SetDeletedToProperty<TEntity>(this IEnumerable<TEntity> entities, DbSet<TEntity> db)
+            where TEntity : class, IEntity
+        {
+            foreach (var entity in entities)
+            {
+                var deleteProperty = entity.GetType().GetProperty("IsDeleted");
+                if (deleteProperty != null)
+                {
+                    deleteProperty.SetValue(entity, true);
+                    db.Attach(entity).State = EntityState.Modified;
+                    db.Update(entity);
+                }
+            }
         }
     }
 }
