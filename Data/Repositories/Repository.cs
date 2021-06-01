@@ -37,12 +37,8 @@ namespace Data.Repositories
 
         public async Task<TEntity> GetByIdAsync(CancellationToken cancellationToken, params object[] ids)
         {
-            var table = Entities.GetContext().Model.FindEntityType(typeof(TEntity)).GetTableName();
-            var schema = Entities.GetContext().Model.FindEntityType(typeof(TEntity)).GetSchema();
-
             var query = Entities
                 .Where(w => ids.Contains(w.Id))
-                .AsNoTracking()
                 .AsQueryable();
 
             foreach (var property in DbContext.Model.FindEntityType(typeof(TEntity)).GetNavigations())
@@ -53,12 +49,8 @@ namespace Data.Repositories
 
         public async Task<IEnumerable<TEntity>> FetchByIdAsync(CancellationToken cancellationToken, int id)
         {
-            var table = Entities.GetContext().Model.FindEntityType(typeof(TEntity)).GetTableName();
-            var schema = Entities.GetContext().Model.FindEntityType(typeof(TEntity)).GetSchema();
-
             var query = Entities
-                .FromSqlRaw($"select * from [{schema}].[{table}] where [Id] = {id}")
-                .AsNoTracking()
+                .Where(w => w.Id == id)
                 .AsQueryable();
 
             foreach (var property in DbContext.Model.FindEntityType(typeof(TEntity)).GetNavigations())
@@ -70,7 +62,6 @@ namespace Data.Repositories
         public async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken, int total = 0, int more = int.MaxValue)
         {
             var query = Entities
-                .AsNoTracking()
                 .Skip(total)
                 .Take(more)
                 .AsQueryable();
@@ -211,24 +202,19 @@ namespace Data.Repositories
         {
             int Result = 0;
 
-            var schema = Entities.GetContext().Model.FindEntityType(typeof(TEntity)).GetSchema();
-            var table = Entities.GetContext().Model.FindEntityType(typeof(TEntity)).GetTableName();
-
             var query = Entities
-                .FromSqlRaw($"select * from [{schema}].[{table}] where [Id] = {id}")
-                .AsNoTracking()
+                .Where(w => w.Id == id)
                 .AsQueryable();
 
             var entity = await query.FirstOrDefaultAsync();
 
-            var deleteProperty = entity.GetType().GetProperty("deleted");
+            var deleteProperty = entity.GetType().GetProperty(nameof(entity.IsDeleted));
 
             if (deleteProperty != null)
             {
                 deleteProperty.SetValue(entity, true);
                 Entities.Attach(entity).State = EntityState.Modified;
                 Entities.Update(entity);
-
                 Result = await DbContext.SaveChangesAsync();
 
                 return entity;
@@ -271,7 +257,6 @@ namespace Data.Repositories
 
             var query = Entities
                 .FromSqlRaw($"select * from [{schema}].[{table}] where [Id] in ({string.Join(",", ids)})")
-                .AsNoTracking()
                 .AsQueryable();
 
             IEnumerable<TEntity> entities = await query.ToListAsync();
@@ -318,12 +303,7 @@ namespace Data.Repositories
                 .Where(x => (x.PropertyType != typeof(string) && x.GetValue(filter.Entity) != null) || (x.PropertyType == typeof(string) && !string.IsNullOrEmpty(x.GetValue(filter.Entity).ToString())))
                 .ToList();
 
-            var entityType = Database.Model.FindEntityType(typeof(TEntity));
-            var schema = entityType.GetSchema();
-            var tableName = entityType.GetTableName();
-
             var query = Entities
-                .AsNoTracking()
                 .Skip(filter.Total)
                 .Take(filter.More)
                 .AsQueryable();
@@ -380,13 +360,10 @@ namespace Data.Repositories
 
                 if (properties != null && properties.Length > 0)
                 {
-                    var schema = Entities.GetContext().Model.FindEntityType(typeof(TEntity)).GetSchema();
-                    var table = Entities.GetContext().Model.FindEntityType(typeof(TEntity)).GetTableName();
                     var id = entity.GetType().GetProperties().Where(w => w.Name == "Id").FirstOrDefault();
 
                     var query = Entities
-                        .FromSqlRaw($"select * from [{schema}].[{table}] where [Id] = {id.GetValue(entity)}")
-                        .AsNoTracking()
+                        .Where(w => w.Id == entity.Id)
                         .AsQueryable();
 
                     var data = await query.FirstOrDefaultAsync();
@@ -406,7 +383,7 @@ namespace Data.Repositories
                     var result = -1;
 
                     Entities.Update(data);
-                    //if (saveNow)
+
                     result = await DbContext.SaveChangesAsync(cancellation);
 
                     if (result > 0)
@@ -420,46 +397,26 @@ namespace Data.Repositories
 
         public async Task<TEntity> UpdateFieldRangeAsync(CancellationToken cancellation, int Id, params KeyValuePair<string, dynamic>[] fields)
         {
-            bool saveNow = true;
             if (fields != null && Id > 0 && fields.Length > 0)
             {
-                var schema = Entities.GetContext().Model.FindEntityType(typeof(TEntity)).GetSchema();
-                var table = Entities.GetContext().Model.FindEntityType(typeof(TEntity)).GetTableName();
-
                 var query = Entities
-                    .FromSqlRaw($"select * from [{schema}].[{table}] where [Id] = {Id}")
-                    .AsNoTracking()
+                    .Where(w => w.Id == Id)
                     .AsQueryable();
 
                 var data = await query.FirstOrDefaultAsync();
 
-                var properties = data.GetType().GetProperties();
+                data = data.SyncFeildsData(fields);
 
-                if (properties != null && properties.Length > 0)
-                {
-                    if (data != null)
-                    {
-                        foreach (var field in fields)
-                        {
-                            var prop = properties.Where(w => w.Name == field.Key).FirstOrDefault();
-                            if (prop != null)
-                            {
-                                prop.SetValue(data, field.Value);
-                            }
-                        }
-                    }
+                var result = -1;
 
-                    var result = -1;
+                Entities.Update(data);
 
-                    Entities.Update(data);
-                    //if (saveNow)
-                    result = await DbContext.SaveChangesAsync(cancellation);
+                result = await DbContext.SaveChangesAsync(cancellation);
 
-                    if (result > 0)
-                        return data;
+                if (result > 0)
+                    return data;
 
-                    return null;
-                }
+                return null;
             }
             return null;
         }

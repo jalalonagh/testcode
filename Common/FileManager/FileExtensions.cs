@@ -13,13 +13,11 @@ namespace Common.FileManager
 {
     public static class FileExtensions
     {
-        private static IEnumerable<string> CodeFileExtensions = new string[] { ".cs", ".cshtml", ".css", ".js", ".json", ".sql", ".dart", ".html" };
-
-        public static async Task<string> AutoSaveAsync(this IFormFile file, string path = "", string filename = "", string folder = "", string userId = "", string series = "")
+        public static async Task<string> AutoSaveAsync(this IFormFile file, FileInputModel inputModel)
         {
             if (file.Length > 0)
             {
-                var filePath = CreateFilePath(path, userId, folder, series, filename, file);
+                var filePath = CreateFilePath(inputModel, file);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
@@ -34,33 +32,17 @@ namespace Common.FileManager
             return null;
         }
 
-        public static async Task<string> AutoSaveThumbnailAsync(this IFormFile file, string path = "", string filename = "", string folder = "", string userId = "", string series = "")
+        public static async Task<string> AutoSaveThumbnailAsync(this IFormFile file, FileInputModel inputModel)
         {
             if (file.Length > 0)
             {
-                var filePath = CreateFilePath(path, userId, folder, series, filename, file);
+                var filePath = CreateFilePath(inputModel, file);
 
                 using (var stream = file.OpenReadStream())
                 {
                     Image image = Image.FromStream(stream);
 
-                    var pixel = image.Width > image.Height ? image.Height : image.Width;
-                    var diff = image.Width > image.Height ? (int)((image.Width - image.Height) / 2) : (int)((image.Height - image.Width) / 2);
-                    var height = image.Width > image.Height ? false : true;
-
-                    var x = !height ? diff : 0;
-                    var y = height ? diff : 0;
-
-                    Rectangle rect = new Rectangle(x, y, pixel, pixel);
-                    Bitmap OriginalImage = new Bitmap(image, image.Width, image.Height);
-                    Bitmap temp = new Bitmap(pixel, pixel);
-                    Graphics g = Graphics.FromImage(temp);
-                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                    g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
-                    g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
-                    g.DrawImage(OriginalImage, 0, 0, rect, GraphicsUnit.Pixel);
-
-                    //Image temp = image.GetThumbnailImage(pixel, pixel, null, IntPtr.Zero);
+                    var temp = RoundImageToCreateThumbnail(image);
 
                     Image thumb = temp.GetThumbnailImage(150, 150, () => false, IntPtr.Zero);
 
@@ -73,12 +55,6 @@ namespace Common.FileManager
             }
 
             return null;
-        }
-
-        public static bool IsCodeFile(this IFormFile file)
-        {
-            var ext = Path.GetExtension(file.FileName);
-            return CodeFileExtensions.Where(w => w == ext).FirstOrDefault() != null ? true : false;
         }
 
         private static void CreateFolder(string basePath, string folder)
@@ -115,26 +91,47 @@ namespace Common.FileManager
             return files;
         }
 
-        public static string CreateFilePath(string path, string userId, string folder, string series, string filename, IFormFile file)
+        public static string CreateFilePath(FileInputModel inputModel, IFormFile file)
         {
             var todayFolder = DateTime.Now.ToPersianDateFolderName();
-            var filePath = !string.IsNullOrEmpty(path) ? path : "";
-            filePath = !string.IsNullOrEmpty(userId) ? Path.Combine(filePath, userId.Replace("-", "_")) : filePath;
+            var filePath = !string.IsNullOrEmpty(inputModel.Path) ? inputModel.Path : "";
+            filePath = !string.IsNullOrEmpty(inputModel.UserId) ? Path.Combine(filePath, inputModel.UserId.Replace("-", "_")) : filePath;
             filePath = Path.Combine(filePath, todayFolder);
-            filePath = !string.IsNullOrEmpty(folder) ? Path.Combine(filePath, folder) : filePath;
-            filePath = !string.IsNullOrEmpty(series) ? Path.Combine(filePath, series) : filePath;
-            filePath = !string.IsNullOrEmpty(filename) ? Path.Combine(filePath, filename) : Path.Combine(filePath, Path.GetRandomFileName() + Path.GetExtension(file.FileName));
+            filePath = !string.IsNullOrEmpty(inputModel.Folder) ? Path.Combine(filePath, inputModel.Folder) : filePath;
+            filePath = !string.IsNullOrEmpty(inputModel.Series) ? Path.Combine(filePath, inputModel.Series) : filePath;
+            filePath = !string.IsNullOrEmpty(inputModel.Filename) ? Path.Combine(filePath, inputModel.Filename) : Path.Combine(filePath, Path.GetRandomFileName() + Path.GetExtension(file.FileName));
 
-            CreateFolder(path, userId);
-            CreateFolder(Path.Combine(path, userId.Replace("-", "_").Replace(" ", "_")), todayFolder);
-            CreateFolder(Path.Combine(path, userId.Replace("-", "_").Replace(" ", "_"), todayFolder), folder);
+            CreateFolder(inputModel.Path, inputModel.UserId);
+            CreateFolder(Path.Combine(inputModel.Path, inputModel.UserId.Replace("-", "_").Replace(" ", "_")), todayFolder);
+            CreateFolder(Path.Combine(inputModel.Path, inputModel.UserId.Replace("-", "_").Replace(" ", "_"), todayFolder), inputModel.Folder);
 
-            if (!string.IsNullOrEmpty(series))
+            if (!string.IsNullOrEmpty(inputModel.Series))
             {
-                CreateFolder(Path.Combine(path, userId.Replace("-", "_").Replace(" ", "_"), todayFolder, folder), series);
+                CreateFolder(Path.Combine(inputModel.Path, inputModel.UserId.Replace("-", "_").Replace(" ", "_"), todayFolder, inputModel.Folder), inputModel.Series);
             }
 
             return filePath;
+        }
+
+        private static Image RoundImageToCreateThumbnail(Image image)
+        {
+            var pixel = image.Width > image.Height ? image.Height : image.Width;
+            var diff = image.Width > image.Height ? (int)((image.Width - image.Height) / 2) : (int)((image.Height - image.Width) / 2);
+            var height = image.Width > image.Height ? false : true;
+
+            var x = !height ? diff : 0;
+            var y = height ? diff : 0;
+
+            Rectangle rect = new Rectangle(x, y, pixel, pixel);
+            Bitmap OriginalImage = new Bitmap(image, image.Width, image.Height);
+            Bitmap temp = new Bitmap(pixel, pixel);
+            Graphics g = Graphics.FromImage(temp);
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+            g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+            g.DrawImage(OriginalImage, 0, 0, rect, GraphicsUnit.Pixel);
+
+            return temp;
         }
     }
 }
