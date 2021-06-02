@@ -23,7 +23,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebFramework", "WebFramewor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayout", "BusinessPlan\BusinessLayout.csproj", "{D0A0BCA2-CFF9-42B3-9D42-17287C9B81A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManaDapper", "ManaDapper\ManaDapper.csproj", "{27AC3266-EA35-47FD-B83D-8586D4933070}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManaDapper", "ManaDapper\ManaDapper.csproj", "{27AC3266-EA35-47FD-B83D-8586D4933070}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManaEntitiesValidation", "ManaEntitiesValidation\ManaEntitiesValidation.csproj", "{CF07257B-58D7-4276-99DA-8A14B4687849}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManaResourceManager", "ManaResourceManager\ManaResourceManager.csproj", "{4096443D-34A3-4B4F-B371-81B5328551D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +79,14 @@ Global
 		{27AC3266-EA35-47FD-B83D-8586D4933070}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27AC3266-EA35-47FD-B83D-8586D4933070}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27AC3266-EA35-47FD-B83D-8586D4933070}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF07257B-58D7-4276-99DA-8A14B4687849}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF07257B-58D7-4276-99DA-8A14B4687849}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF07257B-58D7-4276-99DA-8A14B4687849}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF07257B-58D7-4276-99DA-8A14B4687849}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4096443D-34A3-4B4F-B371-81B5328551D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4096443D-34A3-4B4F-B371-81B5328551D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4096443D-34A3-4B4F-B371-81B5328551D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4096443D-34A3-4B4F-B371-81B5328551D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

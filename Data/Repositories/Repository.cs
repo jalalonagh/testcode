@@ -48,6 +48,8 @@ namespace Data.Repositories
         }
         public async Task<RepositoryResult<IEnumerable<TEntity>>> FetchByIdAsync(int id)
         {
+            if (id == 0)
+                return new RepositoryResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, "ورودی نا مناسب");
             var query = Entities
                 .Where(w => w.Id == id)
                 .AsQueryable();
@@ -73,6 +75,8 @@ namespace Data.Repositories
         }
         public async Task<RepositoryResult<TEntity>> AddAsync(TEntity entity)
         {
+            if (entity == null)
+                return new RepositoryResult<TEntity>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, "ورودی نامناسب");
             int Result = 0;
             Assert.NotNull(entity, nameof(entity));
             entity = entity.FixPersianText();
@@ -86,6 +90,8 @@ namespace Data.Repositories
         }
         public async Task<RepositoryResult<IEnumerable<TEntity>>> AddRangeAsync(IEnumerable<TEntity> entities)
         {
+            if(entities == null || !entities.Any())
+                return new RepositoryResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, "ورودی نامناسب");
             int Result = 0;
             Assert.NotNull(entities, nameof(entities));
             entities = entities.FixPersianText();
@@ -102,6 +108,8 @@ namespace Data.Repositories
         }
         public async Task<RepositoryResult<TEntity>> UpdateAsync(TEntity entity)
         {
+            if(entity == null)
+                return new RepositoryResult<TEntity>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, "ورودی نامناسب");
             int Result = 0;
             Assert.NotNull(entity, nameof(entity));
             entity = entity.FixPersianText();

@@ -6,7 +6,7 @@
         public Transaction.Transaction transaction { get; set; }
         public int phoneId { get; set; }
         public Phone.Phone phone { get; set; }
-        public bool autoConfirmed { get; set; }
-        public bool manualConfirmed { get; set; }
+        public bool? autoConfirmed { get; set; }
+        public bool? manualConfirmed { get; set; }
     }
 }

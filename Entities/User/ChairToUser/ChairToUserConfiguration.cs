@@ -14,6 +14,8 @@ namespace Entities.User.ChairToUser
         public void Configure(EntityTypeBuilder<ChairToUser> builder)
         {
             builder.ToTable(nameof(ChairToUser));
+            builder.Property(p => p.UserId).IsRequired();
+            builder.Property(p => p.ChairId).IsRequired();
             builder.Property(p => p.DateDm).HasDefaultValue(DateTime.Now);
             builder.Property(p => p.DateDs).HasDefaultValue(DateTime.Now.ToPersian());
             builder.Property(p => p.DateDs).HasMaxLength(10);

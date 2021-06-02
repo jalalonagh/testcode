@@ -8,7 +8,7 @@ namespace ManaViewModel.ConfirmedTransaction
         public Transaction.TransactionVM transaction { get; set; }
         public int phoneId { get; set; }
         public Phone.PhoneVM phone { get; set; }
-        public bool autoConfirmed { get; set; }
-        public bool manualConfirmed { get; set; }
+        public bool? autoConfirmed { get; set; }
+        public bool? manualConfirmed { get; set; }
     }
 }

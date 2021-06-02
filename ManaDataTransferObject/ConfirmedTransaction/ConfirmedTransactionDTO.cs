@@ -6,7 +6,7 @@ namespace ManaDataTransferObject.ConfirmedTransaction
     {
         public int transactionId { get; set; }
         public int phoneId { get; set; }
-        public bool autoConfirmed { get; set; }
-        public bool manualConfirmed { get; set; }
+        public bool? autoConfirmed { get; set; }
+        public bool? manualConfirmed { get; set; }
     }
 }
