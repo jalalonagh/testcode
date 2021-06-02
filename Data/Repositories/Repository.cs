@@ -3,6 +3,7 @@ using Common.Utilities;
 using Data.Repositories.Models;
 using Entities;
 using Entities.Common;
+using ManaResourceManager;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -27,11 +28,13 @@ namespace Data.Repositories
         public DbSet<TEntity> Entities { get; }
         public IQueryable<TEntity> Table => Entities;
         public IQueryable<TEntity> TableNoTracking => Entities.AsNoTracking();
+        private ResourceManagerSingleton resource;
 
         public Repository(ApplicationDbContext dbContext)
         {
             DbContext = dbContext;
             Entities = DbContext.Set<TEntity>(); // City => Cities
+            resource = ResourceManagerSingleton.Instance;
         }
 
         public async Task<RepositoryResult<TEntity>> GetByIdAsync(params object[] ids)
@@ -49,7 +52,7 @@ namespace Data.Repositories
         public async Task<RepositoryResult<IEnumerable<TEntity>>> FetchByIdAsync(int id)
         {
             if (id == 0)
-                return new RepositoryResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, "ورودی نا مناسب");
+                return new RepositoryResult<IEnumerable<TEntity>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("emptyinputdata").GetMessage());
             var query = Entities
                 .Where(w => w.Id == id)
                 .AsQueryable();

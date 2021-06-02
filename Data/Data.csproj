@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ManaEntitiesValidation\ManaEntitiesValidation.csproj" />
+    <ProjectReference Include="..\ManaResourceManager\ManaResourceManager.csproj" />
   </ItemGroup>
 
 </Project>
