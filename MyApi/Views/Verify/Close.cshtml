@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>کوپ اپ</title>
+</head>
+<body bgcolor="#FFDE0A">
+    <div align="center">
+        <div style="font-size:30px"><b>فروشگاه کوپ اپ</b></div><br><br>
+        <div style="font-size:24px">
+            <div id="redirectionanchor">
+                <a href="https://my.copapp.ir">برای ادامه کار، مجدداً برنامه «کوپ اپ» را اجرا نمایید.</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var isMobile = {
+            Android: function () {
+                return navigator.userAgent.match(/Android/i);
+            },
+            BlackBerry: function () {
+                return navigator.userAgent.match(/BlackBerry/i);
+            },
+            iOS: function () {
+                return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+            },
+            Opera: function () {
+                return navigator.userAgent.match(/Opera Mini/i);
+            },
+            Windows: function () {
+                return navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i);
+            },
+            any: function () {
+                return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+            }
+        };
+
+        if (isMobile.any()) {
+            document.getElementById("redirectionanchor").innerHTML = '<a href="selfcare://">بازگشت به کوپ اپ</a>';
+            window.close();
+        }
+        else {
+            document.getElementById("redirectionanchor").innerHTML = '<a href="https://my.copapp.ir">بازگشت به کوپ اپ.</a>';
+            window.close();
+        }
+    </script>
+    <div><div style="display: none; position: fixed; top: 30px; width: auto; max-width: 100%; text-align: center; left: 50%; transform: translateX(-50%); z-index: 99999999;"><div style="display: inline-block; font-size: 14px; font-weight: bold; border: 1px solid rgb(240, 195, 109); background-color: rgb(249, 237, 190); padding: 0px 10px; border-radius: 2px; box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;"></div></div></div>
+</body>
+</html>

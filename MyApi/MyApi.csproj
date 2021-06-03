@@ -1,0 +1,120 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
+    <LangVersion>9</LangVersion>
+       <StartupObject>MyApi.Program</StartupObject>
+       <UserSecretsId>0d1f7b28-9a36-4337-9b6a-218010513f69</UserSecretsId>
+        <!-- <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel> -->
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>MyApi.xml</DocumentationFile>
+    <OutputPath>bin\Debug\</OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\MyProject\QC\MyApi\MyApi.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="logs\**" />
+    <Compile Remove="Models\DetailPart\**" />
+    <Compile Remove="Models\Tree\**" />
+    <Compile Remove="ServerApp\**" />
+    <Compile Remove="Tools\**" />
+    <Compile Remove="weatherclient\**" />
+    <Content Remove="logs\**" />
+    <Content Remove="Models\DetailPart\**" />
+    <Content Remove="Models\Tree\**" />
+    <Content Remove="ServerApp\**" />
+    <Content Remove="Tools\**" />
+    <Content Remove="weatherclient\**" />
+    <EmbeddedResource Remove="logs\**" />
+    <EmbeddedResource Remove="Models\DetailPart\**" />
+    <EmbeddedResource Remove="Models\Tree\**" />
+    <EmbeddedResource Remove="ServerApp\**" />
+    <EmbeddedResource Remove="Tools\**" />
+    <EmbeddedResource Remove="weatherclient\**" />
+    <None Remove="logs\**" />
+    <None Remove="Models\DetailPart\**" />
+    <None Remove="Models\Tree\**" />
+    <None Remove="ServerApp\**" />
+    <None Remove="Tools\**" />
+    <None Remove="weatherclient\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+    <None Include="appsettings.Production.json" CopyToPublishDirectory="Always" />
+  </ItemGroup>
+  
+  
+  <ItemGroup>
+    <PackageReference Include="Dapper-QueryBuilder" Version="1.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <!--<PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />-->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.1" />
+    <PackageReference Include="NLog.Targets.ElasticSearch" Version="7.5.0" />
+    <PackageReference Include="NLog.Targets.Sentry3" Version="4.0.35" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.9.3" />
+    <PackageReference Include="NLog" Version="4.7.6" />
+    <PackageReference Include="System.Linq.Async" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebFramework\WebFramework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="nlog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="MyApi.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tokens\Token.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Connected Services\" />
+    <Folder Include="Tokens\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.ServiceModel" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
+
+</Project>
