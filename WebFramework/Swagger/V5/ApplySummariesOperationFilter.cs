@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.OpenApi.Models;
 using Pluralize.NET;
-using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Linq;
@@ -15,15 +14,11 @@ namespace WebFramework.Swagger
         {
             var controllerActionDescriptor = context.ApiDescription.ActionDescriptor as ControllerActionDescriptor;
             if (controllerActionDescriptor == null) return;
-
             var pluralizer = new Pluralizer();
-
             var actionName = controllerActionDescriptor.ActionName;
             var singularizeName = pluralizer.Singularize(controllerActionDescriptor.ControllerName);
             var pluralizeName = pluralizer.Pluralize(singularizeName);
-
             var parameterCount = operation.Parameters.Where(p => p.Name != "version" && p.Name != "api-version").Count();
-
             if (IsGetAllAction())
             {
                 if (!operation.Summary.HasValue())
@@ -33,7 +28,6 @@ namespace WebFramework.Swagger
             {
                 if (!operation.Summary.HasValue())
                     operation.Summary = $"Creates a {singularizeName}";
-
                 if (!operation.Parameters[0].Description.HasValue())
                     operation.Parameters[0].Description = $"A {singularizeName} representation";
             }
@@ -41,7 +35,6 @@ namespace WebFramework.Swagger
             {
                 if (!operation.Summary.HasValue())
                     operation.Summary = $"Retrieves a {singularizeName} by unique id";
-
                 if (!operation.Parameters[0].Description.HasValue())
                     operation.Parameters[0].Description = $"a unique id for the {singularizeName}";
             }
@@ -49,10 +42,6 @@ namespace WebFramework.Swagger
             {
                 if (!operation.Summary.HasValue())
                     operation.Summary = $"Updates a {singularizeName} by unique id";
-
-                //if (!operation.Parameters[0].Description.HasValue())
-                //    operation.Parameters[0].Description = $"A unique id for the {singularizeName}";
-
                 if (!operation.Parameters[0].Description.HasValue())
                     operation.Parameters[0].Description = $"A {singularizeName} representation";
             }
@@ -60,11 +49,9 @@ namespace WebFramework.Swagger
             {
                 if (!operation.Summary.HasValue())
                     operation.Summary = $"Deletes a {singularizeName} by unique id";
-
                 if (!operation.Parameters[0].Description.HasValue())
                     operation.Parameters[0].Description = $"A unique id for the {singularizeName}";
             }
-
             #region Local Functions
             bool IsGetAllAction()
             {

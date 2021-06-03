@@ -30,14 +30,10 @@ namespace WebFramework.Filters
             else if (context.Result is BadRequestObjectResult badRequestObjectResult)
             {
                 var message = badRequestObjectResult.Value.ToString();
-
                 System.Reflection.PropertyInfo pi = badRequestObjectResult.Value.GetType().GetProperty("Errors");
-
                 Dictionary<string, string[]> errors = (Dictionary<string, string[]>)(pi.GetValue(badRequestObjectResult.Value, null));
-
                 var errorMessage = errors.SelectMany(p => p.Value).Distinct();
                 message = string.Join(" | ", errorMessage);
-
                 var apiResult = new ApiResult(false, ApiResultStatus.BAD_REQUEST, message);
                 context.Result = new JsonResult(apiResult) { StatusCode = badRequestObjectResult.StatusCode };
             }
@@ -62,7 +58,6 @@ namespace WebFramework.Filters
                 var apiResult = new ApiResult<object>(true, ApiResultStatus.SUCCESS, objectResult.Value);
                 context.Result = new JsonResult(apiResult) { StatusCode = objectResult.StatusCode };
             }
-
             base.OnResultExecuting(context);
         }
     }

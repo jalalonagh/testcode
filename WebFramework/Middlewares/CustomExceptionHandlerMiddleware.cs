@@ -1,5 +1,5 @@
-﻿using Common;
-using Common.Exceptions;
+﻿using Common.Exceptions;
+using ManaEnums.Api;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -13,10 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using BusinessLayout.Configuration.Validation;
-using FluentValidation;
 using WebFramework.Api;
-using ManaEnums.Api;
 
 namespace WebFramework.MiddleWares
 {
@@ -33,7 +30,6 @@ namespace WebFramework.MiddleWares
         protected override string ResolvePropertyName(string propertyName)
         {
             var t = propertyName.ToCharArray().ToList();
-
             return t[0].ToString().ToLowerInvariant() + string.Join(string.Empty, t.Skip(1));
         }
     }
@@ -58,7 +54,6 @@ namespace WebFramework.MiddleWares
             string message = null;
             var httpStatusCode = HttpStatusCode.InternalServerError;
             var apiStatusCode = ApiResultStatus.SERVER_ERROR;
-
             try
             {
                 await _next(context);
@@ -68,7 +63,6 @@ namespace WebFramework.MiddleWares
                 _logger.LogError(exception, exception.Message);
                 httpStatusCode = exception.HttpStatusCode;
                 apiStatusCode = exception.ApiStatusCode;
-
                 if (_env.IsDevelopment())
                 {
                     var dic = new Dictionary<string, string>
@@ -81,20 +75,16 @@ namespace WebFramework.MiddleWares
                         dic.Add("InnerException.Exception", exception.InnerException.Message);
                         dic.Add("InnerException.StackTrace", exception.InnerException.StackTrace);
                     }
-
-                    var settings = new JsonSerializerSettings {ContractResolver = new LowercaseContractResolver()};
-
+                    var settings = new JsonSerializerSettings { ContractResolver = new LowercaseContractResolver() };
                     if (exception.AdditionalData != null)
                         dic.Add("AdditionalData",
                             JsonConvert.SerializeObject(exception.AdditionalData, Formatting.Indented, settings));
-
                     message = JsonConvert.SerializeObject(dic, Formatting.Indented, settings);
                 }
                 else
                 {
                     message = exception.Message;
                 }
-
                 await WriteToResponseAsync();
             }
             catch (SecurityTokenExpiredException exception)
@@ -111,8 +101,7 @@ namespace WebFramework.MiddleWares
             }
             catch (Exception exception)
             {
-               _logger.LogError(exception, exception.Message);
-
+                _logger.LogError(exception, exception.Message);
                 if (_env.IsDevelopment())
                 {
                     var dic = new Dictionary<string, string>
@@ -130,13 +119,9 @@ namespace WebFramework.MiddleWares
             {
                 if (context.Response.HasStarted)
                     throw new InvalidOperationException("The response has already started, the http status code middleware will not be executed.");
-
                 var result = new ApiResult(false, apiStatusCode, message);
-
                 var settings = new JsonSerializerSettings { ContractResolver = new LowercaseContractResolver() };
-
                 var json = JsonConvert.SerializeObject(result, Formatting.Indented, settings);
-
                 context.Response.StatusCode = (int)httpStatusCode;
                 context.Response.ContentType = "application/json";
                 await context.Response.WriteAsync(json);
@@ -146,7 +131,6 @@ namespace WebFramework.MiddleWares
             {
                 httpStatusCode = HttpStatusCode.Unauthorized;
                 apiStatusCode = ApiResultStatus.UNAUTHORIZED;
-
                 if (_env.IsDevelopment())
                 {
                     var dic = new Dictionary<string, string>

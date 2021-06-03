@@ -1,9 +1,7 @@
-﻿using Swashbuckle.AspNetCore.Swagger;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc.Authorization;
+﻿using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Linq;
 
 namespace WebFramework.Swagger
 {
@@ -21,25 +19,16 @@ namespace WebFramework.Swagger
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             var filters = context.ApiDescription.ActionDescriptor.FilterDescriptors;
-
             var hasAnonymous = filters.Any(p => p.Filter is AllowAnonymousFilter);
             if (hasAnonymous) return;
-
             var hasAuthorize = filters.Any(p => p.Filter is AuthorizeFilter);
             if (!hasAuthorize) return;
-
             if (includeUnauthorizedAndForbiddenResponses)
             {
                 operation.Responses.TryAdd("401", new OpenApiResponse { Description = "Unauthorized" });
                 operation.Responses.TryAdd("403", new OpenApiResponse { Description = "Forbidden" });
             }
-
             operation.Security.Add(new OpenApiSecurityRequirement() { });
-
-            //operation.Security = new List<IDictionary<string, IEnumerable<string>>>
-            //{
-            //    new Dictionary<string, IEnumerable<string>> { { schemeName, new string[] { } } }
-            //};
         }
     }
 }
