@@ -1,17 +1,18 @@
-﻿using AutoMapper;
-using Entities;
-using ManaAutoMapper.Interfaces;
+﻿using Entities;
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace ManaAutoMapper.Models
 {
     [Serializable]
-    public abstract class AutoMapperDTO<TDto, TEntity, TKey> : AutoMapperBaseDTO<TDto, TEntity, TKey>
-        where TDto : class, new()
-        where TEntity : BaseEntity, new()
+    public class AutoMapperDTO<TDto, TEntity, TKey> : AutoMapperBaseDTO<TDto, TEntity, TKey>
+        where TDto : class
+        where TEntity : BaseEntity
         where TKey : struct
     {
+        public AutoMapperDTO()
+        {
+
+        }
 
         public TEntity ToEntity()
         {

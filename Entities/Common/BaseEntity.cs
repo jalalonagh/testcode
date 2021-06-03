@@ -18,7 +18,7 @@ namespace Entities
         public bool IsDeleted { get; set; }
     }
 
-    public abstract class BaseEntity : IEntity
+    public class BaseEntity : IEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -30,5 +30,10 @@ namespace Entities
         public int Order { get; set; }
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
+
+        public BaseEntity()
+        {
+
+        }
     }
 }

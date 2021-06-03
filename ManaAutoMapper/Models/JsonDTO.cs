@@ -1,12 +1,10 @@
-﻿using Entities;
-using Entities.Common;
-using System;
+﻿using System;
 
 namespace ManaAutoMapper.Models
 {
-    public abstract class JsonDTO<TDto, TEntity, TKey>
-        where TDto : class, new()
-        where TEntity : class, new()
+    public class JsonDTO<TDto, TEntity, TKey>
+        where TDto : class
+        where TEntity : class
         where TKey : struct
     {
         public TKey Id { get; set; }
@@ -17,6 +15,11 @@ namespace ManaAutoMapper.Models
         public int? Order { get; set; }
         public bool? IsActive { get; set; }
         public bool? IsDeleted { get; set; }
+
+        public JsonDTO()
+        {
+
+        }
 
         public string ToJson(TEntity entity)
         {

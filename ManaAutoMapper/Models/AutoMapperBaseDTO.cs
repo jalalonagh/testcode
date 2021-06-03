@@ -10,10 +10,15 @@ using System.Threading.Tasks;
 namespace ManaAutoMapper.Models
 {
     public class AutoMapperBaseDTO<TDto, TEntity, TKey> : JsonDTO<TDto, TEntity, TKey>, IHaveCustomMapping
-        where TDto : class, new()
-        where TEntity : class, IEntity, new()
+        where TDto : class
+        where TEntity : class, IEntity
         where TKey : struct
     {
+        public AutoMapperBaseDTO()
+        {
+
+        }
+
         protected TDto CastToDerivedClass(AutoMapperInterfaceDTO<TDto, TEntity, TKey> baseInstance)
         {
             var mapper = LazySingleton.Instance;

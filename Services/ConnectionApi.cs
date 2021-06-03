@@ -1,4 +1,5 @@
 ﻿using Common.Utilities;
+using ManaSpeedTester;
 using Microsoft.AspNetCore.Hosting;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,12 @@ namespace Services
     public class ConnectionApi
     {
         private readonly IHostingEnvironment _env;
+        private TimeDurationTrackerSingleton tester;
 
         public ConnectionApi(IHostingEnvironment env)
         {
             _env = env;
+            tester = TimeDurationTrackerSingleton.Instance;
         }
 
         public void saveToken(AccessTokenDTO model)

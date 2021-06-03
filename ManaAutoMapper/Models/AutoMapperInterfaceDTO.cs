@@ -7,9 +7,9 @@ using System.ComponentModel.DataAnnotations;
 namespace ManaAutoMapper.Models
 {
     [Serializable]
-    public abstract class AutoMapperInterfaceDTO<TDto, TEntity, TKey> : AutoMapperBaseDTO<TDto, TEntity, TKey>
-        where TDto : class, new()
-        where TEntity : class, IEntity, new()
+    public class AutoMapperInterfaceDTO<TDto, TEntity, TKey> : AutoMapperBaseDTO<TDto, TEntity, TKey>
+        where TDto : class
+        where TEntity : class, IEntity
         where TKey : struct
     {
 

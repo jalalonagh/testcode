@@ -34,8 +34,6 @@ namespace BusinessLayout.Configuration.Validation
                 {
                     errorBuilder.AppendLine(error.ErrorMessage);
                 }
-
-                //throw new AppException(errorBuilder.ToString(), null);
             }
 
             return next();
