@@ -156,7 +156,7 @@ namespace Services.Base.Services
             return result.ToServiceResult();
         }
 
-        public async Task<ServiceResult<TEntity>> UpdateFieldRangeAsync(int Id, params KeyValuePair<string, dynamic>[] fields)
+        public async Task<ServiceResult<TEntity>> UpdateFieldRangeByIdAsync(int Id, params KeyValuePair<string, dynamic>[] fields)
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.UpdateFieldRangeAsync(Id, fields);

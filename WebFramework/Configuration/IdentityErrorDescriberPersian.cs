@@ -9,7 +9,6 @@ namespace WebFramework.Configuration
     {
         public override IdentityError DuplicateEmail(string email)
         {
-            //return base.DuplicateEmail(email);
             return new IdentityError
             {
                 Code = base.DuplicateEmail(email).Code,
@@ -26,7 +25,6 @@ namespace WebFramework.Configuration
         }
         public override IdentityError PasswordRequiresDigit()
         {
-            //return base.PasswordRequiresDigit();
             return new IdentityError
             {
                 Code = base.PasswordRequiresDigit().Code,

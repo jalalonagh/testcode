@@ -20,7 +20,6 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 
@@ -48,13 +47,11 @@ namespace WebFramework.Configuration
         {
             builder.RegisterSource(new ScopedContravariantRegistrationSource(typeof(IRequestHandler<,>), typeof(INotificationHandler<>), typeof(IValidator<>)));
             builder.RegisterAssemblyTypes(typeof(IMediator).GetTypeInfo().Assembly).AsImplementedInterfaces();
-
             var mediatrOpenTypes = new[]
             {
             typeof(IRequestHandler<,>),
             typeof(IValidator<>)
-        };
-
+            };
             foreach (var mediatrOpenType in mediatrOpenTypes)
             {
                 builder
@@ -63,7 +60,6 @@ namespace WebFramework.Configuration
                     .FindConstructorsWith(new AllConstructorFinder())
                     .AsImplementedInterfaces();
             }
-
             builder.Register<ServiceFactory>(ctx =>
             {
                 var c = ctx.Resolve<IComponentContext>();
@@ -121,7 +117,6 @@ namespace WebFramework.Configuration
                 .As<ISqlConnectionFactory>()
                 .WithParameter("connectionString", _databaseConnectionString)
                 .InstancePerLifetimeScope();
-
             builder
                 .Register(c =>
                 {
@@ -141,24 +136,19 @@ namespace WebFramework.Configuration
         public static void AddServices(this ContainerBuilder containerBuilder)
         {
             containerBuilder.RegisterGeneric(typeof(Repository<,>)).As(typeof(IRepository<,>)).InstancePerLifetimeScope();
-
             var commonAssembly = typeof(SiteSettings).Assembly;
             var entitiesAssembly = typeof(IEntity).Assembly;
-
             var dataAssembly = typeof(ApplicationDbContext).Assembly;
             var servicesAssembly = typeof(IDataInitializer).Assembly;
             var BLAssembly = typeof(IBL).Assembly;
-
             containerBuilder.RegisterAssemblyTypes(commonAssembly, entitiesAssembly, dataAssembly, servicesAssembly, BLAssembly)
                 .AssignableTo<IScopedDependency>()
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
-
             containerBuilder.RegisterAssemblyTypes(commonAssembly, entitiesAssembly, dataAssembly, servicesAssembly, BLAssembly)
                 .AssignableTo<ITransientDependency>()
                 .AsImplementedInterfaces()
                 .InstancePerDependency();
-
             containerBuilder.RegisterAssemblyTypes(commonAssembly, entitiesAssembly, dataAssembly, servicesAssembly, BLAssembly)
                 .AssignableTo<ISingletonDependency>()
                 .AsImplementedInterfaces()
@@ -169,15 +159,10 @@ namespace WebFramework.Configuration
         {
             var containerBuilder = new ContainerBuilder();
             containerBuilder.Populate(services);
-
-            //Register Services to Autofac ContainerBuilder
             containerBuilder.AddServices();
-
             containerBuilder.RegisterModule(new MediatorModule());
             containerBuilder.RegisterModule(new DataAccessModule(configuration.GetConnectionString("SqlServer")));
-
             var container = containerBuilder.Build();
-
             return new AutofacServiceProvider(container);
         }
     }

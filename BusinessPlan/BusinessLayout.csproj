@@ -5,24 +5,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Product\Share\ViewModels\**" />
-    <EmbeddedResource Remove="Product\Share\ViewModels\**" />
-    <None Remove="Product\Share\ViewModels\**" />
+    <Compile Remove="Product\**" />
+    <Compile Remove="Profile\**" />
+    <Compile Remove="Share\**" />
+    <Compile Remove="User\**" />
+    <EmbeddedResource Remove="Product\**" />
+    <EmbeddedResource Remove="Profile\**" />
+    <EmbeddedResource Remove="Share\**" />
+    <EmbeddedResource Remove="User\**" />
+    <None Remove="Product\**" />
+    <None Remove="Profile\**" />
+    <None Remove="Share\**" />
+    <None Remove="User\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CSharpFunctionalExtensions" Version="2.14.1" />
     <PackageReference Include="MediatR" Version="9.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Product\Command\" />
-    <Folder Include="Product\Share\" />
-    <Folder Include="Profile\Command\" />
-    <Folder Include="Profile\Query\" />
-    <Folder Include="Profile\Share\" />
-    <Folder Include="Share\" />
-    <Folder Include="User\" />
   </ItemGroup>
 
   <ItemGroup>

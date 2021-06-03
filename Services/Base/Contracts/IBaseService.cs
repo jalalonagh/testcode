@@ -29,7 +29,7 @@ namespace Services.Base.Contracts
         Task<ServiceResult<IEnumerable<TEntity>>> FilterRangeAsync(FilterRangeModel<TSearchEntity> filter);
         Task<ServiceResult<IEnumerable<TEntity>>> SearchRangeAsync(SearchRangeModel<TEntity> search);
         Task<ServiceResult<TEntity>> UpdateFieldRangeAsync(TEntity entity, params string[] fields);
-        Task<ServiceResult<TEntity>> UpdateFieldRangeAsync(int Id, params KeyValuePair<string, dynamic>[] fields);
+        Task<ServiceResult<TEntity>> UpdateFieldRangeByIdAsync(int Id, params KeyValuePair<string, dynamic>[] fields);
         Task<ServiceResult<TEntity>> ItemSync(TEntity Target, TEntity Origin);
     }
 }

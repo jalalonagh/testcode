@@ -16,7 +16,6 @@ namespace WebFramework.Configuration
         {
             Assert.NotNull(app, nameof(app));
             Assert.NotNull(env, nameof(env));
-
             if (!env.IsDevelopment())
                 app.UseHsts();
         }
@@ -26,11 +25,8 @@ namespace WebFramework.Configuration
             using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var dbContext = scope.ServiceProvider.GetService<ApplicationDbContext>(); //Service locator
-
                 dbContext.Database.Migrate();
-
                 var dataInitializers = scope.ServiceProvider.GetServices<IDataInitializer>();
- 
                 foreach (var dataInitializer in dataInitializers)
                     dataInitializer.InitializeData();
             }
