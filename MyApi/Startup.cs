@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RequestCorrelation;
 using Services;
 using System;
 using System.Globalization;
@@ -28,7 +29,6 @@ namespace MyApi
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
             _siteSetting = configuration.GetSection(nameof(SiteSettings)).Get<SiteSettings>();
         }
 
@@ -36,32 +36,24 @@ namespace MyApi
         {
             services.AddSingleton(new ResourceManager("MyApi.Properties.Resources", typeof(Startup).GetTypeInfo().Assembly));
             services.AddLocalization(options => options.ResourcesPath = "Properties");
-
             services.AddScoped<IAuthorizationHandler, PermissionHandler>();
             services.AddHttpClient();
 
-            services.AddSession();
+            services.AddScoped(typeof(ITimeDurationTracker), typeof(TimeDurationTracker));
+
+            services.AddSession(
+            );
 
             services.Configure<SiteSettings>(Configuration.GetSection(nameof(SiteSettings)));
-
             services.AddDbContext(Configuration);
-
             services.AddCustomIdentity(_siteSetting.IdentitySettings);
-
             services.AddMinimalMvc();
-
             services.AddControllersWithViews();
-
             services.AddElmah(Configuration, _siteSetting);
-
             services.AddJwtAuthentication(_siteSetting.JwtSettings);
-
             services.AddCustomApiVersioning();
-
             services.AddSwagger();
-
             services.AddSessionService();
-
             services.AddCors(options =>
             {
                 options.AddPolicy(MyAllowSpecificOrigins,
@@ -72,7 +64,6 @@ namespace MyApi
                            .AllowAnyMethod();
                 });
             });
-
             return services.BuildAutofacServiceProvider(Configuration);
         }
 
@@ -83,33 +74,23 @@ namespace MyApi
             cultureInfo.NumberFormat.CurrencySymbol = "R";
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-
             app.UseMultiLanguage();
-
             app.IntializeDatabase();
-
             app.UseCustomExceptionHandler();
-
             app.UseStaticFiles(new StaticFileOptions
             {
             });
 
+            app.UseMiddleware<RequestCorrelationMiddleware>();
+
             app.UseElmah();
-
             app.UseHttpsRedirection();
-
             app.UseCors(MyAllowSpecificOrigins);
-
             app.UseSwaggerAndUI();
-
             app.UseSessionService();
-
             app.UseRouting();
-
             app.UseAuthentication();
-
             app.UseAuthorization();
-
             app.UseEndpoints((endpoints) =>
             {
                 endpoints.MapControllerRoute(

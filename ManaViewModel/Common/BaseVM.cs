@@ -4,7 +4,7 @@ using System;
 
 namespace ManaViewModel.Common
 {
-    public abstract class BaseVM<TDTO, TEntity, TKey> : AutoMapperDTO<TDTO, TEntity, TKey>
+    public class BaseVM<TDTO, TEntity, TKey> : AutoMapperDTO<TDTO, TEntity, TKey>
         where TDTO : class, new()
         where TEntity : BaseEntity, new()
         where TKey : struct
