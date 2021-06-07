@@ -1,4 +1,6 @@
-﻿using Services;
+﻿using Entities;
+using ManaViewModel.Common;
+using Services;
 using WebFramework.Api;
 
 namespace MyApi
@@ -12,6 +14,17 @@ namespace MyApi
         public static ApiResult<TData> ToApiResult<TData>(this ServiceResult<TData> result) where TData : class
         {
             return new WebFramework.Api.ApiResult<TData>(result.IsSuccess, result.StatusCode, result.Data, result.Message);
+        }
+
+        public static ApiResult<TVM> ToApiResult<TEntity, TDTO, TVM, TKey>(this ServiceResult<TEntity> result)
+            where TEntity : BaseEntity
+            where TVM : BaseVM<TDTO, TEntity, TKey>
+            where TDTO : class
+            where TKey : struct
+        {
+            var data1 = TVM.;
+
+            return new ApiResult<TVM>(result.IsSuccess, result.StatusCode, TVM.(result.Data), result.Message);
         }
     }
 }

@@ -1,8 +1,10 @@
-﻿using Common.Utilities;
+﻿using BusinessLayout.Cart.Command.AddAsync;
+using Common.Utilities;
 using Entities;
 using Entities.Common;
 using ManaAutoMapper.Models;
 using ManaViewModel.Common;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -21,19 +23,19 @@ namespace MyApi.Controllers.Api.v1
         where TSearch : BaseSearchEntity
         where TKey : struct
     {
-        private readonly ILogger<BaseBusinessController<TEntity, TDTO, TSearch, TKey>> _logger;
+        private IMediator mediator;
 
-        public BaseBusinessController(ILogger<BaseBusinessController<TEntity, TDTO, TSearch, TKey>> logger)
+        public BaseBusinessController(IMediator _mediator)
         {
-            _logger = logger;
+            mediator = _mediator;
         }
 
-        [HttpGet("[action]")]
-        public async Task<IEnumerable<WalletSurvayVM>> GetWalletSurvay([FromBody] WalletSurvayDto model)
+        [HttpPost("[action]")]
+        public async Task<ApiResult<TVM>> AddAsync(TDTO model)
         {
-            Log.LogMethod(_logger, MethodBase.GetCurrentMethod(), Username, model);
-            var survey = await _walletHandler.GetWalletSurvay(model.Value, Username);
-            return survey.IsSuccess ? survey.Data : new List<WalletSurvayVM>();
+            var result = await mediator.Send(new AddAsyncCommand<TEntity, TDTO, TSearch, TKey>(model));
+
+            return result.ToApiResult();
         }
 
         //[HttpPost("[action]")]
