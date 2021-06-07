@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RequestCorrelation;
 using Services;
 using System;
 using System.Globalization;
@@ -41,10 +40,7 @@ namespace MyApi
             services.AddScoped<IAuthorizationHandler, PermissionHandler>();
             services.AddHttpClient();
 
-            services.AddScoped(typeof(ITimeDurationTracker), typeof(TimeDurationTracker));
-
-            services.AddSession(
-            );
+            services.AddSession();
 
             services.Configure<SiteSettings>(Configuration.GetSection(nameof(SiteSettings)));
 
@@ -97,8 +93,6 @@ namespace MyApi
             app.UseStaticFiles(new StaticFileOptions
             {
             });
-
-            app.UseMiddleware<RequestCorrelationMiddleware>();
 
             app.UseElmah();
 
