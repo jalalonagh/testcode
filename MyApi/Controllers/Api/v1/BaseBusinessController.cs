@@ -34,7 +34,7 @@ namespace MyApi.Controllers.Api.v1
         public async Task<ApiResult<TVM>> AddAsync(TDTO model)
         {
             var result = await mediator.Send(new AddAsyncCommand<TEntity, TDTO, TSearch, TKey>(model));
-
+            TDTO data =;
             return result.ToApiResult();
         }
 

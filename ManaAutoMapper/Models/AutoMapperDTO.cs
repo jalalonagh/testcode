@@ -31,7 +31,6 @@ namespace ManaAutoMapper.Models
         public static TDto FromEntity(TEntity model)
         {
             var mapper = LazySingleton.Instance;
-
             return mapper.GetMapper().Map<TDto>(model);
         }
 
