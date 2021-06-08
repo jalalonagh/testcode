@@ -7,8 +7,8 @@ using Services;
 namespace BusinessLayout.Cart.Command.AddAsync
 {
     public class AddAsyncCommand<TEntity, TDTO, TSearch, TKey> : CommandBase<ServiceResult<TEntity>>
-        where TEntity : BaseEntity
-        where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>
+        where TEntity : BaseEntity, new()
+        where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>, new()
         where TSearch : BaseSearchEntity
         where TKey : struct
     {

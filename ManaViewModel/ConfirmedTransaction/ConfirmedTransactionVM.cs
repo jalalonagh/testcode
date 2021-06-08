@@ -4,6 +4,11 @@ namespace ManaViewModel.ConfirmedTransaction
 {
     public class ConfirmedTransactionVM : BaseVM<ConfirmedTransactionVM, Entities.ConfirmedTransaction.ConfirmedTransaction, int>
     {
+        public ConfirmedTransactionVM()
+        {
+
+        }
+
         public int transactionId { get; set; }
         public Transaction.TransactionVM transaction { get; set; }
         public int phoneId { get; set; }

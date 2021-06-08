@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 namespace BusinessLayout.Cart.Command.AddAsync
 {
     public class AddAsyncCommandHandler<TEntity, TDTO, TSearch, TKey> : ICommandHandler<AddAsyncCommand<TEntity, TDTO, TSearch, TKey>, ServiceResult<TEntity>>
-        where TEntity : BaseEntity
-        where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>
-        where TSearch : BaseSearchEntity
+        where TEntity : BaseEntity, new()
+        where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>, new()
+        where TSearch : BaseSearchEntity, new()
         where TKey : struct
     {
         private readonly IBaseService<TEntity, TSearch> _service;

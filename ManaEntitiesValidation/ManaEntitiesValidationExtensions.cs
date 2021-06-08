@@ -7,7 +7,7 @@ namespace ManaEntitiesValidation
 {
     public static class ManaEntitiesValidationExtensions
     {
-        public static void AddZarrinpalService(this IServiceCollection services, IConfiguration configuration)
+        public static void AddEntitiesValidationService(this IServiceCollection services, IConfiguration configuration)
         {
             // افزودن سرویس کار با پرداخت زرین پال
             services.AddMvc(setup => {}).AddFluentValidation();

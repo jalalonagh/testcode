@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ManaDapper\ManaDapper.csproj" />
-    <ProjectReference Include="..\ManaDataTransferObject\ManaDataTransferObject.csproj" />
     <ProjectReference Include="..\ManaViewModel\ManaViewModel.csproj" />
   </ItemGroup>
 

@@ -1,11 +1,12 @@
 ﻿using Common;
 using ElmahCore.Mvc;
+using ManaDataTransferObjectValidator;
+using ManaEntitiesValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RequestCorrelation;
 using Services;
 using System;
 using System.Globalization;
@@ -38,12 +39,7 @@ namespace MyApi
             services.AddLocalization(options => options.ResourcesPath = "Properties");
             services.AddScoped<IAuthorizationHandler, PermissionHandler>();
             services.AddHttpClient();
-
-            services.AddScoped(typeof(ITimeDurationTracker), typeof(TimeDurationTracker));
-
-            services.AddSession(
-            );
-
+            services.AddSession();
             services.Configure<SiteSettings>(Configuration.GetSection(nameof(SiteSettings)));
             services.AddDbContext(Configuration);
             services.AddCustomIdentity(_siteSetting.IdentitySettings);
@@ -54,6 +50,8 @@ namespace MyApi
             services.AddCustomApiVersioning();
             services.AddSwagger();
             services.AddSessionService();
+            services.AddDTOValidationService(Configuration);
+            services.AddEntitiesValidationService(Configuration);
             services.AddCors(options =>
             {
                 options.AddPolicy(MyAllowSpecificOrigins,
@@ -69,7 +67,6 @@ namespace MyApi
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // تبدیل تاریخ و ساعت اپ به زمان رسمی
             var cultureInfo = new CultureInfo("fa-IR");
             cultureInfo.NumberFormat.CurrencySymbol = "R";
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
@@ -77,12 +74,7 @@ namespace MyApi
             app.UseMultiLanguage();
             app.IntializeDatabase();
             app.UseCustomExceptionHandler();
-            app.UseStaticFiles(new StaticFileOptions
-            {
-            });
-
-            app.UseMiddleware<RequestCorrelationMiddleware>();
-
+            app.UseStaticFiles(new StaticFileOptions {});
             app.UseElmah();
             app.UseHttpsRedirection();
             app.UseCors(MyAllowSpecificOrigins);

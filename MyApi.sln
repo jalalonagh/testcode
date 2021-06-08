@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManaSpeedTester", "ManaSpee
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyApi", "MyApi\MyApi.csproj", "{905F73C0-5456-4FE2-BBBE-B629A59F83DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManaDataTransferObjectValidator", "ManaDataTransferObjectValidator\ManaDataTransferObjectValidator.csproj", "{EAFD06D1-2C81-4AEB-BADC-C77FE9DC60EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{905F73C0-5456-4FE2-BBBE-B629A59F83DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{905F73C0-5456-4FE2-BBBE-B629A59F83DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{905F73C0-5456-4FE2-BBBE-B629A59F83DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAFD06D1-2C81-4AEB-BADC-C77FE9DC60EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAFD06D1-2C81-4AEB-BADC-C77FE9DC60EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAFD06D1-2C81-4AEB-BADC-C77FE9DC60EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAFD06D1-2C81-4AEB-BADC-C77FE9DC60EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

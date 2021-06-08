@@ -5,8 +5,8 @@ using System;
 namespace ManaDataTransferObject.Common
 {
     public class BaseInterfaceDTO<TDTO, TEntity, TKey> : AutoMapperInterfaceDTO<TDTO, TEntity, TKey>
-        where TDTO : class
-        where TEntity : class, IEntity
+        where TDTO : class, new()
+        where TEntity : class, IEntity, new()
         where TKey : struct
     {
     }

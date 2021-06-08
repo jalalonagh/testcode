@@ -7,9 +7,9 @@ using ManaResourceManager;
 namespace BusinessLayout.Cart.Command.DeleteByIdAsync
 {
     public class DeleteByIdAsyncCommandValidator<TEntity, TDTO, TSearch, TKey> : AbstractValidator<DeleteByIdAsyncCommand<TEntity, TDTO, TSearch, TKey>>
-        where TEntity : BaseEntity
-        where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>
-        where TSearch : BaseSearchEntity
+        where TEntity : BaseEntity, new()
+        where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>, new()
+        where TSearch : BaseSearchEntity, new()
         where TKey : struct
     {
         private ResourceManagerSingleton rms;

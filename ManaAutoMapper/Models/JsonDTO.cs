@@ -3,8 +3,8 @@
 namespace ManaAutoMapper.Models
 {
     public class JsonDTO<TDto, TEntity, TKey>
-        where TDto : class
-        where TEntity : class
+        where TDto : class, new()
+        where TEntity : class, new()
         where TKey : struct
     {
         public TKey Id { get; set; }

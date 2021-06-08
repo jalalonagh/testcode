@@ -1,17 +1,12 @@
 ﻿using AutoMapper;
 using Entities;
 using ManaAutoMapper.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ManaAutoMapper.Models
 {
-    public class AutoMapperBaseDTO<TDto, TEntity, TKey> : JsonDTO<TDto, TEntity, TKey>, IHaveCustomMapping
-        where TDto : class
-        where TEntity : class, IEntity
+    public class AutoMapperBaseDTO<TDTO, TEntity, TKey> : JsonDTO<TDTO, TEntity, TKey>, IHaveCustomMapping
+        where TDTO : class, new()
+        where TEntity : class, IEntity, new()
         where TKey : struct
     {
         public AutoMapperBaseDTO()
@@ -19,19 +14,19 @@ namespace ManaAutoMapper.Models
 
         }
 
-        protected TDto CastToDerivedClass(AutoMapperInterfaceDTO<TDto, TEntity, TKey> baseInstance)
+        protected TDTO CastToDerivedClass(AutoMapperInterfaceDTO<TDTO, TEntity, TKey> baseInstance)
         {
             var mapper = LazySingleton.Instance;
 
-            return mapper.GetMapper().Map<TDto>(baseInstance);
+            return mapper.GetMapper().Map<TDTO>(baseInstance);
         }
 
         public void CreateMappings(AutoMapper.Profile profile)
         {
-            var mappingExpression = profile.CreateMap<TDto, TEntity>();
-            var mappingExpressionReverse = profile.CreateMap<TEntity, TDto>();
+            var mappingExpression = profile.CreateMap<TDTO, TEntity>();
+            var mappingExpressionReverse = profile.CreateMap<TEntity, TDTO>();
 
-            var dtoType = typeof(TDto);
+            var dtoType = typeof(TDTO);
             var entityType = typeof(TEntity);
 
             foreach (var property in entityType.GetProperties())
@@ -44,11 +39,11 @@ namespace ManaAutoMapper.Models
             CustomMappingsReverse(mappingExpression);
         }
 
-        public virtual void CustomMappings(IMappingExpression<TEntity, TDto> mapping)
+        public virtual void CustomMappings(IMappingExpression<TEntity, TDTO> mapping)
         {
         }
 
-        public virtual void CustomMappingsReverse(IMappingExpression<TDto, TEntity> mapping)
+        public virtual void CustomMappingsReverse(IMappingExpression<TDTO, TEntity> mapping)
         {
         }
     }

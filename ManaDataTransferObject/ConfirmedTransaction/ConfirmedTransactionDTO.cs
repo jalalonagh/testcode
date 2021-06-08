@@ -1,9 +1,15 @@
-﻿using ManaDataTransferObject.Common;
+﻿using ManaAutoMapper.Models;
+using ManaDataTransferObject.Common;
 
 namespace ManaDataTransferObject.ConfirmedTransaction
 {
     public class ConfirmedTransactionDTO : BaseDTO<ConfirmedTransactionDTO, Entities.ConfirmedTransaction.ConfirmedTransaction, int>
     {
+        public ConfirmedTransactionDTO()
+        {
+
+        }
+
         public int transactionId { get; set; }
         public int phoneId { get; set; }
         public bool? autoConfirmed { get; set; }

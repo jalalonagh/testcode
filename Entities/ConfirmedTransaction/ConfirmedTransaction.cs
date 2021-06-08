@@ -2,6 +2,11 @@
 {
     public class ConfirmedTransaction : BaseEntity
     {
+        public ConfirmedTransaction()
+        {
+
+        }
+
         public int transactionId { get; set; }
         public Transaction.Transaction transaction { get; set; }
         public int phoneId { get; set; }

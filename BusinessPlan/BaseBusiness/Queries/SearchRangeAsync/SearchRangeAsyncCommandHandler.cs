@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 namespace BusinessLayout.Cart.Command.SearchRangeAsync
 {
     public class SearchRangeAsyncCommandHandler<TEntity, TDTO, TSearch, TKey> : ICommandHandler<SearchRangeAsyncCommand<TEntity, TDTO, TSearch, TKey>, ServiceResult<IEnumerable<TEntity>>>
-        where TEntity : BaseEntity
-        where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>
-        where TSearch : BaseSearchEntity
+        where TEntity : BaseEntity, new()
+        where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>, new()
+        where TSearch : BaseSearchEntity, new()
         where TKey : struct
     {
         private readonly IBaseService<TEntity, TSearch> _service;

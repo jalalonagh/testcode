@@ -1,12 +1,15 @@
 ﻿using FluentValidation;
+using ManaResourceManager;
 
 namespace ManaEntitiesValidation.Phone
 {
     internal class PhoneValidator : AbstractValidator<Entities.Phone.Phone>
     {
+        private ResourceManagerSingleton resource;
         public PhoneValidator()
         {
-            RuleFor(x => x.phoneNumber).NotNull().NotEmpty().WithMessage("شماره موبایل ضروری است");
+            resource = ResourceManagerSingleton.Instance;
+            RuleFor(x => x.phoneNumber).NotNull().NotEmpty().WithMessage(resource.FetchResource("phoneisrequired").GetMessage());
         }
     }
 }

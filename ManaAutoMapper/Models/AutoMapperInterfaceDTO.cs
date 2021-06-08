@@ -8,8 +8,8 @@ namespace ManaAutoMapper.Models
 {
     [Serializable]
     public class AutoMapperInterfaceDTO<TDto, TEntity, TKey> : AutoMapperBaseDTO<TDto, TEntity, TKey>
-        where TDto : class
-        where TEntity : class, IEntity
+        where TDto : class, new()
+        where TEntity : class, IEntity, new()
         where TKey : struct
     {
 

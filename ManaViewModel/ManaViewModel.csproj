@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ManaAutoMapper\ManaAutoMapper.csproj" />
+    <ProjectReference Include="..\ManaDataTransferObjectValidator\ManaDataTransferObjectValidator.csproj" />
   </ItemGroup>
 
 </Project>

@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 namespace BusinessLayout.Cart.Command.UpdateRangeAsync
 {
     public class UpdateRangeAsyncCommandHandler<TEntity, TDTO, TSearch, TKey> : ICommandHandler<UpdateRangeAsyncCommand<TEntity, TDTO, TSearch, TKey>, ServiceResult<IEnumerable<TEntity>>>
-        where TEntity : BaseEntity
-        where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>
-        where TSearch : BaseSearchEntity
+        where TEntity : BaseEntity, new()
+        where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>, new()
+        where TSearch : BaseSearchEntity, new()
         where TKey : struct
     {
         private readonly IBaseService<TEntity, TSearch> _service;

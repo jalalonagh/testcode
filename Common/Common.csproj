@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ManaEnums\ManaEnums.csproj" />
+    <ProjectReference Include="..\ManaResourceManager\ManaResourceManager.csproj" />
   </ItemGroup>
   
 </Project>

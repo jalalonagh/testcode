@@ -18,7 +18,7 @@ namespace Entities.Common
         public bool? IsDeleted { get; set; }
     }
 
-    public abstract class BaseSearchEntity : ISearchEntity
+    public class BaseSearchEntity : ISearchEntity
     {
         public int? Id { get; set; }
         public DateTime? CreateTime { get; set; }
