@@ -1,5 +1,4 @@
-﻿using BusinessLayout.Configuration.Commands;
-using Data.Repositories.Models;
+﻿using BusinessLayout.Configuration.Queries;
 using Entities;
 using Entities.Common;
 using ManaAutoMapper.Models;
@@ -8,7 +7,7 @@ using System.Collections.Generic;
 
 namespace BusinessLayout.Cart.Command.GetAllAsync
 {
-    public class GetAllAsyncCommand<TEntity, TDTO, TSearch, TKey> : CommandBase<ServiceResult<IEnumerable<TEntity>>>
+    public class GetAllAsyncCommand<TEntity, TDTO, TSearch, TKey> : IQuery<ServiceResult<IEnumerable<TEntity>>>
         where TEntity : BaseEntity, new()
         where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>, new()
         where TSearch : BaseSearchEntity, new()

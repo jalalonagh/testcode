@@ -4,6 +4,7 @@ using Autofac.Core.Activators.Reflection;
 using Autofac.Extensions.DependencyInjection;
 using Autofac.Features.Variance;
 using BusinessLayout;
+using BusinessLayout.Configuration.Commands;
 using BusinessLayout.Configuration.Validation;
 using Common;
 using Data;

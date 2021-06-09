@@ -1,4 +1,5 @@
 ﻿using BusinessLayout.Configuration.Commands;
+using BusinessLayout.Configuration.Queries;
 using Entities;
 using Entities.Common;
 using ManaAutoMapper.Models;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayout.Cart.Command.FilterRangeAsync
 {
-    public class FilterRangeAsyncCommandHandler<TEntity, TDTO, TSearch, TKey> : ICommandHandler<FilterRangeAsyncCommand<TEntity, TDTO, TSearch, TKey>, ServiceResult<IEnumerable<TEntity>>>
+    public class FilterRangeAsyncCommandHandler<TEntity, TDTO, TSearch, TKey> : IQueryHandler<FilterRangeAsyncCommand<TEntity, TDTO, TSearch, TKey>, ServiceResult<IEnumerable<TEntity>>>
         where TEntity : BaseEntity, new()
         where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>, new()
         where TSearch : BaseSearchEntity, new()

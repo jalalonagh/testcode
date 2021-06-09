@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Entities.SMS
 {
@@ -8,5 +6,6 @@ namespace Entities.SMS
     {
         public string phone { get; set; }
         public string smsText { get; set; }
+        public IEnumerable<Transaction.Transaction> Transactions { get; set; }
     }
 }

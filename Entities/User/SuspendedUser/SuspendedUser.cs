@@ -3,9 +3,8 @@ using System;
 
 namespace Entities.User.SuspendedUser
 {
-    public class SuspendedUser : BaseEntity, IEntity
+    public class SuspendedUser : BaseEntity
     {
-
         public string PhoneNumber { get; set; }
         public bool PhoneNumberConfirmated { get; set; }
         public string ValidCode { get; set; }

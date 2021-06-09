@@ -13,7 +13,6 @@ namespace ManaViewModel.Profile
             mapping.ForMember(x => x.Day, y => y.MapFrom(c => c.DayBirthDate));
             mapping.ForMember(x => x.Month, y => y.MapFrom(c => c.MonthBirthDate));
             mapping.ForMember(x => x.NumberId, y => y.MapFrom(c => c.PhoneNumberId));
-            mapping.ForMember(x => x.Number, y => y.MapFrom(c => c.PhoneNumber));
             mapping.ForMember(x => x.TeleNumber, y => y.MapFrom(c => c.TelePhoneNumber));
             mapping.ForMember(x => x.Year, y => y.MapFrom(c => c.YearBirthDate));
         }

@@ -1,4 +1,5 @@
 ﻿using BusinessLayout.Configuration.Commands;
+using BusinessLayout.Configuration.Queries;
 using Data.Repositories.Models;
 using Entities;
 using Entities.Common;
@@ -8,7 +9,7 @@ using System.Collections.Generic;
 
 namespace BusinessLayout.Cart.Command.SearchRangeAsync
 {
-    public class SearchRangeAsyncCommand<TEntity, TDTO, TSearch, TKey> : CommandBase<ServiceResult<IEnumerable<TEntity>>>
+    public class SearchRangeAsyncCommand<TEntity, TDTO, TSearch, TKey> : IQuery<ServiceResult<IEnumerable<TEntity>>>
         where TEntity : BaseEntity, new()
         where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>, new()
         where TSearch : BaseSearchEntity, new()

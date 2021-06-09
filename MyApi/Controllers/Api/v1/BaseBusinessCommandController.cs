@@ -101,11 +101,11 @@ namespace MyApi.Controllers.Api.v1
             return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
         }
         [HttpPut("[action]")]
-        public async Task<ApiResult<TVM>> UpdateFieldRangeAsync(TDTO model, string[] fields)
+        public async Task<ApiResult<TVM>> UpdateFieldRangeAsync(TDTO model, string fields)
         {
             if (!ModelState.IsValid)
                 return new ApiResult<TVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
-            var result = await mediator.Send(new UpdateFieldRangeAsyncCommand<TEntity, TDTO, TSearch, TKey>(model, fields));
+            var result = await mediator.Send(new UpdateFieldRangeAsyncCommand<TEntity, TDTO, TSearch, TKey>(model, fields.Split(",")));
             return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
         }
         [HttpPut("[action]")]

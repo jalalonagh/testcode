@@ -26,9 +26,9 @@ namespace WebFramework.Configuration
             {
                 var dbContext = scope.ServiceProvider.GetService<ApplicationDbContext>(); //Service locator
                 dbContext.Database.Migrate();
-                var dataInitializers = scope.ServiceProvider.GetServices<IDataInitializer>();
-                foreach (var dataInitializer in dataInitializers)
-                    dataInitializer.InitializeData();
+                //var dataInitializers = scope.ServiceProvider.GetServices<IDataInitializer>();
+                //foreach (var dataInitializer in dataInitializers)
+                //    dataInitializer.InitializeData();
             }
         }
     }

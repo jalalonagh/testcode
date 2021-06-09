@@ -13,6 +13,8 @@ namespace Entities.Transaction
             builder.Property(p => p.smsId).IsRequired();
             builder.Property(p => p.transaction).IsRequired();
             builder.Property(p => p.type).IsRequired();
+            builder.HasOne(o => o.phone).WithMany(w => w.Transactions).HasForeignKey(f => f.phoneId);
+            builder.HasOne(o => o.sms).WithMany(w => w.Transactions).HasForeignKey(f => f.smsId);
 
             builder.HasIndex(i => i.type);
             builder.HasIndex(i => i.phoneId);

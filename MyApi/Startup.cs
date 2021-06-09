@@ -35,8 +35,6 @@ namespace MyApi
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton(new ResourceManager("MyApi.Properties.Resources", typeof(Startup).GetTypeInfo().Assembly));
-            services.AddLocalization(options => options.ResourcesPath = "Properties");
             services.AddScoped<IAuthorizationHandler, PermissionHandler>();
             services.AddHttpClient();
             services.AddSession();

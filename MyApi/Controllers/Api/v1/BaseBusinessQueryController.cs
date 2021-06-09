@@ -41,7 +41,7 @@ namespace MyApi.Controllers.Api.v1
         [HttpGet("[action]")]
         public async Task<ApiResult<IEnumerable<TVM>>> GetAllAsync(int total = 0, int more = int.MaxValue)
         {
-            var result = await mediator.Send(new GetAllAsyncCommand<TEntity, TDTO, TSearch, TKey>(total, more));
+            var result = await new GetAllAsyncCommandHandler<TEntity, TDTO, TVM, TKey>().Handle(new GetAllAsyncCommand<TEntity, TDTO, TSearch, TKey>(total, more));
             return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
         }
 

@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 namespace MyApi.Controllers.Api.v1
 {
     [ApiVersion("1")]
-    public class ProfileQueryController : BaseBusinessCommandController<Profile, ProfileDTO, ProfileVM, ProfileSearch, int>
+    public class ProfileQueryController : BaseBusinessQueryController<Profile, ProfileDTO, ProfileVM, ProfileSearch, int>
     {
         private readonly ILogger<ProfileQueryController> _logger;
         private IMediator mediator;

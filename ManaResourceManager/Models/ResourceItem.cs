@@ -20,6 +20,10 @@ namespace ManaResourceManager.Models
                 {
                     Name = value.ToUpper();
                 }
+                else
+                {
+                    Name = value;
+                }
             }
         }
         public string Title { get; set; }

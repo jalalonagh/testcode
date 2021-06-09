@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace Entities.Profile.FavoriteProduct
+﻿namespace Entities.Profile.FavoriteProduct
 {
     public class FavoriteProduct : BaseEntity
     {

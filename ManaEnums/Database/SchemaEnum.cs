@@ -13,6 +13,8 @@ namespace ManaEnums.Database
         [Display(Name = "پروفایل")]
         PROFILE,
         [Display(Name = "الگو ها")]
-        REGEX
+        REGEX,
+        [Display(Name = "کاربر")]
+        USER
     }
 }

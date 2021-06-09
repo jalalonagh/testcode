@@ -9,7 +9,6 @@ namespace Entities.Profile
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int PhoneNumberId { get; set; }
-        public PhoneNumber.PhoneNumber PhoneNumber { get; set; }
         public string TelePhoneNumber { get; set; }
         public string NationalCode { get; set; }
         public string EmailAddress { get; set; }
@@ -25,5 +24,6 @@ namespace Entities.Profile
         public string ExtensionNumber { get; set; }
 
         public IEnumerable<FavoriteProduct.FavoriteProduct> FavoriteProducts { get; set; }
+        public IEnumerable<PhoneNumber.PhoneNumber> Phones { get; set; }
     }
 }

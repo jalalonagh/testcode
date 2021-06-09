@@ -12,6 +12,8 @@ namespace Entities.ConfirmedTransaction
             builder.ToTable(nameof(ConfirmedTransaction), nameof(SchemaEnum.TRANSACTION));
             builder.Property(p => p.phoneId).IsRequired();
             builder.Property(p => p.transactionId).IsRequired();
+            builder.HasOne(o => o.phone).WithMany(w => w.Confirms).HasForeignKey(f => f.phoneId);
+            builder.HasOne(o => o.transaction).WithMany(w => w.Confirms).HasForeignKey(f => f.transactionId);
 
             builder.HasIndex(i => i.Order);
         }

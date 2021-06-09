@@ -1,4 +1,5 @@
 ﻿using BusinessLayout.Configuration.Commands;
+using BusinessLayout.Configuration.Queries;
 using Entities;
 using Entities.Common;
 using ManaAutoMapper.Models;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayout.Cart.Command.GetByIdAsync
 {
-    public class GetByIdAsyncCommandHandler<TEntity, TDTO, TSearch, TKey> : ICommandHandler<GetByIdAsyncCommand<TEntity, TDTO, TSearch, TKey>, ServiceResult<TEntity>>
+    public class GetByIdAsyncCommandHandler<TEntity, TDTO, TSearch, TKey> : IQueryHandler<GetByIdAsyncCommand<TEntity, TDTO, TSearch, TKey>, ServiceResult<TEntity>>
         where TEntity : BaseEntity, new()
         where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>, new()
         where TSearch : BaseSearchEntity, new()
