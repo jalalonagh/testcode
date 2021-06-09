@@ -4,7 +4,7 @@ using Autofac.Core.Activators.Reflection;
 using Autofac.Extensions.DependencyInjection;
 using Autofac.Features.Variance;
 using BusinessLayout;
-using BusinessLayout.Configuration.Commands;
+using BusinessLayout.BaseBusiness.Query.GetAllAsync;
 using BusinessLayout.Configuration.Validation;
 using Common;
 using Data;
@@ -20,7 +20,6 @@ using Services.DataInitializer;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Reflection;
 
@@ -46,7 +45,7 @@ namespace WebFramework.Configuration
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterSource(new ScopedContravariantRegistrationSource(typeof(IRequestHandler<,>), typeof(INotificationHandler<>), typeof(IValidator<>)));
+            builder.RegisterSource(new ScopedContravariantRegistrationSource(typeof(GetAllAsyncQuery<,,,>), typeof(IRequestHandler<,>), typeof(INotificationHandler<>), typeof(IValidator<>)));
             builder.RegisterAssemblyTypes(typeof(IMediator).GetTypeInfo().Assembly).AsImplementedInterfaces();
             var mediatrOpenTypes = new[]
             {

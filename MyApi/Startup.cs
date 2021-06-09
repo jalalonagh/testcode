@@ -1,17 +1,18 @@
-﻿using Common;
+﻿using BusinessLayout;
+using BusinessLayout.Configuration;
+using Common;
 using ElmahCore.Mvc;
 using ManaDataTransferObjectValidator;
 using ManaEntitiesValidation;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Services;
 using System;
 using System.Globalization;
 using System.Reflection;
-using System.Resources;
 using WebFramework.Configuration;
 using WebFramework.MiddleWares;
 using WebFramework.Permission;
@@ -45,6 +46,10 @@ namespace MyApi
             services.AddControllersWithViews();
             services.AddElmah(Configuration, _siteSetting);
             services.AddJwtAuthentication(_siteSetting.JwtSettings);
+
+            //services.AddScoped<IMediator, Mediator>();
+            //services.AddMediatorHandlers(typeof(IBL).GetTypeInfo().Assembly);
+
             services.AddCustomApiVersioning();
             services.AddSwagger();
             services.AddSessionService();
@@ -72,7 +77,7 @@ namespace MyApi
             app.UseMultiLanguage();
             app.IntializeDatabase();
             app.UseCustomExceptionHandler();
-            app.UseStaticFiles(new StaticFileOptions {});
+            app.UseStaticFiles(new StaticFileOptions { });
             app.UseElmah();
             app.UseHttpsRedirection();
             app.UseCors(MyAllowSpecificOrigins);
