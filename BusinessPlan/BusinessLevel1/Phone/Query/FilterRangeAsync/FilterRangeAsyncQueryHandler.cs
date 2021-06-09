@@ -1,0 +1,34 @@
+﻿using BusinessLayout.Configuration.Queries;
+using Entities;
+using Entities.Common;
+using ManaAutoMapper.Models;
+using Microsoft.Extensions.Logging;
+using Services;
+using Services.Base.Contracts;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace BusinessLayout.BaseBusinessLevel1.Phone.Query.FilterRangeAsync
+{
+    public class FilterRangeAsyncQueryHandler<TEntity, TDTO, TSearch, TKey> : IQueryHandler<FilterRangeAsyncQuery<TEntity, TDTO, TSearch, TKey>, ServiceResult<IEnumerable<TEntity>>>
+        where TEntity : BaseEntity, new()
+        where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>, new()
+        where TSearch : BaseSearchEntity, new()
+        where TKey : struct
+    {
+        private readonly IBaseService<TEntity, TSearch> _service;
+        private readonly ILogger<FilterRangeAsyncQueryHandler<TEntity, TDTO, TSearch, TKey>> _logger;
+
+        public FilterRangeAsyncQueryHandler(ILogger<FilterRangeAsyncQueryHandler<TEntity, TDTO, TSearch, TKey>> logger, IBaseService<TEntity, TSearch> service)
+        {
+            _service = service;
+            _logger = logger;
+        }
+
+        public async Task<ServiceResult<IEnumerable<TEntity>>> Handle(FilterRangeAsyncQuery<TEntity, TDTO, TSearch, TKey> request, CancellationToken cancel)
+        {
+            return await _service.FilterRangeAsync(request.Model);
+        }
+    }
+}

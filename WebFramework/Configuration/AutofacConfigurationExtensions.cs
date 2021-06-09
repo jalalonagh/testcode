@@ -45,7 +45,7 @@ namespace WebFramework.Configuration
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterSource(new ScopedContravariantRegistrationSource(typeof(GetAllAsyncQuery<,,,>), typeof(IRequestHandler<,>), typeof(INotificationHandler<>), typeof(IValidator<>)));
+            builder.RegisterSource(new ScopedContravariantRegistrationSource(typeof(IRequestHandler<,>), typeof(INotificationHandler<>), typeof(IValidator<>)));
             builder.RegisterAssemblyTypes(typeof(IMediator).GetTypeInfo().Assembly).AsImplementedInterfaces();
             var mediatrOpenTypes = new[]
             {
