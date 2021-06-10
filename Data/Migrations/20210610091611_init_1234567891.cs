@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class init_create : Migration
+    public partial class init_1234567891 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,11 +20,12 @@ namespace Data.Migrations
                 name: "USER");
 
             migrationBuilder.CreateTable(
-                name: "BaseEntities",
+                name: "Chairs",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -35,7 +36,52 @@ namespace Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BaseEntities", x => x.Id);
+                    table.PrimaryKey("PK_Chairs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PhoneNumberTypes",
+                schema: "PROFILE",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastUpdatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Order = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PhoneNumberTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Phones",
+                schema: "SMS",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    phoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    type = table.Column<int>(type: "int", nullable: true),
+                    financialAccountId = table.Column<int>(type: "int", nullable: true),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastUpdatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Order = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Phones", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -59,6 +105,75 @@ namespace Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SMS",
+                schema: "SMS",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    phone = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    smsText = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastUpdatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Order = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SMS", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SMSRegexes",
+                schema: "SMS",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    regex = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    type = table.Column<int>(type: "int", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastUpdatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Order = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SMSRegexes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SuspendedUsers",
+                schema: "USER",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumberConfirmated = table.Column<bool>(type: "bit", nullable: false),
+                    ValidCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ValidCodeExpired = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastUpdatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Order = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SuspendedUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -108,220 +223,26 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Chairs",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Chairs", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Chairs_BaseEntities_Id",
-                        column: x => x.Id,
-                        principalTable: "BaseEntities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PhoneNumberTypes",
-                schema: "PROFILE",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PhoneNumberTypes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PhoneNumberTypes_BaseEntities_Id",
-                        column: x => x.Id,
-                        principalTable: "BaseEntities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Phones",
-                schema: "SMS",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    phoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    type = table.Column<int>(type: "int", nullable: true),
-                    financialAccountId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Phones", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Phones_BaseEntities_Id",
-                        column: x => x.Id,
-                        principalTable: "BaseEntities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SMS",
-                schema: "SMS",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    phone = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    smsText = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SMS", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SMS_BaseEntities_Id",
-                        column: x => x.Id,
-                        principalTable: "BaseEntities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SMSRegexes",
-                schema: "SMS",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    regex = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    type = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SMSRegexes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SMSRegexes_BaseEntities_Id",
-                        column: x => x.Id,
-                        principalTable: "BaseEntities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SuspendedUsers",
-                schema: "USER",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumberConfirmated = table.Column<bool>(type: "bit", nullable: false),
-                    ValidCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ValidCodeExpired = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Type = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SuspendedUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SuspendedUsers_BaseEntities_Id",
-                        column: x => x.Id,
-                        principalTable: "BaseEntities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Profiles",
-                schema: "PROFILE",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberId = table.Column<int>(type: "int", nullable: false),
-                    TelePhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NationalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    YearBirthDate = table.Column<int>(type: "int", nullable: true),
-                    MonthBirthDate = table.Column<int>(type: "int", nullable: true),
-                    DayBirthDate = table.Column<int>(type: "int", nullable: true),
-                    ImageAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Points = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
-                    ProfileTypeId = table.Column<int>(type: "int", nullable: true, defaultValue: 3),
-                    BankCarNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecondPassword = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AccountingSystemId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ExtensionNumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Profiles", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Profiles_BaseEntities_Id",
-                        column: x => x.Id,
-                        principalTable: "BaseEntities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Profiles_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ChairToUsers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    ChairId = table.Column<int>(type: "int", nullable: false),
-                    DateDm = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2021, 6, 9, 12, 10, 9, 512, DateTimeKind.Local).AddTicks(1063)),
-                    DateDs = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true, defaultValue: "1400/03/19")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ChairToUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ChairToUsers_BaseEntities_Id",
-                        column: x => x.Id,
-                        principalTable: "BaseEntities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_ChairToUsers_Chairs_ChairId",
-                        column: x => x.ChairId,
-                        principalTable: "Chairs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_ChairToUsers_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "SMSConfirmations",
                 schema: "SMS",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     phoneId = table.Column<int>(type: "int", nullable: false),
                     smsId = table.Column<int>(type: "int", nullable: false),
-                    confirmationText = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    confirmationText = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastUpdatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Order = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SMSConfirmations", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SMSConfirmations_BaseEntities_Id",
-                        column: x => x.Id,
-                        principalTable: "BaseEntities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SMSConfirmations_Phones_phoneId",
                         column: x => x.phoneId,
@@ -343,21 +264,23 @@ namespace Data.Migrations
                 schema: "TRANSACTION",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     phoneId = table.Column<int>(type: "int", nullable: false),
                     smsId = table.Column<int>(type: "int", nullable: false),
                     transaction = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    type = table.Column<int>(type: "int", nullable: false)
+                    type = table.Column<int>(type: "int", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastUpdatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Order = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Transactions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Transactions_BaseEntities_Id",
-                        column: x => x.Id,
-                        principalTable: "BaseEntities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Transactions_Phones_phoneId",
                         column: x => x.phoneId,
@@ -375,63 +298,79 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FavoriteProducts",
-                schema: "PROFILE",
+                name: "ChairToUsers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    ProfileId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    ChairId = table.Column<int>(type: "int", nullable: false),
+                    DateDm = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2021, 6, 10, 13, 46, 11, 357, DateTimeKind.Local).AddTicks(3974)),
+                    DateDs = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true, defaultValue: "1400/03/20"),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastUpdatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Order = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FavoriteProducts", x => x.Id);
+                    table.PrimaryKey("PK_ChairToUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FavoriteProducts_BaseEntities_Id",
-                        column: x => x.Id,
-                        principalTable: "BaseEntities",
+                        name: "FK_ChairToUsers_Chairs_ChairId",
+                        column: x => x.ChairId,
+                        principalTable: "Chairs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_FavoriteProducts_Profiles_ProfileId",
-                        column: x => x.ProfileId,
-                        principalSchema: "PROFILE",
-                        principalTable: "Profiles",
+                        name: "FK_ChairToUsers_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "PhoneNumbers",
+                name: "Profiles",
                 schema: "PROFILE",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    PhoneNumberTypeId = table.Column<int>(type: "int", nullable: false),
-                    Number = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProfileId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberId = table.Column<int>(type: "int", nullable: false),
+                    TelePhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NationalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    YearBirthDate = table.Column<int>(type: "int", nullable: true),
+                    MonthBirthDate = table.Column<int>(type: "int", nullable: true),
+                    DayBirthDate = table.Column<int>(type: "int", nullable: true),
+                    ImageAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Points = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    ProfileTypeId = table.Column<int>(type: "int", nullable: true, defaultValue: 3),
+                    BankCarNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecondPassword = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AccountingSystemId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ExtensionNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastUpdatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Order = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PhoneNumbers", x => x.Id);
+                    table.PrimaryKey("PK_Profiles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PhoneNumbers_BaseEntities_Id",
-                        column: x => x.Id,
-                        principalTable: "BaseEntities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_PhoneNumbers_PhoneNumberTypes_PhoneNumberTypeId",
-                        column: x => x.PhoneNumberTypeId,
-                        principalSchema: "PROFILE",
-                        principalTable: "PhoneNumberTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_PhoneNumbers_Profiles_ProfileId",
-                        column: x => x.ProfileId,
-                        principalSchema: "PROFILE",
-                        principalTable: "Profiles",
+                        name: "FK_Profiles_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -441,21 +380,23 @@ namespace Data.Migrations
                 schema: "TRANSACTION",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     transactionId = table.Column<int>(type: "int", nullable: false),
                     phoneId = table.Column<int>(type: "int", nullable: false),
                     autoConfirmed = table.Column<bool>(type: "bit", nullable: true),
-                    manualConfirmed = table.Column<bool>(type: "bit", nullable: true)
+                    manualConfirmed = table.Column<bool>(type: "bit", nullable: true),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastUpdatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Order = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ConfirmedTransactions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ConfirmedTransactions_BaseEntities_Id",
-                        column: x => x.Id,
-                        principalTable: "BaseEntities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ConfirmedTransactions_Phones_phoneId",
                         column: x => x.phoneId,
@@ -472,6 +413,72 @@ namespace Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "FavoriteProducts",
+                schema: "PROFILE",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    ProfileId = table.Column<int>(type: "int", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastUpdatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Order = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FavoriteProducts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_FavoriteProducts_Profiles_ProfileId",
+                        column: x => x.ProfileId,
+                        principalSchema: "PROFILE",
+                        principalTable: "Profiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PhoneNumbers",
+                schema: "PROFILE",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PhoneNumberTypeId = table.Column<int>(type: "int", nullable: false),
+                    Number = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProfileId = table.Column<int>(type: "int", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastUpdatePersianTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Order = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PhoneNumbers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PhoneNumbers_PhoneNumberTypes_PhoneNumberTypeId",
+                        column: x => x.PhoneNumberTypeId,
+                        principalSchema: "PROFILE",
+                        principalTable: "PhoneNumberTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PhoneNumbers_Profiles_ProfileId",
+                        column: x => x.ProfileId,
+                        principalSchema: "PROFILE",
+                        principalTable: "Profiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_ChairToUsers_ChairId",
                 table: "ChairToUsers",
@@ -481,6 +488,12 @@ namespace Data.Migrations
                 name: "IX_ChairToUsers_UserId",
                 table: "ChairToUsers",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ConfirmedTransactions_Order",
+                schema: "TRANSACTION",
+                table: "ConfirmedTransactions",
+                column: "Order");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ConfirmedTransactions_phoneId",
@@ -507,6 +520,12 @@ namespace Data.Migrations
                 column: "ProfileId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PhoneNumbers_Order",
+                schema: "PROFILE",
+                table: "PhoneNumbers",
+                column: "Order");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PhoneNumbers_PhoneNumberTypeId",
                 schema: "PROFILE",
                 table: "PhoneNumbers",
@@ -517,6 +536,18 @@ namespace Data.Migrations
                 schema: "PROFILE",
                 table: "PhoneNumbers",
                 column: "ProfileId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PhoneNumberTypes_Order",
+                schema: "PROFILE",
+                table: "PhoneNumberTypes",
+                column: "Order");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Phones_Order",
+                schema: "SMS",
+                table: "Phones",
+                column: "Order");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Phones_type",
@@ -535,14 +566,25 @@ namespace Data.Migrations
                 schema: "PROFILE",
                 table: "Profiles",
                 column: "UserId",
-                unique: true,
-                filter: "[UserId] IS NOT NULL");
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SMS_CreateTime",
+                schema: "SMS",
+                table: "SMS",
+                column: "CreateTime");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SMS_phone",
                 schema: "SMS",
                 table: "SMS",
                 column: "phone");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SMSConfirmations_CreateTime",
+                schema: "SMS",
+                table: "SMSConfirmations",
+                column: "CreateTime");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SMSConfirmations_phoneId",
@@ -653,9 +695,6 @@ namespace Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "BaseEntities");
         }
     }
 }

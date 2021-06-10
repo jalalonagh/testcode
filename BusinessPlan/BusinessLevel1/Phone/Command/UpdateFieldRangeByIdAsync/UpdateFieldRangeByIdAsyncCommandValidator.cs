@@ -8,7 +8,7 @@ namespace BusinessLayout.BaseBusinessLevel1.Phone.Command.UpdateFieldRangeByIdAs
         private ResourceManagerSingleton rms;
         public UpdateFieldRangeByIdAsyncCommandValidator()
         {
-            rms = ResourceManagerSingleton.Instance;
+            rms = ResourceManagerSingleton.GetInstance();
 
             RuleFor(c => c.EntityId)
                 .NotNull()

@@ -8,7 +8,7 @@ namespace BusinessLayout.BaseBusinessLevel1.Phone.Query.SearchRangeAsync
         private ResourceManagerSingleton rms;
         public SearchRangeAsyncQueryValidator()
         {
-            rms = ResourceManagerSingleton.Instance;
+            rms = ResourceManagerSingleton.GetInstance();
 
             RuleFor(c => c.Model)
                 .NotNull()

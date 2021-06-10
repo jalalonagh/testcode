@@ -8,7 +8,7 @@ namespace BusinessLayout.BaseBusinessLevel1.Phone.Command.UpdateAsync
         private ResourceManagerSingleton rms;
         public UpdateAsyncCommandValidator()
         {
-            rms = ResourceManagerSingleton.Instance;
+            rms = ResourceManagerSingleton.GetInstance();
 
             RuleFor(c => c.Model)
                 .NotNull()

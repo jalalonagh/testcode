@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Entities.Common;
+using System;
 
 namespace Entities.User.ChairToUser
 {
-    public class ChairToUser: BaseEntity
+    public class ChairToUser : BaseEntity
     {
         public int UserId { get; set; }
         public User User { get; set; }

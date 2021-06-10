@@ -1,8 +1,5 @@
-﻿using AutoMapper;
-using Entities;
-using ManaAutoMapper.Interfaces;
+﻿using Entities.Common;
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace ManaAutoMapper.Models
 {

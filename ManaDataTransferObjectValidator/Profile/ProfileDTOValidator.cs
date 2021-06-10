@@ -8,7 +8,7 @@ namespace ManaEntitiesValidation.Profile
         private ResourceManagerSingleton resource;
         public ProfileValidator()
         {
-            resource = ResourceManagerSingleton.Instance;
+            resource = ResourceManagerSingleton.GetInstance();
             RuleFor(x => x.UserId).NotNull().GreaterThan(0).WithMessage(resource.FetchResource("useridisrequired").GetMessage());
             RuleFor(x => x.PhoneNumberId).NotNull().GreaterThan(0).WithMessage(resource.FetchResource("phonenumberidisrequired").GetMessage());
             RuleFor(x => x.Points).NotNull().GreaterThan(0).WithMessage(resource.FetchResource("pointsisrequired").GetMessage());

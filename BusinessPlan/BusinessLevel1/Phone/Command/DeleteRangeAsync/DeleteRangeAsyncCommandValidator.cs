@@ -8,7 +8,7 @@ namespace BusinessLayout.BaseBusinessLevel1.Phone.Command.DeleteRangeAsync
         private ResourceManagerSingleton rms;
         public DeleteRangeAsyncCommandValidator()
         {
-            rms = ResourceManagerSingleton.Instance;
+            rms = ResourceManagerSingleton.GetInstance();
 
             RuleFor(c => c.Model)
                 .NotNull()

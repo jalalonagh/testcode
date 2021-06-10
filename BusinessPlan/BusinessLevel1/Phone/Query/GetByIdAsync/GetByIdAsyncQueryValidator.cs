@@ -8,7 +8,7 @@ namespace BusinessLayout.BaseBusinessLevel1.Phone.Query.GetByIdAsync
         private ResourceManagerSingleton rms;
         public GetByIdAsyncQueryValidator()
         {
-            rms = ResourceManagerSingleton.Instance;
+            rms = ResourceManagerSingleton.GetInstance();
 
             RuleFor(c => c.EntityIds)
                 .NotNull()

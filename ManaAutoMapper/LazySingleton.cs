@@ -19,8 +19,8 @@ namespace ManaAutoMapper
 
             var allTypes = assembly.ExportedTypes;
 
-            var list = allTypes.Where(type => type.IsClass && !type.IsAbstract &&
-                type.GetInterfaces().Contains(typeof(IHaveCustomMapping)))
+            var list = allTypes.Where(type => type.IsClass && !type.IsAbstract
+            && type.GetInterfaces().Contains(typeof(IHaveCustomMapping)))
                 .Select(type => (IHaveCustomMapping)Activator.CreateInstance(type));
 
             profile = new CustomMappingProfile(list);

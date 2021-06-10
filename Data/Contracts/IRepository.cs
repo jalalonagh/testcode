@@ -1,6 +1,5 @@
 ﻿using Common;
 using Data.Repositories.Models;
-using Entities;
 using Entities.Common;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;

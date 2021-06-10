@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Entities.Common;
+using System.Collections.Generic;
 
 namespace Entities.SMS
 {

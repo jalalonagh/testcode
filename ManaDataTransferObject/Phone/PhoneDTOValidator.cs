@@ -10,7 +10,7 @@ namespace ManaDataTransferObject.Phone
         private ResourceManagerSingleton resource;
         public PhoneDTOValidator()
         {
-            resource = ResourceManagerSingleton.Instance;
+            resource = ResourceManagerSingleton.GetInstance();
             RuleFor(x => x.phoneNumber).NotNull().NotEmpty().WithMessage(resource.FetchResource("phoneisrequired").GetMessage());
         }
     }

@@ -9,7 +9,7 @@ namespace ManaDataTransferObjectValidator.SMSRegex
         private ResourceManagerSingleton resource;
         public SMSRegexDTOValidator()
         {
-            resource = ResourceManagerSingleton.Instance;
+            resource = ResourceManagerSingleton.GetInstance();
             RuleFor(x => x.regex).NotNull().NotEmpty().WithMessage(resource.FetchResource("regexisrequired").GetMessage());
         }
     }

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Entities;
+using Entities.Common;
 using ManaAutoMapper.Interfaces;
 
 namespace ManaAutoMapper.Models

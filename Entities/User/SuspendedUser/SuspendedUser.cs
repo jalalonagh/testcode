@@ -1,4 +1,5 @@
-﻿using ManaEnums.Entity.User;
+﻿using Entities.Common;
+using ManaEnums.Entity.User;
 using System;
 
 namespace Entities.User.SuspendedUser

@@ -3,16 +3,15 @@ using ManaResourceManager;
 
 namespace BusinessLayout.BaseBusinessLevel1.Phone.Query.GetAllAsync
 {
-    public class GetAllAsyncQueryValidator : AbstractValidator<GetAllAsyncQuery>
+    public class PhoneGetAllAsyncQueryValidator : AbstractValidator<PhoneGetAllAsyncQuery>
     {
         private ResourceManagerSingleton rms;
-        public GetAllAsyncQueryValidator()
+        public PhoneGetAllAsyncQueryValidator()
         {
-            rms = ResourceManagerSingleton.Instance;
+            rms = ResourceManagerSingleton.GetInstance();
 
             RuleFor(c => c.Total)
                 .NotNull()
-                .GreaterThan(0)
                 .WithMessage(rms.FetchResource("nototalload").GetMessage());
 
             RuleFor(c => c.More)

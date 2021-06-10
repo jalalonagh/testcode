@@ -1,4 +1,5 @@
-﻿using ManaEnums.Entity.Financial.Transaction;
+﻿using Entities.Common;
+using ManaEnums.Entity.Financial.Transaction;
 using System.Collections.Generic;
 
 namespace Entities.Transaction

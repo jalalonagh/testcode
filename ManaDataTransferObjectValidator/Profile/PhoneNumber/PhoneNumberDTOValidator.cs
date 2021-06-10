@@ -9,7 +9,7 @@ namespace ManaDataTransferObjectValidator.Profile.PhoneNumber
         private ResourceManagerSingleton resource;
         public PhoneNumberDTOValidator()
         {
-            resource = ResourceManagerSingleton.Instance;
+            resource = ResourceManagerSingleton.GetInstance();
             RuleFor(x => x.Number).NotNull().NotEmpty().WithMessage(resource.FetchResource("phonenumberisrequired").GetMessage());
         }
     }

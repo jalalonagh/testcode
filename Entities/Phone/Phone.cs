@@ -1,9 +1,10 @@
-﻿using ManaEnums.Entity.Phone;
+﻿using Entities.Common;
+using ManaEnums.Entity.Phone;
 using System.Collections.Generic;
 
 namespace Entities.Phone
 {
-    public class Phone : BaseEntity
+    public class Phone : BaseEntity, IEntity
     {
         public string phoneNumber { get; set; }
         public string name { get; set; }

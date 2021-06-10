@@ -1,7 +1,6 @@
 ﻿
 using Common.Utilities;
 using Data.Repositories.Models;
-using Entities;
 using Entities.Common;
 using ManaResourceManager;
 using ManaSpeedTester;
@@ -33,7 +32,7 @@ namespace Data.Repositories
         {
             DbContext = dbContext;
             Entities = DbContext.Set<TEntity>(); // City => Cities
-            resource = ResourceManagerSingleton.Instance;
+            resource = ResourceManagerSingleton.GetInstance();
             tester = TimeDurationTrackerSingleton.Instance;
         }
 

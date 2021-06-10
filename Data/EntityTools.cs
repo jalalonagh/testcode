@@ -95,18 +95,18 @@ namespace Data
             return newEntities;
         }
 
-        public static IQueryable<TEntity> SetOrder<TEntity, TSearch>(this IQueryable<TEntity> query, IEnumerable<string> fields)
+        public static IQueryable<TEntity> SetOrder<TEntity, TSearch>(this IQueryable<TEntity> query, IEnumerable<PropertyInfo> fields)
             where TEntity : class, IEntity
             where TSearch : class, ISearchEntity
         {
             if (fields != null && fields.Any())
                 foreach (var item in fields)
-                    query.OrderByDescending(EntityFuncs.ApplyFunc<TEntity, TSearch>(item));
+                    query.OrderByDescending(EntityFuncs.ApplyFunc<TEntity>(item, item.PropertyType.IsValueType ? Activator.CreateInstance(item.PropertyType) : null));
 
             return query;
         }
 
-        public static IQueryable<TEntity> SetOrder<TEntity, TSearch>(this IEnumerable<TEntity> entities, IEnumerable<string> fields)
+        public static IQueryable<TEntity> SetOrder<TEntity, TSearch>(this IEnumerable<TEntity> entities, IEnumerable<PropertyInfo> fields)
             where TEntity : class, IEntity
             where TSearch : class, ISearchEntity
         {
@@ -114,7 +114,7 @@ namespace Data
 
             if (fields != null && fields.Any())
                 foreach (var item in fields)
-                    query.OrderByDescending(EntityFuncs.ApplyFunc<TEntity, TSearch>(item));
+                    query.OrderByDescending(EntityFuncs.ApplyFunc<TEntity>(item, item.PropertyType.IsValueType ? Activator.CreateInstance(item.PropertyType) : null));
 
             return query;
         }
@@ -143,7 +143,7 @@ namespace Data
             return query;
         }
 
-        public static IEnumerable<string> GetOrderFeilds<TEntity>(this IQueryable<TEntity> query)
+        public static IEnumerable<PropertyInfo> GetOrderFeilds<TEntity>(this IQueryable<TEntity> query)
             where TEntity : class, IEntity
         {
             var properties = typeof(TEntity).GetProperties();
@@ -156,7 +156,7 @@ namespace Data
 
             var custom = ordered.Select(s => new
             {
-                name = s.Name,
+                name = s,
                 index = (int)s.CustomAttributes
                 .Where(w => w.AttributeType.FullName == "System.ComponentModel.DataAnnotations.Schema.ColumnAttribute")
                 .FirstOrDefault().NamedArguments

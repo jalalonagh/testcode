@@ -1,15 +1,10 @@
-﻿using Entities.Common;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
 
-namespace Entities.User.Role
+namespace Entities.Common
 {
-    public class Role : IdentityRole<int>, IEntity
+    public interface IEntity
     {
-        [Required]
-        [StringLength(100)]
-        public string Description { get; set; }
+        public int Id { get; set; }
         public DateTime CreateTime { get; set; }
         public string CreatePersianTime { get; set; }
         public DateTime? LastUpdateTime { get; set; }

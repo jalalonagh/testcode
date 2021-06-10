@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace BusinessLayout.BaseBusinessLevel1.Phone.Query.GetAllAsync
 {
-    public class GetAllAsyncQueryHandler : IQueryHandler<GetAllAsyncQuery, ServiceResult<IEnumerable<Entities.Phone.Phone>>>
+    public class PhoneGetAllAsyncQueryHandler : IQueryHandler<PhoneGetAllAsyncQuery, ServiceResult<IEnumerable<Entities.Phone.Phone>>>
     {
         private readonly IBaseService<Entities.Phone.Phone, PhoneSearch> _service;
-        private readonly ILogger<GetAllAsyncQueryHandler> _logger;
+        private readonly ILogger<PhoneGetAllAsyncQueryHandler> _logger;
 
-        public GetAllAsyncQueryHandler(ILogger<GetAllAsyncQueryHandler> logger, IBaseService<Entities.Phone.Phone, PhoneSearch> service)
+        public PhoneGetAllAsyncQueryHandler(ILogger<PhoneGetAllAsyncQueryHandler> logger, IBaseService<Entities.Phone.Phone, PhoneSearch> service)
         {
             _service = service;
             _logger = logger;
         }
 
-        public async Task<ServiceResult<IEnumerable<Entities.Phone.Phone>>> Handle(GetAllAsyncQuery request, CancellationToken cancel)
+        public async Task<ServiceResult<IEnumerable<Entities.Phone.Phone>>> Handle(PhoneGetAllAsyncQuery request, CancellationToken cancel)
         {
             return await _service.GetAllAsync(request.Total, request.More);
         }

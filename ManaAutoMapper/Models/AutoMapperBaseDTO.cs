@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using Entities;
+using Entities.Common;
 using ManaAutoMapper.Interfaces;
 
 namespace ManaAutoMapper.Models
 {
-    public class AutoMapperBaseDTO<TDTO, TEntity, TKey> : JsonDTO<TDTO, TEntity, TKey>, IHaveCustomMapping
+    public class AutoMapperBaseDTO<TDTO, TEntity, TKey> : JsonDTO<TDTO, TEntity, TKey>
         where TDTO : class, new()
         where TEntity : class, IEntity, new()
         where TKey : struct

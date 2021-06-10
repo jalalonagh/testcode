@@ -1,4 +1,6 @@
-﻿namespace Entities.Profile.FavoriteProduct
+﻿using Entities.Common;
+
+namespace Entities.Profile.FavoriteProduct
 {
     public class FavoriteProduct : BaseEntity
     {

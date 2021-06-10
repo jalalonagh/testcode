@@ -8,7 +8,7 @@ namespace BusinessLayout.BaseBusinessLevel1.Phone.Command.UpdateRangeAsync
         private ResourceManagerSingleton rms;
         public UpdateRangeAsyncCommandValidator()
         {
-            rms = ResourceManagerSingleton.Instance;
+            rms = ResourceManagerSingleton.GetInstance();
 
             RuleFor(c => c.Model)
                 .NotNull()

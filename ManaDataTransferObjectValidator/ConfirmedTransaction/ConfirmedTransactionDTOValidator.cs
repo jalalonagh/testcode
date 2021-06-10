@@ -9,7 +9,7 @@ namespace ManaDataTransferObjectValidator.ConfirmedTransaction
         private ResourceManagerSingleton resource;
         public ConfirmedTransactionDTOValidator()
         {
-            resource = ResourceManagerSingleton.Instance;
+            resource = ResourceManagerSingleton.GetInstance();
             RuleFor(x => x.phoneId).NotNull().GreaterThan(0).WithMessage(resource.FetchResource("phoneidisrequired").GetMessage());
             RuleFor(x => x.transactionId).NotNull().GreaterThan(0).WithMessage(resource.FetchResource("transactionidisrequired").GetMessage());
         }

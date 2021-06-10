@@ -8,7 +8,7 @@ namespace ManaEntitiesValidation.Phone
         private ResourceManagerSingleton resource;
         public PhoneValidator()
         {
-            resource = ResourceManagerSingleton.Instance;
+            resource = ResourceManagerSingleton.GetInstance();
             RuleFor(x => x.phoneNumber).NotNull().NotEmpty().WithMessage(resource.FetchResource("phoneisrequired").GetMessage());
         }
     }

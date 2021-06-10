@@ -9,6 +9,8 @@ namespace ManaResourceManager
     {
         private static ResourceManagerSettings settings;
         private static IEnumerable<ResourceItem> book;
+        private static ResourceManagerSingleton instance;
+        private static object _myLock = new object();
 
         private ResourceManagerSingleton()
         {
@@ -66,14 +68,20 @@ namespace ManaResourceManager
             manager.UpdateResource(settings.Languages.Where(w => w.Code == language).FirstOrDefault(), languageResources, settings.RootDirectoryName);
         }
 
-        private static readonly Lazy<ResourceManagerSingleton> lazy = new Lazy<ResourceManagerSingleton>(() => new ResourceManagerSingleton());
-
-        public static ResourceManagerSingleton Instance
+        public static ResourceManagerSingleton GetInstance()
         {
-            get
+            if (instance is null)
             {
-                return lazy.Value;
+                lock (_myLock)
+                {
+                    if (instance is null)
+                    {
+                        instance = new ResourceManagerSingleton();
+                    }
+                }
             }
+
+            return instance;
         }
     }
 }

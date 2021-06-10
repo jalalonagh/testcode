@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Entities.Common;
 
 namespace Entities.SMSConfirmation
 {
-    public class SMSConfirmation: BaseEntity
+    public class SMSConfirmation : BaseEntity
     {
         public int phoneId { get; set; }
         public Phone.Phone phone { get; set; }

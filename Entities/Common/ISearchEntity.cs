@@ -2,7 +2,7 @@
 
 namespace Entities.Common
 {
-    public class BaseSearchEntity : ISearchEntity
+    public interface ISearchEntity
     {
         public int? Id { get; set; }
         public DateTime? CreateTime { get; set; }

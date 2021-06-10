@@ -1,4 +1,4 @@
-﻿using ManaEnums.Entity.Phone;
+﻿using Entities.Common;
 
 namespace Entities.Profile.PhoneNumber
 {

@@ -8,7 +8,7 @@ using BusinessLayout.Configuration.Validation;
 using Common;
 using Data;
 using Data.Repositories;
-using Entities;
+using Entities.Common;
 using FluentValidation;
 using ManaDapper;
 using MediatR;
@@ -27,7 +27,6 @@ namespace WebFramework.Configuration
     internal class AllConstructorFinder : IConstructorFinder
     {
         private static readonly ConcurrentDictionary<Type, ConstructorInfo[]> Cache = new ConcurrentDictionary<Type, ConstructorInfo[]>();
-
         public ConstructorInfo[] FindConstructors(Type targetType)
         {
             var result = Cache.GetOrAdd(targetType, t => t.GetTypeInfo().DeclaredConstructors.ToArray());
@@ -46,11 +45,10 @@ namespace WebFramework.Configuration
         {
             builder.RegisterSource(new ScopedContravariantRegistrationSource(typeof(IRequestHandler<,>), typeof(INotificationHandler<>), typeof(IValidator<>)));
             builder.RegisterAssemblyTypes(typeof(IMediator).GetTypeInfo().Assembly).AsImplementedInterfaces();
-
             var mediatrOpenTypes = new[]
             {
             typeof(IRequestHandler<,>),
-            //typeof(INotificationHandler<>),
+            typeof(INotificationHandler<>),
             typeof(IValidator<>)
         };
 
@@ -62,16 +60,11 @@ namespace WebFramework.Configuration
                     .FindConstructorsWith(new AllConstructorFinder())
                     .AsImplementedInterfaces();
             }
-
-            ////////builder.RegisterGeneric(typeof(RequestPostProcessorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
-            ////////builder.RegisterGeneric(typeof(RequestPreProcessorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
-
             builder.Register<ServiceFactory>(ctx =>
             {
                 var c = ctx.Resolve<IComponentContext>();
                 return t => c.Resolve(t);
             });
-
             builder.RegisterGeneric(typeof(CommandValidationBehavior<,>)).As(typeof(IPipelineBehavior<,>));
         }
 
@@ -79,7 +72,6 @@ namespace WebFramework.Configuration
         {
             private readonly IRegistrationSource _source = new ContravariantRegistrationSource();
             private readonly List<Type> _types = new List<Type>();
-
             public ScopedContravariantRegistrationSource(params Type[] types)
             {
                 if (types == null)
@@ -88,7 +80,6 @@ namespace WebFramework.Configuration
                     throw new ArgumentException("Supplied types should be generic type definitions");
                 _types.AddRange(types);
             }
-
             public IEnumerable<IComponentRegistration> RegistrationsFor(
                 Service service,
                 Func<Service, IEnumerable<ServiceRegistration>> registrationAccessor)
@@ -111,12 +102,10 @@ namespace WebFramework.Configuration
     public class DataAccessModule : Autofac.Module
     {
         private readonly string _databaseConnectionString;
-
         public DataAccessModule(string databaseConnectionString)
         {
             _databaseConnectionString = databaseConnectionString;
         }
-
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<SqlConnectionFactory>()
@@ -160,7 +149,6 @@ namespace WebFramework.Configuration
                 .AsImplementedInterfaces()
                 .SingleInstance();
         }
-
         public static IServiceProvider BuildAutofacServiceProvider(this IServiceCollection services, IConfiguration configuration)
         {
             var containerBuilder = new ContainerBuilder();

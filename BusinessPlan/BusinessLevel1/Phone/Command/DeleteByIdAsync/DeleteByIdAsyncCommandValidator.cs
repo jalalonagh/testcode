@@ -11,7 +11,7 @@ namespace BusinessLayout.BaseBusinessLevel1.Phone.Command.DeleteByIdAsync
         private ResourceManagerSingleton rms;
         public DeleteByIdAsyncCommandValidator()
         {
-            rms = ResourceManagerSingleton.Instance;
+            rms = ResourceManagerSingleton.GetInstance();
 
             RuleFor(c => c.EntityId)
                 .NotNull()

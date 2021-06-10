@@ -24,16 +24,16 @@ namespace ManaResourceManager
                 foreach (var item in languages)
                 {
                     CreateFolder(dir, root, item.Name);
-                    CreateFileWithTemplate(Path.Combine(dir, root, item.Name), item.Name);
+                    CreateFileWithTemplate(Path.Combine(dir, root, item.Name), item.Name, item.Code);
                 }
         }
         public IEnumerable<ResourceItem> GetAllResources(IEnumerable<ManaResourceLanguage> languages, string root)
         {
             List<ResourceItem> items = new List<ResourceItem>();
-            if(!string.IsNullOrEmpty(root) && languages != null && languages.Any())
+            if (!string.IsNullOrEmpty(root) && languages != null && languages.Any())
             {
                 var files = FindLanguageFiles(languages, root);
-                if(files != null && files.Any())
+                if (files != null && files.Any())
                     foreach (var file in files)
                     {
                         string text = "";
@@ -59,7 +59,7 @@ namespace ManaResourceManager
         }
         private void CreateFolder(params string[] parts)
         {
-            if(parts != null && parts.Any())
+            if (parts != null && parts.Any())
             {
                 var path = Path.Combine(parts);
 
@@ -67,37 +67,35 @@ namespace ManaResourceManager
                     Directory.CreateDirectory(path);
             }
         }
-        /// <summary>
-        /// ایجاد فایل معانی
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="fileName">نام فایل بدون پسوند</param>
-        private void CreateFileWithTemplate(string path, string fileName)
+
+        private void CreateFileWithTemplate(string path, string fileName, string languageCode)
         {
-            if(!string.IsNullOrEmpty(path) && !string.IsNullOrEmpty(fileName))
+            if (!string.IsNullOrEmpty(path) && !string.IsNullOrEmpty(fileName))
             {
                 var pathFile = Path.Combine(path, fileName + ".json");
 
                 if (!File.Exists(pathFile))
                 {
-                    File.Create(pathFile);
-
-                    var json = Newtonsoft.Json.JsonConvert.SerializeObject(new List<ResourceItem>() { new ResourceItem(){
+                    using (FileStream sw = File.Create(pathFile))
+                    {
+                        var list = new List<ResourceItem>();
+                        list.Add(new ResourceItem(){
                         Category = "base",
-                        Language = "fa-IR",
+                        Language = languageCode,
                         Message = "به سیستم مدیریت پیغام های ما خوش آمدید",
                         Name = "WELLCOME",
-                        Title = "خوش آمد گویی"
-                    }});
-
-                    File.WriteAllText(pathFile, json);
+                        Title = "خوش آمد گویی"});
+                        var json = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+                        byte[] bytes = new UTF8Encoding(true).GetBytes(json);
+                        sw.Write(bytes, 0, bytes.Length);
+                    }
                 }
             }
         }
         private IEnumerable<FileInfo> FindLanguageFiles(IEnumerable<ManaResourceLanguage> languages, string root)
         {
             IEnumerable<FileInfo> files = new List<FileInfo>();
-            if(!string.IsNullOrEmpty(root) && languages != null && languages.Any())
+            if (!string.IsNullOrEmpty(root) && languages != null && languages.Any())
             {
                 foreach (var item in languages)
                     files = files.Append(new FileInfo(Path.Combine(dir, root, item.Name, item.Name + ".json")));

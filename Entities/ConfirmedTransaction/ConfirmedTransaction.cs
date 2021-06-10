@@ -1,4 +1,6 @@
-﻿namespace Entities.ConfirmedTransaction
+﻿using Entities.Common;
+
+namespace Entities.ConfirmedTransaction
 {
     public class ConfirmedTransaction : BaseEntity
     {
