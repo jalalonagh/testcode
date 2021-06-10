@@ -1,4 +1,14 @@
-﻿using Entities.Phone;
+﻿using BusinessLayout.BaseBusinessLevel1.Phone.Command.AddAsync;
+using BusinessLayout.BaseBusinessLevel1.Phone.Command.AddRangeAsync;
+using BusinessLayout.BaseBusinessLevel1.Phone.Command.DeleteAsync;
+using BusinessLayout.BaseBusinessLevel1.Phone.Command.DeleteByIdAsync;
+using BusinessLayout.BaseBusinessLevel1.Phone.Command.DeleteRangeAsync;
+using BusinessLayout.BaseBusinessLevel1.Phone.Command.DeleteRangeByIdsAsync;
+using BusinessLayout.BaseBusinessLevel1.Phone.Command.UpdateAsync;
+using BusinessLayout.BaseBusinessLevel1.Phone.Command.UpdateFieldRangeAsync;
+using BusinessLayout.BaseBusinessLevel1.Phone.Command.UpdateFieldRangeByIdAsync;
+using BusinessLayout.BaseBusinessLevel1.Phone.Command.UpdateRangeAsync;
+using Entities.Phone;
 using ManaDataTransferObject.Phone;
 using ManaResourceManager;
 using ManaViewModel.Phone;
@@ -31,7 +41,7 @@ namespace MyApi.Controllers.Api.v1
         {
             if (!ModelState.IsValid)
                 return new ApiResult<PhoneVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
-            var result = await mediator.Send(new AddAsyncCommand<Entities.Phone.Phone, PhoneDTO, PhoneSearch, int>(model));
+            var result = await mediator.Send(new AddAsyncCommand(model));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
         [HttpPost("[action]")]
@@ -39,7 +49,7 @@ namespace MyApi.Controllers.Api.v1
         {
             if (!ModelState.IsValid)
                 return new ApiResult<IEnumerable<PhoneVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
-            var result = await mediator.Send(new AddRangeAsyncCommand<Entities.Phone.Phone, PhoneDTO, PhoneSearch, int>(models));
+            var result = await mediator.Send(new AddRangeAsyncCommand(models));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
         #endregion
@@ -49,7 +59,7 @@ namespace MyApi.Controllers.Api.v1
         {
             if (!ModelState.IsValid)
                 return new ApiResult<PhoneVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
-            var result = await mediator.Send(new DeleteAsyncCommand<Entities.Phone.Phone, PhoneDTO, PhoneSearch, int>(model));
+            var result = await mediator.Send(new DeleteAsyncCommand(model));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
         [HttpDelete("[action]")]
@@ -57,7 +67,7 @@ namespace MyApi.Controllers.Api.v1
         {
             if (!ModelState.IsValid)
                 return new ApiResult<PhoneVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
-            var result = await mediator.Send(new DeleteByIdAsyncCommand<Entities.Phone.Phone, PhoneDTO, PhoneSearch, int>(id));
+            var result = await mediator.Send(new DeleteByIdAsyncCommand(id));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
         [HttpDelete("[action]")]
@@ -65,7 +75,7 @@ namespace MyApi.Controllers.Api.v1
         {
             if (!ModelState.IsValid)
                 return new ApiResult<IEnumerable<PhoneVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
-            var result = await mediator.Send(new DeleteRangeAsyncCommand<Entities.Phone.Phone, PhoneDTO, PhoneSearch, int>(models));
+            var result = await mediator.Send(new DeleteRangeAsyncCommand(models));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
         [HttpDelete("[action]")]
@@ -73,7 +83,7 @@ namespace MyApi.Controllers.Api.v1
         {
             if (!ModelState.IsValid)
                 return new ApiResult<IEnumerable<PhoneVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
-            var result = await mediator.Send(new DeleteRangeByIdsAsyncCommand<Entities.Phone.Phone, PhoneDTO, PhoneSearch, int>(ids));
+            var result = await mediator.Send(new DeleteRangeByIdsAsyncCommand(ids));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
         #endregion
@@ -83,7 +93,7 @@ namespace MyApi.Controllers.Api.v1
         {
             if (!ModelState.IsValid)
                 return new ApiResult<PhoneVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
-            var result = await mediator.Send(new UpdateAsyncCommand<Entities.Phone.Phone, PhoneDTO, PhoneSearch, int>(model));
+            var result = await mediator.Send(new UpdateAsyncCommand(model));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
         [HttpPut("[action]")]
@@ -91,7 +101,7 @@ namespace MyApi.Controllers.Api.v1
         {
             if (!ModelState.IsValid)
                 return new ApiResult<PhoneVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
-            var result = await mediator.Send(new UpdateFieldRangeAsyncCommand<Entities.Phone.Phone, PhoneDTO, PhoneSearch, int>(model, fields.Split(",")));
+            var result = await mediator.Send(new UpdateFieldRangeAsyncCommand(model, fields.Split(",")));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
         [HttpPut("[action]")]
@@ -99,7 +109,7 @@ namespace MyApi.Controllers.Api.v1
         {
             if (!ModelState.IsValid)
                 return new ApiResult<PhoneVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
-            var result = await mediator.Send(new UpdateFieldRangeByIdAsyncCommand<Entities.Phone.Phone, PhoneDTO, PhoneSearch, int>(id, fields));
+            var result = await mediator.Send(new UpdateFieldRangeByIdAsyncCommand(id, fields));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
         [HttpPut("[action]")]
@@ -107,7 +117,7 @@ namespace MyApi.Controllers.Api.v1
         {
             if (!ModelState.IsValid)
                 return new ApiResult<IEnumerable<PhoneVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
-            var result = await mediator.Send(new UpdateRangeAsyncCommand<Entities.Phone.Phone, PhoneDTO, PhoneSearch, int>(models));
+            var result = await mediator.Send(new UpdateRangeAsyncCommand(models));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
         #endregion

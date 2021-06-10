@@ -1,16 +1,9 @@
-﻿using Entities;
-using Entities.Common;
-using FluentValidation;
-using ManaAutoMapper.Models;
+﻿using FluentValidation;
 using ManaResourceManager;
 
 namespace BusinessLayout.BaseBusinessLevel1.Phone.Command.UpdateAsync
 {
-    public class UpdateAsyncCommandValidator<TEntity, TDTO, TSearch, TKey> : AbstractValidator<UpdateAsyncCommand<TEntity, TDTO, TSearch, TKey>>
-        where TEntity : BaseEntity, new()
-        where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>, new()
-        where TSearch : BaseSearchEntity, new()
-        where TKey : struct
+    public class UpdateAsyncCommandValidator : AbstractValidator<UpdateAsyncCommand>
     {
         private ResourceManagerSingleton rms;
         public UpdateAsyncCommandValidator()

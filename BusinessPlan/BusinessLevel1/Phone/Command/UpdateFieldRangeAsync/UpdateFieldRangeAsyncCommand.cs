@@ -2,23 +2,20 @@
 using Entities;
 using Entities.Common;
 using ManaAutoMapper.Models;
+using ManaDataTransferObject.Phone;
 using Services;
 
 namespace BusinessLayout.BaseBusinessLevel1.Phone.Command.UpdateFieldRangeAsync
 {
-    public class UpdateFieldRangeAsyncCommand<TEntity, TDTO, TSearch, TKey> : CommandBase<ServiceResult<TEntity>>
-        where TEntity : BaseEntity, new()
-        where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>, new()
-        where TSearch : BaseSearchEntity, new()
-        where TKey : struct
+    public class UpdateFieldRangeAsyncCommand : CommandBase<ServiceResult<Entities.Phone.Phone>>
     {
-        public UpdateFieldRangeAsyncCommand(TDTO model, params string[] fields)
+        public UpdateFieldRangeAsyncCommand(PhoneDTO model, params string[] fields)
         {
             Model = model;
             Fields = fields;
         }
 
-        public TDTO Model { get; }
+        public PhoneDTO Model { get; }
         public string[] Fields { get; }
     }
 }

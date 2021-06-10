@@ -6,11 +6,7 @@ using ManaResourceManager;
 
 namespace BusinessLayout.BaseBusinessLevel1.Phone.Command.DeleteByIdAsync
 {
-    public class DeleteByIdAsyncCommandValidator<TEntity, TDTO, TSearch, TKey> : AbstractValidator<DeleteByIdAsyncCommand<TEntity, TDTO, TSearch, TKey>>
-        where TEntity : BaseEntity, new()
-        where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>, new()
-        where TSearch : BaseSearchEntity, new()
-        where TKey : struct
+    public class DeleteByIdAsyncCommandValidator : AbstractValidator<DeleteByIdAsyncCommand>
     {
         private ResourceManagerSingleton rms;
         public DeleteByIdAsyncCommandValidator()

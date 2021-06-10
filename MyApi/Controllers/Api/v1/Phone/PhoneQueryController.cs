@@ -1,8 +1,7 @@
-﻿
-using BusinessLayout.BaseBusiness.Query.FilterRangeAsync;
-using BusinessLayout.BaseBusiness.Query.GetByIdAsync;
-using BusinessLayout.BaseBusiness.Query.SearchRangeAsync;
+﻿using BusinessLayout.BaseBusinessLevel1.Phone.Query.FilterRangeAsync;
 using BusinessLayout.BaseBusinessLevel1.Phone.Query.GetAllAsync;
+using BusinessLayout.BaseBusinessLevel1.Phone.Query.GetByIdAsync;
+using BusinessLayout.BaseBusinessLevel1.Phone.Query.SearchRangeAsync;
 using Data.Repositories.Models;
 using Entities.Phone;
 using ManaDataTransferObject.Phone;
@@ -31,28 +30,28 @@ namespace MyApi.Controllers.Api.v1
         [HttpGet("[action]")]
         public async Task<ApiResult<IEnumerable<PhoneVM>>> FilterRangeAsync(FilterRangeModel<PhoneSearch> model)
         {
-            var result = await mediator.Send(new FilterRangeAsyncQuery<Entities.Phone.Phone, PhoneDTO, PhoneSearch, int>(model));
+            var result = await mediator.Send(new FilterRangeAsyncQuery(model));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
 
         [HttpGet("[action]")]
         public async Task<ApiResult<IEnumerable<PhoneVM>>> GetAllAsync(int total = 0, int more = int.MaxValue)
         {
-            var result = await mediator.Send(new GetAllAsyncQuery<Entities.Phone.Phone, PhoneDTO, PhoneSearch, int>(total, more));
+            var result = await mediator.Send(new GetAllAsyncQuery(total, more));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
 
         [HttpGet("[action]")]
         public async Task<ApiResult<IEnumerable<PhoneVM>>> SearchRangeAsync(SearchRangeModel<Entities.Phone.Phone> model)
         {
-            var result = await mediator.Send(new SearchRangeAsyncQuery<Entities.Phone.Phone, PhoneDTO, PhoneSearch, int>(model));
+            var result = await mediator.Send(new SearchRangeAsyncQuery(model));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
 
         [HttpGet("[action]")]
         public async Task<ApiResult<PhoneVM>> GetByIdAsync(int[] ids)
         {
-            var result = await mediator.Send(new GetByIdAsyncQuery<Entities.Phone.Phone, PhoneDTO, PhoneSearch, int>(ids));
+            var result = await mediator.Send(new GetByIdAsyncQuery(ids));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
     }

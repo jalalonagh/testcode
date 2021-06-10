@@ -1,7 +1,5 @@
 ﻿using BusinessLayout.Configuration.Commands;
-using Entities;
-using Entities.Common;
-using ManaAutoMapper.Models;
+using Entities.Phone;
 using Microsoft.Extensions.Logging;
 using Services;
 using Services.Base.Contracts;
@@ -12,22 +10,18 @@ using System.Threading.Tasks;
 
 namespace BusinessLayout.BaseBusinessLevel1.Phone.Command.DeleteRangeAsync
 {
-    public class DeleteRangeAsyncCommandHandler<TEntity, TDTO, TSearch, TKey> : ICommandHandler<DeleteRangeAsyncCommand<TEntity, TDTO, TSearch, TKey>, ServiceResult<IEnumerable<TEntity>>>
-        where TEntity : BaseEntity, new()
-        where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>, new()
-        where TSearch : BaseSearchEntity, new()
-        where TKey : struct
+    public class DeleteRangeAsyncCommandHandler : ICommandHandler<DeleteRangeAsyncCommand, ServiceResult<IEnumerable<Entities.Phone.Phone>>>
     {
-        private readonly IBaseService<TEntity, TSearch> _service;
-        private readonly ILogger<DeleteRangeAsyncCommandHandler<TEntity, TDTO, TSearch, TKey>> _logger;
+        private readonly IBaseService<Entities.Phone.Phone, PhoneSearch> _service;
+        private readonly ILogger<DeleteRangeAsyncCommandHandler> _logger;
 
-        public DeleteRangeAsyncCommandHandler(ILogger<DeleteRangeAsyncCommandHandler<TEntity, TDTO, TSearch, TKey>> logger, IBaseService<TEntity, TSearch> service)
+        public DeleteRangeAsyncCommandHandler(ILogger<DeleteRangeAsyncCommandHandler> logger, IBaseService<Entities.Phone.Phone, PhoneSearch> service)
         {
             _service = service;
             _logger = logger;
         }
 
-        public async Task<ServiceResult<IEnumerable<TEntity>>> Handle(DeleteRangeAsyncCommand<TEntity, TDTO, TSearch, TKey> request, CancellationToken cancel)
+        public async Task<ServiceResult<IEnumerable<Entities.Phone.Phone>>> Handle(DeleteRangeAsyncCommand request, CancellationToken cancel)
         {
             return await _service.DeleteRangeAsync(request.Model.Select(s => s.ToEntity()));
         }

@@ -1,24 +1,17 @@
 ﻿using BusinessLayout.Configuration.Queries;
 using Data.Repositories.Models;
-using Entities;
-using Entities.Common;
-using ManaAutoMapper.Models;
 using Services;
 using System.Collections.Generic;
 
 namespace BusinessLayout.BaseBusinessLevel1.Phone.Query.SearchRangeAsync
 {
-    public class SearchRangeAsyncQuery<TEntity, TDTO, TSearch, TKey> : IQuery<ServiceResult<IEnumerable<TEntity>>>
-        where TEntity : BaseEntity, new()
-        where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>, new()
-        where TSearch : BaseSearchEntity, new()
-        where TKey : struct
+    public class SearchRangeAsyncQuery : IQuery<ServiceResult<IEnumerable<Entities.Phone.Phone>>>
     {
-        public SearchRangeAsyncQuery(SearchRangeModel<TEntity> model)
+        public SearchRangeAsyncQuery(SearchRangeModel<Entities.Phone.Phone> model)
         {
             Model = model;
         }
 
-        public SearchRangeModel<TEntity> Model { get; }
+        public SearchRangeModel<Entities.Phone.Phone> Model { get; }
     }
 }

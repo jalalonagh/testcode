@@ -1,8 +1,5 @@
-﻿using BusinessLayout.BaseBusiness.Command.DeleteAsync;
-using BusinessLayout.Configuration.Commands;
-using Entities;
-using Entities.Common;
-using ManaAutoMapper.Models;
+﻿using BusinessLayout.Configuration.Commands;
+using Entities.Phone;
 using Microsoft.Extensions.Logging;
 using Services;
 using Services.Base.Contracts;
@@ -11,22 +8,18 @@ using System.Threading.Tasks;
 
 namespace BusinessLayout.BaseBusinessLevel1.Phone.Command.DeleteAsync
 {
-    public class DeleteAsyncCommandHandler<TEntity, TDTO, TSearch, TKey> : ICommandHandler<DeleteAsyncCommand<TEntity, TDTO, TSearch, TKey>, ServiceResult<TEntity>>
-        where TEntity : BaseEntity, new()
-        where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>, new()
-        where TSearch : BaseSearchEntity, new()
-        where TKey : struct
+    public class DeleteAsyncCommandHandler : ICommandHandler<DeleteAsyncCommand, ServiceResult<Entities.Phone.Phone>>
     {
-        private readonly IBaseService<TEntity, TSearch> _service;
-        private readonly ILogger<DeleteAsyncCommandHandler<TEntity, TDTO, TSearch, TKey>> _logger;
+        private readonly IBaseService<Entities.Phone.Phone, PhoneSearch> _service;
+        private readonly ILogger<DeleteAsyncCommandHandler> _logger;
 
-        public DeleteAsyncCommandHandler(ILogger<DeleteAsyncCommandHandler<TEntity, TDTO, TSearch, TKey>> logger, IBaseService<TEntity, TSearch> service)
+        public DeleteAsyncCommandHandler(ILogger<DeleteAsyncCommandHandler> logger, IBaseService<Entities.Phone.Phone, PhoneSearch> service)
         {
             _service = service;
             _logger = logger;
         }
 
-        public async Task<ServiceResult<TEntity>> Handle(DeleteAsyncCommand<TEntity, TDTO, TSearch, TKey> request, CancellationToken cancel)
+        public async Task<ServiceResult<Entities.Phone.Phone>> Handle(DeleteAsyncCommand request, CancellationToken cancel)
         {
             return await _service.DeleteAsync(request.Model.ToEntity());
         }

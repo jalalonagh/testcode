@@ -7,11 +7,7 @@ using System.Collections.Generic;
 
 namespace BusinessLayout.BaseBusinessLevel1.Phone.Command.DeleteRangeByIdsAsync
 {
-    public class DeleteRangeByIdsAsyncCommand<TEntity, TDTO, TSearch, TKey> : CommandBase<ServiceResult<IEnumerable<TEntity>>>
-        where TEntity : BaseEntity, new()
-        where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>, new()
-        where TSearch : BaseSearchEntity, new()
-        where TKey : struct
+    public class DeleteRangeByIdsAsyncCommand : CommandBase<ServiceResult<IEnumerable<Entities.Phone.Phone>>>
     {
         public DeleteRangeByIdsAsyncCommand(IEnumerable<int> ids)
         {

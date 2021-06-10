@@ -1,16 +1,9 @@
-﻿using Entities;
-using Entities.Common;
-using FluentValidation;
-using ManaAutoMapper.Models;
+﻿using FluentValidation;
 using ManaResourceManager;
 
 namespace BusinessLayout.BaseBusinessLevel1.Phone.Query.FilterRangeAsync
 {
-    public class FilterRangeAsyncQueryValidator<TEntity, TDTO, TSearch, TKey> : AbstractValidator<FilterRangeAsyncQuery<TEntity, TDTO, TSearch, TKey>>
-        where TEntity : BaseEntity, new()
-        where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>, new()
-        where TSearch : BaseSearchEntity, new()
-        where TKey : struct
+    public class FilterRangeAsyncQueryValidator : AbstractValidator<FilterRangeAsyncQuery>
     {
         private ResourceManagerSingleton rms;
         public FilterRangeAsyncQueryValidator()

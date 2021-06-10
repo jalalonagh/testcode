@@ -1,16 +1,9 @@
-﻿using Entities;
-using Entities.Common;
-using FluentValidation;
-using ManaAutoMapper.Models;
+﻿using FluentValidation;
 using ManaResourceManager;
 
 namespace BusinessLayout.BaseBusinessLevel1.Phone.Query.GetByIdAsync
 {
-    public class GetByIdAsyncQueryValidator<TEntity, TDTO, TSearch, TKey> : AbstractValidator<GetByIdAsyncQuery<TEntity, TDTO, TSearch, TKey>>
-        where TEntity : BaseEntity, new()
-        where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>, new()
-        where TSearch : BaseSearchEntity, new()
-        where TKey : struct
+    public class GetByIdAsyncQueryValidator : AbstractValidator<GetByIdAsyncQuery>
     {
         private ResourceManagerSingleton rms;
         public GetByIdAsyncQueryValidator()

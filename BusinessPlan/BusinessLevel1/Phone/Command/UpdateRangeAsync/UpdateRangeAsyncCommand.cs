@@ -1,23 +1,17 @@
 ﻿using BusinessLayout.Configuration.Commands;
-using Entities;
-using Entities.Common;
-using ManaAutoMapper.Models;
+using ManaDataTransferObject.Phone;
 using Services;
 using System.Collections.Generic;
 
 namespace BusinessLayout.BaseBusinessLevel1.Phone.Command.UpdateRangeAsync
 {
-    public class UpdateRangeAsyncCommand<TEntity, TDTO, TSearch, TKey> : CommandBase<ServiceResult<IEnumerable<TEntity>>>
-        where TEntity : BaseEntity, new()
-        where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>, new()
-        where TSearch : BaseSearchEntity, new()
-        where TKey : struct
+    public class UpdateRangeAsyncCommand : CommandBase<ServiceResult<IEnumerable<Entities.Phone.Phone>>>
     {
-        public UpdateRangeAsyncCommand(IEnumerable<TDTO> model)
+        public UpdateRangeAsyncCommand(IEnumerable<PhoneDTO> model)
         {
             Model = model;
         }
 
-        public IEnumerable<TDTO> Model { get; }
+        public IEnumerable<PhoneDTO> Model { get; }
     }
 }

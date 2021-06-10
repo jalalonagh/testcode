@@ -1,16 +1,9 @@
-﻿using Entities;
-using Entities.Common;
-using FluentValidation;
-using ManaAutoMapper.Models;
+﻿using FluentValidation;
 using ManaResourceManager;
 
 namespace BusinessLayout.BaseBusinessLevel1.Phone.Command.UpdateFieldRangeAsync
 {
-    public class UpdateFieldRangeAsyncCommandValidator<TEntity, TDTO, TSearch, TKey> : AbstractValidator<UpdateFieldRangeAsyncCommand<TEntity, TDTO, TSearch, TKey>>
-        where TEntity : BaseEntity, new()
-        where TDTO : AutoMapperDTO<TDTO, TEntity, TKey>, new()
-        where TSearch : BaseSearchEntity, new()
-        where TKey : struct
+    public class UpdateFieldRangeAsyncCommandValidator : AbstractValidator<UpdateFieldRangeAsyncCommand>
     {
         private ResourceManagerSingleton rms;
         public UpdateFieldRangeAsyncCommandValidator()
