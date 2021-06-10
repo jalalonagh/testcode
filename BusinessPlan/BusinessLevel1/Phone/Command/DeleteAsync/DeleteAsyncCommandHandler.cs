@@ -1,4 +1,5 @@
-﻿using BusinessLayout.Configuration.Commands;
+﻿using BusinessLayout.BaseBusiness.Command.DeleteAsync;
+using BusinessLayout.Configuration.Commands;
 using Entities;
 using Entities.Common;
 using ManaAutoMapper.Models;

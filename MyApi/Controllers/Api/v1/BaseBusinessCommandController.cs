@@ -38,91 +38,91 @@ namespace MyApi.Controllers.Api.v1
             resource = ResourceManagerSingleton.Instance;
         }
 
-        #region POST
-        [HttpPost("[action]")]
-        public async Task<ApiResult<TVM>> AddAsync(TDTO model)
-        {
-            if (!ModelState.IsValid)
-                return new ApiResult<TVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
-            var result = await mediator.Send(new AddAsyncCommand<TEntity, TDTO, TSearch, TKey>(model));
-            return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
-        }
-        [HttpPost("[action]")]
-        public async Task<ApiResult<IEnumerable<TVM>>> AddRangeAsync(IEnumerable<TDTO> models)
-        {
-            if (!ModelState.IsValid)
-                return new ApiResult<IEnumerable<TVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
-            var result = await mediator.Send(new AddRangeAsyncCommand<TEntity, TDTO, TSearch, TKey>(models));
-            return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
-        }
-        #endregion
-        #region DELETE
-        [HttpDelete("[action]")]
-        public async Task<ApiResult<TVM>> DeleteAsync(TDTO model)
-        {
-            if (!ModelState.IsValid)
-                return new ApiResult<TVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
-            var result = await mediator.Send(new DeleteAsyncCommand<TEntity, TDTO, TSearch, TKey>(model));
-            return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
-        }
-        [HttpDelete("[action]")]
-        public async Task<ApiResult<TVM>> DeleteByIdAsync(int id)
-        {
-            if (!ModelState.IsValid)
-                return new ApiResult<TVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
-            var result = await mediator.Send(new DeleteByIdAsyncCommand<TEntity, TDTO, TSearch, TKey>(id));
-            return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
-        }
-        [HttpDelete("[action]")]
-        public async Task<ApiResult<IEnumerable<TVM>>> DeleteRangeAsync(IEnumerable<TDTO> models)
-        {
-            if (!ModelState.IsValid)
-                return new ApiResult<IEnumerable<TVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
-            var result = await mediator.Send(new DeleteRangeAsyncCommand<TEntity, TDTO, TSearch, TKey>(models));
-            return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
-        }
-        [HttpDelete("[action]")]
-        public async Task<ApiResult<IEnumerable<TVM>>> DeleteRangeByIdsAsync(IEnumerable<int> ids)
-        {
-            if (!ModelState.IsValid)
-                return new ApiResult<IEnumerable<TVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
-            var result = await mediator.Send(new DeleteRangeByIdsAsyncCommand<TEntity, TDTO, TSearch, TKey>(ids));
-            return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
-        }
-        #endregion
-        #region PUT
-        [HttpPut("[action]")]
-        public async Task<ApiResult<TVM>> UpdateAsync(TDTO model)
-        {
-            if (!ModelState.IsValid)
-                return new ApiResult<TVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
-            var result = await mediator.Send(new UpdateAsyncCommand<TEntity, TDTO, TSearch, TKey>(model));
-            return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
-        }
-        [HttpPut("[action]")]
-        public async Task<ApiResult<TVM>> UpdateFieldRangeAsync(TDTO model, string fields)
-        {
-            if (!ModelState.IsValid)
-                return new ApiResult<TVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
-            var result = await mediator.Send(new UpdateFieldRangeAsyncCommand<TEntity, TDTO, TSearch, TKey>(model, fields.Split(",")));
-            return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
-        }
-        [HttpPut("[action]")]
-        public async Task<ApiResult<TVM>> UpdateFieldRangeByIdAsync(int id, KeyValuePair<string, dynamic> fields)
-        {
-            if (!ModelState.IsValid)
-                return new ApiResult<TVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
-            var result = await mediator.Send(new UpdateFieldRangeByIdAsyncCommand<TEntity, TDTO, TSearch, TKey>(id, fields));
-            return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
-        }
-        [HttpPut("[action]")]
-        public async Task<ApiResult<IEnumerable<TVM>>> UpdateRangeAsync(IEnumerable<TDTO> models)
-        {
-            if (!ModelState.IsValid)
-                return new ApiResult<IEnumerable<TVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
-            var result = await mediator.Send(new UpdateRangeAsyncCommand<TEntity, TDTO, TSearch, TKey>(models));
-            return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
-        }
-        #endregion
+        //#region POST
+        //[HttpPost("[action]")]
+        //public async Task<ApiResult<TVM>> AddAsync(TDTO model)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return new ApiResult<TVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+        //    var result = await mediator.Send(new AddAsyncCommand<TEntity, TDTO, TSearch, TKey>(model));
+        //    return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
+        //}
+        //[HttpPost("[action]")]
+        //public async Task<ApiResult<IEnumerable<TVM>>> AddRangeAsync(IEnumerable<TDTO> models)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return new ApiResult<IEnumerable<TVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+        //    var result = await mediator.Send(new AddRangeAsyncCommand<TEntity, TDTO, TSearch, TKey>(models));
+        //    return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
+        //}
+        //#endregion
+        //#region DELETE
+        //[HttpDelete("[action]")]
+        //public async Task<ApiResult<TVM>> DeleteAsync(TDTO model)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return new ApiResult<TVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+        //    var result = await mediator.Send(new DeleteAsyncCommand<TEntity, TDTO, TSearch, TKey>(model));
+        //    return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
+        //}
+        //[HttpDelete("[action]")]
+        //public async Task<ApiResult<TVM>> DeleteByIdAsync(int id)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return new ApiResult<TVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+        //    var result = await mediator.Send(new DeleteByIdAsyncCommand<TEntity, TDTO, TSearch, TKey>(id));
+        //    return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
+        //}
+        //[HttpDelete("[action]")]
+        //public async Task<ApiResult<IEnumerable<TVM>>> DeleteRangeAsync(IEnumerable<TDTO> models)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return new ApiResult<IEnumerable<TVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+        //    var result = await mediator.Send(new DeleteRangeAsyncCommand<TEntity, TDTO, TSearch, TKey>(models));
+        //    return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
+        //}
+        //[HttpDelete("[action]")]
+        //public async Task<ApiResult<IEnumerable<TVM>>> DeleteRangeByIdsAsync(IEnumerable<int> ids)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return new ApiResult<IEnumerable<TVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+        //    var result = await mediator.Send(new DeleteRangeByIdsAsyncCommand<TEntity, TDTO, TSearch, TKey>(ids));
+        //    return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
+        //}
+        //#endregion
+        //#region PUT
+        //[HttpPut("[action]")]
+        //public async Task<ApiResult<TVM>> UpdateAsync(TDTO model)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return new ApiResult<TVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+        //    var result = await mediator.Send(new UpdateAsyncCommand<TEntity, TDTO, TSearch, TKey>(model));
+        //    return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
+        //}
+        //[HttpPut("[action]")]
+        //public async Task<ApiResult<TVM>> UpdateFieldRangeAsync(TDTO model, string fields)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return new ApiResult<TVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+        //    var result = await mediator.Send(new UpdateFieldRangeAsyncCommand<TEntity, TDTO, TSearch, TKey>(model, fields.Split(",")));
+        //    return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
+        //}
+        //[HttpPut("[action]")]
+        //public async Task<ApiResult<TVM>> UpdateFieldRangeByIdAsync(int id, KeyValuePair<string, dynamic> fields)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return new ApiResult<TVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+        //    var result = await mediator.Send(new UpdateFieldRangeByIdAsyncCommand<TEntity, TDTO, TSearch, TKey>(id, fields));
+        //    return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
+        //}
+        //[HttpPut("[action]")]
+        //public async Task<ApiResult<IEnumerable<TVM>>> UpdateRangeAsync(IEnumerable<TDTO> models)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return new ApiResult<IEnumerable<TVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+        //    var result = await mediator.Send(new UpdateRangeAsyncCommand<TEntity, TDTO, TSearch, TKey>(models));
+        //    return result.ToApiResult<TEntity, TDTO, TVM, TKey>();
+        //}
+        //#endregion
     }
 }
