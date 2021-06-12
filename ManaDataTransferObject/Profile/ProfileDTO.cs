@@ -1,8 +1,9 @@
-﻿using ManaDataTransferObject.Common;
+﻿using ManaAutoMapper.Interfaces;
+using ManaDataTransferObject.Common;
 
 namespace ManaDataTransferObject.Profile
 {
-    public class ProfileDTO : BaseDTO<ProfileDTO, Entities.Profile.Profile, int>
+    public class ProfileDTO : BaseDTO<ProfileDTO, Entities.Profile.Profile, int>, IHaveCustomMapping
     {
         public int UserId { get; set; }
         public string FirstName { get; set; }

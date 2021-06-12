@@ -7,21 +7,21 @@ using System.Reflection;
 
 namespace ManaAutoMapper
 {
-    public sealed class LazySingleton
+    public sealed class LazySingletonVM
     {
         private static CustomMappingProfile profile;
         private static Assembly assembly;
         private static IMapper mapper;
 
-        private LazySingleton()
+        private LazySingletonVM()
         {
-            assembly = typeof(IHaveCustomMapping).Assembly;
+            if (assembly == null)
+                assembly = typeof(IHaveCustomMapping).Assembly;
 
             var allTypes = assembly.ExportedTypes;
 
-            var list = allTypes.Where(type => type.IsClass && !type.IsAbstract
-            && type.GetInterfaces().Contains(typeof(IHaveCustomMapping)))
-                .Select(type => (IHaveCustomMapping)Activator.CreateInstance(type));
+            var listtemp = allTypes.Where(type => type.IsClass && !type.IsAbstract && type.GetInterfaces().Contains(typeof(IHaveCustomMapping)));
+            var list = listtemp.Select(type => (IHaveCustomMapping)Activator.CreateInstance(type));
 
             profile = new CustomMappingProfile(list);
 
@@ -35,13 +35,20 @@ namespace ManaAutoMapper
             mapper = config.CreateMapper();
         }
 
-        private static readonly Lazy<LazySingleton> lazy = new Lazy<LazySingleton>(() => new LazySingleton());
-        public static LazySingleton Instance
+        private static readonly Lazy<LazySingletonVM> lazy = new Lazy<LazySingletonVM>(() => new LazySingletonVM());
+        public static LazySingletonVM Instance
         {
             get
             {
                 return lazy.Value;
             }
+        }
+
+        public static LazySingletonVM SetCustomAssembly(Assembly _assembly)
+        {
+            assembly = _assembly;
+
+            return lazy.Value;
         }
 
         public Assembly GetAssembly()

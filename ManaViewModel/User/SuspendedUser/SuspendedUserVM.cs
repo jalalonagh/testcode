@@ -1,10 +1,11 @@
-﻿using ManaEnums.Entity.User;
+﻿using ManaAutoMapper.Interfaces;
+using ManaEnums.Entity.User;
 using ManaViewModel.Common;
 using System;
 
 namespace ManaViewModel.User.SuspendedUser
 {
-    public class SuspendedUserVM : BaseVM<SuspendedUserVM, Entities.User.SuspendedUser.SuspendedUser, int>
+    public class SuspendedUserVM : BaseVM<SuspendedUserVM, Entities.User.SuspendedUser.SuspendedUser, int>, IHaveCustomMapping
     {
         public string PhoneNumber { get; set; }
         public bool PhoneNumberConfirmated { get; set; }

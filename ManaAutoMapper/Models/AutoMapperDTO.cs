@@ -16,33 +16,33 @@ namespace ManaAutoMapper.Models
 
         public TEntity ToEntity()
         {
-            var mapper = LazySingleton.Instance;
+            var mapper = LazySingletonDTO.SetCustomAssembly(typeof(TDTO).Assembly);
 
             return mapper.GetMapper().Map<TEntity>(CastToDerivedClass(this));
         }
 
         public TEntity ToEntity(TEntity entity)
         {
-            var mapper = LazySingleton.Instance;
+            var mapper = LazySingletonDTO.SetCustomAssembly(typeof(TDTO).Assembly);
 
             return mapper.GetMapper().Map(CastToDerivedClass(this), entity);
         }
 
         public static TDTO FromEntity(TEntity model)
         {
-            var mapper = LazySingleton.Instance;
+            var mapper = LazySingletonDTO.SetCustomAssembly(typeof(TDTO).Assembly);
             return mapper.GetMapper().Map<TDTO>(model);
         }
 
         public TDTO DTOFromEntity(TEntity model)
         {
-            var mapper = LazySingleton.Instance;
+            var mapper = LazySingletonDTO.SetCustomAssembly(typeof(TDTO).Assembly);
             return mapper.GetMapper().Map<TDTO>(model);
         }
 
         protected TDTO CastToDerivedClass(AutoMapperDTO<TDTO, TEntity, TKey> baseInstance)
         {
-            var mapper = LazySingleton.Instance;
+            var mapper = LazySingletonDTO.SetCustomAssembly(typeof(TDTO).Assembly);
 
             return mapper.GetMapper().Map<TDTO>(baseInstance);
         }

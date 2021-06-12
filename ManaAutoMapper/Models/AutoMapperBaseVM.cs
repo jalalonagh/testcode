@@ -4,7 +4,7 @@ using ManaAutoMapper.Interfaces;
 
 namespace ManaAutoMapper.Models
 {
-    public class AutoMapperBaseVM<TVM, TEntity, TKey> : JsonVM<TVM, TEntity, TKey>, IHaveCustomMapping
+    public class AutoMapperBaseVM<TVM, TEntity, TKey> : JsonVM<TVM, TEntity, TKey>
         where TVM : class, new()
         where TEntity : class, IEntity, new()
         where TKey : struct
@@ -16,7 +16,7 @@ namespace ManaAutoMapper.Models
 
         protected TVM CastToDerivedClass(AutoMapperInterfaceVM<TVM, TEntity, TKey> baseInstance)
         {
-            var mapper = LazySingleton.Instance;
+            var mapper = LazySingletonVM.SetCustomAssembly(typeof(TVM).Assembly);
 
             return mapper.GetMapper().Map<TVM>(baseInstance);
         }

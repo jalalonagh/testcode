@@ -16,7 +16,7 @@ namespace ManaAutoMapper.Models
 
         protected TDTO CastToDerivedClass(AutoMapperInterfaceDTO<TDTO, TEntity, TKey> baseInstance)
         {
-            var mapper = LazySingleton.Instance;
+            var mapper = LazySingletonDTO.SetCustomAssembly(typeof(TDTO).Assembly);
 
             return mapper.GetMapper().Map<TDTO>(baseInstance);
         }

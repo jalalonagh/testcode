@@ -1,10 +1,11 @@
-﻿using ManaDataTransferObject.Common;
+﻿using ManaAutoMapper.Interfaces;
+using ManaDataTransferObject.Common;
 using ManaEnums.Entity.User;
 using System;
 
 namespace ManaDataTransferObject.User
 {
-    public class UserDTO : BaseInterfaceDTO<UserDTO, Entities.User.User, int>
+    public class UserDTO : BaseInterfaceDTO<UserDTO, Entities.User.User, int>, IHaveCustomMapping
     {
         public virtual string PhoneNumber { get; set; }
         public virtual string Email { get; set; }

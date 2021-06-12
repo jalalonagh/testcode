@@ -1,4 +1,5 @@
 ﻿using Entities.Common;
+using ManaAutoMapper.Interfaces;
 using ManaDataTransferObject.Common;
 using ManaEnums.Entity.Phone;
 

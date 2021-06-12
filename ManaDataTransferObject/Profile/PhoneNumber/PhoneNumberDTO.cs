@@ -1,9 +1,10 @@
-﻿using ManaDataTransferObject.Common;
+﻿using ManaAutoMapper.Interfaces;
+using ManaDataTransferObject.Common;
 using ManaEnums.Entity.Phone;
 
 namespace ManaDataTransferObject.Profile.PhoneNumber
 {
-    public class PhoneNumberDTO : BaseDTO<PhoneNumberDTO, Entities.Profile.PhoneNumber.PhoneNumber, int>
+    public class PhoneNumberDTO : BaseDTO<PhoneNumberDTO, Entities.Profile.PhoneNumber.PhoneNumber, int>, IHaveCustomMapping
     {
         public PhoneNumberType.PhoneNumberTypeDTO PhoneNumberType { get; set; }
         public PhoneType PhoneNumberTypeId { get; set; }

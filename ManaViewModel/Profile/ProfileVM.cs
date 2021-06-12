@@ -1,9 +1,10 @@
-﻿using ManaViewModel.Common;
+﻿using ManaAutoMapper.Interfaces;
+using ManaViewModel.Common;
 using System.Collections.Generic;
 
 namespace ManaViewModel.Profile
 {
-    public class ProfileVM : BaseVM<ProfileVM, Entities.Profile.Profile, int>
+    public class ProfileVM : BaseVM<ProfileVM, Entities.Profile.Profile, int>, IHaveCustomMapping
     {
         public int UserId { get; set; }
         public string FirstName { get; set; }

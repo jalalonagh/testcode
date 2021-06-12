@@ -1,9 +1,10 @@
-﻿using ManaEnums.Entity.Phone;
+﻿using ManaAutoMapper.Interfaces;
+using ManaEnums.Entity.Phone;
 using ManaViewModel.Common;
 
 namespace ManaViewModel.Profile.PhoneNumber
 {
-    public class PhoneNumberVM : BaseVM<PhoneNumberVM, Entities.Profile.PhoneNumber.PhoneNumber, int>
+    public class PhoneNumberVM : BaseVM<PhoneNumberVM, Entities.Profile.PhoneNumber.PhoneNumber, int>, IHaveCustomMapping
     {
         public PhoneNumberType.PhoneNumberTypeVM PhoneNumberType { get; set; }
         public PhoneType PhoneNumberTypeId { get; set; }

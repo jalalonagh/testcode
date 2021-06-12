@@ -1,8 +1,9 @@
-﻿using ManaDataTransferObject.Common;
+﻿using ManaAutoMapper.Interfaces;
+using ManaDataTransferObject.Common;
 
 namespace ManaDataTransferObject.ConfirmedTransaction
 {
-    public class ConfirmedTransactionDTO : BaseDTO<ConfirmedTransactionDTO, Entities.ConfirmedTransaction.ConfirmedTransaction, int>
+    public class ConfirmedTransactionDTO : BaseDTO<ConfirmedTransactionDTO, Entities.ConfirmedTransaction.ConfirmedTransaction, int>, IHaveCustomMapping
     {
         public ConfirmedTransactionDTO()
         {

@@ -1,8 +1,9 @@
-﻿using ManaDataTransferObject.Common;
+﻿using ManaAutoMapper.Interfaces;
+using ManaDataTransferObject.Common;
 
 namespace ManaDataTransferObject.SMS
 {
-    public class SMSDTO : BaseDTO<SMSDTO, Entities.SMS.SMS, int>
+    public class SMSDTO : BaseDTO<SMSDTO, Entities.SMS.SMS, int>, IHaveCustomMapping
     {
         public string phone { get; set; }
         public string smsText { get; set; }

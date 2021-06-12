@@ -1,4 +1,5 @@
-﻿using ManaViewModel.Common;
+﻿using ManaAutoMapper.Interfaces;
+using ManaViewModel.Common;
 
 namespace ManaDataTransferObject.ConfirmedTransaction
 {

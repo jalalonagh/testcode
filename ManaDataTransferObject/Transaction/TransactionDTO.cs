@@ -1,9 +1,10 @@
-﻿using ManaDataTransferObject.Common;
+﻿using ManaAutoMapper.Interfaces;
+using ManaDataTransferObject.Common;
 using ManaEnums.Entity.Financial.Transaction;
 
 namespace ManaDataTransferObject.Transaction
 {
-    public class TransactionDTO : BaseDTO<TransactionDTO, Entities.Transaction.Transaction, int>
+    public class TransactionDTO : BaseDTO<TransactionDTO, Entities.Transaction.Transaction, int>, IHaveCustomMapping
     {
         public int phoneId { get; set; }
         public int smsId { get; set; }

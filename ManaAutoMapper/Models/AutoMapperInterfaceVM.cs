@@ -12,21 +12,21 @@ namespace ManaAutoMapper.Models
 
         public TEntity ToEntity()
         {
-            var mapper = LazySingleton.Instance;
+            var mapper = LazySingletonVM.SetCustomAssembly(typeof(TVM).Assembly);
 
             return mapper.GetMapper().Map<TEntity>(CastToDerivedClass(this));
         }
 
         public TEntity ToEntity(TEntity entity)
         {
-            var mapper = LazySingleton.Instance;
+            var mapper = LazySingletonVM.SetCustomAssembly(typeof(TVM).Assembly);
 
             return mapper.GetMapper().Map(CastToDerivedClass(this), entity);
         }
 
         public static TVM FromEntity(TEntity model)
         {
-            var mapper = LazySingleton.Instance;
+            var mapper = LazySingletonVM.SetCustomAssembly(typeof(TVM).Assembly);
 
             return mapper.GetMapper().Map<TVM>(model);
         }

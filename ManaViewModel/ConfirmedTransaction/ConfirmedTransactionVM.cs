@@ -1,8 +1,9 @@
-﻿using ManaViewModel.Common;
+﻿using ManaAutoMapper.Interfaces;
+using ManaViewModel.Common;
 
 namespace ManaViewModel.ConfirmedTransaction
 {
-    public class ConfirmedTransactionVM : BaseVM<ConfirmedTransactionVM, Entities.ConfirmedTransaction.ConfirmedTransaction, int>
+    public class ConfirmedTransactionVM : BaseVM<ConfirmedTransactionVM, Entities.ConfirmedTransaction.ConfirmedTransaction, int>, IHaveCustomMapping
     {
         public ConfirmedTransactionVM()
         {

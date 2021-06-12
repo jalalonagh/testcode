@@ -1,11 +1,12 @@
-﻿using ManaEnums.Entity.User;
+﻿using ManaAutoMapper.Interfaces;
+using ManaEnums.Entity.User;
 using ManaViewModel.Common;
 using System;
 using System.Collections.Generic;
 
 namespace ManaViewModel.User
 {
-    public class UserVM : BaseInterfaceVM<UserVM, Entities.User.User, int>
+    public class UserVM : BaseInterfaceVM<UserVM, Entities.User.User, int>, IHaveCustomMapping
     {
         public string UserType { get; set; }
         public string FullName { get; set; }

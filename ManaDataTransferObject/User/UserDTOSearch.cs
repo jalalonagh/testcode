@@ -1,4 +1,5 @@
-﻿using ManaDataTransferObject.Common;
+﻿using ManaAutoMapper.Interfaces;
+using ManaDataTransferObject.Common;
 using ManaEnums.Entity.User;
 using System;
 
