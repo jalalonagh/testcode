@@ -17,21 +17,15 @@ namespace ManaAutoMapper
         {
             if (assembly == null)
                 assembly = typeof(IHaveCustomMapping).Assembly;
-
             var allTypes = assembly.ExportedTypes;
-
-            var listtemp = allTypes.Where(type => type.IsClass && !type.IsAbstract && type.GetInterfaces().Contains(typeof(IHaveCustomMapping)));
-            var list = listtemp.Select(type => (IHaveCustomMapping)Activator.CreateInstance(type));
-
+            var listTemp = allTypes.Where(type => type.IsClass && !type.IsAbstract && type.GetInterfaces().Contains(typeof(IHaveCustomMapping)));
+            var list = listTemp.Select(type => (IHaveCustomMapping)Activator.CreateInstance(type));
             profile = new CustomMappingProfile(list);
-
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(profile);
             });
-
             config.CompileMappings();
-
             mapper = config.CreateMapper();
         }
 
