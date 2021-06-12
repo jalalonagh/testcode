@@ -11,7 +11,7 @@ namespace Entities.User
         public string UserType { get; set; }
         public string FullName { get; set; }
         public int Age { get; set; }
-        public UserGenderType Gender { get; set; }
+        public int Gender { get; set; }
         public bool IsActive { get; set; }
         public int? SalcustSi { get; set; }
         public string SalcustCu { get; set; }

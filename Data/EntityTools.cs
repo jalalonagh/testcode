@@ -30,7 +30,6 @@ namespace Data
 
             return entity;
         }
-
         public static IEnumerable<TEntity> FixPersianText<TEntity>(this IEnumerable<TEntity> entities)
             where TEntity : class, IEntity
         {
@@ -42,7 +41,24 @@ namespace Data
             });
             return persianEntities;
         }
-
+        public static TEntity FixDeleteAndActivation<TEntity>(this TEntity entity, bool isActive = true, bool isDeleted = false)
+            where TEntity : class, IEntity
+        {
+            entity.IsActive = isActive;
+            entity.IsDeleted = isDeleted;
+            return entity;
+        }
+        public static IEnumerable<TEntity> FixDeleteAndActivation<TEntity>(this IEnumerable<TEntity> entities)
+            where TEntity : class, IEntity
+        {
+            List<TEntity> persianEntities = new List<TEntity>();
+            entities.ToList().ForEach(delegate (TEntity entity)
+            {
+                entity = FixDeleteAndActivation(entity);
+                persianEntities.Add(entity);
+            });
+            return persianEntities;
+        }
         public static IQueryable<TEntity> ClearDeletedOrNotActiveEntity<TEntity>(this IQueryable<TEntity> query)
             where TEntity : class, IEntity
         {
@@ -50,7 +66,6 @@ namespace Data
 
             return query;
         }
-
         public static TEntity SetCreationTime<TEntity>(this TEntity entity)
             where TEntity : class, IEntity
         {
@@ -58,7 +73,6 @@ namespace Data
 
             return entity;
         }
-
         public static IEnumerable<TEntity> SetCreationTimes<TEntity>(this IEnumerable<TEntity> entities)
             where TEntity : class, IEntity
         {
@@ -71,7 +85,6 @@ namespace Data
 
             return newEntities;
         }
-
         public static TEntity SetModifiedTime<TEntity>(this TEntity entity)
             where TEntity : class, IEntity
         {
@@ -79,7 +92,6 @@ namespace Data
 
             return entity;
         }
-
         public static IEnumerable<TEntity> SetModifiedTimes<TEntity>(this IEnumerable<TEntity> entities)
             where TEntity : class, IEntity
         {
@@ -94,7 +106,6 @@ namespace Data
 
             return newEntities;
         }
-
         public static IQueryable<TEntity> SetOrder<TEntity, TSearch>(this IQueryable<TEntity> query, IEnumerable<PropertyInfo> fields)
             where TEntity : class, IEntity
             where TSearch : class, ISearchEntity
@@ -105,7 +116,6 @@ namespace Data
 
             return query;
         }
-
         public static IQueryable<TEntity> SetOrder<TEntity, TSearch>(this IEnumerable<TEntity> entities, IEnumerable<PropertyInfo> fields)
             where TEntity : class, IEntity
             where TSearch : class, ISearchEntity
@@ -118,18 +128,16 @@ namespace Data
 
             return query;
         }
-
         public static IQueryable<TEntity> SetWhere<TEntity, TSearch>(this IQueryable<TEntity> query, IEnumerable<PropertyInfo> fields, TSearch entity)
             where TEntity : class, IEntity
             where TSearch : class, ISearchEntity
         {
             if (fields != null && fields.Any())
                 foreach (var item in fields)
-                    query.Where(EntityFuncs.ApplyWhereFunc<TEntity, TSearch>(item.Name, item.GetValue(entity)));
+                    query = query.Where(EntityFuncs.ApplyWhereFunc<TEntity>(item.Name, item.GetValue(entity)));
 
             return query;
         }
-
         public static IQueryable<TEntity> SetWhere<TEntity, TSearch>(this IEnumerable<TEntity> entities, IEnumerable<PropertyInfo> fields, TSearch entity)
             where TEntity : class, IEntity
             where TSearch : class, ISearchEntity
@@ -138,11 +146,10 @@ namespace Data
 
             if (fields != null && fields.Any())
                 foreach (var item in fields)
-                    query.Where(EntityFuncs.ApplyWhereFunc<TEntity, TSearch>(item.Name, item.GetValue(entity)));
+                    query = query.Where(EntityFuncs.ApplyWhereFunc<TEntity>(item.Name, item.GetValue(entity)));
 
             return query;
         }
-
         public static IEnumerable<PropertyInfo> GetOrderFeilds<TEntity>(this IQueryable<TEntity> query)
             where TEntity : class, IEntity
         {
@@ -165,7 +172,6 @@ namespace Data
 
             return custom.OrderBy(o => o.index).Select(s => s.name);
         }
-
         public static TEntity SetModifiedTimeToProperty<TEntity>(this TEntity entity)
             where TEntity : class, IEntity
         {
@@ -185,11 +191,10 @@ namespace Data
 
             return entity;
         }
-
         public static TEntity SetDeletedToEntity<TEntity>(this TEntity entity, DbSet<TEntity> db)
             where TEntity : class, IEntity
         {
-            if(entity != null && db != null)
+            if (entity != null && db != null)
             {
                 var deleteProperty = entity.GetType().GetProperty(nameof(entity.IsDeleted));
                 if (deleteProperty != null)
@@ -210,7 +215,6 @@ namespace Data
                 entity.SetDeletedToEntity<TEntity>(db);
             }
         }
-
         public static TEntity SetCreatedToProperty<TEntity>(TEntity entity)
             where TEntity : class, IEntity
         {
@@ -230,7 +234,6 @@ namespace Data
 
             return entity;
         }
-
         public static TEntity SyncFeildsData<TEntity>(this TEntity entity, IEnumerable<KeyValuePair<string, dynamic>> keyValues)
         {
             if (keyValues != null && keyValues.Any() && entity != null)
@@ -248,7 +251,6 @@ namespace Data
             }
             return default(TEntity);
         }
-
         public static TEntity SetFieldsValue<TEntity>(this TEntity entity, string[] fields, IEnumerable<PropertyInfo> properties)
             where TEntity : class, IEntity
         {
@@ -265,6 +267,51 @@ namespace Data
             }
 
             return entity;
+        }
+        public static object? GetPropertyValue(this PropertyInfo info, object data)
+        {
+            if (info.PropertyType.IsGenericType && info.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+            {
+                var result = info.GetValue(data);
+                return info.GenerateNullableValue(result);
+            }
+            return info.GetValue(data);
+        }
+        public static object? GenerateNullableValue(this PropertyInfo info, object value)
+        {
+            switch (info.PropertyType.GetGenericArguments()[0].Name)
+            {
+                case "Int32":
+                    return new int?((int)value);
+                case "Int64":
+                    return new long?((long)value);
+                case "DateTime":
+                    return new DateTime?((DateTime)value);
+                case "TimeSpan":
+                    return new TimeSpan?((TimeSpan)value);
+                case "Decimal":
+                    return new decimal?((decimal)value);
+                case "Byte":
+                    return new byte?((byte)value);
+                case "Int16":
+                    return new short?((short)value);
+                case "UInt16":
+                    return new ushort?((ushort)value);
+                case "UInt32":
+                    return new uint?((uint)value);
+                case "UInt64":
+                    return new ulong?((ulong)value);
+                case "Char":
+                    return new char?((char)value);
+                case "Single":
+                    return new float?((float)value);
+                case "Double":
+                    return new double?((double)value);
+                case "Boolean":
+                    return new bool?((bool)value);
+                default:
+                    return null;
+            }
         }
     }
 }

@@ -93,6 +93,7 @@ namespace Data.Repositories
             Assert.NotNull(entity, nameof(entity));
             entity = entity.FixPersianText();
             entity = entity.SetCreationTime();
+            entity = entity.FixDeleteAndActivation();
             await Entities.AddAsync(entity, new CancellationToken()).ConfigureAwait(false);
             Result = await DbContext.SaveChangesAsync().ConfigureAwait(false);
             tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), entity));      // SAVE SPEEDT TEST RESULT
@@ -109,13 +110,14 @@ namespace Data.Repositories
             Assert.NotNull(entities, nameof(entities));
             entities = entities.FixPersianText();
             entities = entities.SetCreationTimes();
+            entities = entities.FixDeleteAndActivation();
             await Entities.AddRangeAsync(entities, new CancellationToken()).ConfigureAwait(false);
             Result = await DbContext.SaveChangesAsync();
             if (Result > 0)
             {
                 var query = entities.AsQueryable<TEntity>();
                 query = entities.SetOrder<TEntity, TSearchEntity>(query.GetOrderFeilds<TEntity>());
-                var result = await query.ToListAsync();
+                var result = query.ToList();
                 tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), entities));      // SAVE SPEEDT TEST RESULT
                 return result;
             }
@@ -156,7 +158,7 @@ namespace Data.Repositories
             {
                 var query = entities.AsQueryable<TEntity>();
                 query = entities.SetOrder<TEntity, TSearchEntity>(query.GetOrderFeilds<TEntity>());
-                var result = await query.ToListAsync();
+                var result = query.ToList();
                 tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), entities));      // SAVE SPEEDT TEST RESULT
                 return result;
             }
@@ -223,7 +225,7 @@ namespace Data.Repositories
             {
                 var query1 = entities.AsQueryable<TEntity>();
                 query1 = entities.SetOrder<TEntity, TSearchEntity>(query.GetOrderFeilds<TEntity>());
-                var result = await query1.ToListAsync();
+                var result = query1.ToList();
                 tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), ids));      // SAVE SPEEDT TEST RESULT
                 return result;
             }
@@ -252,7 +254,9 @@ namespace Data.Repositories
             var start = DateTime.Now;       // START SPEED TEST
             var properties = filter.Entity.GetType()
                 .GetProperties()
-                .Where(x => (x.PropertyType != typeof(string) && x.GetValue(filter.Entity) != null) || (x.PropertyType == typeof(string) && !string.IsNullOrEmpty(x.GetValue(filter.Entity).ToString())))
+                .Where(x => x.PropertyType.IsValueType
+                && (x.PropertyType != typeof(string) && x.GetValue(filter.Entity) != null)
+                || (x.PropertyType == typeof(string) && !string.IsNullOrEmpty(x.GetValue(filter.Entity)?.ToString())))
                 .ToList();
             var query = Entities
                 .Skip(filter.Total)

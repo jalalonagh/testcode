@@ -45,16 +45,20 @@ namespace Data
             return Expression.Lambda<Func<TEntity, bool>>(andExp, argParam);
         }
 
-        public static Expression<Func<TEntity, bool>> ApplyWhereFunc<TEntity, TSearch>(this string propertyName, dynamic propertyValue)
+        public static Expression<Func<TEntity, bool>> ApplyWhereFunc<TEntity>(this string propertyName, object propertyValue)
             where TEntity : class, IEntity
-            where TSearch : class, ISearchEntity
         {
-            var parameter = Expression.Parameter(typeof(TSearch), $"{nameof(TSearch).Substring(0, 2)}");
-
+            var info = typeof(TEntity).GetProperty(propertyName);
+            var parameter = Expression.Parameter(typeof(TEntity), $"{nameof(TEntity).Substring(0, 2)}");
             var property = Expression.Property(parameter, propertyName);
-
-            var clause = Expression.Equal(property, Expression.Constant(propertyValue));
-
+            dynamic clause;
+            if (info.PropertyType.IsGenericType && info.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+            {
+                var p1 = Expression.Convert(property, info.PropertyType.GetGenericArguments()[0]);
+                clause = Expression.Equal(p1, Expression.Constant(propertyValue));
+            }
+            else
+                clause = Expression.Equal(property, Expression.Constant(propertyValue));
             return Expression.Lambda<Func<TEntity, bool>>(clause, parameter);
         }
 

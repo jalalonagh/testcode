@@ -13,6 +13,6 @@ namespace Entities.Transaction
         public int? phoneId { get; set; }
         public int? smsId { get; set; }
         public decimal? transaction { get; set; }
-        public FinancialTransactionType? type { get; set; }
+        public int? type { get; set; }
     }
 }
