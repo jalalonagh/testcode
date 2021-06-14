@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -276,6 +277,7 @@ namespace Data.Repositories
         }
         public async Task<RepositoryResult<IEnumerable<TEntity>>> SearchRangeAsync(SearchRangeModel<TEntity> search)
         {
+            Expression<Func<TEntity, bool>> funcs = null;
             var start = DateTime.Now;       // START SPEED TEST
             var properties = search.Entity.GetType()
                 .GetProperties()
@@ -287,7 +289,11 @@ namespace Data.Repositories
                 .AsQueryable();
             if (properties != null && properties.Any())
                 foreach (var item in properties)
-                    query = query.Where(EntityFuncs.ApplyWhereLikeFunc<TEntity, TSearchEntity>(item.Name, search.Text));
+                    if (funcs == null)
+                        funcs = ExpressionHelper.GetPredicate<TEntity>(item.Name, ExpressionHelper.SearchType.Contains, search.Text);
+                    else
+                        funcs = funcs.Or<TEntity>(ExpressionHelper.GetPredicate<TEntity>(item.Name, ExpressionHelper.SearchType.Contains, search.Text));
+            query = query.Where(funcs);
             foreach (var property in DbContext.Model.FindEntityType(typeof(TEntity)).GetNavigations())
                 query = query.Include(property.Name);
             query = query.ClearDeletedOrNotActiveEntity<TEntity>();

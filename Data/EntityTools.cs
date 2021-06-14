@@ -112,8 +112,7 @@ namespace Data
         {
             if (fields != null && fields.Any())
                 foreach (var item in fields)
-                    query.OrderByDescending(EntityFuncs.ApplyFunc<TEntity>(item, item.PropertyType.IsValueType ? Activator.CreateInstance(item.PropertyType) : null));
-
+                    query = query.OrderByDescending(item.Order<TEntity>());
             return query;
         }
         public static IQueryable<TEntity> SetOrder<TEntity, TSearch>(this IEnumerable<TEntity> entities, IEnumerable<PropertyInfo> fields)
@@ -124,8 +123,7 @@ namespace Data
 
             if (fields != null && fields.Any())
                 foreach (var item in fields)
-                    query.OrderByDescending(EntityFuncs.ApplyFunc<TEntity>(item, item.PropertyType.IsValueType ? Activator.CreateInstance(item.PropertyType) : null));
-
+                    query = query.OrderByDescending(item.Order<TEntity>());
             return query;
         }
         public static IQueryable<TEntity> SetWhere<TEntity, TSearch>(this IQueryable<TEntity> query, IEnumerable<PropertyInfo> fields, TSearch entity)
@@ -134,8 +132,7 @@ namespace Data
         {
             if (fields != null && fields.Any())
                 foreach (var item in fields)
-                    query = query.Where(EntityFuncs.ApplyWhereFunc<TEntity>(item.Name, item.GetValue(entity)));
-
+                    query = query.Where(ExpressionHelper.GetPredicate<TEntity>(item.Name, ExpressionHelper.SearchType.Equal, item.GetValue(entity)));
             return query;
         }
         public static IQueryable<TEntity> SetWhere<TEntity, TSearch>(this IEnumerable<TEntity> entities, IEnumerable<PropertyInfo> fields, TSearch entity)
@@ -143,11 +140,9 @@ namespace Data
             where TSearch : class, ISearchEntity
         {
             var query = entities.AsQueryable();
-
             if (fields != null && fields.Any())
                 foreach (var item in fields)
-                    query = query.Where(EntityFuncs.ApplyWhereFunc<TEntity>(item.Name, item.GetValue(entity)));
-
+                    query = query.Where(ExpressionHelper.GetPredicate<TEntity>(item.Name, ExpressionHelper.SearchType.Equal, item.GetValue(entity)));
             return query;
         }
         public static IEnumerable<PropertyInfo> GetOrderFeilds<TEntity>(this IQueryable<TEntity> query)

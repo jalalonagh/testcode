@@ -31,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="BaseBusiness\" />
+    <Folder Include="BusinessLevel1\" />
     <Folder Include="BusinessLevel2\" />
     <Folder Include="BusinessLevel3\" />
   </ItemGroup>

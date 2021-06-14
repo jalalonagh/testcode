@@ -30,7 +30,7 @@ namespace Services.Base.Services
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.AddAsync(entity);
-            tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), entity));      // SAVE SPEEDT TEST RESULT
+            tester.SaveServiceSpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), entity));      // SAVE SPEEDT TEST RESULT
             return result.ToServiceResult();
         }
 
@@ -38,7 +38,7 @@ namespace Services.Base.Services
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.AddRangeAsync(entities);
-            tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), entities));      // SAVE SPEEDT TEST RESULT
+            tester.SaveServiceSpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), entities));      // SAVE SPEEDT TEST RESULT
             if (result.IsSuccess && result.Data.Any())
                 return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result.Data, "");
             if (result.IsSuccess && !result.Data.Any())
@@ -50,7 +50,7 @@ namespace Services.Base.Services
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.DeleteAsync(entity);
-            tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), entity));      // SAVE SPEEDT TEST RESULT
+            tester.SaveServiceSpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), entity));      // SAVE SPEEDT TEST RESULT
             return result.ToServiceResult();
         }
 
@@ -58,7 +58,7 @@ namespace Services.Base.Services
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.DeleteByIdAsync(id);
-            tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), id));      // SAVE SPEEDT TEST RESULT
+            tester.SaveServiceSpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), id));      // SAVE SPEEDT TEST RESULT
             return result.ToServiceResult();
         }
 
@@ -66,7 +66,7 @@ namespace Services.Base.Services
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.DeleteRangeAsync(entities);
-            tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), entities));      // SAVE SPEEDT TEST RESULT
+            tester.SaveServiceSpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), entities));      // SAVE SPEEDT TEST RESULT
             if (result.IsSuccess && result.Data.Any())
                 return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result.Data, "");
             if (result.IsSuccess && !result.Data.Any())
@@ -78,7 +78,7 @@ namespace Services.Base.Services
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.DeleteRangeByIdsAsync(ids);
-            tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), ids));      // SAVE SPEEDT TEST RESULT
+            tester.SaveServiceSpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), ids));      // SAVE SPEEDT TEST RESULT
             if (result.IsSuccess && result.Data.Any())
                 return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result.Data, "");
             if (result.IsSuccess && !result.Data.Any())
@@ -90,7 +90,7 @@ namespace Services.Base.Services
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.FilterRangeAsync(filter);
-            tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), filter));      // SAVE SPEEDT TEST RESULT
+            tester.SaveServiceSpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), filter));      // SAVE SPEEDT TEST RESULT
             if (result.IsSuccess && result.Data.Any())
                 return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result.Data, "");
             if (result.IsSuccess && !result.Data.Any())
@@ -102,7 +102,7 @@ namespace Services.Base.Services
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.GetAllAsync(total, more);
-            tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), total, more));      // SAVE SPEEDT TEST RESULT
+            tester.SaveServiceSpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), total, more));      // SAVE SPEEDT TEST RESULT
             if (result.IsSuccess && result.Data.Any())
                 return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result.Data, "");
             if (result.IsSuccess && !result.Data.Any())
@@ -114,7 +114,7 @@ namespace Services.Base.Services
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.GetByIdAsync(ids);
-            tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), ids));      // SAVE SPEEDT TEST RESULT
+            tester.SaveServiceSpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), ids));      // SAVE SPEEDT TEST RESULT
             return result.ToServiceResult();
         }
 
@@ -122,7 +122,7 @@ namespace Services.Base.Services
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await ItemSync(Target, Origin);
-            tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), Target, Origin));      // SAVE SPEEDT TEST RESULT
+            tester.SaveServiceSpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), Target, Origin));      // SAVE SPEEDT TEST RESULT
             return result;
         }
 
@@ -130,7 +130,7 @@ namespace Services.Base.Services
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.SearchRangeAsync(search);
-            tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), search));      // SAVE SPEEDT TEST RESULT
+            tester.SaveServiceSpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), search));      // SAVE SPEEDT TEST RESULT
             if (result.IsSuccess && result.Data.Any())
                 return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result.Data, "");
             if (result.IsSuccess && !result.Data.Any())
@@ -142,7 +142,7 @@ namespace Services.Base.Services
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.UpdateAsync(entity);
-            tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), entity));      // SAVE SPEEDT TEST RESULT
+            tester.SaveServiceSpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), entity));      // SAVE SPEEDT TEST RESULT
             return result.ToServiceResult();
         }
 
@@ -150,7 +150,7 @@ namespace Services.Base.Services
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.UpdateFieldRangeAsync(entity, fields);
-            tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), entity, fields));      // SAVE SPEEDT TEST RESULT
+            tester.SaveServiceSpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), entity, fields));      // SAVE SPEEDT TEST RESULT
             return result.ToServiceResult();
         }
 
@@ -158,7 +158,7 @@ namespace Services.Base.Services
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.UpdateFieldRangeAsync(Id, fields);
-            tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), Id, fields));      // SAVE SPEEDT TEST RESULT
+            tester.SaveServiceSpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), Id, fields));      // SAVE SPEEDT TEST RESULT
             return result.ToServiceResult();
         }
 
@@ -166,7 +166,7 @@ namespace Services.Base.Services
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.UpdateRangeAsync(entities);
-            tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), entities));      // SAVE SPEEDT TEST RESULT
+            tester.SaveServiceSpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), entities));      // SAVE SPEEDT TEST RESULT
             if (result.IsSuccess && result.Data.Any())
                 return new ServiceResult<IEnumerable<TEntity>>(true, ManaEnums.Api.ApiResultStatus.SUCCESS, result.Data, "");
             if (result.IsSuccess && !result.Data.Any())

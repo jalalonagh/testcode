@@ -11,6 +11,6 @@ namespace ManaViewModel.Transaction
         public int smsId { get; set; }
         public SMS.SMSVM sms { get; set; }
         public decimal transaction { get; set; }
-        public FinancialTransactionType type { get; set; }
+        public int type { get; set; }
     }
 }

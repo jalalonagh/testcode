@@ -1,6 +1,4 @@
 ﻿using FluentValidation;
-using ManaDataTransferObject.Common;
-using ManaEnums.Entity.Phone;
 using ManaResourceManager;
 
 namespace ManaDataTransferObject.Phone

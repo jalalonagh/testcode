@@ -29,12 +29,13 @@ namespace ManaResourceManager
                 var resources = book.Where(w => w.Name == name).ToList();
                 pack.Item = resources.Where(w => w.Language == language).FirstOrDefault();
                 pack.Others = resources.Where(w => w.Language != language).ToList();
-                return pack;
+                if (pack.Item != null)
+                    return pack;
             }
             CreateSource(name, language);
             ResourceFileManager manager = new ResourceFileManager();
             book = manager.GetAllResources(settings.Languages, settings.RootDirectoryName);
-            return pack;
+            return FetchResource(name);
         }
 
         public ResourceItemPack FetchResource(string name, string language)

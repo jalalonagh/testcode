@@ -68,3 +68,59 @@ TIME : 1400/3/22 15:32:46
 DURATION : 7٫2311712 sec 
  
 **************************************************************************************************************
+**************************************************************************************************************
+JSON DATA : [{"Entity":{"phoneNumber":null,"name":null,"type":2,"financialAccountId":null,"Id":null,"CreateTime":null,"CreatePersianTime":null,"LastUpdateTime":null,"LastUpdatePersianTime":null,"Order":null,"IsActive":null,"IsDeleted":null},"Total":0,"More":2147483647}] 
+METHOD : Data.Repositories.Repository`2+<FilterRangeAsync>d__26 
+TIME : 1400/3/23 9:03:13 
+DURATION : 56٫4643201 sec 
+ 
+**************************************************************************************************************
+**************************************************************************************************************
+JSON DATA : [{"Entity":{"phoneNumber":null,"name":null,"type":2,"financialAccountId":null,"Id":null,"CreateTime":null,"CreatePersianTime":null,"LastUpdateTime":null,"LastUpdatePersianTime":null,"Order":null,"IsActive":null,"IsDeleted":null},"Total":0,"More":2147483647}] 
+METHOD : Services.Base.Services.BaseService`2+<FilterRangeAsync>d__12 
+TIME : 1400/3/23 9:03:13 
+DURATION : 56٫5501791 sec 
+ 
+**************************************************************************************************************
+**************************************************************************************************************
+JSON DATA : [{"Entity":{"phoneNumber":null,"name":null,"type":2,"financialAccountId":null,"Id":null,"CreateTime":null,"CreatePersianTime":null,"LastUpdateTime":null,"LastUpdatePersianTime":null,"Order":null,"IsActive":null,"IsDeleted":null},"Total":0,"More":2147483647}] 
+METHOD : Data.Repositories.Repository`2+<FilterRangeAsync>d__26 
+TIME : 1400/3/23 11:48:42 
+DURATION : 22٫5948935 sec 
+ 
+**************************************************************************************************************
+**************************************************************************************************************
+JSON DATA : [{"Entity":{"phoneNumber":null,"name":null,"type":2,"financialAccountId":null,"Id":null,"CreateTime":null,"CreatePersianTime":null,"LastUpdateTime":null,"LastUpdatePersianTime":null,"Order":null,"IsActive":null,"IsDeleted":null},"Total":0,"More":2147483647}] 
+METHOD : Services.Base.Services.BaseService`2+<FilterRangeAsync>d__12 
+TIME : 1400/3/23 11:48:42 
+DURATION : 22٫6507126 sec 
+ 
+**************************************************************************************************************
+**************************************************************************************************************
+JSON DATA : [{"Entity":{"phoneNumber":null,"name":null,"type":2,"financialAccountId":null,"Id":null,"CreateTime":null,"CreatePersianTime":null,"LastUpdateTime":null,"LastUpdatePersianTime":null,"Order":null,"IsActive":null,"IsDeleted":null},"Total":0,"More":2147483647}] 
+METHOD : Data.Repositories.Repository`2+<FilterRangeAsync>d__26 
+TIME : 1400/3/24 9:16:45 
+DURATION : 15٫1572154 sec 
+ 
+**************************************************************************************************************
+**************************************************************************************************************
+JSON DATA : [{"Entity":{"phoneNumber":null,"name":null,"type":2,"financialAccountId":null,"Id":null,"CreateTime":null,"CreatePersianTime":null,"LastUpdateTime":null,"LastUpdatePersianTime":null,"Order":null,"IsActive":null,"IsDeleted":null},"Total":0,"More":2147483647}] 
+METHOD : Services.Base.Services.BaseService`2+<FilterRangeAsync>d__12 
+TIME : 1400/3/24 9:16:45 
+DURATION : 15٫2674268 sec 
+ 
+**************************************************************************************************************
+**************************************************************************************************************
+JSON DATA : [{"Entity":{"phoneNumber":"string","name":"string","type":0,"financialAccountId":0,"Confirms":[{"transactionId":0,"transaction":{"phoneId":0,"phone":null,"smsId":0,"sms":{"phone":"string","smsText":"string","Transactions":[null],"Id":0,"CreateTime":"2021-06-14T10:26:39.459Z","CreatePersianTime":"string","LastUpdateTime":"2021-06-14T10:26:39.459Z","LastUpdatePersianTime":"string","Order":0,"IsActive":true,"IsDeleted":true},"transaction":0.0,"type":0,"Confirms":[null],"Id":0,"CreateTime":"2021-06-14T10:26:39.459Z","CreatePersianTime":"string","LastUpdateTime":"2021-06-14T10:26:39.459Z","LastUpdatePersianTime":"string","Order":0,"IsActive":true,"IsDeleted":true},"phoneId":0,"phone":null,"autoConfirmed":true,"manualConfirmed":true,"Id":0,"CreateTime":"2021-06-14T10:26:39.459Z","CreatePersianTime":"string","LastUpdateTime":"2021-06-14T10:26:39.459Z","LastUpdatePersianTime":"string","Order":0,"IsActive":true,"IsDeleted":true}],"Transactions":[{"phoneId":0,"phone":null,"smsId":0,"sms":{"phone":"string","smsText":"string","Transactions":[null],"Id":0,"CreateTime":"2021-06-14T10:26:39.459Z","CreatePersianTime":"string","LastUpdateTime":"2021-06-14T10:26:39.459Z","LastUpdatePersianTime":"string","Order":0,"IsActive":true,"IsDeleted":true},"transaction":0.0,"type":0,"Confirms":[null],"Id":0,"CreateTime":"2021-06-14T10:26:39.459Z","CreatePersianTime":"string","LastUpdateTime":"2021-06-14T10:26:39.459Z","LastUpdatePersianTime":"string","Order":0,"IsActive":true,"IsDeleted":true}],"Id":0,"CreateTime":"2021-06-14T10:26:39.459Z","CreatePersianTime":"string","LastUpdateTime":"2021-06-14T10:26:39.459Z","LastUpdatePersianTime":"string","Order":0,"IsActive":true,"IsDeleted":true},"Text":"ggggg","Total":0,"More":2147483647}] 
+METHOD : Data.Repositories.Repository`2+<SearchRangeAsync>d__27 
+TIME : 1400/3/24 14:56:56 
+DURATION : 4٫300432 sec 
+ 
+**************************************************************************************************************
+**************************************************************************************************************
+JSON DATA : [{"Entity":{"phoneNumber":"string","name":"string","type":0,"financialAccountId":0,"Confirms":[{"transactionId":0,"transaction":{"phoneId":0,"phone":null,"smsId":0,"sms":{"phone":"string","smsText":"string","Transactions":[null],"Id":0,"CreateTime":"2021-06-14T10:26:39.459Z","CreatePersianTime":"string","LastUpdateTime":"2021-06-14T10:26:39.459Z","LastUpdatePersianTime":"string","Order":0,"IsActive":true,"IsDeleted":true},"transaction":0.0,"type":0,"Confirms":[null],"Id":0,"CreateTime":"2021-06-14T10:26:39.459Z","CreatePersianTime":"string","LastUpdateTime":"2021-06-14T10:26:39.459Z","LastUpdatePersianTime":"string","Order":0,"IsActive":true,"IsDeleted":true},"phoneId":0,"phone":null,"autoConfirmed":true,"manualConfirmed":true,"Id":0,"CreateTime":"2021-06-14T10:26:39.459Z","CreatePersianTime":"string","LastUpdateTime":"2021-06-14T10:26:39.459Z","LastUpdatePersianTime":"string","Order":0,"IsActive":true,"IsDeleted":true}],"Transactions":[{"phoneId":0,"phone":null,"smsId":0,"sms":{"phone":"string","smsText":"string","Transactions":[null],"Id":0,"CreateTime":"2021-06-14T10:26:39.459Z","CreatePersianTime":"string","LastUpdateTime":"2021-06-14T10:26:39.459Z","LastUpdatePersianTime":"string","Order":0,"IsActive":true,"IsDeleted":true},"transaction":0.0,"type":0,"Confirms":[null],"Id":0,"CreateTime":"2021-06-14T10:26:39.459Z","CreatePersianTime":"string","LastUpdateTime":"2021-06-14T10:26:39.459Z","LastUpdatePersianTime":"string","Order":0,"IsActive":true,"IsDeleted":true}],"Id":0,"CreateTime":"2021-06-14T10:26:39.459Z","CreatePersianTime":"string","LastUpdateTime":"2021-06-14T10:26:39.459Z","LastUpdatePersianTime":"string","Order":0,"IsActive":true,"IsDeleted":true},"Text":"ggggg","Total":0,"More":2147483647}] 
+METHOD : Services.Base.Services.BaseService`2+<SearchRangeAsync>d__16 
+TIME : 1400/3/24 14:56:56 
+DURATION : 4٫3785533 sec 
+ 
+**************************************************************************************************************
