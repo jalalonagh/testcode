@@ -1,4 +1,5 @@
 ﻿using FluentValidation.AspNetCore;
+using ManaDataTransferObject.Common;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -11,6 +12,8 @@ namespace ManaDataTransferObjectValidator
         {
             // افزودن سرویس کار با پرداخت زرین پال
             services.AddMvc(setup => {}).AddFluentValidation();
+
+            services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<IBaseDTO>());
         }
     }
 }
