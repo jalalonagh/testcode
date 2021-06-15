@@ -19,11 +19,11 @@ namespace MyApi.Controllers.Api.v1
             mediator = _mediator;
         }
 
-        [HttpGet("[action]")]
-        public async Task<ApiResult> AgainSendValidCode(string username, CancellationToken cancellationToken)
-        {
-            var result = await _userService.AgainSendValidCode(username, cancellationToken);
-            return result.ToApiResult();
-        }
+        //[HttpGet("[action]")]
+        //public async Task<ApiResult> AgainSendValidCode(string username, CancellationToken cancellationToken)
+        //{
+        //    var result = await _userService.AgainSendValidCode(username, cancellationToken);
+        //    return result.ToApiResult();
+        //}
     }
 }
