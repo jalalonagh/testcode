@@ -1,9 +1,6 @@
 ﻿using BusinessLayout.Configuration.Commands;
-using Entities;
-using Entities.Common;
-using ManaAutoMapper.Models;
 using ManaDataTransferObject.Phone;
-using Services;
+using Services.Models;
 
 namespace BusinessLayout.BaseBusinessLevel.Phone.Command.UpdateFieldRangeAsync
 {
