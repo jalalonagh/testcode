@@ -1,6 +1,7 @@
 ﻿using BusinessLayout.Configuration.Commands;
 using ManaDataTransferObject.SMS;
 using Services;
+using Services.Models;
 
 namespace BusinessLayout.BaseBusinessLevel.SMS.Command.UpdateAsync
 {

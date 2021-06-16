@@ -1,6 +1,7 @@
 ﻿using BusinessLayout.Configuration.Commands;
 using ManaDataTransferObject.User;
 using Services;
+using Services.Models;
 
 namespace BusinessLayout.BaseBusinessLevel.User.Command.UpdateAsync
 {

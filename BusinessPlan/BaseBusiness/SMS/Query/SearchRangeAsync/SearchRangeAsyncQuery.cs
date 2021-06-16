@@ -1,6 +1,7 @@
 ﻿using BusinessLayout.Configuration.Queries;
 using Data.Repositories.Models;
 using Services;
+using Services.Models;
 using System.Collections.Generic;
 
 namespace BusinessLayout.BaseBusinessLevel.SMS.Query.SearchRangeAsync
