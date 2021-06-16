@@ -43,11 +43,8 @@ namespace Data
         {
             ParameterExpression parameterExp = Expression.Parameter(typeof(T), "t");
             MemberExpression member = Expression.PropertyOrField(parameterExp, modelPropertyName.Split('.').First());
-            // If there are any dots in parram then we have to change expression 
             foreach (var innerMember in modelPropertyName.Split('.').Skip(1))
-            {
                 member = Expression.PropertyOrField(member, innerMember);
-            }
             if (member.Type.BaseType.ToString() == "System.Enum")
             {
                 data = Int32.Parse(data.ToString());
@@ -56,88 +53,16 @@ namespace Data
             }
             else if (searchType != SearchType.IsIn)
             {
-                switch (member.Type.ToString())
-                {
-                    case "System.Nullable`1[System.Decimal]":
-                        data = data.ToString().ToNullableDecimal();
-                        break;
-                    case "System.Nullable`1[System.Double]":
-                        data = data.ToString().ToNullableDouble();
-                        break;
-                    case "System.Nullable`1[System.Float]":
-                        data = data.ToString().ToNullableFloat();
-                        break;
-                    case "System.Nullable`1[System.DateTime]":
-                        data = data.ToString().ToNullableDateTime();
-                        break;
-                    case "System.Nullable`1[System.Int16]":
-                        data = data.ToString().ToNullableInt16();
-                        break;
-                    case "System.Nullable`1[System.Int32]":
-                        data = data.ToString().ToNullableInt32();
-                        break;
-                    case "System.Nullable`1[System.Int64]":
-                        data = data.ToString().ToNullableInt64();
-                        break;
-                    case "System.Nullable`1[System.UInt16]":
-                        data = data.ToString().ToNullableUInt16();
-                        break;
-                    case "System.Nullable`1[System.UInt32]":
-                        data = data.ToString().ToNullableUInt32();
-                        break;
-                    case "System.Nullable`1[System.UInt64]":
-                        data = data.ToString().ToNullableUInt64();
-                        break;
-                    case "System.Nullable`1[System.Boolean]":
-                        data = data.ToString().ToNullableBoolean();
-                        break;
-                    case "System.Decimal":
-                        data = decimal.Parse(data.ToString());
-                        break;
-                    case "System.Double":
-                        data = double.Parse(data.ToString());
-                        break;
-                    case "System.Float":
-                        data = float.Parse(data.ToString());
-                        break;
-                    case "System.DateTime":
-                        data = DateTime.Parse(data.ToString());
-                        break;
-                    case "System.Int16":
-                        data = Int16.Parse(data.ToString());
-                        break;
-                    case "System.Int32":
-                        data = Int32.Parse(data.ToString());
-                        break;
-                    case "System.Int64":
-                        data = Int64.Parse(data.ToString());
-                        break;
-                    case "System.UInt16":
-                        data = UInt16.Parse(data.ToString());
-                        break;
-                    case "System.UInt32":
-                        data = UInt32.Parse(data.ToString());
-                        break;
-                    case "System.UInt64":
-                        data = UInt64.Parse(data.ToString());
-                        break;
-                    case "System.Byte":
-                        data = Byte.Parse(data.ToString());
-                        break;
-                    case "System.Boolean":
-                        data = Boolean.Parse(data.ToString());
-                        break;
-                }
+                if (member.Type.GetGenericArguments() != null && member.Type.GetGenericArguments().Length > 0)
+                    data = member.Type.ToString().ConvertToNullable(data);
+                else
+                    data = member.Type.ToString().ConvertToNotNullable(data);
             }
             ConstantExpression valuetoCheck;
             if (searchType == SearchType.IsIn)
-            {
                 valuetoCheck = Expression.Constant(data, GetListType(member.Type));
-            }
             else
-            {
                 valuetoCheck = Expression.Constant(data, member.Type);
-            }
             Expression expression = getExpression<T>(searchType, member, valuetoCheck);
             Expression<Func<T, bool>> predicate = Expression.Lambda<Func<T, bool>>(expression, new ParameterExpression[] { parameterExp });
             return predicate;
@@ -370,6 +295,68 @@ namespace Data
             DateTime i;
             if (DateTime.TryParse(s, out i)) return i;
             return null;
+        }
+        private static object ConvertToNullable(this string type, object data)
+        {
+            switch (type)
+            {
+                case "System.Nullable`1[System.Decimal]":
+                    return data.ToString().ToNullableDecimal();
+                case "System.Nullable`1[System.Double]":
+                    return data.ToString().ToNullableDouble();
+                case "System.Nullable`1[System.Float]":
+                    return data.ToString().ToNullableFloat();
+                case "System.Nullable`1[System.DateTime]":
+                    return data.ToString().ToNullableDateTime();
+                case "System.Nullable`1[System.Int16]":
+                    return data.ToString().ToNullableInt16();
+                case "System.Nullable`1[System.Int32]":
+                    return data.ToString().ToNullableInt32();
+                case "System.Nullable`1[System.Int64]":
+                    return data.ToString().ToNullableInt64();
+                case "System.Nullable`1[System.UInt16]":
+                    return data.ToString().ToNullableUInt16();
+                case "System.Nullable`1[System.UInt32]":
+                    return data.ToString().ToNullableUInt32();
+                case "System.Nullable`1[System.UInt64]":
+                    return data.ToString().ToNullableUInt64();
+                case "System.Nullable`1[System.Boolean]":
+                    return data.ToString().ToNullableBoolean();
+                default:
+                    return null;
+            }
+        }
+        private static object ConvertToNotNullable(this string type, object data)
+        {
+            switch (type)
+            {
+                case "System.Decimal":
+                    return decimal.Parse(data.ToString());
+                case "System.Double":
+                    return double.Parse(data.ToString());
+                case "System.Float":
+                    return float.Parse(data.ToString());
+                case "System.DateTime":
+                    return DateTime.Parse(data.ToString());
+                case "System.Int16":
+                    return Int16.Parse(data.ToString());
+                case "System.Int32":
+                    return Int32.Parse(data.ToString());
+                case "System.Int64":
+                    return Int64.Parse(data.ToString());
+                case "System.UInt16":
+                    return UInt16.Parse(data.ToString());
+                case "System.UInt32":
+                    return UInt32.Parse(data.ToString());
+                case "System.UInt64":
+                    return UInt64.Parse(data.ToString());
+                case "System.Byte":
+                    return Byte.Parse(data.ToString());
+                case "System.Boolean":
+                    return Boolean.Parse(data.ToString());
+                default:
+                    return null;
+            }
         }
     }
 }

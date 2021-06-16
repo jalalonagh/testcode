@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>by jalal onagh . all enums to use in ecommerce services</Description>
+    <Copyright>2021 dejavu</Copyright>
   </PropertyGroup>
 
 </Project>
