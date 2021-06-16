@@ -15,18 +15,7 @@ namespace ManaAutoMapper
 
         private LazySingletonVM()
         {
-            if (assembly == null)
-                assembly = typeof(IHaveCustomMapping).Assembly;
-            var allTypes = assembly.ExportedTypes;
-            var listTemp = allTypes.Where(type => type.IsClass && !type.IsAbstract && type.GetInterfaces().Contains(typeof(IHaveCustomMapping)));
-            var list = listTemp.Select(type => (IHaveCustomMapping)Activator.CreateInstance(type));
-            profile = new CustomMappingProfile(list);
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(profile);
-            });
-            config.CompileMappings();
-            mapper = config.CreateMapper();
+            mapper = assembly.GenerateMapper(profile);
         }
 
         private static readonly Lazy<LazySingletonVM> lazy = new Lazy<LazySingletonVM>(() => new LazySingletonVM());
@@ -41,7 +30,6 @@ namespace ManaAutoMapper
         public static LazySingletonVM SetCustomAssembly(Assembly _assembly)
         {
             assembly = _assembly;
-
             return lazy.Value;
         }
 

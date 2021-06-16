@@ -15,18 +15,7 @@ namespace ManaAutoMapper
 
         private LazySingletonDTO()
         {
-            if (assembly == null)
-                assembly = typeof(IHaveCustomMapping).Assembly;
-            var allTypes = assembly.ExportedTypes;
-            var listTemp = allTypes.Where(type => type.IsClass && !type.IsAbstract && type.GetInterfaces().Contains(typeof(IHaveCustomMapping)));
-            var list = listTemp.Select(type => (IHaveCustomMapping)Activator.CreateInstance(type));
-            profile = new CustomMappingProfile(list);
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(profile);
-            });
-            config.CompileMappings();
-            mapper = config.CreateMapper();
+            mapper = assembly.GenerateMapper(profile);
         }
 
         private static readonly Lazy<LazySingletonDTO> lazy = new Lazy<LazySingletonDTO>(() => new LazySingletonDTO());
