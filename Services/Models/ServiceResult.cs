@@ -1,7 +1,7 @@
 ﻿using Common.Utilities;
 using ManaEnums.Api;
 
-namespace Services
+namespace Services.Models
 {
     public class ServiceResult
     {

@@ -7,13 +7,10 @@
   <ItemGroup>
     <Compile Remove="Base\Contracts\Base\**" />
     <Compile Remove="Base\Services\Base\**" />
-    <Compile Remove="Models\**" />
     <EmbeddedResource Remove="Base\Contracts\Base\**" />
     <EmbeddedResource Remove="Base\Services\Base\**" />
-    <EmbeddedResource Remove="Models\**" />
     <None Remove="Base\Contracts\Base\**" />
     <None Remove="Base\Services\Base\**" />
-    <None Remove="Models\**" />
   </ItemGroup>
 
   <ItemGroup>

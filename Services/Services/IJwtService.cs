@@ -1,5 +1,5 @@
-﻿using Entities;
-using Entities.User;
+﻿using Entities.User;
+using Services.Models;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;

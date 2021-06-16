@@ -31,7 +31,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="BusinessLevel1\" />
+    <Folder Include="BusinessLevel1\User\Command\" />
+    <Folder Include="BusinessLevel1\User\Query\" />
     <Folder Include="BusinessLevel2\" />
     <Folder Include="BusinessLevel3\" />
   </ItemGroup>

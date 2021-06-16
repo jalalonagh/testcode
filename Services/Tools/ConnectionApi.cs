@@ -1,13 +1,9 @@
 ﻿using Common.Utilities;
 using ManaSpeedTester;
 using Microsoft.AspNetCore.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Services.Models;
 
-namespace Services
+namespace Services.Tools
 {
     public class ConnectionApi
     {
@@ -20,19 +16,19 @@ namespace Services
             tester = TimeDurationTrackerSingleton.Instance;
         }
 
-        public void saveToken(AccessTokenDTO model)
+        public void saveToken(AccessToken model)
         {
             model.access_token = model.access_token.Replace("Bearer ", "");
             System.IO.File.WriteAllText(_env.ContentRootPath + "/Tokens/Token.txt", model.ToJson());
         }
 
-        public AccessTokenDTO openToken()
+        public AccessToken openToken()
         {
             if (System.IO.File.Exists(_env.ContentRootPath + "/Tokens/Token.txt"))
             {
                 var json = System.IO.File.ReadAllText(_env.ContentRootPath + "/Tokens/Token.txt");
 
-                return json.FromJson<AccessTokenDTO>();
+                return json.FromJson<AccessToken>();
             }
 
             return null;

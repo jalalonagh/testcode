@@ -1,11 +1,8 @@
 ﻿using Data.Repositories;
 using Data.Repositories.Models;
-using Entities;
 using Entities.Common;
-using System;
+using Services.Models;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Services.Base.Contracts

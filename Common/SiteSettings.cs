@@ -3,14 +3,11 @@
     public class SiteSettings
     {
         public CommitionSettings CommitionSettings { get; set; }
-        public HangFireSettings HangFireSettings { get; set; }
         public string ElmahPath { get; set; }
         public JwtSettings JwtSettings { get; set; }
         public IdentitySettings IdentitySettings { get; set; }
         public string PassKeyEncrypt { get; set; }
         public RabbitOptions RabbitMQSettings { get; set; }
-        public string PordoUrl { get; set; }
-        public string KookBazUrl { get; set; }
         public string UriSms { get; set; }
         public string UriToken { get; set; }
         public string UriUserInfo { get; set; }

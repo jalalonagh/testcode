@@ -1,7 +1,7 @@
 ﻿using Data.Repositories.Models;
-using Services;
+using Services.Models;
 
-namespace Services
+namespace Services.Tools
 {
     public static class RepositoryResultExtention
     {

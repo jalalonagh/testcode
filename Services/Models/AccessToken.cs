@@ -2,7 +2,7 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace Services
+namespace Services.Models
 {
     public class AccessToken
     {
