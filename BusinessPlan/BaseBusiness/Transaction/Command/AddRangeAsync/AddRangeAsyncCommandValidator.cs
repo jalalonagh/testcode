@@ -9,10 +9,7 @@ namespace BusinessLayout.BaseBusinessLevel.Transaction.Command.AddRangeAsync
         public AddRangeAsyncCommandValidator()
         {
             rms = ResourceManagerSingleton.GetInstance();
-
-            RuleFor(c => c.Model)
-                .NotNull()
-                .WithMessage(rms.FetchResource("modellistempty").GetMessage());
+            RuleFor(c => c.Model).NotNull().WithMessage(rms.FetchResource("modellistempty").GetMessage());
         }
     }
 }

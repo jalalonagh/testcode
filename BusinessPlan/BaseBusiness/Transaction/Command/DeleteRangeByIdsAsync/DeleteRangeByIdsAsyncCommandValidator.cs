@@ -9,10 +9,7 @@ namespace BusinessLayout.BaseBusinessLevel.Transaction.Command.DeleteRangeByIdsA
         public DeleteRangeByIdsAsyncCommandValidator()
         {
             rms = ResourceManagerSingleton.GetInstance();
-
-            RuleFor(c => c.EntityIds)
-                .NotNull()
-                .WithMessage(rms.FetchResource("idlistempty").GetMessage());
+            RuleFor(c => c.EntityIds).NotNull().WithMessage(rms.FetchResource("idlistempty").GetMessage());
         }
     }
 }

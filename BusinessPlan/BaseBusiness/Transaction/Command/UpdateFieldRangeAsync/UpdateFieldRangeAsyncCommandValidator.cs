@@ -9,14 +9,8 @@ namespace BusinessLayout.BaseBusinessLevel.Transaction.Command.UpdateFieldRangeA
         public UpdateFieldRangeAsyncCommandValidator()
         {
             rms = ResourceManagerSingleton.GetInstance();
-
-            RuleFor(c => c.Model)
-                .NotNull()
-                .WithMessage(rms.FetchResource("modelempty").GetMessage());
-
-            RuleFor(c => c.Fields)
-                .NotNull()
-                .WithMessage(rms.FetchResource("fieldsempty").GetMessage());
+            RuleFor(c => c.Model).NotNull().WithMessage(rms.FetchResource("modelempty").GetMessage());
+            RuleFor(c => c.Fields).NotNull().WithMessage(rms.FetchResource("fieldsempty").GetMessage());
         }
     }
 }
