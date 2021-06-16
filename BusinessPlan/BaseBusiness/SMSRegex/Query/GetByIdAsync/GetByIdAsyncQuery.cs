@@ -1,5 +1,6 @@
 ﻿using BusinessLayout.Configuration.Queries;
 using Services;
+using Services.Models;
 
 namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Query.GetByIdAsync
 {

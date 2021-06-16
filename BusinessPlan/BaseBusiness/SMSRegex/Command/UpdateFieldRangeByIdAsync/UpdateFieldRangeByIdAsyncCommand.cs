@@ -1,5 +1,6 @@
 ﻿using BusinessLayout.Configuration.Commands;
 using Services;
+using Services.Models;
 using System.Collections.Generic;
 
 namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Command.UpdateFieldRangeByIdAsync

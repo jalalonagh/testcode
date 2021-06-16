@@ -1,6 +1,7 @@
 ﻿using BusinessLayout.Configuration.Commands;
 using ManaDataTransferObject.SMSRegex;
 using Services;
+using Services.Models;
 
 namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Command.AddAsync
 {

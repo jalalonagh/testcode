@@ -2,6 +2,7 @@
 using Data.Repositories.Models;
 using Entities.SMSRegex;
 using Services;
+using Services.Models;
 using System.Collections.Generic;
 
 namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Query.FilterRangeAsync
