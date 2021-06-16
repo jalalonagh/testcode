@@ -1,5 +1,6 @@
 ﻿using BusinessLayout.Configuration.Commands;
 using Services;
+using Services.Models;
 
 namespace BusinessLayout.BaseBusinessLevel.Profile.Command.DeleteByIdAsync
 {

@@ -1,6 +1,7 @@
 ﻿using BusinessLayout.Configuration.Commands;
 using ManaDataTransferObject.Profile;
 using Services;
+using Services.Models;
 
 namespace BusinessLayout.BaseBusinessLevel.Profile.Command.AddAsync
 {

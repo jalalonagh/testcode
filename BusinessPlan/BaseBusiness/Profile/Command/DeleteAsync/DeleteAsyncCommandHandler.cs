@@ -3,6 +3,7 @@ using Entities.Profile;
 using Microsoft.Extensions.Logging;
 using Services;
 using Services.Base.Contracts;
+using Services.Models;
 using System.Threading;
 using System.Threading.Tasks;
 

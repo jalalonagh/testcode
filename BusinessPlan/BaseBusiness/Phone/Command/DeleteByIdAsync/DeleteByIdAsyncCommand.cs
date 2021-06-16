@@ -3,6 +3,7 @@ using Entities;
 using Entities.Common;
 using ManaAutoMapper.Models;
 using Services;
+using Services.Models;
 
 namespace BusinessLayout.BaseBusinessLevel.Phone.Command.DeleteByIdAsync
 {

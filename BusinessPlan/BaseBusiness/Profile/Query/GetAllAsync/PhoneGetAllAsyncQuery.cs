@@ -1,5 +1,6 @@
 ﻿using BusinessLayout.Configuration.Queries;
 using Services;
+using Services.Models;
 using System.Collections.Generic;
 
 namespace BusinessLayout.BaseBusinessLevel.Profile.Query.GetAllAsync
