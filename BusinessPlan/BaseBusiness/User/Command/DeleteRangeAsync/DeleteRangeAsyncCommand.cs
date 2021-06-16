@@ -1,6 +1,7 @@
 ﻿using BusinessLayout.Configuration.Commands;
 using ManaDataTransferObject.User;
 using Services;
+using Services.Models;
 using System.Collections.Generic;
 
 namespace BusinessLayout.BaseBusinessLevel.User.Command.DeleteRangeAsync

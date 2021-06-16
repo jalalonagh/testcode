@@ -2,6 +2,7 @@
 using Data.Repositories.Models;
 using Entities.User;
 using Services;
+using Services.Models;
 using System.Collections.Generic;
 
 namespace BusinessLayout.BaseBusinessLevel.User.Query.FilterRangeAsync

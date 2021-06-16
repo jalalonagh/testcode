@@ -1,6 +1,7 @@
 ﻿using BusinessLayout.Configuration.Commands;
 using ManaDataTransferObject.Transaction;
 using Services;
+using Services.Models;
 using System.Collections.Generic;
 
 namespace BusinessLayout.BaseBusinessLevel.Transaction.Command.AddRangeAsync
