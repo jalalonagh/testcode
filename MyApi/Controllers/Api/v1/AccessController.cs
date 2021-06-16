@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
-using MyApi.Models;
-using Services;
+using Services.Models;
+using Services.Tools;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,29 +23,17 @@ namespace MyApi.Controllers.Api.v1
 
     public class NavigationMenu
     {
-
         public string Id { get; set; }
-
         public string Name { get; set; }
-
         public string ParentMenuId { get; set; }
-
         public virtual NavigationMenu ParentNavigationMenu { get; set; }
-
         public string Area { get; set; }
-
         public string ControllerName { get; set; }
-
         public string ActionName { get; set; }
-
         public bool IsExternal { get; set; }
-
         public string ExternalUrl { get; set; }
-
         public int DisplayOrder { get; set; }
-
         public bool Permitted { get; set; }
-
         public bool Visible { get; set; }
         public string Domain { get; set; }
     }
@@ -53,23 +41,16 @@ namespace MyApi.Controllers.Api.v1
     public class MvcActionInfo
     {
         public string Id => $"{ControllerId}:{Name}";
-
         public string Name { get; set; }
-
         public string DisplayName { get; set; }
-
         public string ControllerId { get; set; }
     }
     public class MvcControllerInfo
     {
         public string Id => $"{AreaName}:{Name}";
-
         public string Name { get; set; }
-
         public string DisplayName { get; set; }
-
         public string AreaName { get; set; }
-
         public IEnumerable<MvcActionInfo> Actions { get; set; }
     }
 
@@ -96,46 +77,21 @@ namespace MyApi.Controllers.Api.v1
         }
 
         [Obsolete]
-        private async Task Autorization()
+        private async Task<ServiceResult<JWTAuthModel>> Token(TokenRequest tokenRequest, CancellationToken cancellationToken)
         {
-            var token = await Token(new TokenRequest
-            {
-                password = siteSettings.Password,
-                username = siteSettings.UserName,
-                grant_type = "password"
-            }, CancellationToken.None);
-
-            new ConnectionApi(_env).saveToken(new AccessTokenDTO
-            {
-                access_token = token.Data.jwt.access_token
-            });
-        }
-
-        [Obsolete]
-        private async Task<ServiceResult<TokenDTO>> Token(TokenRequest tokenRequest, CancellationToken cancellationToken)
-        {
-
             string url = siteSettings.UriUserInfo + "/TokenWithModel";
             var client = _clientFactory.CreateClient();
             var request = new HttpRequestMessage(HttpMethod.Post, url);
-
             var formVariables = new List<KeyValuePair<string, string>>();
             formVariables.Add(new KeyValuePair<string, string>("grant_type", "password"));
-            formVariables.Add(new KeyValuePair<string, string>("username", tokenRequest.username));
-            formVariables.Add(new KeyValuePair<string, string>("password", tokenRequest.password));
-
+            formVariables.Add(new KeyValuePair<string, string>("username", tokenRequest.Username));
+            formVariables.Add(new KeyValuePair<string, string>("password", tokenRequest.Password));
             FormUrlEncodedContent content = new FormUrlEncodedContent(formVariables);
             request.Content = content;
-
             var response = await client.SendAsync(request);
-
-            var api = Newtonsoft.Json.JsonConvert.DeserializeObject<ServiceResult<TokenDTO>>(await response.Content.ReadAsStringAsync());
-
+            var api = Newtonsoft.Json.JsonConvert.DeserializeObject<ServiceResult<JWTAuthModel>>(await response.Content.ReadAsStringAsync());
             if (api.IsSuccess)
-            {
                 new ConnectionApi(_env).saveToken(api.Data.jwt);
-            }
-
             return api;
         }
 
@@ -150,12 +106,10 @@ namespace MyApi.Controllers.Api.v1
                 .Select(descriptor => descriptor)
                 .GroupBy(descriptor => descriptor.ControllerTypeInfo.FullName)
                 .ToList();
-
             foreach (var actionDescriptors in items)
             {
                 if (!actionDescriptors.Any())
                     continue;
-
                 var actionDescriptor = actionDescriptors.First();
                 var controllerTypeInfo = actionDescriptor.ControllerTypeInfo;
                 var currentController = new MvcControllerInfo
@@ -164,7 +118,6 @@ namespace MyApi.Controllers.Api.v1
                     DisplayName = controllerTypeInfo.GetCustomAttribute<DisplayNameAttribute>()?.DisplayName,
                     Name = actionDescriptor.ControllerName,
                 };
-
                 var actions = new List<MvcActionInfo>();
                 foreach (var descriptor in actionDescriptors.GroupBy(a => a.ActionName).Select(g => g.First()))
                 {
@@ -177,16 +130,13 @@ namespace MyApi.Controllers.Api.v1
                             DisplayName = methodInfo.GetCustomAttribute<DisplayNameAttribute>()?.DisplayName,
                         });
                 }
-
                 if (actions.Any())
                 {
                     currentController.Actions = actions;
                     _mvcControllers.Add(currentController);
                 }
             }
-
             List<NavigationMenu> ls = new List<NavigationMenu>();
-
             foreach (var item in _mvcControllers)
             {
                 ls.AddRange(item.Actions.Select(x => new NavigationMenu
@@ -203,19 +153,13 @@ namespace MyApi.Controllers.Api.v1
                     }
                 }));
             }
-
             var lll = ls.ToList();
-
             lll.ForEach(x => x.Domain = HttpContext.Request.Host.Value);
-
-
             string url = siteSettings.UriTokenService;
             var client = _clientFactory.CreateClient();
             var request = new HttpRequestMessage(HttpMethod.Post, url + $"/Access/SetController");
-
             StringContent content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(lll), Encoding.UTF8, "application/json");
             request.Content = content;
-
             var response = await client.SendAsync(request);
         }
 
@@ -223,13 +167,10 @@ namespace MyApi.Controllers.Api.v1
         {
             if (actionMethodInfo.GetCustomAttribute<AllowAnonymousAttribute>(true) != null)
                 return false;
-
             if (controllerTypeInfo.GetCustomAttribute<AuthorizeAttribute>(true) != null)
                 return true;
-
             if (actionMethodInfo.GetCustomAttribute<AuthorizeAttribute>(true) != null)
                 return true;
-
             return false;
         }
 
@@ -240,18 +181,13 @@ namespace MyApi.Controllers.Api.v1
             string url = siteSettings.UriUserInfo;
             var client = _clientFactory.CreateClient();
             var request = new HttpRequestMessage(HttpMethod.Get, url);
-
-
             var JWToken = new ConnectionApi(_env).openToken()?.access_token;
             if (!string.IsNullOrEmpty(JWToken))
-            {
                 request.Headers.Add("Authorization", "Bearer " + JWToken.Replace("\"", ""));
-            }
-
             var response = await client.SendAsync(request);
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
-                await Autorization();
+                //await Autorization();
                 goto again;
             }
 
