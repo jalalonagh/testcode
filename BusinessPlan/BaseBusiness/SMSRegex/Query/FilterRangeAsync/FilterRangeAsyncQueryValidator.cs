@@ -9,10 +9,7 @@ namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Query.FilterRangeAsync
         public FilterRangeAsyncQueryValidator()
         {
             rms = ResourceManagerSingleton.GetInstance();
-
-            RuleFor(c => c.Model)
-                .NotNull()
-                .WithMessage(rms.FetchResource("filtermodelempty").GetMessage());
+            RuleFor(c => c.Model).NotNull().WithMessage(rms.FetchResource("filtermodelempty").GetMessage());
         }
     }
 }

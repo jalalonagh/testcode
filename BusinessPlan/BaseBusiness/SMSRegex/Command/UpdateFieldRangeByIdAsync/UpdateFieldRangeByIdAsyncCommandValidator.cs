@@ -9,15 +9,8 @@ namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Command.UpdateFieldRangeById
         public UpdateFieldRangeByIdAsyncCommandValidator()
         {
             rms = ResourceManagerSingleton.GetInstance();
-
-            RuleFor(c => c.EntityId)
-                .NotNull()
-                .GreaterThan(0)
-                .WithMessage(rms.FetchResource("noid").GetMessage());
-
-            RuleFor(c => c.Fields)
-                .NotNull()
-                .WithMessage(rms.FetchResource("fieldsempty").GetMessage());
+            RuleFor(c => c.EntityId).NotNull().GreaterThan(0).WithMessage(rms.FetchResource("noid").GetMessage());
+            RuleFor(c => c.Fields).NotNull().WithMessage(rms.FetchResource("fieldsempty").GetMessage());
         }
     }
 }

@@ -9,10 +9,7 @@ namespace BusinessLayout.BaseBusinessLevel.Profile.Command.DeleteRangeByIdsAsync
         public DeleteRangeByIdsAsyncCommandValidator()
         {
             rms = ResourceManagerSingleton.GetInstance();
-
-            RuleFor(c => c.EntityIds)
-                .NotNull()
-                .WithMessage(rms.FetchResource("idlistempty").GetMessage());
+            RuleFor(c => c.EntityIds).NotNull().WithMessage(rms.FetchResource("idlistempty").GetMessage());
         }
     }
 }

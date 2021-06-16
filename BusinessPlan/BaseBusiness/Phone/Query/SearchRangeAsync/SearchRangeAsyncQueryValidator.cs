@@ -9,10 +9,7 @@ namespace BusinessLayout.BaseBusinessLevel.Phone.Query.SearchRangeAsync
         public SearchRangeAsyncQueryValidator()
         {
             rms = ResourceManagerSingleton.GetInstance();
-
-            RuleFor(c => c.Model)
-                .NotNull()
-                .WithMessage(rms.FetchResource("searchmodelempty").GetMessage());
+            RuleFor(c => c.Model).NotNull().WithMessage(rms.FetchResource("searchmodelempty").GetMessage());
         }
     }
 }

@@ -9,11 +9,7 @@ namespace BusinessLayout.BaseBusinessLevel.SMSConfirmation.Query.GetByIdAsync
         public GetByIdAsyncQueryValidator()
         {
             rms = ResourceManagerSingleton.GetInstance();
-
-            RuleFor(c => c.EntityIds)
-                .NotNull()
-                .NotEmpty()
-                .WithMessage(rms.FetchResource("noids").GetMessage());
+            RuleFor(c => c.EntityIds).NotNull().NotEmpty().WithMessage(rms.FetchResource("noids").GetMessage());
         }
     }
 }

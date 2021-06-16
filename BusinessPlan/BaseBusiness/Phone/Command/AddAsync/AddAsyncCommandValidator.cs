@@ -10,11 +10,7 @@ namespace BusinessLayout.BaseBusinessLevel.Phone.Command.AddAsync
         public AddAsyncCommandValidator()
         {
             rms = ResourceManagerSingleton.GetInstance();
-
-            RuleFor(c => c.Model)
-                .NotNull()
-                .NotEqual(default(PhoneDTO))
-                .WithMessage(rms.FetchResource("modelempty").GetMessage());
+            RuleFor(c => c.Model).NotNull().NotEqual(default(PhoneDTO)).WithMessage(rms.FetchResource("modelempty").GetMessage());
         }
     }
 }

@@ -9,10 +9,7 @@ namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Command.UpdateRangeAsync
         public UpdateRangeAsyncCommandValidator()
         {
             rms = ResourceManagerSingleton.GetInstance();
-
-            RuleFor(c => c.Model)
-                .NotNull()
-                .WithMessage(rms.FetchResource("modellistempty").GetMessage());
+            RuleFor(c => c.Model).NotNull().WithMessage(rms.FetchResource("modellistempty").GetMessage());
         }
     }
 }

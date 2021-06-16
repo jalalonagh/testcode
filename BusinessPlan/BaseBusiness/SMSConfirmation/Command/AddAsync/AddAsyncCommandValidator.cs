@@ -9,10 +9,7 @@ namespace BusinessLayout.BaseBusinessLevel.SMSConfirmation.Command.AddAsync
         public AddAsyncCommandValidator()
         {
             rms = ResourceManagerSingleton.GetInstance();
-
-            RuleFor(c => c.Model)
-                .NotNull()
-                .WithMessage(rms.FetchResource("modelempty").GetMessage());
+            RuleFor(c => c.Model).NotNull().WithMessage(rms.FetchResource("modelempty").GetMessage());
         }
     }
 }

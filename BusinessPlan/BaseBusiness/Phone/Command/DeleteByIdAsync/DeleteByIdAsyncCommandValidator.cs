@@ -12,11 +12,7 @@ namespace BusinessLayout.BaseBusinessLevel.Phone.Command.DeleteByIdAsync
         public DeleteByIdAsyncCommandValidator()
         {
             rms = ResourceManagerSingleton.GetInstance();
-
-            RuleFor(c => c.EntityId)
-                .NotNull()
-                .GreaterThan(0)
-                .WithMessage(rms.FetchResource("noid").GetMessage());
+            RuleFor(c => c.EntityId).NotNull().GreaterThan(0).WithMessage(rms.FetchResource("noid").GetMessage());
         }
     }
 }
