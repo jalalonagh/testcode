@@ -15,6 +15,8 @@ namespace ManaEnums.Database
         [Display(Name = "الگو ها")]
         REGEX,
         [Display(Name = "کاربر")]
-        USER
+        USER,
+        [Display(Name = "تامین کننده")]
+        SUPPLIER
     }
 }
