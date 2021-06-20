@@ -43,6 +43,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SupplierSystem", "SupplierS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SupplierSystem.Entities", "SupplierSystem\SupplierBarecode.Entities\SupplierSystem.Entities.csproj", "{BECDFDD5-D4C8-40FA-8B67-0B03787670EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaraGostarEntities", "DinaproFaraGostar\FaraGostarEntities\FaraGostarEntities.csproj", "{705B94E8-146C-455C-860D-9D507EE7E0C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -121,6 +123,10 @@ Global
 		{BECDFDD5-D4C8-40FA-8B67-0B03787670EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BECDFDD5-D4C8-40FA-8B67-0B03787670EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BECDFDD5-D4C8-40FA-8B67-0B03787670EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{705B94E8-146C-455C-860D-9D507EE7E0C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{705B94E8-146C-455C-860D-9D507EE7E0C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{705B94E8-146C-455C-860D-9D507EE7E0C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{705B94E8-146C-455C-860D-9D507EE7E0C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -128,6 +134,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{46C91BBD-0EDF-4A8B-969B-EDD23633287E} = {E176D0BD-D35C-4FB7-B6B4-B2A59533E691}
 		{BECDFDD5-D4C8-40FA-8B67-0B03787670EF} = {0949B03B-645A-40C1-A1DD-55FD58D77ED9}
+		{705B94E8-146C-455C-860D-9D507EE7E0C5} = {E176D0BD-D35C-4FB7-B6B4-B2A59533E691}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7FE0111B-D1A5-40E9-AA5A-344E5B5ED548}
