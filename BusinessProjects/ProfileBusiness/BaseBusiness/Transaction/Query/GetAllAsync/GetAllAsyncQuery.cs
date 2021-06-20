@@ -1,5 +1,4 @@
-﻿using BusinessLayout.Configuration.Queries;
-using Services;
+﻿using BusinessBaseConfig.Configuration.Queries;
 using Services.Models;
 using System.Collections.Generic;
 
