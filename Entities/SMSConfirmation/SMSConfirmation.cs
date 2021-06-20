@@ -1,4 +1,4 @@
-﻿using Entities.Common;
+﻿using ManaBaseEntity.Common;
 
 namespace Entities.SMSConfirmation
 {

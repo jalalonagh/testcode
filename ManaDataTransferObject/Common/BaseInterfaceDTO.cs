@@ -1,5 +1,5 @@
-﻿using Entities.Common;
-using ManaAutoMapper.Models;
+﻿using ManaAutoMapper.Models;
+using ManaBaseEntity.Common;
 
 namespace ManaDataTransferObject.Common
 {

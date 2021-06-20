@@ -1,5 +1,4 @@
-﻿using Entities.Common;
-using System.Collections.Generic;
+﻿using ManaBaseEntity.Common;
 
 namespace Entities.Profile
 {

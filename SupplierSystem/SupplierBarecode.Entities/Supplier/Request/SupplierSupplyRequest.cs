@@ -1,4 +1,4 @@
-﻿using SupplierSystem.Entities.Common;
+﻿using ManaBaseEntity.Common;
 using SupplierSystem.Entities.Supplier.Store;
 using System;
 

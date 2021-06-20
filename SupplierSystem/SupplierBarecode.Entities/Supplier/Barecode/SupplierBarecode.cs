@@ -1,7 +1,4 @@
-﻿using ManaEnums.Database;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SupplierSystem.Entities.Common;
+﻿using ManaBaseEntity.Common;
 using SupplierSystem.Entities.Supplier.Store;
 
 namespace SupplierSystem.Entities.Supplier.Barecode

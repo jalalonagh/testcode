@@ -1,5 +1,6 @@
 ﻿using Common.Utilities;
-using Entities.Common;
+using Entities;
+using ManaBaseEntity.Common;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Reflection;
@@ -10,11 +11,11 @@ namespace Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions options) : base(options) {}
+        public ApplicationDbContext(DbContextOptions options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            var entitiesAssembly = typeof(IEntity).Assembly;
+            var entitiesAssembly = typeof(ISMSEntities).Assembly;
             modelBuilder.RegisterAllEntities<IEntity>(entitiesAssembly);
             modelBuilder.ApplyConfigurationsFromAssembly(entitiesAssembly);
             modelBuilder.RegisterEntityTypeConfiguration(entitiesAssembly);

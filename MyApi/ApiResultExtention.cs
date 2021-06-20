@@ -1,8 +1,6 @@
-﻿using Entities;
-using Entities.Common;
+﻿using ManaBaseEntity.Common;
 using ManaDataTransferObject.Common;
 using ManaViewModel.Common;
-using Services;
 using Services.Models;
 using System.Collections.Generic;
 using System.Linq;

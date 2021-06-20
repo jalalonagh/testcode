@@ -5,7 +5,7 @@ using BusinessBaseConfig;
 using Common;
 using Data;
 using Data.Repositories;
-using Entities.Common;
+using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,7 +46,7 @@ namespace WebFramework.Configuration
         {
             containerBuilder.RegisterGeneric(typeof(Repository<,>)).As(typeof(IRepository<,>)).InstancePerLifetimeScope();
             var commonAssembly = typeof(SiteSettings).Assembly;
-            var entitiesAssembly = typeof(IEntity).Assembly;
+            var entitiesAssembly = typeof(ISMSEntities).Assembly;
             var dataAssembly = typeof(ApplicationDbContext).Assembly;
             var servicesAssembly = typeof(IDataInitializer).Assembly;
             var BLAssembly = typeof(IBL).Assembly;

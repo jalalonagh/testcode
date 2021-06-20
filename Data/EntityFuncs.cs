@@ -1,7 +1,5 @@
-﻿using Entities;
-using Entities.Common;
+﻿using ManaBaseEntity.Common;
 using System;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 

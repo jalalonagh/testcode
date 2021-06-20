@@ -1,10 +1,9 @@
-﻿using Entities.Common;
-using ManaDataTransferObject.Common;
+﻿using ManaDataTransferObject.Common;
 using Newtonsoft.Json;
 
 namespace ManaDataTransferObject.User.DapperPermission
 {
-    public class DapperPermissionDTO: BaseJsonDTO<DapperPermissionDTO, Entities.User.DapperPermission.DapperPermission, int>
+    public class DapperPermissionDTO : BaseJsonDTO<DapperPermissionDTO, Entities.User.DapperPermission.DapperPermission, int>
     {
         [JsonProperty("NavigationMenusActionName")]
         public string MenusActionName { get; set; }

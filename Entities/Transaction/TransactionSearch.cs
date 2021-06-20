@@ -1,14 +1,8 @@
-﻿using Entities.Common;
-using ManaEnums.Entity.Financial.Transaction;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ManaBaseEntity.Common;
 
 namespace Entities.Transaction
 {
-    public class TransactionSearch: BaseSearchEntity
+    public class TransactionSearch : BaseSearchEntity
     {
         public int? phoneId { get; set; }
         public int? smsId { get; set; }

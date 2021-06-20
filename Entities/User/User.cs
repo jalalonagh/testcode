@@ -1,5 +1,4 @@
-﻿using Entities.Common;
-using ManaEnums.Entity.User;
+﻿using ManaBaseEntity.Common;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;

@@ -1,6 +1,6 @@
 ﻿using Common;
 using Data.Repositories.Models;
-using Entities.Common;
+using ManaBaseEntity.Common;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;

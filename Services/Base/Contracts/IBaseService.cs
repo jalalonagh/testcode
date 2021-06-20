@@ -1,6 +1,6 @@
 ﻿using Data.Repositories;
 using Data.Repositories.Models;
-using Entities.Common;
+using ManaBaseEntity.Common;
 using Services.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;

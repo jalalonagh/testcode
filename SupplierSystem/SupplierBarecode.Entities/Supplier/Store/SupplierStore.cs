@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SupplierSystem.Entities.Common;
+﻿using ManaBaseEntity.Common;
 using SupplierSystem.Entities.Supplier.Barecode;
 using SupplierSystem.Entities.Supplier.Store.Activities;
 using System.Collections.Generic;

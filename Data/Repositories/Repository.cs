@@ -1,7 +1,7 @@
 ﻿
 using Common.Utilities;
 using Data.Repositories.Models;
-using Entities.Common;
+using ManaBaseEntity.Common;
 using ManaResourceManager;
 using ManaSpeedTester;
 using ManaSpeedTester.Models;

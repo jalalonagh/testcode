@@ -1,4 +1,4 @@
-﻿using Entities.Common;
+﻿using ManaBaseEntity.Common;
 using System.Collections.Generic;
 
 namespace Entities.SMS

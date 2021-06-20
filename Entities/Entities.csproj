@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <PackageReference Include="Common" Version="1.0.0" />
+    <PackageReference Include="ManaBaseEntity" Version="1.0.0" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="5.0.1" />
   </ItemGroup>
 

@@ -1,8 +1,8 @@
 ﻿using Common;
 using Data;
 using Data.Repositories;
-using Entities.Common;
 using Entities.User;
+using ManaBaseEntity.Common;
 using ManaEnums.Api;
 using ManaResourceManager;
 using ManaSpeedTester;

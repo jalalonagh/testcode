@@ -1,7 +1,4 @@
-﻿using Entities;
-using Entities.Common;
-using FluentValidation;
-using ManaAutoMapper.Models;
+﻿using FluentValidation;
 using ManaResourceManager;
 
 namespace ProfileBusiness.BaseBusinessLevel.Profile.Command.AddAsync

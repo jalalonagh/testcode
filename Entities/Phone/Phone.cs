@@ -1,5 +1,4 @@
-﻿using Entities.Common;
-using ManaEnums.Entity.Phone;
+﻿using ManaBaseEntity.Common;
 using System.Collections.Generic;
 
 namespace Entities.Phone
