@@ -43,7 +43,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SupplierSystem", "SupplierS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SupplierSystem.Entities", "SupplierSystem\SupplierBarecode.Entities\SupplierSystem.Entities.csproj", "{BECDFDD5-D4C8-40FA-8B67-0B03787670EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaraGostarEntities", "DinaproFaraGostar\FaraGostarEntities\FaraGostarEntities.csproj", "{705B94E8-146C-455C-860D-9D507EE7E0C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FaraGostarEntities", "DinaproFaraGostar\FaraGostarEntities\FaraGostarEntities.csproj", "{705B94E8-146C-455C-860D-9D507EE7E0C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManaUserManager", "ManaUserManager\ManaUserManager.csproj", "{B58DE6B3-8BA1-4C5F-8E31-17C14C966F97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -127,6 +129,10 @@ Global
 		{705B94E8-146C-455C-860D-9D507EE7E0C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{705B94E8-146C-455C-860D-9D507EE7E0C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{705B94E8-146C-455C-860D-9D507EE7E0C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B58DE6B3-8BA1-4C5F-8E31-17C14C966F97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B58DE6B3-8BA1-4C5F-8E31-17C14C966F97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B58DE6B3-8BA1-4C5F-8E31-17C14C966F97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B58DE6B3-8BA1-4C5F-8E31-17C14C966F97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
