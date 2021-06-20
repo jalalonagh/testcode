@@ -35,7 +35,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BusinessPlan\BusinessLayout.csproj" />
+    <ProjectReference Include="..\BusinessProjects\PhoneBusiness\PhoneBusiness.csproj" />
+    <ProjectReference Include="..\BusinessProjects\ProfileBusiness\ProfileBusiness.csproj" />
+    <ProjectReference Include="..\BusinessProjects\SMSBusiness\SMSBusiness.csproj" />
+    <ProjectReference Include="..\BusinessProjects\SMSConfirmationBusiness\SMSConfirmationBusiness.csproj" />
+    <ProjectReference Include="..\BusinessProjects\SMSRegexBusiness\SMSRegexBusiness.csproj" />
+    <ProjectReference Include="..\BusinessProjects\TransactionBusiness\TransactionBusiness.csproj" />
+    <ProjectReference Include="..\BusinessProjects\UserBusiness\UserBusiness.csproj" />
   </ItemGroup>
 
 </Project>
