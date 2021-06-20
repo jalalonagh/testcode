@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <PackageReference Include="CSharpFunctionalExtensions" Version="2.14.1" />
+    <PackageReference Include="ManaDapper" Version="1.0.0" />
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
   </ItemGroup>
@@ -32,7 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ManaDapper\ManaDapper.csproj" />
     <ProjectReference Include="..\ManaViewModel\ManaViewModel.csproj" />
     <ProjectReference Include="..\BusinessBaseConfig\BusinessBaseConfig.csproj" />
   </ItemGroup>

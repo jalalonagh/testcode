@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>basic configuration for mediatR business action for commands and queries</Description>
+    <Authors>Jalal Onagh</Authors>
+    <Company>Managostar Ara</Company>
   </PropertyGroup>
 
   <ItemGroup>

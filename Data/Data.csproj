@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ManaSpeedTester" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.6">
@@ -15,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ManaEntitiesValidation\ManaEntitiesValidation.csproj" />
-    <ProjectReference Include="..\ManaSpeedTester\ManaSpeedTester.csproj" />
   </ItemGroup>
 
 </Project>

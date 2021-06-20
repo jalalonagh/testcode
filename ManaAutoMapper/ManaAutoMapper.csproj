@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Jalal Onagh</Authors>
+    <Company>Managostar Ara</Company>
+    <Description>generic auto mapper component for using to map data from entity to dto or entity to vm</Description>
   </PropertyGroup>
 
   <ItemGroup>

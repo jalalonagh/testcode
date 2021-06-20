@@ -5,6 +5,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>by jalal onagh . all enums to use in ecommerce services</Description>
     <Copyright>2021 dejavu</Copyright>
+    <Authors>Jalal Onagh</Authors>
+    <Company>Managostar Ara</Company>
   </PropertyGroup>
 
 </Project>
