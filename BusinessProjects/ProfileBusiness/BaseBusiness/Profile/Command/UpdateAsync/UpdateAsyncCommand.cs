@@ -1,9 +1,9 @@
-﻿using BusinessLayout.Configuration.Commands;
+﻿using BusinessBaseConfig.Configuration.Commands;
 using ManaDataTransferObject.Profile;
 using Services;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.Profile.Command.UpdateAsync
+namespace ProfileBusiness.BaseBusinessLevel.Profile.Command.UpdateAsync
 {
     public class UpdateAsyncCommand : CommandBase<ServiceResult<Entities.Profile.Profile>>
     {

@@ -3,7 +3,7 @@ using ManaDataTransferObject.SMSConfirmation;
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSConfirmation.Command.AddRangeAsync
+namespace SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Command.AddRangeAsync
 {
     public class AddRangeAsyncCommand : CommandBase<ServiceResult<IEnumerable<Entities.SMSConfirmation.SMSConfirmation>>>
     {

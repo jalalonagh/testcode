@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.Phone.Query.GetAllAsync
+namespace PhoneBusiness.BaseBusinessLevel.Phone.Query.GetAllAsync
 {
     public class PhoneGetAllAsyncQueryHandler : IQueryHandler<PhoneGetAllAsyncQuery, ServiceResult<IEnumerable<Entities.Phone.Phone>>>
     {

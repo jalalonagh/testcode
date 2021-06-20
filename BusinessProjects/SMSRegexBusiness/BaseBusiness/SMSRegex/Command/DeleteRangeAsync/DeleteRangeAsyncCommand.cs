@@ -3,7 +3,7 @@ using ManaDataTransferObject.SMSRegex;
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Command.DeleteRangeAsync
+namespace SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Command.DeleteRangeAsync
 {
     public class DeleteRangeAsyncCommand : CommandBase<ServiceResult<IEnumerable<Entities.SMSRegex.SMSRegex>>>
     {

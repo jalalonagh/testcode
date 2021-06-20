@@ -3,7 +3,7 @@ using ManaDataTransferObject.SMSRegex;
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Command.AddRangeAsync
+namespace SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Command.AddRangeAsync
 {
     public class AddRangeAsyncCommand : CommandBase<ServiceResult<IEnumerable<Entities.SMSRegex.SMSRegex>>>
     {

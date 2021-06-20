@@ -1,7 +1,7 @@
-﻿using BusinessLayout.BaseBusinessLevel.SMSRegex.Query.FilterRangeAsync;
-using BusinessLayout.BaseBusinessLevel.SMSRegex.Query.GetAllAsync;
-using BusinessLayout.BaseBusinessLevel.SMSRegex.Query.GetByIdAsync;
-using BusinessLayout.BaseBusinessLevel.SMSRegex.Query.SearchRangeAsync;
+﻿using SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.FilterRangeAsync;
+using SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.GetAllAsync;
+using SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.GetByIdAsync;
+using SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.SearchRangeAsync;
 using Data.Repositories.Models;
 using Entities.SMSRegex;
 using ManaDataTransferObject.SMSRegex;

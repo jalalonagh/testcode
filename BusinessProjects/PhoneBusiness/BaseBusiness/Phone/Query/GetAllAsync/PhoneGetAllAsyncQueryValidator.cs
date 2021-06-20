@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using ManaResourceManager;
 
-namespace BusinessLayout.BaseBusinessLevel.Phone.Query.GetAllAsync
+namespace PhoneBusiness.BaseBusinessLevel.Phone.Query.GetAllAsync
 {
     public class PhoneGetAllAsyncQueryValidator : AbstractValidator<PhoneGetAllAsyncQuery>
     {

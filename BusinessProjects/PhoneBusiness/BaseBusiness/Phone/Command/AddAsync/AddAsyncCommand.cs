@@ -2,7 +2,7 @@
 using ManaDataTransferObject.Phone;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.Phone.Command.AddAsync
+namespace PhoneBusiness.BaseBusinessLevel.Phone.Command.AddAsync
 {
     public class AddAsyncCommand : CommandBase<ServiceResult<Entities.Phone.Phone>>
     {

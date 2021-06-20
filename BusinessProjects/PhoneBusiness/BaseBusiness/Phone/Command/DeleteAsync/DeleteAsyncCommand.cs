@@ -2,7 +2,7 @@
 using ManaDataTransferObject.Phone;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.Phone.Command.DeleteAsync
+namespace PhoneBusiness.BaseBusinessLevel.Phone.Command.DeleteAsync
 {
     public class DeleteAsyncCommand : CommandBase<ServiceResult<Entities.Phone.Phone>>
     {

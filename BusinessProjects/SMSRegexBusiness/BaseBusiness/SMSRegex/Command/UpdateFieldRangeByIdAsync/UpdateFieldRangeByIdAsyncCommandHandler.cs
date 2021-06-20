@@ -6,7 +6,7 @@ using Services.Models;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Command.UpdateFieldRangeByIdAsync
+namespace SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Command.UpdateFieldRangeByIdAsync
 {
     public class UpdateFieldRangeByIdAsyncCommandHandler : ICommandHandler<UpdateFieldRangeByIdAsyncCommand, ServiceResult<Entities.SMSRegex.SMSRegex>>
     {

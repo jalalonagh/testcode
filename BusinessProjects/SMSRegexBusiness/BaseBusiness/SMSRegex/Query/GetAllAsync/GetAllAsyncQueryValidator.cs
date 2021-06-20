@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using ManaResourceManager;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Query.GetAllAsync
+namespace SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.GetAllAsync
 {
     public class GetAllAsyncQueryValidator : AbstractValidator<GetAllAsyncQuery>
     {

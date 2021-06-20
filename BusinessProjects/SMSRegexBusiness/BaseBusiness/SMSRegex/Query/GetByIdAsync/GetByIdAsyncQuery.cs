@@ -1,7 +1,7 @@
 ﻿using BusinessBaseConfig.Configuration.Queries;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Query.GetByIdAsync
+namespace SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.GetByIdAsync
 {
     public class GetByIdAsyncQuery : IQuery<ServiceResult<Entities.SMSRegex.SMSRegex>>
     {

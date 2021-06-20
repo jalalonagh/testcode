@@ -4,7 +4,7 @@ using Entities.Profile;
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.Profile.Query.FilterRangeAsync
+namespace ProfileBusiness.BaseBusinessLevel.Profile.Query.FilterRangeAsync
 {
     public class FilterRangeAsyncQuery : IQuery<ServiceResult<IEnumerable<Entities.Profile.Profile>>>
     {

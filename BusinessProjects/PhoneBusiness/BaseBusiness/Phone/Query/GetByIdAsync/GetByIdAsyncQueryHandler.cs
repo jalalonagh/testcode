@@ -6,7 +6,7 @@ using Services.Models;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.Phone.Query.GetByIdAsync
+namespace PhoneBusiness.BaseBusinessLevel.Phone.Query.GetByIdAsync
 {
     public class GetByIdAsyncQueryHandler : IQueryHandler<GetByIdAsyncQuery, ServiceResult<Entities.Phone.Phone>>
     {

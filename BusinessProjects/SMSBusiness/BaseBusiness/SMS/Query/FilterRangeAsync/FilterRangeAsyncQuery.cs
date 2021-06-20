@@ -4,7 +4,7 @@ using Entities.SMS;
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.SMS.Query.FilterRangeAsync
+namespace SMSBusiness.BaseBusinessLevel.SMS.Query.FilterRangeAsync
 {
     public class FilterRangeAsyncQuery : IQuery<ServiceResult<IEnumerable<Entities.SMS.SMS>>>
     {

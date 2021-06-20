@@ -1,9 +1,9 @@
-﻿using BusinessLayout.Configuration.Commands;
+﻿using BusinessBaseConfig.Configuration.Commands;
 using Services;
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.Profile.Command.DeleteRangeByIdsAsync
+namespace ProfileBusiness.BaseBusinessLevel.Profile.Command.DeleteRangeByIdsAsync
 {
     public class DeleteRangeByIdsAsyncCommand : CommandBase<ServiceResult<IEnumerable<Entities.Profile.Profile>>>
     {

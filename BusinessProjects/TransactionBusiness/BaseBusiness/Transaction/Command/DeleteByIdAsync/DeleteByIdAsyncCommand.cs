@@ -1,7 +1,7 @@
 ﻿using BusinessBaseConfig.Configuration.Commands;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.Transaction.Command.DeleteByIdAsync
+namespace TransactionBusiness.BaseBusinessLevel.Transaction.Command.DeleteByIdAsync
 {
     public class DeleteByIdAsyncCommand : CommandBase<ServiceResult<Entities.Transaction.Transaction>>
     {

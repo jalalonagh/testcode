@@ -2,7 +2,7 @@
 using ManaDataTransferObject.Phone;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.Phone.Command.UpdateAsync
+namespace PhoneBusiness.BaseBusinessLevel.Phone.Command.UpdateAsync
 {
     public class UpdateAsyncCommand : CommandBase<ServiceResult<Entities.Phone.Phone>>
     {

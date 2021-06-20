@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using ManaResourceManager;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Command.DeleteRangeAsync
+namespace SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Command.DeleteRangeAsync
 {
     public class DeleteRangeAsyncCommandValidator : AbstractValidator<DeleteRangeAsyncCommand>
     {

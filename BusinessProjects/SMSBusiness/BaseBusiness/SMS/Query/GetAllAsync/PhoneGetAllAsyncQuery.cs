@@ -2,7 +2,7 @@
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.SMS.Query.GetAllAsync
+namespace SMSBusiness.BaseBusinessLevel.SMS.Query.GetAllAsync
 {
     public class SMSGetAllAsyncQuery : IQuery<ServiceResult<IEnumerable<Entities.SMS.SMS>>>
     {

@@ -3,7 +3,7 @@ using ManaDataTransferObject.SMSConfirmation;
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSConfirmation.Command.DeleteRangeAsync
+namespace SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Command.DeleteRangeAsync
 {
     public class DeleteRangeAsyncCommand : CommandBase<ServiceResult<IEnumerable<Entities.SMSConfirmation.SMSConfirmation>>>
     {

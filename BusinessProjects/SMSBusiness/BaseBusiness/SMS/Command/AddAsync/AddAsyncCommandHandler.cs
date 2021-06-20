@@ -6,7 +6,7 @@ using Services.Models;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.SMS.Command.AddAsync
+namespace SMSBusiness.BaseBusinessLevel.SMS.Command.AddAsync
 {
     public class AddAsyncCommandHandler : ICommandHandler<AddAsyncCommand, ServiceResult<Entities.SMS.SMS>>
     {

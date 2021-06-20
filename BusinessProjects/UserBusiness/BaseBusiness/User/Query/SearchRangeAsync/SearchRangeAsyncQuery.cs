@@ -3,7 +3,7 @@ using Data.Repositories.Models;
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.User.Query.SearchRangeAsync
+namespace UserBusiness.BaseBusinessLevel.User.Query.SearchRangeAsync
 {
     public class SearchRangeAsyncQuery : IQuery<ServiceResult<IEnumerable<Entities.User.User>>>
     {

@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using ManaResourceManager;
 
-namespace BusinessLayout.BaseBusinessLevel.SMS.Command.DeleteRangeAsync
+namespace SMSBusiness.BaseBusinessLevel.SMS.Command.DeleteRangeAsync
 {
     public class DeleteRangeAsyncCommandValidator : AbstractValidator<DeleteRangeAsyncCommand>
     {

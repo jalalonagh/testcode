@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.SMS.Command.DeleteRangeByIdsAsync
+namespace SMSBusiness.BaseBusinessLevel.SMS.Command.DeleteRangeByIdsAsync
 {
     public class DeleteRangeByIdsAsyncCommandHandler : ICommandHandler<DeleteRangeByIdsAsyncCommand, ServiceResult<IEnumerable<Entities.SMS.SMS>>>
     {

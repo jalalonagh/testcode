@@ -6,7 +6,7 @@ using Services.Models;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Command.DeleteByIdAsync
+namespace SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Command.DeleteByIdAsync
 {
     public class DeleteByIdAsyncCommandHandler : ICommandHandler<DeleteByIdAsyncCommand, ServiceResult<Entities.SMSRegex.SMSRegex>>
     {

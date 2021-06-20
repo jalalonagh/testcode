@@ -6,7 +6,7 @@ using Services.Models;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.Profile.Command.UpdateFieldRangeAsync
+namespace ProfileBusiness.BaseBusinessLevel.Profile.Command.UpdateFieldRangeAsync
 {
     public class UpdateFieldRangeAsyncCommandHandler : ICommandHandler<UpdateFieldRangeAsyncCommand, ServiceResult<Entities.Profile.Profile>>
     {

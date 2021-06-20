@@ -2,7 +2,7 @@
 using ManaDataTransferObject.SMSConfirmation;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSConfirmation.Command.DeleteAsync
+namespace SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Command.DeleteAsync
 {
     public class DeleteAsyncCommand : CommandBase<ServiceResult<Entities.SMSConfirmation.SMSConfirmation>>
     {

@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using ManaResourceManager;
 
-namespace BusinessLayout.BaseBusinessLevel.SMS.Query.GetByIdAsync
+namespace SMSBusiness.BaseBusinessLevel.SMS.Query.GetByIdAsync
 {
     public class GetByIdAsyncQueryValidator : AbstractValidator<GetByIdAsyncQuery>
     {

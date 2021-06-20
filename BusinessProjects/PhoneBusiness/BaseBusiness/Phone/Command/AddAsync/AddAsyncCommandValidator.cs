@@ -2,7 +2,7 @@
 using ManaDataTransferObject.Phone;
 using ManaResourceManager;
 
-namespace BusinessLayout.BaseBusinessLevel.Phone.Command.AddAsync
+namespace PhoneBusiness.BaseBusinessLevel.Phone.Command.AddAsync
 {
     public class AddAsyncCommandValidator : AbstractValidator<AddAsyncCommand>
     {

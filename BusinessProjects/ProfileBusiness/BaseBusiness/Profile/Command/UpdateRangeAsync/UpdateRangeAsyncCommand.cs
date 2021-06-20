@@ -1,10 +1,10 @@
-﻿using BusinessLayout.Configuration.Commands;
+﻿using BusinessBaseConfig.Configuration.Commands;
 using ManaDataTransferObject.Profile;
 using Services;
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.Profile.Command.UpdateRangeAsync
+namespace ProfileBusiness.BaseBusinessLevel.Profile.Command.UpdateRangeAsync
 {
     public class UpdateRangeAsyncCommand : CommandBase<ServiceResult<IEnumerable<Entities.Profile.Profile>>>
     {

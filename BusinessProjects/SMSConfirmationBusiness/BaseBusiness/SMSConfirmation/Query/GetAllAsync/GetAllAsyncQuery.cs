@@ -2,7 +2,7 @@
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSConfirmation.Query.GetAllAsync
+namespace SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.GetAllAsync
 {
     public class GetAllAsyncQuery : IQuery<ServiceResult<IEnumerable<Entities.SMSConfirmation.SMSConfirmation>>>
     {

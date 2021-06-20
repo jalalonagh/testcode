@@ -3,7 +3,7 @@ using ManaDataTransferObject.Phone;
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.Phone.Command.DeleteRangeAsync
+namespace PhoneBusiness.BaseBusinessLevel.Phone.Command.DeleteRangeAsync
 {
     public class DeleteRangeAsyncCommand : CommandBase<ServiceResult<IEnumerable<Entities.Phone.Phone>>>
     {

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Command.DeleteRangeAsync
+namespace SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Command.DeleteRangeAsync
 {
     public class DeleteRangeAsyncCommandHandler : ICommandHandler<DeleteRangeAsyncCommand, ServiceResult<IEnumerable<Entities.SMSRegex.SMSRegex>>>
     {

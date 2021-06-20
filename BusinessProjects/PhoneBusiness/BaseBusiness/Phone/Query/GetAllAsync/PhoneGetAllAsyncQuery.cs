@@ -2,7 +2,7 @@
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.Phone.Query.GetAllAsync
+namespace PhoneBusiness.BaseBusinessLevel.Phone.Query.GetAllAsync
 {
     public class PhoneGetAllAsyncQuery : IQuery<ServiceResult<IEnumerable<Entities.Phone.Phone>>>
     {

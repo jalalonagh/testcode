@@ -2,7 +2,7 @@
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.User.Command.UpdateFieldRangeByIdAsync
+namespace UserBusiness.BaseBusinessLevel.User.Command.UpdateFieldRangeByIdAsync
 {
     public class UpdateFieldRangeByIdAsyncCommand : CommandBase<ServiceResult<Entities.User.User>>
     {

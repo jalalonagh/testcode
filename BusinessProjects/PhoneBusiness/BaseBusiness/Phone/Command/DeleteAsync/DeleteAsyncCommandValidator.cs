@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using ManaResourceManager;
 
-namespace BusinessLayout.BaseBusinessLevel.Phone.Command.DeleteAsync
+namespace PhoneBusiness.BaseBusinessLevel.Phone.Command.DeleteAsync
 {
     public class DeleteAsyncCommandValidator : AbstractValidator<DeleteAsyncCommand>
     {

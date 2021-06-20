@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using ManaResourceManager;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Query.FilterRangeAsync
+namespace SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.FilterRangeAsync
 {
     public class FilterRangeAsyncQueryValidator : AbstractValidator<FilterRangeAsyncQuery>
     {

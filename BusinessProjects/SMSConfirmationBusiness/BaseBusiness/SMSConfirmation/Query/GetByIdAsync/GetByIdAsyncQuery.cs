@@ -1,7 +1,7 @@
 ﻿using BusinessBaseConfig.Configuration.Queries;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSConfirmation.Query.GetByIdAsync
+namespace SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.GetByIdAsync
 {
     public class GetByIdAsyncQuery : IQuery<ServiceResult<Entities.SMSConfirmation.SMSConfirmation>>
     {

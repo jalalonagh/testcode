@@ -4,7 +4,7 @@ using Entities.Phone;
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.Phone.Query.FilterRangeAsync
+namespace PhoneBusiness.BaseBusinessLevel.Phone.Query.FilterRangeAsync
 {
     public class FilterRangeAsyncQuery : IQuery<ServiceResult<IEnumerable<Entities.Phone.Phone>>>
     {

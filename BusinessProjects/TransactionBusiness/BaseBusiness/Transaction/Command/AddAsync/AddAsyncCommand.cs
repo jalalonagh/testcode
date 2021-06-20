@@ -2,7 +2,7 @@
 using ManaDataTransferObject.Transaction;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.Transaction.Command.AddAsync
+namespace TransactionBusiness.BaseBusinessLevel.Transaction.Command.AddAsync
 {
     public class AddAsyncCommand : CommandBase<ServiceResult<Entities.Transaction.Transaction>>
     {

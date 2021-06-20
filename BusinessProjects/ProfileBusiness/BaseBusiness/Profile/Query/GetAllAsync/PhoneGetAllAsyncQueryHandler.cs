@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.Profile.Query.GetAllAsync
+namespace ProfileBusiness.BaseBusinessLevel.Profile.Query.GetAllAsync
 {
     public class ProfileGetAllAsyncQueryHandler : IQueryHandler<ProfileGetAllAsyncQuery, ServiceResult<IEnumerable<Entities.Profile.Profile>>>
     {

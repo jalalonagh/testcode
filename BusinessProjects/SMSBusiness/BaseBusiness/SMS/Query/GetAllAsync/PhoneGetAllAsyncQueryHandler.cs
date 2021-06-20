@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.SMS.Query.GetAllAsync
+namespace SMSBusiness.BaseBusinessLevel.SMS.Query.GetAllAsync
 {
     public class SMSGetAllAsyncQueryHandler : IQueryHandler<SMSGetAllAsyncQuery, ServiceResult<IEnumerable<Entities.SMS.SMS>>>
     {

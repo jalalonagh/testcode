@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using ManaResourceManager;
 
-namespace BusinessLayout.BaseBusinessLevel.SMS.Command.UpdateFieldRangeAsync
+namespace SMSBusiness.BaseBusinessLevel.SMS.Command.UpdateFieldRangeAsync
 {
     public class UpdateFieldRangeAsyncCommandValidator : AbstractValidator<UpdateFieldRangeAsyncCommand>
     {

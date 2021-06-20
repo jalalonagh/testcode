@@ -6,7 +6,7 @@ using Services.Models;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Command.UpdateAsync
+namespace SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Command.UpdateAsync
 {
     public class UpdateAsyncCommandHandler : ICommandHandler<UpdateAsyncCommand, ServiceResult<Entities.SMSRegex.SMSRegex>>
     {

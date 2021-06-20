@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.User.Query.FilterRangeAsync
+namespace UserBusiness.BaseBusinessLevel.User.Query.FilterRangeAsync
 {
     public class FilterRangeAsyncQueryHandler : IQueryHandler<FilterRangeAsyncQuery, ServiceResult<IEnumerable<Entities.User.User>>>
     {

@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using ManaResourceManager;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSConfirmation.Command.UpdateAsync
+namespace SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Command.UpdateAsync
 {
     public class UpdateAsyncCommandValidator : AbstractValidator<UpdateAsyncCommand>
     {

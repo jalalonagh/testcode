@@ -6,7 +6,7 @@ using Services.Models;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.Profile.Command.UpdateAsync
+namespace ProfileBusiness.BaseBusinessLevel.Profile.Command.UpdateAsync
 {
     public class UpdateAsyncCommandHandler : ICommandHandler<UpdateAsyncCommand, ServiceResult<Entities.Profile.Profile>>
     {

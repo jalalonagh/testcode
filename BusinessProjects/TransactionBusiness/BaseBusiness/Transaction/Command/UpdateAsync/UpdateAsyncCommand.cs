@@ -2,7 +2,7 @@
 using ManaDataTransferObject.Transaction;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.Transaction.Command.UpdateAsync
+namespace TransactionBusiness.BaseBusinessLevel.Transaction.Command.UpdateAsync
 {
     public class UpdateAsyncCommand : CommandBase<ServiceResult<Entities.Transaction.Transaction>>
     {

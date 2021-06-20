@@ -2,7 +2,7 @@
 using ManaDataTransferObject.SMSConfirmation;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSConfirmation.Command.AddAsync
+namespace SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Command.AddAsync
 {
     public class AddAsyncCommand : CommandBase<ServiceResult<Entities.SMSConfirmation.SMSConfirmation>>
     {

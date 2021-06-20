@@ -4,7 +4,7 @@ using Entities.User;
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.User.Query.FilterRangeAsync
+namespace UserBusiness.BaseBusinessLevel.User.Query.FilterRangeAsync
 {
     public class FilterRangeAsyncQuery : IQuery<ServiceResult<IEnumerable<Entities.User.User>>>
     {

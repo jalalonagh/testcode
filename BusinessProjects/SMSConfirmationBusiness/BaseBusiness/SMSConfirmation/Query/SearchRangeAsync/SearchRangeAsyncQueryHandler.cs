@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSConfirmation.Query.SearchRangeAsync
+namespace SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.SearchRangeAsync
 {
     public class SearchRangeAsyncQueryHandler : IQueryHandler<SearchRangeAsyncQuery, ServiceResult<IEnumerable<Entities.SMSConfirmation.SMSConfirmation>>>
     {

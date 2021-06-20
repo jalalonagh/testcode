@@ -1,9 +1,9 @@
-﻿using BusinessLayout.Configuration.Commands;
+﻿using BusinessBaseConfig.Configuration.Commands;
 using Services;
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.Profile.Command.UpdateFieldRangeByIdAsync
+namespace ProfileBusiness.BaseBusinessLevel.Profile.Command.UpdateFieldRangeByIdAsync
 {
     public class UpdateFieldRangeByIdAsyncCommand : CommandBase<ServiceResult<Entities.Profile.Profile>>
     {

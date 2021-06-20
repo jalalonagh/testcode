@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Query.GetAllAsync
+namespace SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.GetAllAsync
 {
     public class GetAllAsyncQueryHandler : IQueryHandler<GetAllAsyncQuery, ServiceResult<IEnumerable<Entities.SMSRegex.SMSRegex>>>
     {

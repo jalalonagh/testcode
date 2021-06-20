@@ -2,7 +2,7 @@
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.Phone.Command.DeleteRangeByIdsAsync
+namespace PhoneBusiness.BaseBusinessLevel.Phone.Command.DeleteRangeByIdsAsync
 {
     public class DeleteRangeByIdsAsyncCommand : CommandBase<ServiceResult<IEnumerable<Entities.Phone.Phone>>>
     {

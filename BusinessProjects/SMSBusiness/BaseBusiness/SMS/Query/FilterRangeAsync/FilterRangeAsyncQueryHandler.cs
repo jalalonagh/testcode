@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.SMS.Query.FilterRangeAsync
+namespace SMSBusiness.BaseBusinessLevel.SMS.Query.FilterRangeAsync
 {
     public class FilterRangeAsyncQueryHandler : IQueryHandler<FilterRangeAsyncQuery, ServiceResult<IEnumerable<Entities.SMS.SMS>>>
     {

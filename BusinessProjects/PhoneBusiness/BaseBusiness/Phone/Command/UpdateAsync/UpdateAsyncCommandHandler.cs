@@ -6,7 +6,7 @@ using Services.Models;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.Phone.Command.UpdateAsync
+namespace PhoneBusiness.BaseBusinessLevel.Phone.Command.UpdateAsync
 {
     public class UpdateAsyncCommandHandler : ICommandHandler<UpdateAsyncCommand, ServiceResult<Entities.Phone.Phone>>
     {

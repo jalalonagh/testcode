@@ -1,9 +1,9 @@
-﻿using BusinessLayout.Configuration.Commands;
+﻿using BusinessBaseConfig.Configuration.Commands;
 using ManaDataTransferObject.Profile;
 using Services;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.Profile.Command.DeleteAsync
+namespace ProfileBusiness.BaseBusinessLevel.Profile.Command.DeleteAsync
 {
     public class DeleteAsyncCommand : CommandBase<ServiceResult<Entities.Profile.Profile>>
     {

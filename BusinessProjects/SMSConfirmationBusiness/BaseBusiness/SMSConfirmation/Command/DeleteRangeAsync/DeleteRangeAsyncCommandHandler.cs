@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSConfirmation.Command.DeleteRangeAsync
+namespace SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Command.DeleteRangeAsync
 {
     public class DeleteRangeAsyncCommandHandler : ICommandHandler<DeleteRangeAsyncCommand, ServiceResult<IEnumerable<Entities.SMSConfirmation.SMSConfirmation>>>
     {

@@ -6,7 +6,7 @@ using Services.Models;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.Profile.Command.DeleteAsync
+namespace ProfileBusiness.BaseBusinessLevel.Profile.Command.DeleteAsync
 {
     public class DeleteAsyncCommandHandler : ICommandHandler<DeleteAsyncCommand, ServiceResult<Entities.Profile.Profile>>
     {

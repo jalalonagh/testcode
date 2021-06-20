@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Autofac.Core.Activators.Reflection;
 using Autofac.Extensions.DependencyInjection;
-using BusinessLayout;
+using BusinessBaseConfig;
 using Common;
 using Data;
 using Data.Repositories;

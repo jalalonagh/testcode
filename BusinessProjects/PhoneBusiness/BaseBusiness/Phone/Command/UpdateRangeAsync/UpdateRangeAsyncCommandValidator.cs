@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using ManaResourceManager;
 
-namespace BusinessLayout.BaseBusinessLevel.Phone.Command.UpdateRangeAsync
+namespace PhoneBusiness.BaseBusinessLevel.Phone.Command.UpdateRangeAsync
 {
     public class UpdateRangeAsyncCommandValidator : AbstractValidator<UpdateRangeAsyncCommand>
     {

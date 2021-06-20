@@ -2,7 +2,7 @@
 using ManaDataTransferObject.SMSRegex;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Command.AddAsync
+namespace SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Command.AddAsync
 {
     public class AddAsyncCommand : CommandBase<ServiceResult<Entities.SMSRegex.SMSRegex>>
     {

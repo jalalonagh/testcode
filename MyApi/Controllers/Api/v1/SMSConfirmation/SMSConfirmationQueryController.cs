@@ -1,7 +1,7 @@
-﻿using BusinessLayout.BaseBusinessLevel.SMSConfirmation.Query.FilterRangeAsync;
-using BusinessLayout.BaseBusinessLevel.SMSConfirmation.Query.GetAllAsync;
-using BusinessLayout.BaseBusinessLevel.SMSConfirmation.Query.GetByIdAsync;
-using BusinessLayout.BaseBusinessLevel.SMSConfirmation.Query.SearchRangeAsync;
+﻿using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.FilterRangeAsync;
+using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.GetAllAsync;
+using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.GetByIdAsync;
+using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.SearchRangeAsync;
 using Data.Repositories.Models;
 using Entities.SMSConfirmation;
 using ManaDataTransferObject.SMSConfirmation;

@@ -6,7 +6,7 @@ using Services.Models;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.Transaction.Command.AddAsync
+namespace TransactionBusiness.BaseBusinessLevel.Transaction.Command.AddAsync
 {
     public class AddAsyncCommandHandler : ICommandHandler<AddAsyncCommand, ServiceResult<Entities.Transaction.Transaction>>
     {

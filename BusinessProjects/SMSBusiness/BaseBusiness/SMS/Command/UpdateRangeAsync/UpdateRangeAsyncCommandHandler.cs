@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.SMS.Command.UpdateRangeAsync
+namespace SMSBusiness.BaseBusinessLevel.SMS.Command.UpdateRangeAsync
 {
     public class UpdateRangeAsyncCommandHandler : ICommandHandler<UpdateRangeAsyncCommand, ServiceResult<IEnumerable<Entities.SMS.SMS>>>
     {

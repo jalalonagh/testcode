@@ -2,7 +2,7 @@
 using ManaDataTransferObject.SMSRegex;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Command.DeleteAsync
+namespace SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Command.DeleteAsync
 {
     public class DeleteAsyncCommand : CommandBase<ServiceResult<Entities.SMSRegex.SMSRegex>>
     {

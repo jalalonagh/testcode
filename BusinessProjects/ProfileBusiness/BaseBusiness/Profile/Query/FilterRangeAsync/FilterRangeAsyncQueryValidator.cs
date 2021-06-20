@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using ManaResourceManager;
 
-namespace BusinessLayout.BaseBusinessLevel.Profile.Query.FilterRangeAsync
+namespace ProfileBusiness.BaseBusinessLevel.Profile.Query.FilterRangeAsync
 {
     public class FilterRangeAsyncQueryValidator : AbstractValidator<FilterRangeAsyncQuery>
     {

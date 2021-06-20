@@ -1,7 +1,7 @@
 ﻿using BusinessBaseConfig.Configuration.Queries;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.SMS.Query.GetByIdAsync
+namespace SMSBusiness.BaseBusinessLevel.SMS.Query.GetByIdAsync
 {
     public class GetByIdAsyncQuery : IQuery<ServiceResult<Entities.SMS.SMS>>
     {

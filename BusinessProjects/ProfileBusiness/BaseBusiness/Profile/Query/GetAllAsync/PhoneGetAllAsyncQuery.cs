@@ -2,7 +2,7 @@
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.Profile.Query.GetAllAsync
+namespace ProfileBusiness.BaseBusinessLevel.Profile.Query.GetAllAsync
 {
     public class ProfileGetAllAsyncQuery : IQuery<ServiceResult<IEnumerable<Entities.Profile.Profile>>>
     {

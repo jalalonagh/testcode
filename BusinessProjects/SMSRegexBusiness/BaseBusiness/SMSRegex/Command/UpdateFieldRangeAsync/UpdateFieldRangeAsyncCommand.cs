@@ -2,7 +2,7 @@
 using ManaDataTransferObject.SMSRegex;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Command.UpdateFieldRangeAsync
+namespace SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Command.UpdateFieldRangeAsync
 {
     public class UpdateFieldRangeAsyncCommand : CommandBase<ServiceResult<Entities.SMSRegex.SMSRegex>>
     {

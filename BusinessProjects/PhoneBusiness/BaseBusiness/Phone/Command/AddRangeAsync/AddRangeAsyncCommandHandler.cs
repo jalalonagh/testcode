@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.Phone.Command.AddRangeAsync
+namespace PhoneBusiness.BaseBusinessLevel.Phone.Command.AddRangeAsync
 {
     public class AddRangeAsyncCommandHandler : ICommandHandler<AddRangeAsyncCommand, ServiceResult<IEnumerable<Entities.Phone.Phone>>>
     {

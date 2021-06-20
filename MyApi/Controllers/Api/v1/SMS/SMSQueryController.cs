@@ -1,7 +1,7 @@
-﻿using BusinessLayout.BaseBusinessLevel.SMS.Query.FilterRangeAsync;
-using BusinessLayout.BaseBusinessLevel.SMS.Query.GetAllAsync;
-using BusinessLayout.BaseBusinessLevel.SMS.Query.GetByIdAsync;
-using BusinessLayout.BaseBusinessLevel.SMS.Query.SearchRangeAsync;
+﻿using SMSBusiness.BaseBusinessLevel.SMS.Query.FilterRangeAsync;
+using SMSBusiness.BaseBusinessLevel.SMS.Query.GetAllAsync;
+using SMSBusiness.BaseBusinessLevel.SMS.Query.GetByIdAsync;
+using SMSBusiness.BaseBusinessLevel.SMS.Query.SearchRangeAsync;
 using Data.Repositories.Models;
 using Entities.SMS;
 using ManaDataTransferObject.SMS;

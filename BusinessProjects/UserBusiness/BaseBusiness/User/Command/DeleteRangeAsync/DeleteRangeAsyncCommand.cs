@@ -3,7 +3,7 @@ using ManaDataTransferObject.User;
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.User.Command.DeleteRangeAsync
+namespace UserBusiness.BaseBusinessLevel.User.Command.DeleteRangeAsync
 {
     public class DeleteRangeAsyncCommand : CommandBase<ServiceResult<IEnumerable<Entities.User.User>>>
     {

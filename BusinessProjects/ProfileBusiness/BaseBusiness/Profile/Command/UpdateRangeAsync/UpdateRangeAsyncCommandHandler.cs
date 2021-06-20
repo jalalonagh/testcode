@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.Profile.Command.UpdateRangeAsync
+namespace ProfileBusiness.BaseBusinessLevel.Profile.Command.UpdateRangeAsync
 {
     public class UpdateRangeAsyncCommandHandler : ICommandHandler<UpdateRangeAsyncCommand, ServiceResult<IEnumerable<Entities.Profile.Profile>>>
     {

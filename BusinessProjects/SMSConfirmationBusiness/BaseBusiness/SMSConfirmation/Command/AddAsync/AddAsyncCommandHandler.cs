@@ -6,7 +6,7 @@ using Services.Models;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSConfirmation.Command.AddAsync
+namespace SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Command.AddAsync
 {
     public class AddAsyncCommandHandler : ICommandHandler<AddAsyncCommand, ServiceResult<Entities.SMSConfirmation.SMSConfirmation>>
     {

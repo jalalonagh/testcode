@@ -3,7 +3,7 @@ using ManaDataTransferObject.Transaction;
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.Transaction.Command.UpdateRangeAsync
+namespace TransactionBusiness.BaseBusinessLevel.Transaction.Command.UpdateRangeAsync
 {
     public class UpdateRangeAsyncCommand : CommandBase<ServiceResult<IEnumerable<Entities.Transaction.Transaction>>>
     {

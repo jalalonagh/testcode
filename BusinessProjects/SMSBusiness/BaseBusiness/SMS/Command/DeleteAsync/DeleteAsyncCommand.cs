@@ -2,7 +2,7 @@
 using ManaDataTransferObject.SMS;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.SMS.Command.DeleteAsync
+namespace SMSBusiness.BaseBusinessLevel.SMS.Command.DeleteAsync
 {
     public class DeleteAsyncCommand : CommandBase<ServiceResult<Entities.SMS.SMS>>
     {

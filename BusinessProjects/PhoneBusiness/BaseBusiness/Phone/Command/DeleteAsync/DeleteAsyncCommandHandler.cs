@@ -6,7 +6,7 @@ using Services.Models;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.Phone.Command.DeleteAsync
+namespace PhoneBusiness.BaseBusinessLevel.Phone.Command.DeleteAsync
 {
     public class DeleteAsyncCommandHandler : ICommandHandler<DeleteAsyncCommand, ServiceResult<Entities.Phone.Phone>>
     {

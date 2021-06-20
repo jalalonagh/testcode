@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using ManaResourceManager;
 
-namespace BusinessLayout.BaseBusinessLevel.Transaction.Command.AddRangeAsync
+namespace TransactionBusiness.BaseBusinessLevel.Transaction.Command.AddRangeAsync
 {
     public class AddRangeAsyncCommandValidator : AbstractValidator<AddRangeAsyncCommand>
     {

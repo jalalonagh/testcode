@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.Transaction.Query.SearchRangeAsync
+namespace TransactionBusiness.BaseBusinessLevel.Transaction.Query.SearchRangeAsync
 {
     public class SearchRangeAsyncQueryHandler : IQueryHandler<SearchRangeAsyncQuery, ServiceResult<IEnumerable<Entities.Transaction.Transaction>>>
     {

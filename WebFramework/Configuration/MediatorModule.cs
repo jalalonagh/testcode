@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Autofac.Core;
 using Autofac.Features.Variance;
-using BusinessLayout.Configuration.Validation;
+using BusinessBaseConfig.Configuration.Validation;
 using FluentValidation;
 using MediatR;
 using System;

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.User.Query.GetAllAsync
+namespace UserBusiness.BaseBusinessLevel.User.Query.GetAllAsync
 {
     public class GetAllAsyncQueryHandler : IQueryHandler<GetAllAsyncQuery, ServiceResult<IEnumerable<Entities.User.User>>>
     {

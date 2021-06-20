@@ -1,7 +1,7 @@
 ﻿using BusinessBaseConfig.Configuration.Commands;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.Phone.Command.DeleteByIdAsync
+namespace PhoneBusiness.BaseBusinessLevel.Phone.Command.DeleteByIdAsync
 {
     public class DeleteByIdAsyncCommand : CommandBase<ServiceResult<Entities.Phone.Phone>>
     {

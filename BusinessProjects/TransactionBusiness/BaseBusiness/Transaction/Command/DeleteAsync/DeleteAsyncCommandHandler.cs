@@ -6,7 +6,7 @@ using Services.Models;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BusinessLayout.BaseBusinessLevel.Transaction.Command.DeleteAsync
+namespace TransactionBusiness.BaseBusinessLevel.Transaction.Command.DeleteAsync
 {
     public class DeleteAsyncCommandHandler : ICommandHandler<DeleteAsyncCommand, ServiceResult<Entities.Transaction.Transaction>>
     {

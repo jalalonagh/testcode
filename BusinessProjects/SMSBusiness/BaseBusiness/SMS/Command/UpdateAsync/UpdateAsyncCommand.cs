@@ -2,7 +2,7 @@
 using ManaDataTransferObject.SMS;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.SMS.Command.UpdateAsync
+namespace SMSBusiness.BaseBusinessLevel.SMS.Command.UpdateAsync
 {
     public class UpdateAsyncCommand : CommandBase<ServiceResult<Entities.SMS.SMS>>
     {

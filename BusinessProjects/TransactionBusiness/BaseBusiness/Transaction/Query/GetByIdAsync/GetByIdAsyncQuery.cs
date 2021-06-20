@@ -1,7 +1,7 @@
 ﻿using BusinessBaseConfig.Configuration.Queries;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.Transaction.Query.GetByIdAsync
+namespace TransactionBusiness.BaseBusinessLevel.Transaction.Query.GetByIdAsync
 {
     public class GetByIdAsyncQuery : IQuery<ServiceResult<Entities.Transaction.Transaction>>
     {

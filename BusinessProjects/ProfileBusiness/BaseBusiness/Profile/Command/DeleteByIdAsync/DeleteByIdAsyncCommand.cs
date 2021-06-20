@@ -1,8 +1,8 @@
-﻿using BusinessLayout.Configuration.Commands;
+﻿using BusinessBaseConfig.Configuration.Commands;
 using Services;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.Profile.Command.DeleteByIdAsync
+namespace ProfileBusiness.BaseBusinessLevel.Profile.Command.DeleteByIdAsync
 {
     public class DeleteByIdAsyncCommand : CommandBase<ServiceResult<Entities.Profile.Profile>>
     {

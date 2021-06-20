@@ -3,7 +3,7 @@ using ManaDataTransferObject.User;
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.User.Command.UpdateRangeAsync
+namespace UserBusiness.BaseBusinessLevel.User.Command.UpdateRangeAsync
 {
     public class UpdateRangeAsyncCommand : CommandBase<ServiceResult<IEnumerable<Entities.User.User>>>
     {

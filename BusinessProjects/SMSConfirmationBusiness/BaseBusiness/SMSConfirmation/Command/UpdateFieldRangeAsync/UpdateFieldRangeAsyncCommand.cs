@@ -2,7 +2,7 @@
 using ManaDataTransferObject.SMSConfirmation;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSConfirmation.Command.UpdateFieldRangeAsync
+namespace SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Command.UpdateFieldRangeAsync
 {
     public class UpdateFieldRangeAsyncCommand : CommandBase<ServiceResult<Entities.SMSConfirmation.SMSConfirmation>>
     {

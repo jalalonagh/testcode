@@ -1,10 +1,10 @@
-﻿using BusinessLayout.Configuration.Commands;
+﻿using BusinessBaseConfig.Configuration.Commands;
 using ManaDataTransferObject.Profile;
 using Services;
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.Profile.Command.AddRangeAsync
+namespace ProfileBusiness.BaseBusinessLevel.Profile.Command.AddRangeAsync
 {
     public class AddRangeAsyncCommand : CommandBase<ServiceResult<IEnumerable<Entities.Profile.Profile>>>
     {

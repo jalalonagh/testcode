@@ -2,7 +2,7 @@
 using ManaDataTransferObject.User;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.User.Command.DeleteAsync
+namespace UserBusiness.BaseBusinessLevel.User.Command.DeleteAsync
 {
     public class DeleteAsyncCommand : CommandBase<ServiceResult<Entities.User.User>>
     {

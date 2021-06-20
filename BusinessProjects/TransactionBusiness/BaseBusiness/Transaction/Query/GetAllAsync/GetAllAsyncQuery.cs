@@ -2,7 +2,7 @@
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.Transaction.Query.GetAllAsync
+namespace TransactionBusiness.BaseBusinessLevel.Transaction.Query.GetAllAsync
 {
     public class GetAllAsyncQuery : IQuery<ServiceResult<IEnumerable<Entities.Transaction.Transaction>>>
     {

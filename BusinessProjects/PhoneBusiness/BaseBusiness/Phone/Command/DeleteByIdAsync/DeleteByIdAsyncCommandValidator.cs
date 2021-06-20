@@ -1,10 +1,7 @@
-﻿using Entities;
-using Entities.Common;
-using FluentValidation;
-using ManaAutoMapper.Models;
+﻿using FluentValidation;
 using ManaResourceManager;
 
-namespace BusinessLayout.BaseBusinessLevel.Phone.Command.DeleteByIdAsync
+namespace PhoneBusiness.BaseBusinessLevel.Phone.Command.DeleteByIdAsync
 {
     public class DeleteByIdAsyncCommandValidator : AbstractValidator<DeleteByIdAsyncCommand>
     {

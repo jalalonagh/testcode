@@ -1,7 +1,7 @@
 ﻿using BusinessBaseConfig.Configuration.Commands;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Command.DeleteByIdAsync
+namespace SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Command.DeleteByIdAsync
 {
     public class DeleteByIdAsyncCommand : CommandBase<ServiceResult<Entities.SMSRegex.SMSRegex>>
     {

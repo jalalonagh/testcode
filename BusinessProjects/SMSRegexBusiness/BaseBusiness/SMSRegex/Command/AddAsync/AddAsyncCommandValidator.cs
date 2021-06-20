@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using ManaResourceManager;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Command.AddAsync
+namespace SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Command.AddAsync
 {
     public class AddAsyncCommandValidator : AbstractValidator<AddAsyncCommand>
     {

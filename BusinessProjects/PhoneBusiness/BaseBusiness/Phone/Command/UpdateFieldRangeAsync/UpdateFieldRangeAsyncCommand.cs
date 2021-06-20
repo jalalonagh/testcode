@@ -2,7 +2,7 @@
 using ManaDataTransferObject.Phone;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.Phone.Command.UpdateFieldRangeAsync
+namespace PhoneBusiness.BaseBusinessLevel.Phone.Command.UpdateFieldRangeAsync
 {
     public class UpdateFieldRangeAsyncCommand : CommandBase<ServiceResult<Entities.Phone.Phone>>
     {

@@ -2,7 +2,7 @@
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.SMSRegex.Query.GetAllAsync
+namespace SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.GetAllAsync
 {
     public class GetAllAsyncQuery : IQuery<ServiceResult<IEnumerable<Entities.SMSRegex.SMSRegex>>>
     {

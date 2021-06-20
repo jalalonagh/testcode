@@ -4,7 +4,7 @@ using Entities.Transaction;
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.Transaction.Query.FilterRangeAsync
+namespace TransactionBusiness.BaseBusinessLevel.Transaction.Query.FilterRangeAsync
 {
     public class FilterRangeAsyncQuery : IQuery<ServiceResult<IEnumerable<Entities.Transaction.Transaction>>>
     {

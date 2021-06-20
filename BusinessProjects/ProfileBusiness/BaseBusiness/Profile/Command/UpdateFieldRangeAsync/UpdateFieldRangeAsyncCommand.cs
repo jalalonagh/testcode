@@ -1,9 +1,9 @@
-﻿using BusinessLayout.Configuration.Commands;
+﻿using BusinessBaseConfig.Configuration.Commands;
 using ManaDataTransferObject.Profile;
 using Services;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.Profile.Command.UpdateFieldRangeAsync
+namespace ProfileBusiness.BaseBusinessLevel.Profile.Command.UpdateFieldRangeAsync
 {
     public class UpdateFieldRangeAsyncCommand : CommandBase<ServiceResult<Entities.Profile.Profile>>
     {

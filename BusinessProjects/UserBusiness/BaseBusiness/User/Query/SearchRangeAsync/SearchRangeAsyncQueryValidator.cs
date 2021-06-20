@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using ManaResourceManager;
 
-namespace BusinessLayout.BaseBusinessLevel.User.Query.SearchRangeAsync
+namespace UserBusiness.BaseBusinessLevel.User.Query.SearchRangeAsync
 {
     public class SearchRangeAsyncQueryValidator : AbstractValidator<SearchRangeAsyncQuery>
     {
@@ -9,10 +9,7 @@ namespace BusinessLayout.BaseBusinessLevel.User.Query.SearchRangeAsync
         public SearchRangeAsyncQueryValidator()
         {
             rms = ResourceManagerSingleton.GetInstance();
-
-            RuleFor(c => c.Model)
-                .NotNull()
-                .WithMessage(rms.FetchResource("searchmodelempty").GetMessage());
+            RuleFor(c => c.Model).NotNull().WithMessage(rms.FetchResource("searchmodelempty").GetMessage());
         }
     }
 }

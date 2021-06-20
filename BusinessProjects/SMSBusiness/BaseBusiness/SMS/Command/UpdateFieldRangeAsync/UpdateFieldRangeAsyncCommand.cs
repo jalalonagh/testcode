@@ -2,7 +2,7 @@
 using ManaDataTransferObject.SMS;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.SMS.Command.UpdateFieldRangeAsync
+namespace SMSBusiness.BaseBusinessLevel.SMS.Command.UpdateFieldRangeAsync
 {
     public class UpdateFieldRangeAsyncCommand : CommandBase<ServiceResult<Entities.SMS.SMS>>
     {

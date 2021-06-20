@@ -4,7 +4,7 @@ using FluentValidation;
 using ManaAutoMapper.Models;
 using ManaResourceManager;
 
-namespace BusinessLayout.BaseBusinessLevel.Profile.Command.AddAsync
+namespace ProfileBusiness.BaseBusinessLevel.Profile.Command.AddAsync
 {
     public class AddAsyncCommandValidator : AbstractValidator<AddAsyncCommand>
     {

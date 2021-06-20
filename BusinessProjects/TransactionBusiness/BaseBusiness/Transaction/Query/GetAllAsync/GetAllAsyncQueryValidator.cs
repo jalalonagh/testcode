@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using ManaResourceManager;
 
-namespace BusinessLayout.BaseBusinessLevel.Transaction.Query.GetAllAsync
+namespace TransactionBusiness.BaseBusinessLevel.Transaction.Query.GetAllAsync
 {
     public class GetAllAsyncQueryValidator : AbstractValidator<GetAllAsyncQuery>
     {

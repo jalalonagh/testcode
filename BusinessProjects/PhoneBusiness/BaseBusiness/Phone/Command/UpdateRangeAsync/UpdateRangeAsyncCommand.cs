@@ -3,7 +3,7 @@ using ManaDataTransferObject.Phone;
 using Services.Models;
 using System.Collections.Generic;
 
-namespace BusinessLayout.BaseBusinessLevel.Phone.Command.UpdateRangeAsync
+namespace PhoneBusiness.BaseBusinessLevel.Phone.Command.UpdateRangeAsync
 {
     public class UpdateRangeAsyncCommand : CommandBase<ServiceResult<IEnumerable<Entities.Phone.Phone>>>
     {

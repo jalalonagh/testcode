@@ -2,7 +2,7 @@
 using ManaDataTransferObject.Transaction;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.Transaction.Command.DeleteAsync
+namespace TransactionBusiness.BaseBusinessLevel.Transaction.Command.DeleteAsync
 {
     public class DeleteAsyncCommand : CommandBase<ServiceResult<Entities.Transaction.Transaction>>
     {

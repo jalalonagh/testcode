@@ -2,7 +2,7 @@
 using ManaDataTransferObject.Transaction;
 using Services.Models;
 
-namespace BusinessLayout.BaseBusinessLevel.Transaction.Command.UpdateFieldRangeAsync
+namespace TransactionBusiness.BaseBusinessLevel.Transaction.Command.UpdateFieldRangeAsync
 {
     public class UpdateFieldRangeAsyncCommand : CommandBase<ServiceResult<Entities.Transaction.Transaction>>
     {
