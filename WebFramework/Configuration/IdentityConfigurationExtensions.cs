@@ -24,7 +24,4 @@ namespace WebFramework.Configuration
             .AddDefaultTokenProviders();
         }
     }
-
-
-
 }
