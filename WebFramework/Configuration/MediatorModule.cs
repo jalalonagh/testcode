@@ -25,8 +25,9 @@ namespace WebFramework.Configuration
         };
             foreach (var mediatrOpenType in mediatrOpenTypes)
             {
-                builder
-                    .RegisterAssemblyTypes(Assemblies.Application, ThisAssembly)
+                var asms = Assemblies.Applications.ToList();
+                asms.Add(ThisAssembly);
+                builder.RegisterAssemblyTypes(asms.ToArray())
                     .AsClosedTypesOf(mediatrOpenType)
                     .FindConstructorsWith(new AllConstructorFinder())
                     .AsImplementedInterfaces();

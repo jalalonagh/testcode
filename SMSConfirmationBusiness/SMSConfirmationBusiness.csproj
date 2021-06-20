@@ -32,8 +32,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ManaDapper\ManaDapper.csproj" />
-    <ProjectReference Include="..\..\ManaViewModel\ManaViewModel.csproj" />
+    <ProjectReference Include="..\ManaDapper\ManaDapper.csproj" />
+    <ProjectReference Include="..\ManaViewModel\ManaViewModel.csproj" />
     <ProjectReference Include="..\BusinessBaseConfig\BusinessBaseConfig.csproj" />
   </ItemGroup>
 

@@ -9,11 +9,17 @@ using Entities.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ProfileBusiness;
 using Services.DataInitializer;
+using SMSBusiness;
+using SMSConfirmationBusiness;
+using SMSRegexBusiness;
 using System;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Reflection;
+using TransactionBusiness;
+using UserBusiness;
 
 namespace WebFramework.Configuration
 {
@@ -30,6 +36,8 @@ namespace WebFramework.Configuration
     internal static class Assemblies
     {
         public static readonly Assembly Application = typeof(IBL).Assembly;
+        public static readonly Assembly[] Applications = new Assembly[] { typeof(IBL).Assembly, typeof(IPrB).Assembly,
+            typeof(ISmB).Assembly, typeof(ISCB).Assembly, typeof(ISRB).Assembly, typeof(ITrB).Assembly, typeof(IUsB).Assembly};
     }
 
     public static class AutofacConfigurationExtensions

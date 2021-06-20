@@ -35,13 +35,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BusinessProjects\PhoneBusiness\PhoneBusiness.csproj" />
-    <ProjectReference Include="..\BusinessProjects\ProfileBusiness\ProfileBusiness.csproj" />
-    <ProjectReference Include="..\BusinessProjects\SMSBusiness\SMSBusiness.csproj" />
-    <ProjectReference Include="..\BusinessProjects\SMSConfirmationBusiness\SMSConfirmationBusiness.csproj" />
-    <ProjectReference Include="..\BusinessProjects\SMSRegexBusiness\SMSRegexBusiness.csproj" />
-    <ProjectReference Include="..\BusinessProjects\TransactionBusiness\TransactionBusiness.csproj" />
-    <ProjectReference Include="..\BusinessProjects\UserBusiness\UserBusiness.csproj" />
+    <ProjectReference Include="..\PhoneBusiness\PhoneBusiness.csproj" />
+    <ProjectReference Include="..\ProfileBusiness\ProfileBusiness.csproj" />
+    <ProjectReference Include="..\SMSBusiness\SMSBusiness.csproj" />
+    <ProjectReference Include="..\SMSConfirmationBusiness\SMSConfirmationBusiness.csproj" />
+    <ProjectReference Include="..\SMSRegexBusiness\SMSRegexBusiness.csproj" />
+    <ProjectReference Include="..\TransactionBusiness\TransactionBusiness.csproj" />
+    <ProjectReference Include="..\UserBusiness\UserBusiness.csproj" />
   </ItemGroup>
 
 </Project>
