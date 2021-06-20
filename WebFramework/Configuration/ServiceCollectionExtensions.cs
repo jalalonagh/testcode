@@ -1,26 +1,10 @@
 ﻿
 using Common;
-using Common.Utilities;
-using Data;
-using Data.User;
 using ElmahCore;
 using ElmahCore.Mvc;
-using Entities.User;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Converters;
-using System;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using WebFramework.Permission;
 
 namespace WebFramework.Configuration
 {

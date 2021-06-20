@@ -1,7 +1,6 @@
 ﻿
 using Common;
 using Common.Utilities;
-using Data.User;
 using Entities.User;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -49,7 +48,7 @@ namespace WebFramework.Configuration
                     OnTokenValidated = async context =>
                     {
                         var signInManager = context.HttpContext.RequestServices.GetRequiredService<SignInManager<User>>();
-                        var userRepository = context.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
+                        //var userRepository = context.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
                         var claimsIdentity = context.Principal.Identity as ClaimsIdentity;
                         if (claimsIdentity.Claims?.Any() != true)
                             context.Fail("This token has no claims.");
@@ -57,15 +56,15 @@ namespace WebFramework.Configuration
                         if (!securityStamp.HasValue())
                             context.Fail("This token has no secuirty stamp");
                         var userId = claimsIdentity.GetUserId<int>();
-                        var user = await userRepository.GetByIdAsync(context.HttpContext.RequestAborted, userId);
-                        if (user == null)
-                        {
-                            context.Fail("کاربر یافت نشد.");
-                            return;
-                        }
-                        if (user.IsSuccess && user.Data.IsActive)
-                            context.Fail("User is not active.");
-                        await userRepository.UpdateLastLoginDateAsync(user.Data);
+                        //var user = await userRepository.GetByIdAsync(context.HttpContext.RequestAborted, userId);
+                        //if (user == null)
+                        //{
+                        //    context.Fail("کاربر یافت نشد.");
+                        //    return;
+                        //}
+                        //if (user.IsSuccess && user.Data.IsActive)
+                        //    context.Fail("User is not active.");
+                        //await userRepository.UpdateLastLoginDateAsync(user.Data);
                     }
                 };
             });
