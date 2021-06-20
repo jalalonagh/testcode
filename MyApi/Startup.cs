@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SwaggerApi.V5;
 using System;
 using System.Globalization;
 using WebFramework.Configuration;
 using WebFramework.MiddleWares;
 using WebFramework.Permission;
 using WebFramework.Session;
-using WebFramework.Swagger;
 
 namespace MyApi
 {

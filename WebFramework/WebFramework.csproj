@@ -21,7 +21,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.10" />
     <PackageReference Include="RabbitMQ.Client" Version="6.2.1" />
@@ -40,6 +40,7 @@
     <ProjectReference Include="..\SMSBusiness\SMSBusiness.csproj" />
     <ProjectReference Include="..\SMSConfirmationBusiness\SMSConfirmationBusiness.csproj" />
     <ProjectReference Include="..\SMSRegexBusiness\SMSRegexBusiness.csproj" />
+    <ProjectReference Include="..\SwaggerApi\SwaggerApi.csproj" />
     <ProjectReference Include="..\TransactionBusiness\TransactionBusiness.csproj" />
     <ProjectReference Include="..\UserBusiness\UserBusiness.csproj" />
   </ItemGroup>

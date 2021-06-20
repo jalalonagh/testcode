@@ -82,7 +82,6 @@
   <ItemGroup>
     <PackageReference Include="Dapper-QueryBuilder" Version="1.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <!--<PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />-->
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

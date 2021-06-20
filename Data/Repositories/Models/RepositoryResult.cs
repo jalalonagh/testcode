@@ -1,5 +1,6 @@
 ﻿using Common.Utilities;
 using ManaEnums.Api;
+using ManaEnums.Extensions;
 
 namespace Data.Repositories.Models
 {

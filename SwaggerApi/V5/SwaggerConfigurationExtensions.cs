@@ -1,5 +1,4 @@
-﻿using Common.Utilities;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -11,13 +10,12 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace WebFramework.Swagger
+namespace SwaggerApi.V5
 {
     public static class SwaggerConfigurationExtensions
     {
         public static void AddSwagger(this IServiceCollection services)
         {
-            Assert.NotNull(services, nameof(services));
             services.AddSwaggerExamplesFromAssemblies();
             services.AddSwaggerGen(options =>
             {
@@ -69,9 +67,8 @@ namespace WebFramework.Swagger
 
         public static void UseSwaggerAndUI(this IApplicationBuilder app)
         {
-            Assert.NotNull(app, nameof(app));
             app.UseSwagger(options =>
-            {});
+            { });
             app.UseSwaggerUI(options =>
             {
                 #region Customizing

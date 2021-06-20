@@ -1,5 +1,4 @@
 ﻿using Common;
-using Common.Random;
 using Data;
 using Data.Repositories;
 using Entities.Common;
@@ -143,7 +142,8 @@ namespace Services.Services.UserService
             var response = await tokenApi.CreateUserIntoServer(userData, url);
             if (response.IsSuccess)
             {
-                var code = new CreateRandom().RandomNumber4();
+                Random random = new Random();
+                var code = random.Next(56793, 99999);
                 var user = new Entities.User.User
                 {
                     Id = response.Data.Id,
@@ -164,9 +164,6 @@ namespace Services.Services.UserService
                 };
                 if ((await GetByIdAsync(user.Id)).IsSuccess)
                     await AddAsync(user);
-                //var suspendUser = _suspendedUser.Where(z => z.PhoneNumber == userDto.UserName).ToList();
-                //if (suspendUser.Any())
-                //    _suspendedUser.RemoveRange(suspendUser);
                 return user;
             }
             return response;
