@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebFramework.Api;
+using ManaBaseData.Repositories.Models;
 
 namespace MyApi.Controllers.Api.v1
 {

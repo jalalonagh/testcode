@@ -1,6 +1,5 @@
-﻿using Data.Repositories;
-using Entities.User;
-using Entities.User.Role;
+﻿using Entities.User.Role;
+using ManaBaseData.Repositories;
 using System.Linq;
 
 namespace Services.DataInitializer

@@ -1,6 +1,7 @@
 ﻿using Common.Exceptions;
 using Common.Utilities;
-using Data.Repositories;
+using ManaBaseData;
+using ManaBaseData.Repositories;
 using ManaSpeedTester;
 using ManaSpeedTester.Models;
 using Microsoft.EntityFrameworkCore;

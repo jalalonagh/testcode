@@ -1,5 +1,5 @@
-﻿using Data.Repositories;
-using Data.Repositories.Models;
+﻿using ManaBaseData.Repositories;
+using ManaBaseData.Repositories.Models;
 using ManaBaseEntity.Common;
 using ManaSpeedTester;
 using ManaSpeedTester.Models;

@@ -1,12 +1,10 @@
-﻿using System.Linq;
-using Common.Utilities;
-using Data;
+﻿using Common.Utilities;
+using ManaBaseData;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Services.DataInitializer;
 
 namespace WebFramework.Configuration
 {

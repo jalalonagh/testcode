@@ -1,16 +1,11 @@
 ﻿using Common;
-using Data.Repositories;
 using Entities.SMS;
+using ManaBaseData.Repositories;
 using Services.Base.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services.Services.SMSService
 {
-    public class SMSServices: BaseService<SMS, SMSSearch>, ISMSServices, IScopedDependency
+    public class SMSServices : BaseService<SMS, SMSSearch>, ISMSServices, IScopedDependency
     {
         public IRepository<SMS, SMSSearch> repository { get; set; }
 

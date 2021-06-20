@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ManaBaseData" Version="1.0.0" />
     <PackageReference Include="ManaResourceManager" Version="1.0.0" />
     <PackageReference Include="ManaSpeedTester" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.6" />

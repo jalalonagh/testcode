@@ -1,16 +1,11 @@
 ﻿using Common;
-using Data.Repositories;
 using Entities.SMSConfirmation;
+using ManaBaseData.Repositories;
 using Services.Base.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services.Services.SMSConfirmationService
 {
-    public class SMSConfirmationServices: BaseService<SMSConfirmation, SMSConfirmationSearch>, ISMSConfirmationServices, IScopedDependency
+    public class SMSConfirmationServices : BaseService<SMSConfirmation, SMSConfirmationSearch>, ISMSConfirmationServices, IScopedDependency
     {
         public IRepository<SMSConfirmation, SMSConfirmationSearch> repository { get; set; }
 

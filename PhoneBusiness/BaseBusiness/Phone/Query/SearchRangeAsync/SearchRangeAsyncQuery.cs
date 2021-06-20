@@ -1,5 +1,5 @@
 ﻿using BusinessBaseConfig.Configuration.Queries;
-using Data.Repositories.Models;
+using ManaBaseData.Repositories.Models;
 using Services.Models;
 using System.Collections.Generic;
 
