@@ -12,18 +12,15 @@ namespace Common
         {
             return identity?.FindFirst(claimType)?.Value;
         }
-
         public static string FindFirstValue(this IIdentity identity, string claimType)
         {
             var claimsIdentity = identity as ClaimsIdentity;
             return claimsIdentity?.FindFirstValue(claimType);
         }
-
         public static string GetUserId(this IIdentity identity)
         {
             return identity?.FindFirstValue(ClaimTypes.NameIdentifier);
         }
-
         public static T GetUserId<T>(this IIdentity identity) where T : IConvertible
         {
             var userId = identity?.GetUserId();
@@ -31,12 +28,10 @@ namespace Common
                 ? (T)Convert.ChangeType(userId, typeof(T), CultureInfo.InvariantCulture)
                 : default(T);
         }
-
         public static string GetUserName(this IIdentity identity)
         {
             return identity?.FindFirstValue(ClaimTypes.Name);
         }
-
         public static string GetUserame(this IIdentity identity)
         {
             return identity?.FindFirstValue(ClaimTypes.Name);

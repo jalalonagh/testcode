@@ -1,11 +1,10 @@
-﻿using ManaEnums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 
-namespace Common.Utilities
+namespace ManaEnums.Extensions
 {
     public static class EnumExtensions
     {
@@ -13,24 +12,20 @@ namespace Common.Utilities
         {
             if (!typeof(T).IsEnum)
                 throw new NotSupportedException();
-
             return Enum.GetValues(input.GetType()).Cast<T>();
         }
 
-        public static T GetEnumValue<T>(this object input) 
+        public static T GetEnumValue<T>(this object input)
             where T : struct
         {
             if (!typeof(T).IsEnum)
                 throw new NotSupportedException();
-
             return (T)Enum.ToObject(typeof(T), input);
-
         }
         public static IEnumerable<T> GetEnumFlags<T>(this T input) where T : struct
         {
             if (!typeof(T).IsEnum)
                 throw new NotSupportedException();
-
             foreach (var value in Enum.GetValues(input.GetType()))
                 if ((input as Enum).HasFlag(value as Enum))
                     yield return (T)value;
@@ -38,14 +33,10 @@ namespace Common.Utilities
 
         public static string ToDisplay(this Enum value, EnumDisplayProperty property = EnumDisplayProperty.Name)
         {
-            Assert.NotNull(value, nameof(value));
-
             var attribute = value.GetType().GetField(value.ToString())
                 .GetCustomAttributes<DisplayAttribute>(false).FirstOrDefault();
-
             if (attribute == null)
                 return value.ToString();
-
             var propValue = attribute.GetType().GetProperty(property.ToString()).GetValue(attribute, null);
             return propValue.ToString();
         }
