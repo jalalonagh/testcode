@@ -10,18 +10,11 @@ namespace Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions options)
-            : base(options)
-        {
-
-        }
-
+        public ApplicationDbContext(DbContextOptions options) : base(options) {}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
             var entitiesAssembly = typeof(IEntity).Assembly;
-
             modelBuilder.RegisterAllEntities<IEntity>(entitiesAssembly);
             modelBuilder.ApplyConfigurationsFromAssembly(entitiesAssembly);
             modelBuilder.RegisterEntityTypeConfiguration(entitiesAssembly);
@@ -35,25 +28,21 @@ namespace Data
             _cleanString();
             return base.SaveChanges();
         }
-
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
             _cleanString();
             return base.SaveChanges(acceptAllChangesOnSuccess);
         }
-
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
         {
             _cleanString();
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
-
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             _cleanString();
             return base.SaveChangesAsync(cancellationToken);
         }
-
         private void _cleanString()
         {
             var changedEntities = ChangeTracker.Entries()
