@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BusinessBaseConfig" Version="1.0.0" />
     <PackageReference Include="CSharpFunctionalExtensions" Version="2.14.1" />
     <PackageReference Include="ManaDapper" Version="1.0.0" />
     <PackageReference Include="MediatR" Version="9.0.0" />
@@ -35,7 +36,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ManaViewModel\ManaViewModel.csproj" />
-    <ProjectReference Include="..\BusinessBaseConfig\BusinessBaseConfig.csproj" />
   </ItemGroup>
 
 </Project>
