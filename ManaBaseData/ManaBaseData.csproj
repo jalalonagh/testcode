@@ -6,6 +6,9 @@
     <Authors>Jalal Onagh</Authors>
     <Company>Managostar Ara</Company>
     <Description>generic data (access layer) for working with database</Description>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <FileVersion>1.0.1.0</FileVersion>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
