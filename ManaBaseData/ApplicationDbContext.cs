@@ -35,7 +35,8 @@ namespace ManaBaseData
                 {
                     var json = Newtonsoft.Json.JsonConvert.SerializeObject(new DataRepositoryConfiguration()
                     {
-                        EntityAssemblies = new string[] { "Entities" }
+                        EntityAssemblies = new string[] { "Entities" },
+                        MigrationAssembly = "Data"
                     });
                     byte[] bytes = new UTF8Encoding(true).GetBytes(json);
                     sw.Write(bytes, 0, bytes.Length);
