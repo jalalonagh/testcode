@@ -55,7 +55,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwaggerApi", "SwaggerApi\Sw
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManaBaseEntity", "ManaBaseEntity\ManaBaseEntity.csproj", "{68AED34B-45FB-4C6C-A77A-3E44BE6C9A55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManaBaseData", "ManaBaseData\ManaBaseData.csproj", "{393C901C-AEF2-4417-89B3-407C1CF20777}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManaBaseData", "ManaBaseData\ManaBaseData.csproj", "{393C901C-AEF2-4417-89B3-407C1CF20777}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManaWebConfiguration", "ManaWebConfiguration\ManaWebConfiguration.csproj", "{DA572D91-4D8F-4A3D-9230-ED97F34C5747}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -171,6 +173,10 @@ Global
 		{393C901C-AEF2-4417-89B3-407C1CF20777}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{393C901C-AEF2-4417-89B3-407C1CF20777}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{393C901C-AEF2-4417-89B3-407C1CF20777}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA572D91-4D8F-4A3D-9230-ED97F34C5747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA572D91-4D8F-4A3D-9230-ED97F34C5747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA572D91-4D8F-4A3D-9230-ED97F34C5747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA572D91-4D8F-4A3D-9230-ED97F34C5747}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
