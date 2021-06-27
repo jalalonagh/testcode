@@ -1,18 +1,16 @@
-﻿using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.FilterRangeAsync;
-using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.GetAllAsync;
-using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.GetByIdAsync;
-using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.SearchRangeAsync;
-using Data.Repositories.Models;
-using Entities.SMSConfirmation;
+﻿using Entities.SMSConfirmation;
 using ManaDataTransferObject.SMSConfirmation;
 using ManaViewModel.SMSConfirmation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.FilterRangeAsync;
+using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.GetAllAsync;
+using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.GetByIdAsync;
+using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.SearchRangeAsync;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebFramework.Api;
-using ManaBaseData.Repositories.Models;
 
 namespace MyApi.Controllers.Api.v1
 {

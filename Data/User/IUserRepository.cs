@@ -1,5 +1,4 @@
-﻿using ManaBaseData.Repositories;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Data.User
 {

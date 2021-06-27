@@ -1,18 +1,16 @@
-﻿using SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.FilterRangeAsync;
-using SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.GetAllAsync;
-using SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.GetByIdAsync;
-using SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.SearchRangeAsync;
-using Data.Repositories.Models;
-using Entities.SMSRegex;
+﻿using Entities.SMSRegex;
 using ManaDataTransferObject.SMSRegex;
 using ManaViewModel.SMSRegex;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.FilterRangeAsync;
+using SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.GetAllAsync;
+using SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.GetByIdAsync;
+using SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.SearchRangeAsync;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebFramework.Api;
-using ManaBaseData.Repositories.Models;
 
 namespace MyApi.Controllers.Api.v1
 {

@@ -1,6 +1,5 @@
 ﻿using Common;
 using Entities.ConfirmedTransaction;
-using ManaBaseData.Repositories;
 using Services.Base.Services;
 
 namespace Services.Services.ConfirmedTransactionService

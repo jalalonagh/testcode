@@ -1,8 +1,4 @@
 ﻿using FluentValidation;
-using ManaEnums.Database;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.ComponentModel.DataAnnotations;
 
 namespace ManaEntitiesValidation.SMSConfirmation
 {

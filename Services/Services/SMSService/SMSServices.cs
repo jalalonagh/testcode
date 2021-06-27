@@ -1,6 +1,5 @@
 ﻿using Common;
 using Entities.SMS;
-using ManaBaseData.Repositories;
 using Services.Base.Services;
 
 namespace Services.Services.SMSService

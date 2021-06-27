@@ -1,6 +1,5 @@
 ﻿using Common;
 using Entities.Transaction;
-using ManaBaseData.Repositories;
 using Services.Base.Services;
 
 namespace Services.Services.TransactionService

@@ -1,5 +1,4 @@
 ﻿using ManaAutoMapper.Models;
-using System;
 
 namespace ManaDataTransferObject.Common
 {

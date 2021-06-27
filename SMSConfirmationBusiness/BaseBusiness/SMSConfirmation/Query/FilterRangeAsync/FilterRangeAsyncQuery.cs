@@ -1,6 +1,5 @@
 ﻿using BusinessBaseConfig.Configuration.Queries;
 using Entities.SMSConfirmation;
-using ManaBaseData.Repositories.Models;
 using Services.Models;
 using System.Collections.Generic;
 

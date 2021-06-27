@@ -1,7 +1,4 @@
-﻿using ManaBaseData.Repositories;
-using ManaBaseData.Repositories.Models;
-using ManaBaseEntity.Common;
-using Services.Models;
+﻿using Services.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

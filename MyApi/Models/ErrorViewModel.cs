@@ -1,5 +1,3 @@
-using System;
-
 namespace SignalRNotification.Models
 {
     public class ErrorViewModel

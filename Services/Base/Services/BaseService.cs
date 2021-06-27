@@ -1,7 +1,4 @@
-﻿using ManaBaseData.Repositories;
-using ManaBaseData.Repositories.Models;
-using ManaBaseEntity.Common;
-using ManaSpeedTester;
+﻿using ManaSpeedTester;
 using ManaSpeedTester.Models;
 using Services.Base.Contracts;
 using Services.Models;

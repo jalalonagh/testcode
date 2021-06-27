@@ -1,5 +1,4 @@
-﻿using ManaAutoMapper.Interfaces;
-using ManaDataTransferObject.Common;
+﻿using ManaDataTransferObject.Common;
 using ManaEnums.Entity.Financial.Transaction;
 
 namespace ManaDataTransferObject.Transaction

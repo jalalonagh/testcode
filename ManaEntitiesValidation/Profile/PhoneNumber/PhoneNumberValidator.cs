@@ -1,8 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using FluentValidation;
-using ManaEnums.Database;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using FluentValidation;
 
 namespace ManaEntitiesValidation.Profile.PhoneNumber
 {

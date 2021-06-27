@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace WebFramework.Configuration
 {
-   public class IdentityErrorDescriberPersian:IdentityErrorDescriber
+    public class IdentityErrorDescriberPersian : IdentityErrorDescriber
     {
         public override IdentityError DuplicateEmail(string email)
         {
@@ -71,7 +68,7 @@ namespace WebFramework.Configuration
                 Code = base.PasswordRequiresNonAlphanumeric().Code,
                 Description = $"پسورد باید شامل حروف نباشد"
             };
- 
+
         }
         public override IdentityError InvalidEmail(string email)
         {

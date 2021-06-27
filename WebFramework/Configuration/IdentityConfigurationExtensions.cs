@@ -1,7 +1,6 @@
 ﻿using Common;
 using Entities.User;
 using Entities.User.Role;
-using ManaBaseData;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
