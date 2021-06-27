@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ManaEntitiesValidation\ManaEntitiesValidation.csproj" />
+    <ProjectReference Include="..\SupplierSystem\SupplierBarecode.Entities\SupplierSystem.Entities.csproj" />
   </ItemGroup>
 
 </Project>

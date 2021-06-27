@@ -62,7 +62,6 @@ namespace WebFramework.Configuration
                     var defs = c.Target.Services
                         .OfType<TypedService>()
                         .Select(x => x.ServiceType.GetGenericTypeDefinition());
-
                     if (defs.Any(_types.Contains))
                         yield return c;
                 }

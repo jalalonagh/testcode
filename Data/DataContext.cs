@@ -3,6 +3,7 @@ using Entities;
 using ManaBaseData;
 using ManaBaseEntity.Common;
 using Microsoft.EntityFrameworkCore;
+using SupplierSystem.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -21,6 +22,7 @@ namespace Data
             base.OnModelCreating(modelBuilder);
             assemblies = assemblies.Append(typeof(IEntity).Assembly);
             assemblies = assemblies.Append(typeof(ISMSEntities).Assembly);
+            assemblies = assemblies.Append(typeof(ISupplierSystemEntity).Assembly);
             assemblies = assemblies.Append(typeof(IData).Assembly);
             modelBuilder.RegisterAllEntities<IEntity>(assemblies.ToArray());
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(IData).Assembly);

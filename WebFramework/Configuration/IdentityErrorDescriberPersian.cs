@@ -31,7 +31,6 @@ namespace WebFramework.Configuration
                 Description = $"پسورد باید شامل اعداد باشد"
             };
         }
-
         public override IdentityError PasswordRequiresUpper()
         {
             return new IdentityError
@@ -82,7 +81,6 @@ namespace WebFramework.Configuration
                 Description = $"ایمیل {email} صحیح نمی باشد"
             };
         }
-
         public override IdentityError DuplicateUserName(string userName)
         {
             return new IdentityError
@@ -91,7 +89,6 @@ namespace WebFramework.Configuration
                 Description = $"قبلا این کاربر ثبت نام شده است"
             };
         }
-
         public override IdentityError InvalidUserName(string userName)
         {
             return new IdentityError
