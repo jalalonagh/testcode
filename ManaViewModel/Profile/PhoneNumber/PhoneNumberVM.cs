@@ -1,4 +1,5 @@
 ﻿using ManaAutoMapper.Interfaces;
+using ManaEnums.Entity.Phone;
 using ManaViewModel.Common;
 
 namespace ManaViewModel.Profile.PhoneNumber

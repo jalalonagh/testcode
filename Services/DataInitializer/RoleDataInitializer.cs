@@ -1,4 +1,5 @@
 ﻿using Entities.User.Role;
+using ManaBaseData.Repositories;
 using System.Linq;
 
 namespace Services.DataInitializer

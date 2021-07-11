@@ -1,4 +1,6 @@
-﻿using Entities.Profile;
+﻿using Data.Repositories.Models;
+using Entities.Profile;
+using ManaBaseData.Repositories.Models;
 using ManaDataTransferObject.Profile;
 using ManaViewModel.Profile;
 using MediatR;

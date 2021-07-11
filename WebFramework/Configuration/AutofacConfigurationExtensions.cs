@@ -4,6 +4,8 @@ using Autofac.Extensions.DependencyInjection;
 using BusinessBaseConfig;
 using Common;
 using Entities;
+using ManaBaseData;
+using ManaBaseData.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

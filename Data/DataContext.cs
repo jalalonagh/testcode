@@ -1,5 +1,7 @@
 ﻿using Common.Utilities;
 using Entities;
+using ManaBaseData;
+using ManaBaseEntity.Common;
 using Microsoft.EntityFrameworkCore;
 using SupplierSystem.Entities;
 using System.Collections.Generic;

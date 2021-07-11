@@ -1,4 +1,5 @@
 ﻿using ManaAutoMapper.Interfaces;
+using ManaEnums.Entity.Financial.Transaction;
 using ManaViewModel.Common;
 
 namespace ManaViewModel.Transaction

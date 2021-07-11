@@ -1,4 +1,6 @@
-﻿using Entities.Phone;
+﻿using Data.Repositories.Models;
+using Entities.Phone;
+using ManaBaseData.Repositories.Models;
 using ManaDataTransferObject.Phone;
 using ManaViewModel.Phone;
 using MediatR;

@@ -1,5 +1,6 @@
 ﻿using Common;
 using Entities.SMSRegex;
+using ManaBaseData.Repositories;
 using Services.Base.Services;
 
 namespace Services.Services.SMSRegexService

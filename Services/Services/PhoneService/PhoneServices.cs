@@ -1,5 +1,6 @@
 ﻿using Common;
 using Entities.Phone;
+using ManaBaseData.Repositories;
 using Services.Base.Services;
 
 namespace Services.Services.PhoneService

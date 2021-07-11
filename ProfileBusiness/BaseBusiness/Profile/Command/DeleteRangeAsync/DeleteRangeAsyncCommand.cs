@@ -1,5 +1,6 @@
 ﻿using BusinessBaseConfig.Configuration.Commands;
 using ManaDataTransferObject.Profile;
+using Services;
 using Services.Models;
 using System.Collections.Generic;
 

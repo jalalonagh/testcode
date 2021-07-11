@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using ManaAutoMapper.CustomMapping;
+using ManaAutoMapper.Interfaces;
 using System;
+using System.Linq;
 using System.Reflection;
 
 namespace ManaAutoMapper

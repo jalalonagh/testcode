@@ -1,4 +1,8 @@
-﻿using FluentValidation;
+﻿using Common.Utilities;
+using FluentValidation;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 
 namespace ManaEntitiesValidation.User.ChairToUser
 {

@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using Data;
+using ManaBaseData;
 using ManaDapper;
 using Microsoft.EntityFrameworkCore;
 

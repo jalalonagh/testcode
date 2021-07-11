@@ -1,6 +1,9 @@
-﻿using Data.User;
+﻿using Data.Repositories;
+using Data.User;
+using Entities;
 using Entities.User;
 using Microsoft.AspNetCore.Identity;
+using System.Linq;
 
 namespace Services.DataInitializer
 {

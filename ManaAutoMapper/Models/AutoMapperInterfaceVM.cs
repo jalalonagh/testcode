@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ManaBaseEntity.Common;
+using System;
 
 namespace ManaAutoMapper.Models
 {

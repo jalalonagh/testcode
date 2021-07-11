@@ -1,10 +1,4 @@
-﻿using ManaDataTransferObject.SMSConfirmation;
-using ManaResourceManager;
-using ManaViewModel.SMSConfirmation;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Command.AddAsync;
+﻿using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Command.AddAsync;
 using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Command.AddRangeAsync;
 using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Command.DeleteAsync;
 using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Command.DeleteByIdAsync;
@@ -14,6 +8,12 @@ using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Command.UpdateAs
 using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Command.UpdateFieldRangeAsync;
 using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Command.UpdateFieldRangeByIdAsync;
 using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Command.UpdateRangeAsync;
+using ManaDataTransferObject.SMSConfirmation;
+using ManaResourceManager;
+using ManaViewModel.SMSConfirmation;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebFramework.Api;

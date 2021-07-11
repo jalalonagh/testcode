@@ -1,4 +1,5 @@
-﻿using ManaViewModel.Common;
+﻿using ManaEnums.Entity.Phone;
+using ManaViewModel.Common;
 
 namespace ManaViewModel.Phone
 {

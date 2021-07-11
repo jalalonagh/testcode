@@ -1,5 +1,6 @@
 ﻿using BusinessBaseConfig.Configuration.Queries;
 using Entities.SMSRegex;
+using ManaBaseData.Repositories.Models;
 using Services.Models;
 using System.Collections.Generic;
 

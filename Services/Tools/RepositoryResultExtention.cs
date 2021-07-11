@@ -1,4 +1,5 @@
-﻿using Services.Models;
+﻿using Data.Repositories.Models;
+using Services.Models;
 
 namespace Services.Tools
 {

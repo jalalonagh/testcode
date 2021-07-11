@@ -1,4 +1,5 @@
-﻿using ManaDataTransferObject.Common;
+﻿using ManaBaseEntity.Common;
+using ManaDataTransferObject.Common;
 using ManaViewModel.Common;
 using Services.Models;
 using System.Collections.Generic;

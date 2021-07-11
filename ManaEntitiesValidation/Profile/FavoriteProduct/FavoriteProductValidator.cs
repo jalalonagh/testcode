@@ -1,4 +1,7 @@
 ﻿using FluentValidation;
+using ManaEnums.Database;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ManaEntitiesValidation.Profile.FavoriteProduct
 {

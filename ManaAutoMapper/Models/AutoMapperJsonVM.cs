@@ -1,4 +1,6 @@
-﻿namespace ManaAutoMapper.Models
+﻿using ManaBaseEntity.Common;
+
+namespace ManaAutoMapper.Models
 {
     public class AutoMapperJsonVM<TDto, TEntity, TKey> : JsonVM<TDto, TEntity, TKey>
         where TDto : class, new()
