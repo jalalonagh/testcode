@@ -4,7 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Jalal Onagh</Authors>
-    <Company>Managostar Ara</Company>
+    <Company>Dejavu</Company>
     <Description>basic items for create entity</Description>
   </PropertyGroup>
 
