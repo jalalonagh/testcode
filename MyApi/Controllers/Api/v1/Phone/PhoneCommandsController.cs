@@ -36,86 +36,86 @@ namespace MyApi.Controllers.Api.v1
 
         #region POST
         [HttpPost("[action]")]
-        public async Task<ApiResult<PhoneVM>> AddAsync(PhoneDTO model)
+        public async Task<IApiResult<PhoneVM>> AddAsync(PhoneDTO model)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<PhoneVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<PhoneVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new AddAsyncCommand(model));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
         [HttpPost("[action]")]
-        public async Task<ApiResult<IEnumerable<PhoneVM>>> AddRangeAsync(IEnumerable<PhoneDTO> models)
+        public async Task<IApiResult<IEnumerable<PhoneVM>>> AddRangeAsync(IEnumerable<PhoneDTO> models)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<IEnumerable<PhoneVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return  false.Generate<IEnumerable<PhoneVM>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new AddRangeAsyncCommand(models));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
         #endregion
         #region DELETE
         [HttpDelete("[action]")]
-        public async Task<ApiResult<PhoneVM>> DeleteAsync(PhoneDTO model)
+        public async Task<IApiResult<PhoneVM>> DeleteAsync(PhoneDTO model)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<PhoneVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<PhoneVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new DeleteAsyncCommand(model));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
         [HttpDelete("[action]")]
-        public async Task<ApiResult<PhoneVM>> DeleteByIdAsync(int id)
+        public async Task<IApiResult<PhoneVM>> DeleteByIdAsync(int id)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<PhoneVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<PhoneVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new DeleteByIdAsyncCommand(id));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
         [HttpDelete("[action]")]
-        public async Task<ApiResult<IEnumerable<PhoneVM>>> DeleteRangeAsync(IEnumerable<PhoneDTO> models)
+        public async Task<IApiResult<IEnumerable<PhoneVM>>> DeleteRangeAsync(IEnumerable<PhoneDTO> models)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<IEnumerable<PhoneVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<IEnumerable<PhoneVM>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new DeleteRangeAsyncCommand(models));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
         [HttpDelete("[action]")]
-        public async Task<ApiResult<IEnumerable<PhoneVM>>> DeleteRangeByIdsAsync(IEnumerable<int> ids)
+        public async Task<IApiResult<IEnumerable<PhoneVM>>> DeleteRangeByIdsAsync(IEnumerable<int> ids)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<IEnumerable<PhoneVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<IEnumerable<PhoneVM>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new DeleteRangeByIdsAsyncCommand(ids));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
         #endregion
         #region PUT
         [HttpPut("[action]")]
-        public async Task<ApiResult<PhoneVM>> UpdateAsync(PhoneDTO model)
+        public async Task<IApiResult<PhoneVM>> UpdateAsync(PhoneDTO model)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<PhoneVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<PhoneVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new UpdateAsyncCommand(model));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
         [HttpPut("[action]")]
-        public async Task<ApiResult<PhoneVM>> UpdateFieldRangeAsync(PhoneDTO model, string fields)
+        public async Task<IApiResult<PhoneVM>> UpdateFieldRangeAsync(PhoneDTO model, string fields)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<PhoneVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<PhoneVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new UpdateFieldRangeAsyncCommand(model, fields.Split(",")));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
         [HttpPut("[action]")]
-        public async Task<ApiResult<PhoneVM>> UpdateFieldRangeByIdAsync(int id, KeyValuePair<string, dynamic> fields)
+        public async Task<IApiResult<PhoneVM>> UpdateFieldRangeByIdAsync(int id, KeyValuePair<string, dynamic> fields)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<PhoneVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<PhoneVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new UpdateFieldRangeByIdAsyncCommand(id, fields));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
         [HttpPut("[action]")]
-        public async Task<ApiResult<IEnumerable<PhoneVM>>> UpdateRangeAsync(IEnumerable<PhoneDTO> models)
+        public async Task<IApiResult<IEnumerable<PhoneVM>>> UpdateRangeAsync(IEnumerable<PhoneDTO> models)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<IEnumerable<PhoneVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<IEnumerable<PhoneVM>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new UpdateRangeAsyncCommand(models));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }

@@ -20,6 +20,7 @@ using System.Linq;
 using System.Reflection;
 using TransactionBusiness;
 using UserBusiness;
+using WebFramework.Api;
 
 namespace WebFramework.Configuration
 {
@@ -66,6 +67,8 @@ namespace WebFramework.Configuration
         public static IServiceProvider BuildAutofacServiceProvider(this IServiceCollection services, IConfiguration configuration)
         {
             var containerBuilder = new ContainerBuilder();
+            services.AddSingleton(typeof(IApiResult), typeof(ApiResult));
+            services.AddSingleton(typeof(IApiResult<>), typeof(ApiResult<>));
             containerBuilder.Populate(services);
             containerBuilder.AddServices();
             containerBuilder.RegisterModule(new MediatorModule());

@@ -1,6 +1,4 @@
-﻿using Common;
-using Common.Utilities;
-using ManaEnums.Api;
+﻿using ManaEnums.Api;
 using ManaEnums.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -9,7 +7,7 @@ using System.Linq;
 
 namespace WebFramework.Api
 {
-    public class ApiResult
+    public class ApiResult : IApiResult
     {
         public bool IsSuccess { get; set; }
         public ApiResultStatus StatusCode { get; set; }
@@ -24,45 +22,16 @@ namespace WebFramework.Api
             Message = message ?? statusCode.ToDisplay();
         }
 
-        #region Implicit Operators
-        public static implicit operator ApiResult(OkResult result)
+        public ApiResult Generate(bool isSuccess, ApiResultStatus statusCode, string message = null)
         {
-            return new ApiResult(true, ApiResultStatus.SUCCESS);
+            IsSuccess = isSuccess;
+            StatusCode = statusCode;
+            Message = message ?? statusCode.ToDisplay();
+            return this;
         }
-
-        public static implicit operator ApiResult(BadRequestResult result)
-        {
-            return new ApiResult(false, ApiResultStatus.BAD_REQUEST);
-        }
-
-        public static implicit operator ApiResult(BadRequestObjectResult result)
-        {
-            var message = result.Value.ToString();
-            if (result.Value is SerializableError errors)
-            {
-                var errorMessages = errors.SelectMany(p => (string[])p.Value).Distinct();
-                message = string.Join(" | ", errorMessages);
-            }
-            return new ApiResult(false, ApiResultStatus.BAD_REQUEST, message);
-        }
-
-        public static implicit operator ApiResult(ContentResult result)
-        {
-            return new ApiResult(true, ApiResultStatus.SUCCESS, result.Content);
-        }
-
-        public static implicit operator ApiResult(NotFoundResult result)
-        {
-            return new ApiResult(false, ApiResultStatus.NOT_FOUND);
-        }
-        public static implicit operator ApiResult(UnauthorizedResult result)
-        {
-            return new ApiResult(false, ApiResultStatus.UNAUTHORIZED);
-        }
-        #endregion
     }
 
-    public class ApiResult<TData> : ApiResult
+    public class ApiResult<TData> : ApiResult, IApiResult<TData>
         where TData : class
     {
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
@@ -73,58 +42,6 @@ namespace WebFramework.Api
         {
             Data = data;
         }
-
-        #region Implicit Operators
-        public static implicit operator ApiResult<TData>(TData data)
-        {
-            return new ApiResult<TData>(true, ApiResultStatus.SUCCESS, data);
-        }
-
-        public static implicit operator ApiResult<TData>(OkResult result)
-        {
-            return new ApiResult<TData>(true, ApiResultStatus.SUCCESS, null);
-        }
-
-        public static implicit operator ApiResult<TData>(OkObjectResult result)
-        {
-            return new ApiResult<TData>(true, ApiResultStatus.SUCCESS, (TData)result.Value);
-        }
-
-        public static implicit operator ApiResult<TData>(BadRequestResult result)
-        {
-            return new ApiResult<TData>(false, ApiResultStatus.BAD_REQUEST, null);
-        }
-
-        public static implicit operator ApiResult<TData>(BadRequestObjectResult result)
-        {
-            var message = result.Value.ToString();
-            if (result.Value is SerializableError errors)
-            {
-                var errorMessages = errors.SelectMany(p => (string[])p.Value).Distinct();
-                message = string.Join(" | ", errorMessages);
-            }
-            return new ApiResult<TData>(false, ApiResultStatus.BAD_REQUEST, null, message);
-        }
-
-        public static implicit operator ApiResult<TData>(ContentResult result)
-        {
-            return new ApiResult<TData>(true, ApiResultStatus.SUCCESS, null, result.Content);
-        }
-
-        public static implicit operator ApiResult<TData>(NotFoundResult result)
-        {
-            return new ApiResult<TData>(false, ApiResultStatus.NOT_FOUND, null);
-        }
-
-        public static implicit operator ApiResult<TData>(NotFoundObjectResult result)
-        {
-            return new ApiResult<TData>(false, ApiResultStatus.NOT_FOUND, (TData)result.Value);
-        }
-        public static implicit operator ApiResult<TData>(UnauthorizedObjectResult result)
-        {
-            return new ApiResult<TData>(false, ApiResultStatus.UNAUTHORIZED, (TData)result.Value);
-        }
-        #endregion
     }
 
     public class ApiStructResult<TStruct> : ApiResult
