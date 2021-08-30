@@ -5,11 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Common" Version="1.0.0" />
     <PackageReference Include="ManaBaseEntity" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Common.csproj" />
+    <PackageReference Include="ManaEnums" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
