@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Converters;
@@ -10,10 +9,6 @@ namespace WebFramework.Configuration
     public static class MVCServiceCollectionExtensions
     {
         readonly static string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-        public static void UseMinimalMvc(this IApplicationBuilder app)
-        {
-            app.UseCors(options => options.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
-        }
         public static void AddMinimalMvc(this IServiceCollection services)
         {
             services.AddMvcCore(options =>
@@ -40,15 +35,7 @@ namespace WebFramework.Configuration
                      option.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.None;
                      option.SerializerSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
                  })
-            .AddCors(options =>
-            {
-                options.AddPolicy(MyAllowSpecificOrigins,
-                    builder =>
-                        builder.AllowAnyOrigin()
-                        .AllowAnyHeader()
-                        .AllowAnyMethod());
-            })
-            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            .SetCompatibilityVersion(CompatibilityVersion.Latest);
         }
     }
 }

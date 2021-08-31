@@ -9,10 +9,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebFramework.Api;
 using WebFramework.Resolvers;
+using Common;
 
 namespace WebFramework.Processing
 {
-    public class ResponseWriteTools : IResponseWriteTools
+    public class ResponseWriteTools : IResponseWriteTools, ISingletonDependency
     {
         public async Task<HttpContext> WriteToResponseAsync(HttpContext context, ApiResultStatus status, string message)
         {

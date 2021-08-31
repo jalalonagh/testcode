@@ -1,10 +1,11 @@
-﻿using ManaEnums.Api;
+﻿using Common;
+using ManaEnums.Api;
 using ManaEnums.Extensions;
 using Newtonsoft.Json;
 
 namespace WebFramework.Api
 {
-    public class ApiResult : IApiResult
+    public class ApiResult : IApiResult, ISingletonDependency
     {
         public bool IsSuccess { get; set; }
         public ApiResultStatus StatusCode { get; set; }
@@ -24,7 +25,7 @@ namespace WebFramework.Api
             return this;
         }
     }
-    public class ApiResult<TData> : ApiResult, IApiResult<TData>
+    public class ApiResult<TData> : ApiResult, IApiResult<TData>, ISingletonDependency
         where TData : class
     {
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]

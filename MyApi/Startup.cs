@@ -74,12 +74,12 @@ namespace MyApi
             app.UseStaticFiles(new StaticFileOptions { });
             app.UseElmah();
             app.UseHttpsRedirection();
-            app.UseCors(MyAllowSpecificOrigins);
             app.UseSwaggerAndUI();
             app.UseSessionService();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseEndpoints((endpoints) =>
             {
                 endpoints.MapControllerRoute(

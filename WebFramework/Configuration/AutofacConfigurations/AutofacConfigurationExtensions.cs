@@ -10,8 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Services.DataInitializer;
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 using WebFramework.Api;
-using WebFramework.Processing;
 
 namespace WebFramework.Configuration.AutofacConfigurations
 {
@@ -20,20 +21,16 @@ namespace WebFramework.Configuration.AutofacConfigurations
         public static void AddServices(this ContainerBuilder containerBuilder)
         {
             containerBuilder.RegisterGeneric(typeof(Repository<,>)).As(typeof(IRepository<,>)).InstancePerLifetimeScope();
-            var commonAssembly = typeof(SiteSettings).Assembly;
-            var entitiesAssembly = typeof(ISMSEntities).Assembly;
-            var dataAssembly = typeof(ApplicationDbContext).Assembly;
-            var servicesAssembly = typeof(IDataInitializer).Assembly;
-            var BLAssembly = typeof(IBL).Assembly;
-            containerBuilder.RegisterAssemblyTypes(commonAssembly, entitiesAssembly, dataAssembly, servicesAssembly, BLAssembly)
+            var list = new List<Assembly>() { typeof(ApiResult).Assembly, typeof(SiteSettings).Assembly, typeof(ISMSEntities).Assembly, typeof(ApplicationDbContext).Assembly, typeof(IDataInitializer).Assembly, typeof(IBL).Assembly };
+            containerBuilder.RegisterAssemblyTypes(list.ToArray())
                 .AssignableTo<IScopedDependency>()
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
-            containerBuilder.RegisterAssemblyTypes(commonAssembly, entitiesAssembly, dataAssembly, servicesAssembly, BLAssembly)
+            containerBuilder.RegisterAssemblyTypes(list.ToArray())
                 .AssignableTo<ITransientDependency>()
                 .AsImplementedInterfaces()
                 .InstancePerDependency();
-            containerBuilder.RegisterAssemblyTypes(commonAssembly, entitiesAssembly, dataAssembly, servicesAssembly, BLAssembly)
+            containerBuilder.RegisterAssemblyTypes(list.ToArray())
                 .AssignableTo<ISingletonDependency>()
                 .AsImplementedInterfaces()
                 .SingleInstance();
@@ -41,9 +38,6 @@ namespace WebFramework.Configuration.AutofacConfigurations
         public static IServiceProvider BuildAutofacServiceProvider(this IServiceCollection services, IConfiguration configuration)
         {
             var containerBuilder = new ContainerBuilder();
-            services.AddSingleton(typeof(IApiResult), typeof(ApiResult));
-            services.AddSingleton(typeof(IApiResult<>), typeof(ApiResult<>));
-            services.AddSingleton(typeof(IResponseWriteTools), typeof(ResponseWriteTools));
             containerBuilder.Populate(services);
             containerBuilder.AddServices();
             containerBuilder.RegisterModule(new MediatorModule());
