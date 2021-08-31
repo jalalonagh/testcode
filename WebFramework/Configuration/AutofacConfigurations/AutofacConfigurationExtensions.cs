@@ -13,7 +13,7 @@ using System;
 using WebFramework.Api;
 using WebFramework.Processing;
 
-namespace WebFramework.Configuration.Autofac
+namespace WebFramework.Configuration.AutofacConfigurations
 {
     public static class AutofacConfigurationExtensions
     {

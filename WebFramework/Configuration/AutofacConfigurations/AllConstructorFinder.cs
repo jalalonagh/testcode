@@ -4,7 +4,7 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Reflection;
 
-namespace WebFramework.Configuration.Autofac
+namespace WebFramework.Configuration.AutofacConfigurations
 {
     internal class AllConstructorFinder : IConstructorFinder
     {

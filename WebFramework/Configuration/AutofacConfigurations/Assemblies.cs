@@ -7,7 +7,7 @@ using System.Reflection;
 using TransactionBusiness;
 using UserBusiness;
 
-namespace WebFramework.Configuration.Autofac
+namespace WebFramework.Configuration.AutofacConfigurations
 {
     public static class Assemblies
     {

@@ -11,7 +11,7 @@ using SwaggerApi.V5;
 using System;
 using System.Globalization;
 using WebFramework.Configuration;
-using WebFramework.Configuration.Autofac;
+using WebFramework.Configuration.AutofacConfigurations;
 using WebFramework.Extensions;
 using WebFramework.MiddleWares;
 using WebFramework.Permission;
