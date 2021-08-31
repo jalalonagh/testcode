@@ -1,4 +1,4 @@
-﻿using Entities.Common;
+﻿using ManaBaseEntity.Common;
 using System;
 
 namespace ManaAutoMapper.Models
@@ -9,7 +9,7 @@ namespace ManaAutoMapper.Models
         where TEntity : BaseEntity, new()
         where TKey : struct
     {
-        public AutoMapperDTO() {}
+        public AutoMapperDTO() { }
 
         public TEntity ToEntity()
         {

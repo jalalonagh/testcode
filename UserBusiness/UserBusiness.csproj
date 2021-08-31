@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <PackageReference Include="BusinessBaseConfig" Version="1.0.0" />
-    <PackageReference Include="CSharpFunctionalExtensions" Version="2.14.1" />
+    <PackageReference Include="CSharpFunctionalExtensions" Version="2.20.0" />
     <PackageReference Include="ManaDapper" Version="1.0.0" />
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />

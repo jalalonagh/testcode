@@ -6,14 +6,13 @@
     <Authors>Jalal Onagh</Authors>
     <Company>Managostar Ara</Company>
     <Description>generic auto mapper component for using to map data from entity to dto or entity to vm</Description>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Services\Services.csproj" />
+    <PackageReference Include="ManaBaseEntity" Version="1.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
 </Project>

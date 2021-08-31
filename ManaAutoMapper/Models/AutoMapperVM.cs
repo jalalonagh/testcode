@@ -1,4 +1,4 @@
-﻿using Entities.Common;
+﻿using ManaBaseEntity.Common;
 using System;
 
 namespace ManaAutoMapper.Models
@@ -9,7 +9,7 @@ namespace ManaAutoMapper.Models
         where TEntity : BaseEntity, new()
         where TKey : struct
     {
-        public AutoMapperVM() {}
+        public AutoMapperVM() { }
         public TEntity ToEntity()
         {
             var mapper = LazySingletonVM.SetCustomAssembly(typeof(TVM).Assembly);
