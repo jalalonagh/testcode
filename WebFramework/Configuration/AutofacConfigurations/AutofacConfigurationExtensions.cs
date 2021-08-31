@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using BaseBusiness;
 using BusinessBaseConfig;
 using Common;
 using Entities;
@@ -9,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Services.DataInitializer;
+using Services.Models;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -21,7 +23,8 @@ namespace WebFramework.Configuration.AutofacConfigurations
         public static void AddServices(this ContainerBuilder containerBuilder)
         {
             containerBuilder.RegisterGeneric(typeof(Repository<,>)).As(typeof(IRepository<,>)).InstancePerLifetimeScope();
-            var list = new List<Assembly>() { typeof(ApiResult).Assembly, typeof(SiteSettings).Assembly, typeof(ISMSEntities).Assembly, typeof(ApplicationDbContext).Assembly, typeof(IDataInitializer).Assembly, typeof(IBL).Assembly };
+            var list = new List<Assembly>() { typeof(ApiResult).Assembly, typeof(SiteSettings).Assembly, typeof(ISMSEntities).Assembly, typeof(ApplicationDbContext).Assembly,
+                typeof(IDataInitializer).Assembly, typeof(IBL).Assembly, typeof(AccessToken).Assembly, typeof(Crud<,,,,>).Assembly };
             containerBuilder.RegisterAssemblyTypes(list.ToArray())
                 .AssignableTo<IScopedDependency>()
                 .AsImplementedInterfaces()

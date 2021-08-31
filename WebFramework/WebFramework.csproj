@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BaseBusiness\BaseBusiness.csproj" />
     <ProjectReference Include="..\PhoneBusiness\PhoneBusiness.csproj" />
     <ProjectReference Include="..\ProfileBusiness\ProfileBusiness.csproj" />
     <ProjectReference Include="..\SMSBusiness\SMSBusiness.csproj" />

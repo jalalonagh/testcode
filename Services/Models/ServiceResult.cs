@@ -1,9 +1,10 @@
-﻿using ManaEnums.Api;
+﻿using Common;
+using ManaEnums.Api;
 using ManaEnums.Extensions;
 
 namespace Services.Models
 {
-    public class ServiceResult
+    public class ServiceResult : IServiceResult, ISingletonDependency
     {
         public bool IsSuccess { get; set; }
         public ApiResultStatus StatusCode { get; set; }
@@ -17,7 +18,7 @@ namespace Services.Models
         }
     }
 
-    public class ServiceResult<TData> : ServiceResult
+    public class ServiceResult<TData> : ServiceResult, IServiceResult<TData>, ISingletonDependency
         where TData : class
     {
         public TData Data { get; set; }
@@ -28,11 +29,21 @@ namespace Services.Models
             Data = data;
         }
 
-        #region Implicit Operators
+        public TData GetData()
+        {
+            return Data;
+        }
+
+        public bool GetIsSuccess()
+        {
+            return IsSuccess;
+        }
+
         public static implicit operator ServiceResult<TData>(TData data)
         {
+            if (data == null)
+                return new ServiceResult<TData>(false, ApiResultStatus.NOT_FOUND, null);
             return new ServiceResult<TData>(true, ApiResultStatus.SUCCESS, data);
         }
-        #endregion
     }
 }
