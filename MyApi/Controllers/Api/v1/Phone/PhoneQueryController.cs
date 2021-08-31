@@ -1,5 +1,4 @@
-﻿using Data.Repositories.Models;
-using Entities.Phone;
+﻿using Entities.Phone;
 using ManaBaseData.Repositories.Models;
 using ManaDataTransferObject.Phone;
 using ManaViewModel.Phone;
@@ -29,25 +28,25 @@ namespace MyApi.Controllers.Api.v1
         }
 
         [HttpPost("[action]")]
-        public async Task<ApiResult<IEnumerable<PhoneVM>>> FilterRangeAsync(FilterRangeModel<PhoneSearch> model)
+        public async Task<IApiResult<IEnumerable<PhoneVM>>> FilterRangeAsync(FilterRangeModel<PhoneSearch> model)
         {
             var result = await mediator.Send(new FilterRangeAsyncQuery(model));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
         [HttpGet("[action]")]
-        public async Task<ApiResult<IEnumerable<PhoneVM>>> GetAllAsync(int total = 0, int more = int.MaxValue)
+        public async Task<IApiResult<IEnumerable<PhoneVM>>> GetAllAsync(int total = 0, int more = int.MaxValue)
         {
             var result = await mediator.Send(new PhoneGetAllAsyncQuery(total, more));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
         [HttpPost("[action]")]
-        public async Task<ApiResult<IEnumerable<PhoneVM>>> SearchRangeAsync(SearchRangeModel<Entities.Phone.Phone> model)
+        public async Task<IApiResult<IEnumerable<PhoneVM>>> SearchRangeAsync(SearchRangeModel<Entities.Phone.Phone> model)
         {
             var result = await mediator.Send(new SearchRangeAsyncQuery(model));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }
         [HttpPost("[action]")]
-        public async Task<ApiResult<PhoneVM>> GetByIdAsync(int[] ids)
+        public async Task<IApiResult<PhoneVM>> GetByIdAsync(int[] ids)
         {
             var result = await mediator.Send(new GetByIdAsyncQuery(ids));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();

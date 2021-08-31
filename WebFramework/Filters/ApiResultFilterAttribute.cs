@@ -1,5 +1,4 @@
-﻿using Common;
-using ManaEnums.Api;
+﻿using ManaEnums.Api;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Collections.Generic;

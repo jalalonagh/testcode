@@ -1,18 +1,17 @@
-﻿using SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.FilterRangeAsync;
-using SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.GetAllAsync;
-using SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.GetByIdAsync;
-using SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.SearchRangeAsync;
-using Data.Repositories.Models;
-using Entities.SMSRegex;
+﻿using Entities.SMSRegex;
+using ManaBaseData.Repositories.Models;
 using ManaDataTransferObject.SMSRegex;
 using ManaViewModel.SMSRegex;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.FilterRangeAsync;
+using SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.GetAllAsync;
+using SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.GetByIdAsync;
+using SMSRegexBusiness.BaseBusinessLevel.SMSRegex.Query.SearchRangeAsync;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebFramework.Api;
-using ManaBaseData.Repositories.Models;
 
 namespace MyApi.Controllers.Api.v1
 {
@@ -29,25 +28,25 @@ namespace MyApi.Controllers.Api.v1
         }
 
         [HttpPost("[action]")]
-        public async Task<ApiResult<IEnumerable<SMSRegexVM>>> FilterRangeAsync(FilterRangeModel<SMSRegexSearch> model)
+        public async Task<IApiResult<IEnumerable<SMSRegexVM>>> FilterRangeAsync(FilterRangeModel<SMSRegexSearch> model)
         {
             var result = await mediator.Send(new FilterRangeAsyncQuery(model));
             return result.ToApiResult<Entities.SMSRegex.SMSRegex, SMSRegexDTO, SMSRegexVM, int>();
         }
         [HttpGet("[action]")]
-        public async Task<ApiResult<IEnumerable<SMSRegexVM>>> GetAllAsync(int total = 0, int more = int.MaxValue)
+        public async Task<IApiResult<IEnumerable<SMSRegexVM>>> GetAllAsync(int total = 0, int more = int.MaxValue)
         {
             var result = await mediator.Send(new GetAllAsyncQuery(total, more));
             return result.ToApiResult<Entities.SMSRegex.SMSRegex, SMSRegexDTO, SMSRegexVM, int>();
         }
         [HttpPost("[action]")]
-        public async Task<ApiResult<IEnumerable<SMSRegexVM>>> SearchRangeAsync(SearchRangeModel<Entities.SMSRegex.SMSRegex> model)
+        public async Task<IApiResult<IEnumerable<SMSRegexVM>>> SearchRangeAsync(SearchRangeModel<Entities.SMSRegex.SMSRegex> model)
         {
             var result = await mediator.Send(new SearchRangeAsyncQuery(model));
             return result.ToApiResult<Entities.SMSRegex.SMSRegex, SMSRegexDTO, SMSRegexVM, int>();
         }
         [HttpPost("[action]")]
-        public async Task<ApiResult<SMSRegexVM>> GetByIdAsync(int[] ids)
+        public async Task<IApiResult<SMSRegexVM>> GetByIdAsync(int[] ids)
         {
             var result = await mediator.Send(new GetByIdAsyncQuery(ids));
             return result.ToApiResult<Entities.SMSRegex.SMSRegex, SMSRegexDTO, SMSRegexVM, int>();

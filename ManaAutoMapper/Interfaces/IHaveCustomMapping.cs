@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-
-namespace ManaAutoMapper.Interfaces
+﻿namespace ManaAutoMapper.Interfaces
 {
     public interface IHaveCustomMapping
     {

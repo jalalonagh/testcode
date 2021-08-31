@@ -1,8 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Threading;
-using System.Threading.Tasks;
 using WebFramework.Api;
 
 namespace MyApi.Controllers.Api.v1
@@ -18,12 +16,5 @@ namespace MyApi.Controllers.Api.v1
             _logger = logger;
             mediator = _mediator;
         }
-
-        //[HttpGet("[action]")]
-        //public async Task<ApiResult> AgainSendValidCode(string username, CancellationToken cancellationToken)
-        //{
-        //    var result = await _userService.AgainSendValidCode(username, cancellationToken);
-        //    return result.ToApiResult();
-        //}
     }
 }

@@ -34,91 +34,85 @@ namespace MyApi.Controllers.Api.v1
             resource = ResourceManagerSingleton.GetInstance();
         }
 
-        #region POST
         [HttpPost("[action]")]
-        public async Task<ApiResult<ProfileVM>> AddAsync(ProfileDTO model)
+        public async Task<IApiResult<ProfileVM>> AddAsync(ProfileDTO model)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<ProfileVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<ProfileVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new AddAsyncCommand(model));
             return result.ToApiResult<Entities.Profile.Profile, ProfileDTO, ProfileVM, int>();
         }
         [HttpPost("[action]")]
-        public async Task<ApiResult<IEnumerable<ProfileVM>>> AddRangeAsync(IEnumerable<ProfileDTO> models)
+        public async Task<IApiResult<IEnumerable<ProfileVM>>> AddRangeAsync(IEnumerable<ProfileDTO> models)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<IEnumerable<ProfileVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<IEnumerable<ProfileVM>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new AddRangeAsyncCommand(models));
             return result.ToApiResult<Entities.Profile.Profile, ProfileDTO, ProfileVM, int>();
         }
-        #endregion
-        #region DELETE
         [HttpDelete("[action]")]
-        public async Task<ApiResult<ProfileVM>> DeleteAsync(ProfileDTO model)
+        public async Task<IApiResult<ProfileVM>> DeleteAsync(ProfileDTO model)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<ProfileVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<ProfileVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new DeleteAsyncCommand(model));
             return result.ToApiResult<Entities.Profile.Profile, ProfileDTO, ProfileVM, int>();
         }
         [HttpDelete("[action]")]
-        public async Task<ApiResult<ProfileVM>> DeleteByIdAsync(int id)
+        public async Task<IApiResult<ProfileVM>> DeleteByIdAsync(int id)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<ProfileVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<ProfileVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new DeleteByIdAsyncCommand(id));
             return result.ToApiResult<Entities.Profile.Profile, ProfileDTO, ProfileVM, int>();
         }
         [HttpDelete("[action]")]
-        public async Task<ApiResult<IEnumerable<ProfileVM>>> DeleteRangeAsync(IEnumerable<ProfileDTO> models)
+        public async Task<IApiResult<IEnumerable<ProfileVM>>> DeleteRangeAsync(IEnumerable<ProfileDTO> models)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<IEnumerable<ProfileVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<IEnumerable<ProfileVM>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new DeleteRangeAsyncCommand(models));
             return result.ToApiResult<Entities.Profile.Profile, ProfileDTO, ProfileVM, int>();
         }
         [HttpDelete("[action]")]
-        public async Task<ApiResult<IEnumerable<ProfileVM>>> DeleteRangeByIdsAsync(IEnumerable<int> ids)
+        public async Task<IApiResult<IEnumerable<ProfileVM>>> DeleteRangeByIdsAsync(IEnumerable<int> ids)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<IEnumerable<ProfileVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<IEnumerable<ProfileVM>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new DeleteRangeByIdsAsyncCommand(ids));
             return result.ToApiResult<Entities.Profile.Profile, ProfileDTO, ProfileVM, int>();
         }
-        #endregion
-        #region PUT
         [HttpPut("[action]")]
-        public async Task<ApiResult<ProfileVM>> UpdateAsync(ProfileDTO model)
+        public async Task<IApiResult<ProfileVM>> UpdateAsync(ProfileDTO model)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<ProfileVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<ProfileVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new UpdateAsyncCommand(model));
             return result.ToApiResult<Entities.Profile.Profile, ProfileDTO, ProfileVM, int>();
         }
         [HttpPut("[action]")]
-        public async Task<ApiResult<ProfileVM>> UpdateFieldRangeAsync(ProfileDTO model, string fields)
+        public async Task<IApiResult<ProfileVM>> UpdateFieldRangeAsync(ProfileDTO model, string fields)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<ProfileVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<ProfileVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new UpdateFieldRangeAsyncCommand(model, fields.Split(",")));
             return result.ToApiResult<Entities.Profile.Profile, ProfileDTO, ProfileVM, int>();
         }
         [HttpPut("[action]")]
-        public async Task<ApiResult<ProfileVM>> UpdateFieldRangeByIdAsync(int id, KeyValuePair<string, dynamic> fields)
+        public async Task<IApiResult<ProfileVM>> UpdateFieldRangeByIdAsync(int id, KeyValuePair<string, dynamic> fields)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<ProfileVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<ProfileVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new UpdateFieldRangeByIdAsyncCommand(id, fields));
             return result.ToApiResult<Entities.Profile.Profile, ProfileDTO, ProfileVM, int>();
         }
         [HttpPut("[action]")]
-        public async Task<ApiResult<IEnumerable<ProfileVM>>> UpdateRangeAsync(IEnumerable<ProfileDTO> models)
+        public async Task<IApiResult<IEnumerable<ProfileVM>>> UpdateRangeAsync(IEnumerable<ProfileDTO> models)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<IEnumerable<ProfileVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<IEnumerable<ProfileVM>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new UpdateRangeAsyncCommand(models));
             return result.ToApiResult<Entities.Profile.Profile, ProfileDTO, ProfileVM, int>();
         }
-        #endregion
     }
 }

@@ -1,5 +1,4 @@
-﻿using Data.Repositories.Models;
-using Entities.Profile;
+﻿using Entities.Profile;
 using ManaBaseData.Repositories.Models;
 using ManaDataTransferObject.Profile;
 using ManaViewModel.Profile;
@@ -29,25 +28,25 @@ namespace MyApi.Controllers.Api.v1
         }
 
         [HttpPost("[action]")]
-        public async Task<ApiResult<IEnumerable<ProfileVM>>> FilterRangeAsync(FilterRangeModel<ProfileSearch> model)
+        public async Task<IApiResult<IEnumerable<ProfileVM>>> FilterRangeAsync(FilterRangeModel<ProfileSearch> model)
         {
             var result = await mediator.Send(new FilterRangeAsyncQuery(model));
             return result.ToApiResult<Entities.Profile.Profile, ProfileDTO, ProfileVM, int>();
         }
         [HttpGet("[action]")]
-        public async Task<ApiResult<IEnumerable<ProfileVM>>> GetAllAsync(int total = 0, int more = int.MaxValue)
+        public async Task<IApiResult<IEnumerable<ProfileVM>>> GetAllAsync(int total = 0, int more = int.MaxValue)
         {
             var result = await mediator.Send(new ProfileGetAllAsyncQuery(total, more));
             return result.ToApiResult<Entities.Profile.Profile, ProfileDTO, ProfileVM, int>();
         }
         [HttpPost("[action]")]
-        public async Task<ApiResult<IEnumerable<ProfileVM>>> SearchRangeAsync(SearchRangeModel<Entities.Profile.Profile> model)
+        public async Task<IApiResult<IEnumerable<ProfileVM>>> SearchRangeAsync(SearchRangeModel<Entities.Profile.Profile> model)
         {
             var result = await mediator.Send(new SearchRangeAsyncQuery(model));
             return result.ToApiResult<Entities.Profile.Profile, ProfileDTO, ProfileVM, int>();
         }
         [HttpPost("[action]")]
-        public async Task<ApiResult<ProfileVM>> GetByIdAsync(int[] ids)
+        public async Task<IApiResult<ProfileVM>> GetByIdAsync(int[] ids)
         {
             var result = await mediator.Send(new GetByIdAsyncQuery(ids));
             return result.ToApiResult<Entities.Profile.Profile, ProfileDTO, ProfileVM, int>();

@@ -17,7 +17,7 @@ namespace ManaEnums.Api
         [Display(Name = "خطایی در پردازش رخ داد")]
         LOGIC_ERROR = 409,
         [Display(Name = "خطای احراز هویت")]
-        UNAUTHORIZED = 403,     
+        UNAUTHORIZED = 403,
         [Display(Name = "محدودیت فروش")]
         SALE_LIMITATION = 210
     }

@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Autofac.Core.Activators.Reflection;
 using Autofac.Extensions.DependencyInjection;
 using BusinessBaseConfig;
 using Common;
@@ -9,38 +8,13 @@ using ManaBaseData.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ProfileBusiness;
 using Services.DataInitializer;
-using SMSBusiness;
-using SMSConfirmationBusiness;
-using SMSRegexBusiness;
 using System;
-using System.Collections.Concurrent;
-using System.Linq;
-using System.Reflection;
-using TransactionBusiness;
-using UserBusiness;
 using WebFramework.Api;
+using WebFramework.Processing;
 
-namespace WebFramework.Configuration
+namespace WebFramework.Configuration.Autofac
 {
-    internal class AllConstructorFinder : IConstructorFinder
-    {
-        private static readonly ConcurrentDictionary<Type, ConstructorInfo[]> Cache = new ConcurrentDictionary<Type, ConstructorInfo[]>();
-        public ConstructorInfo[] FindConstructors(Type targetType)
-        {
-            var result = Cache.GetOrAdd(targetType, t => t.GetTypeInfo().DeclaredConstructors.ToArray());
-            return result.Length > 0 ? result : throw new NoConstructorsFoundException(targetType);
-        }
-    }
-
-    internal static class Assemblies
-    {
-        public static readonly Assembly Application = typeof(IBL).Assembly;
-        public static readonly Assembly[] Applications = new Assembly[] { typeof(IBL).Assembly, typeof(IPrB).Assembly,
-            typeof(ISmB).Assembly, typeof(ISCB).Assembly, typeof(ISRB).Assembly, typeof(ITrB).Assembly, typeof(IUsB).Assembly};
-    }
-
     public static class AutofacConfigurationExtensions
     {
         public static void AddServices(this ContainerBuilder containerBuilder)
@@ -69,6 +43,7 @@ namespace WebFramework.Configuration
             var containerBuilder = new ContainerBuilder();
             services.AddSingleton(typeof(IApiResult), typeof(ApiResult));
             services.AddSingleton(typeof(IApiResult<>), typeof(ApiResult<>));
+            services.AddSingleton(typeof(IResponseWriteTools), typeof(ResponseWriteTools));
             containerBuilder.Populate(services);
             containerBuilder.AddServices();
             containerBuilder.RegisterModule(new MediatorModule());

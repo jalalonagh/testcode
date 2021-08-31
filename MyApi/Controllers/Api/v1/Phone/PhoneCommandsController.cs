@@ -47,7 +47,7 @@ namespace MyApi.Controllers.Api.v1
         public async Task<IApiResult<IEnumerable<PhoneVM>>> AddRangeAsync(IEnumerable<PhoneDTO> models)
         {
             if (!ModelState.IsValid)
-                return  false.Generate<IEnumerable<PhoneVM>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<IEnumerable<PhoneVM>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new AddRangeAsyncCommand(models));
             return result.ToApiResult<Entities.Phone.Phone, PhoneDTO, PhoneVM, int>();
         }

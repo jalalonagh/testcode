@@ -1,18 +1,17 @@
-﻿using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.FilterRangeAsync;
-using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.GetAllAsync;
-using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.GetByIdAsync;
-using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.SearchRangeAsync;
-using Data.Repositories.Models;
-using Entities.SMSConfirmation;
+﻿using Entities.SMSConfirmation;
+using ManaBaseData.Repositories.Models;
 using ManaDataTransferObject.SMSConfirmation;
 using ManaViewModel.SMSConfirmation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.FilterRangeAsync;
+using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.GetAllAsync;
+using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.GetByIdAsync;
+using SMSConfirmationBusiness.BaseBusinessLevel.SMSConfirmation.Query.SearchRangeAsync;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebFramework.Api;
-using ManaBaseData.Repositories.Models;
 
 namespace MyApi.Controllers.Api.v1
 {
@@ -29,25 +28,25 @@ namespace MyApi.Controllers.Api.v1
         }
 
         [HttpPost("[action]")]
-        public async Task<ApiResult<IEnumerable<SMSConfirmationVM>>> FilterRangeAsync(FilterRangeModel<SMSConfirmationSearch> model)
+        public async Task<IApiResult<IEnumerable<SMSConfirmationVM>>> FilterRangeAsync(FilterRangeModel<SMSConfirmationSearch> model)
         {
             var result = await mediator.Send(new FilterRangeAsyncQuery(model));
             return result.ToApiResult<Entities.SMSConfirmation.SMSConfirmation, SMSConfirmationDTO, SMSConfirmationVM, int>();
         }
         [HttpGet("[action]")]
-        public async Task<ApiResult<IEnumerable<SMSConfirmationVM>>> GetAllAsync(int total = 0, int more = int.MaxValue)
+        public async Task<IApiResult<IEnumerable<SMSConfirmationVM>>> GetAllAsync(int total = 0, int more = int.MaxValue)
         {
             var result = await mediator.Send(new GetAllAsyncQuery(total, more));
             return result.ToApiResult<Entities.SMSConfirmation.SMSConfirmation, SMSConfirmationDTO, SMSConfirmationVM, int>();
         }
         [HttpPost("[action]")]
-        public async Task<ApiResult<IEnumerable<SMSConfirmationVM>>> SearchRangeAsync(SearchRangeModel<Entities.SMSConfirmation.SMSConfirmation> model)
+        public async Task<IApiResult<IEnumerable<SMSConfirmationVM>>> SearchRangeAsync(SearchRangeModel<Entities.SMSConfirmation.SMSConfirmation> model)
         {
             var result = await mediator.Send(new SearchRangeAsyncQuery(model));
             return result.ToApiResult<Entities.SMSConfirmation.SMSConfirmation, SMSConfirmationDTO, SMSConfirmationVM, int>();
         }
         [HttpPost("[action]")]
-        public async Task<ApiResult<SMSConfirmationVM>> GetByIdAsync(int[] ids)
+        public async Task<IApiResult<SMSConfirmationVM>> GetByIdAsync(int[] ids)
         {
             var result = await mediator.Send(new GetByIdAsyncQuery(ids));
             return result.ToApiResult<Entities.SMSConfirmation.SMSConfirmation, SMSConfirmationDTO, SMSConfirmationVM, int>();

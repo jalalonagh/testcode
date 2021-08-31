@@ -1,5 +1,4 @@
-﻿using ManaEnums.Entity.Financial.Transaction;
-using ManaViewModel.Common;
+﻿using ManaViewModel.Common;
 
 namespace ManaViewModel.Transaction
 {

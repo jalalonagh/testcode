@@ -1,5 +1,4 @@
 ﻿using BusinessBaseConfig.Configuration.Commands;
-using Services;
 using Services.Models;
 
 namespace ProfileBusiness.BaseBusinessLevel.Profile.Command.DeleteByIdAsync

@@ -1,5 +1,4 @@
-﻿using ManaEnums.SMSText;
-using ManaViewModel.Common;
+﻿using ManaViewModel.Common;
 
 namespace ManaViewModel.SMSRegex
 {

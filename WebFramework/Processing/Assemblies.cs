@@ -1,10 +1,11 @@
 ﻿using BusinessBaseConfig;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace SampleProject.Infrastructure.Processing
 {
-    internal static class Assemblies
+    public static class Assemblies
     {
-        public static readonly Assembly Application = typeof(IBL).Assembly;
+        public static readonly IEnumerable<Assembly> Applications = new List<Assembly>() { typeof(IBL).Assembly };
     }
 }

@@ -23,7 +23,7 @@ namespace SwaggerApi.V5
                 options.IncludeXmlComments(xmlDocPath, true);
                 options.CustomSchemaIds(x => x.FullName);
                 options.EnableAnnotations();
-                options.DescribeAllEnumsAsStrings();
+                //options.DescribeAllEnumsAsStrings();
                 options.SwaggerDoc("v1", new OpenApiInfo { Version = "v1", Title = "API V1" });
                 options.SwaggerDoc("v2", new OpenApiInfo { Version = "v2", Title = "API V2" });
                 #region Filters

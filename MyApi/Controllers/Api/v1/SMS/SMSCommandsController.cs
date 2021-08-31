@@ -1,4 +1,10 @@
-﻿using SMSBusiness.BaseBusinessLevel.SMS.Command.AddAsync;
+﻿using ManaDataTransferObject.SMS;
+using ManaResourceManager;
+using ManaViewModel.SMS;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using SMSBusiness.BaseBusinessLevel.SMS.Command.AddAsync;
 using SMSBusiness.BaseBusinessLevel.SMS.Command.AddRangeAsync;
 using SMSBusiness.BaseBusinessLevel.SMS.Command.DeleteAsync;
 using SMSBusiness.BaseBusinessLevel.SMS.Command.DeleteByIdAsync;
@@ -8,12 +14,6 @@ using SMSBusiness.BaseBusinessLevel.SMS.Command.UpdateAsync;
 using SMSBusiness.BaseBusinessLevel.SMS.Command.UpdateFieldRangeAsync;
 using SMSBusiness.BaseBusinessLevel.SMS.Command.UpdateFieldRangeByIdAsync;
 using SMSBusiness.BaseBusinessLevel.SMS.Command.UpdateRangeAsync;
-using ManaDataTransferObject.SMS;
-using ManaResourceManager;
-using ManaViewModel.SMS;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebFramework.Api;
@@ -34,91 +34,85 @@ namespace MyApi.Controllers.Api.v1
             resource = ResourceManagerSingleton.GetInstance();
         }
 
-        #region POST
         [HttpPost("[action]")]
-        public async Task<ApiResult<SMSVM>> AddAsync(SMSDTO model)
+        public async Task<IApiResult<SMSVM>> AddAsync(SMSDTO model)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<SMSVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<SMSVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new AddAsyncCommand(model));
             return result.ToApiResult<Entities.SMS.SMS, SMSDTO, SMSVM, int>();
         }
         [HttpPost("[action]")]
-        public async Task<ApiResult<IEnumerable<SMSVM>>> AddRangeAsync(IEnumerable<SMSDTO> models)
+        public async Task<IApiResult<IEnumerable<SMSVM>>> AddRangeAsync(IEnumerable<SMSDTO> models)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<IEnumerable<SMSVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<IEnumerable<SMSVM>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new AddRangeAsyncCommand(models));
             return result.ToApiResult<Entities.SMS.SMS, SMSDTO, SMSVM, int>();
         }
-        #endregion
-        #region DELETE
         [HttpDelete("[action]")]
-        public async Task<ApiResult<SMSVM>> DeleteAsync(SMSDTO model)
+        public async Task<IApiResult<SMSVM>> DeleteAsync(SMSDTO model)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<SMSVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<SMSVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new DeleteAsyncCommand(model));
             return result.ToApiResult<Entities.SMS.SMS, SMSDTO, SMSVM, int>();
         }
         [HttpDelete("[action]")]
-        public async Task<ApiResult<SMSVM>> DeleteByIdAsync(int id)
+        public async Task<IApiResult<SMSVM>> DeleteByIdAsync(int id)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<SMSVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<SMSVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new DeleteByIdAsyncCommand(id));
             return result.ToApiResult<Entities.SMS.SMS, SMSDTO, SMSVM, int>();
         }
         [HttpDelete("[action]")]
-        public async Task<ApiResult<IEnumerable<SMSVM>>> DeleteRangeAsync(IEnumerable<SMSDTO> models)
+        public async Task<IApiResult<IEnumerable<SMSVM>>> DeleteRangeAsync(IEnumerable<SMSDTO> models)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<IEnumerable<SMSVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<IEnumerable<SMSVM>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new DeleteRangeAsyncCommand(models));
             return result.ToApiResult<Entities.SMS.SMS, SMSDTO, SMSVM, int>();
         }
         [HttpDelete("[action]")]
-        public async Task<ApiResult<IEnumerable<SMSVM>>> DeleteRangeByIdsAsync(IEnumerable<int> ids)
+        public async Task<IApiResult<IEnumerable<SMSVM>>> DeleteRangeByIdsAsync(IEnumerable<int> ids)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<IEnumerable<SMSVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<IEnumerable<SMSVM>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new DeleteRangeByIdsAsyncCommand(ids));
             return result.ToApiResult<Entities.SMS.SMS, SMSDTO, SMSVM, int>();
         }
-        #endregion
-        #region PUT
         [HttpPut("[action]")]
-        public async Task<ApiResult<SMSVM>> UpdateAsync(SMSDTO model)
+        public async Task<IApiResult<SMSVM>> UpdateAsync(SMSDTO model)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<SMSVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<SMSVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new UpdateAsyncCommand(model));
             return result.ToApiResult<Entities.SMS.SMS, SMSDTO, SMSVM, int>();
         }
         [HttpPut("[action]")]
-        public async Task<ApiResult<SMSVM>> UpdateFieldRangeAsync(SMSDTO model, string fields)
+        public async Task<IApiResult<SMSVM>> UpdateFieldRangeAsync(SMSDTO model, string fields)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<SMSVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<SMSVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new UpdateFieldRangeAsyncCommand(model, fields.Split(",")));
             return result.ToApiResult<Entities.SMS.SMS, SMSDTO, SMSVM, int>();
         }
         [HttpPut("[action]")]
-        public async Task<ApiResult<SMSVM>> UpdateFieldRangeByIdAsync(int id, KeyValuePair<string, dynamic> fields)
+        public async Task<IApiResult<SMSVM>> UpdateFieldRangeByIdAsync(int id, KeyValuePair<string, dynamic> fields)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<SMSVM>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<SMSVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new UpdateFieldRangeByIdAsyncCommand(id, fields));
             return result.ToApiResult<Entities.SMS.SMS, SMSDTO, SMSVM, int>();
         }
         [HttpPut("[action]")]
-        public async Task<ApiResult<IEnumerable<SMSVM>>> UpdateRangeAsync(IEnumerable<SMSDTO> models)
+        public async Task<IApiResult<IEnumerable<SMSVM>>> UpdateRangeAsync(IEnumerable<SMSDTO> models)
         {
             if (!ModelState.IsValid)
-                return new ApiResult<IEnumerable<SMSVM>>(false, ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate<IEnumerable<SMSVM>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await mediator.Send(new UpdateRangeAsyncCommand(models));
             return result.ToApiResult<Entities.SMS.SMS, SMSDTO, SMSVM, int>();
         }
-        #endregion
     }
 }
