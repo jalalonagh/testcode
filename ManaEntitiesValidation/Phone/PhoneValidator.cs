@@ -3,7 +3,7 @@ using ManaResourceManager;
 
 namespace ManaEntitiesValidation.Phone
 {
-    internal class PhoneValidator : AbstractValidator<Entities.Phone.Phone>
+    public class PhoneValidator : AbstractValidator<Entities.Phone.Phone>
     {
         private ResourceManagerSingleton resource;
         public PhoneValidator()
