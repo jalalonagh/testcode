@@ -1,6 +1,7 @@
 ﻿using BaseBusiness;
 using Common;
 using FluentValidation;
+using ManaBaseData.Repositories.Models;
 using ManaBaseEntity.Common;
 using ManaDataTransferObject.Common;
 using ManaResourceManager;
@@ -13,8 +14,8 @@ using WebFramework.Api;
 
 namespace MyApi.Controllers.Api.v1
 {
-    [ApiVersion("1")]
-    public class GenericCommandsController<TEntity, TValid, TSearch, TVM, TDTO, TKey> : BaseController
+    //[ApiVersion("1")]
+    public class GenericController<TEntity, TValid, TSearch, TVM, TDTO, TKey> : BaseController
         where TEntity : BaseEntity, new()
         where TValid : AbstractValidator<TEntity>, new()
         where TSearch : BaseSearchEntity, new()
@@ -25,7 +26,7 @@ namespace MyApi.Controllers.Api.v1
         private ICrud<TEntity, TValid, TSearch, TDTO, TKey> crud;
         ResourceManagerSingleton resource;
 
-        public GenericCommandsController(ICrud<TEntity, TValid, TSearch, TDTO, TKey> _crud)
+        public GenericController(ICrud<TEntity, TValid, TSearch, TDTO, TKey> _crud)
         {
             crud = _crud;
             resource = ResourceManagerSingleton.GetInstance();
@@ -120,6 +121,34 @@ namespace MyApi.Controllers.Api.v1
             var result = await crud.UpdateRangeAsync(models.MapTo<IEnumerable<TEntity>>(), validator);
             var entities = result.MapTo<ServiceResult<IEnumerable<TVM>>>();
             return entities.ToApiResult();
+        }
+        [HttpPost("[action]")]
+        public async Task<IApiResult<IEnumerable<TVM>>> FilterRangeAsync(FilterRangeModel<TSearch> model)
+        {
+            var result = await crud.FilterRangeAsync(model);
+            var entities = result.MapTo<ServiceResult<IEnumerable<TVM>>>();
+            return entities.ToApiResult();
+        }
+        [HttpGet("[action]")]
+        public async Task<IApiResult<IEnumerable<TVM>>> GetAllAsync(int total = 0, int more = int.MaxValue)
+        {
+            var result = await crud.GetAllAsync(total, more);
+            var entities = result.MapTo<ServiceResult<IEnumerable<TVM>>>();
+            return entities.ToApiResult();
+        }
+        [HttpPost("[action]")]
+        public async Task<IApiResult<IEnumerable<TVM>>> SearchRangeAsync(SearchRangeModel<TEntity> model)
+        {
+            var result = await crud.SearchRangeAsync(model);
+            var entities = result.MapTo<ServiceResult<IEnumerable<TVM>>>();
+            return entities.ToApiResult();
+        }
+        [HttpPost("[action]")]
+        public async Task<IApiResult<TVM>> GetByIdAsync(int[] ids)
+        {
+            var result = await crud.GetByIdAsync(ids);
+            var entity = result.MapTo<ServiceResult<TVM>>();
+            return entity.ToApiResult();
         }
     }
 }
