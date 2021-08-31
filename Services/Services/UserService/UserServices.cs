@@ -102,14 +102,6 @@ namespace Services.Services.UserService
                 {
                     return api;
                 }
-                var collection = repository.Entities.GetContext<User>().Entry(user2).Reference(x => x.Profile);
-                if (!collection.IsLoaded)
-                    await collection.LoadAsync();
-                api.Data.user.FullName = user2.FullName;
-                api.Data.user.Profile = new Entities.Profile.Profile
-                {
-                    ImageAddress = user2.Profile?.ImageAddress
-                };
                 if (user2 != null)
                     api.Data.user.UserType = user2.UserType;
                 if (!string.IsNullOrWhiteSpace(api.Data.user.Avatar))

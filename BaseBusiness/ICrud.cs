@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace BaseBusiness
 {
-    public interface ICrud<TEntity, TSearchEntity, TVM, TDTO, TKey>
+    public interface ICrud<TEntity, TSearchEntity, TDTO, TKey>
         where TEntity : BaseEntity, new()
         where TSearchEntity : BaseSearchEntity, new()
-        where TVM : BaseVM<TVM, TEntity, TKey>, new()
         where TDTO : BaseDTO<TDTO, TEntity, TKey>, new()
         where TKey : struct
     {

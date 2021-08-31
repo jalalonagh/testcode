@@ -21,7 +21,6 @@ namespace Entities.User
         public string ValidCode { get; set; }
         public DateTime ValidCodeExpired { get; set; }
         public bool IsPerson { get; set; }
-        public Profile.Profile Profile { get; set; }
         public IEnumerable<ChairToUser.ChairToUser> Chairs { get; set; }
         public int? AccountingUserReferenceId { get; set; }
         public DateTime CreateTime { get; set; }

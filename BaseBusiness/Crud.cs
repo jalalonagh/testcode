@@ -10,10 +10,9 @@ using System.Threading.Tasks;
 
 namespace BaseBusiness
 {
-    public class Crud<TEntity, TSearchEntity, TVM, TDTO, TKey> : ICrud<TEntity, TSearchEntity, TVM, TDTO, TKey>, IScopedDependency
+    public class Crud<TEntity, TSearchEntity, TDTO, TKey> : ICrud<TEntity, TSearchEntity, TDTO, TKey>, IScopedDependency
         where TEntity : BaseEntity, new()
         where TSearchEntity : BaseSearchEntity, new()
-        where TVM : BaseVM<TVM, TEntity, TKey>, new()
         where TDTO : BaseDTO<TDTO, TEntity, TKey>, new()
         where TKey : struct
     {
