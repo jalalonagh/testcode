@@ -21,11 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyApi", "MyApi\MyApi.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManaDataTransferObjectValidator", "ManaDataTransferObjectValidator\ManaDataTransferObjectValidator.csproj", "{EAFD06D1-2C81-4AEB-BADC-C77FE9DC60EF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManaUserManager", "ManaUserManager\ManaUserManager.csproj", "{B58DE6B3-8BA1-4C5F-8E31-17C14C966F97}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwaggerApi", "SwaggerApi\SwaggerApi.csproj", "{15D5ECFF-2677-45DE-8635-F2B72E38BCD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseBusiness", "BaseBusiness\BaseBusiness.csproj", "{68624FA4-D2EC-4248-9DA7-56E0821379AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseBusiness", "BaseBusiness\BaseBusiness.csproj", "{68624FA4-D2EC-4248-9DA7-56E0821379AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,10 +67,6 @@ Global
 		{EAFD06D1-2C81-4AEB-BADC-C77FE9DC60EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAFD06D1-2C81-4AEB-BADC-C77FE9DC60EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAFD06D1-2C81-4AEB-BADC-C77FE9DC60EF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B58DE6B3-8BA1-4C5F-8E31-17C14C966F97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B58DE6B3-8BA1-4C5F-8E31-17C14C966F97}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B58DE6B3-8BA1-4C5F-8E31-17C14C966F97}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B58DE6B3-8BA1-4C5F-8E31-17C14C966F97}.Release|Any CPU.Build.0 = Release|Any CPU
 		{15D5ECFF-2677-45DE-8635-F2B72E38BCD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{15D5ECFF-2677-45DE-8635-F2B72E38BCD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15D5ECFF-2677-45DE-8635-F2B72E38BCD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
