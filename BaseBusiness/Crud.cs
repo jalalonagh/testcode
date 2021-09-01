@@ -64,12 +64,6 @@ namespace BaseBusiness
                 return false.GenerateResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
             return await service.DeleteRangeByIdsAsync(ids);
         }
-        public async Task<IServiceResult<IEnumerable<TEntity>>> FilterRangeAsync(FilterRangeModel<TSearchEntity> filter)
-        {
-            if (filter == null)
-                return false.GenerateResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
-            return await service.FilterRangeAsync(filter);
-        }
         public async Task<IServiceResult<IEnumerable<TEntity>>> GetAllAsync(int total = 0, int more = int.MaxValue)
         {
             return await service.GetAllAsync(total, more);
@@ -79,18 +73,6 @@ namespace BaseBusiness
             if (ids == null || !ids.Any())
                 return false.GenerateResult<TEntity>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
             return await service.GetByIdAsync(ids);
-        }
-        public async Task<IServiceResult<TEntity>> ItemSync(TEntity Target, TEntity Origin, TValid validator)
-        {
-            if (!Target.Validate(validator) || !Origin.Validate(validator))
-                return false.GenerateResult<TEntity>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
-            return await service.ItemSync(Target, Origin);
-        }
-        public async Task<IServiceResult<IEnumerable<TEntity>>> SearchRangeAsync(SearchRangeModel<TEntity> search)
-        {
-            if (search == null)
-                return false.GenerateResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
-            return await service.SearchRangeAsync(search);
         }
         public async Task<IServiceResult<TEntity>> UpdateAsync(TEntity entity, TValid validator)
         {
