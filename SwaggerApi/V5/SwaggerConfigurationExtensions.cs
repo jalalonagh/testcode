@@ -1,14 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
-using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 
 namespace SwaggerApi.V5
 {
@@ -28,24 +24,12 @@ namespace SwaggerApi.V5
                 options.ExampleFilters();
                 options.OperationFilter<ApplySummariesOperationFilter>();
                 options.OperationFilter<UnauthorizedResponsesOperationFilter>(true, "Bearer");
-                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    Type = SecuritySchemeType.OAuth2,
-                    Flows = new OpenApiOAuthFlows
-                    {
-                        Password = new OpenApiOAuthFlow
-                        {
-                            TokenUrl = new Uri("https://token.dinavision.org/api/v1/users/Token", UriKind.Absolute),
-                        }
-                    }
-                });
+                options.AddSecurityDefinition("Bearer", new SwaggerTools().GenerateOpenApiSecurityScheme());
                 options.OperationFilter<RemoveVersionParameters>();
                 options.DocumentFilter<SetVersionInPaths>();
                 options.DocInclusionPredicate((docName, apiDesc) =>
                 {
-                    if (!apiDesc.TryGetMethodInfo(out MethodInfo methodInfo)) return false;
-                    var versions = methodInfo.DeclaringType.GetCustomAttributes<ApiVersionAttribute>(true).SelectMany(attr => attr.Versions);
-                    return versions.Any(v => $"v{v.ToString()}" == docName);
+                    return new SwaggerTools().ProccessDocInclusionPredicate(docName, apiDesc);
                 });
             });
         }
