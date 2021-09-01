@@ -14,18 +14,17 @@ using WebFramework.Api;
 namespace MyApi.Controllers.Api.v1
 {
     //[ApiVersion("1")]
-    public class GenericController<TEntity, TValid, TSearch, TVM, TDTO, TKey> : BaseController
+    public class GenericController<TEntity, TValid, TSearch, TVM, TDTO> : BaseController
         where TEntity : BaseEntity, new()
         where TValid : AbstractValidator<TEntity>, new()
         where TSearch : BaseSearchEntity, new()
-        where TVM : BaseVM<TVM, TEntity, TKey>, new()
-        where TDTO : BaseDTO<TDTO, TEntity, TKey>, new()
-        where TKey : struct
+        where TVM : BaseVM<TVM, TEntity, int>, new()
+        where TDTO : BaseDTO<TDTO, TEntity, int>, new()
     {
-        private ICrud<TEntity, TValid, TSearch, TDTO, TKey> crud;
+        private ICrud<TEntity, TValid, TSearch, TDTO> crud;
         ResourceManagerSingleton resource;
 
-        public GenericController(ICrud<TEntity, TValid, TSearch, TDTO, TKey> _crud)
+        public GenericController(ICrud<TEntity, TValid, TSearch, TDTO> _crud)
         {
             crud = _crud;
             resource = ResourceManagerSingleton.GetInstance();
@@ -38,7 +37,7 @@ namespace MyApi.Controllers.Api.v1
                 return false.Generate<TVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await crud.AddAsync(model.MapTo<TEntity>(), validator);
             var entity = result.MapTo<ServiceResult<TEntity>>();
-            return entity.ToApiResult<TEntity, TDTO, TVM, TKey>();
+            return entity.ToApiResult<TEntity, TDTO, TVM, int>();
         }
         [HttpDelete("[action]")]
         public async Task<IApiResult<TVM>> DeleteAsync(TDTO model, TValid validator)

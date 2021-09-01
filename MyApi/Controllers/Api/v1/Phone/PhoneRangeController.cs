@@ -9,12 +9,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace MyApi.Controllers.Api.v1
 {
     [ApiVersion("1")]
-    public class PhoneRangeController : GenericRangeController<Phone, PhoneValidator, PhoneSearch, PhoneVM, PhoneDTO, int>
+    public class PhoneRangeController : GenericRangeController<Phone, PhoneValidator, PhoneSearch, PhoneVM, PhoneDTO>
     {
-        private ICrudRange<Phone, PhoneValidator, PhoneSearch, PhoneDTO, int> crud;
+        private ICrudRange<Phone, PhoneValidator, PhoneSearch, PhoneDTO> crud;
         ResourceManagerSingleton resource;
 
-        public PhoneRangeController(ICrudRange<Phone, PhoneValidator, PhoneSearch, PhoneDTO, int> _crud) : base(_crud)
+        public PhoneRangeController(ICrudRange<Phone, PhoneValidator, PhoneSearch, PhoneDTO> _crud) : base(_crud)
         {
             resource = ResourceManagerSingleton.GetInstance();
             crud = _crud;
