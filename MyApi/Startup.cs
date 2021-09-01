@@ -12,6 +12,7 @@ using System;
 using System.Globalization;
 using WebFramework.Configuration;
 using WebFramework.Configuration.AutofacConfigurations;
+using WebFramework.Configuration.JWTConfigurations;
 using WebFramework.Extensions;
 using WebFramework.MiddleWares;
 using WebFramework.Permission;
