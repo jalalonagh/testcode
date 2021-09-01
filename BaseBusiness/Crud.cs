@@ -34,12 +34,6 @@ namespace BaseBusiness
                 return false.GenerateResult<TEntity>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
             return await service.AddAsync(entity);
         }
-        public async Task<IServiceResult<IEnumerable<TEntity>>> AddRangeAsync(IEnumerable<TEntity> entities, TValid validator)
-        {
-            if (!entities.Validate(validator))
-                return false.GenerateResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
-            return await service.AddRangeAsync(entities);
-        }
         public async Task<IServiceResult<TEntity>> DeleteAsync(TEntity entity, TValid validator)
         {
             if (!entity.Validate(validator))
@@ -51,22 +45,6 @@ namespace BaseBusiness
             if (id <= 0)
                 return false.GenerateResult<TEntity>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
             return await service.DeleteByIdAsync(id);
-        }
-        public async Task<IServiceResult<IEnumerable<TEntity>>> DeleteRangeAsync(IEnumerable<TEntity> entities, TValid validator)
-        {
-            if (!entities.Validate(validator))
-                return false.GenerateResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
-            return await service.DeleteRangeAsync(entities);
-        }
-        public async Task<IServiceResult<IEnumerable<TEntity>>> DeleteRangeByIdsAsync(IEnumerable<int> ids)
-        {
-            if (ids == null || !ids.Any())
-                return false.GenerateResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
-            return await service.DeleteRangeByIdsAsync(ids);
-        }
-        public async Task<IServiceResult<IEnumerable<TEntity>>> GetAllAsync(int total = 0, int more = int.MaxValue)
-        {
-            return await service.GetAllAsync(total, more);
         }
         public async Task<IServiceResult<TEntity>> GetByIdAsync(params object[] ids)
         {
@@ -91,12 +69,6 @@ namespace BaseBusiness
             if (Id <= 0 || fields == null || !fields.Any())
                 return false.GenerateResult<TEntity>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
             return await service.UpdateFieldRangeByIdAsync(Id, fields);
-        }
-        public async Task<IServiceResult<IEnumerable<TEntity>>> UpdateRangeAsync(IEnumerable<TEntity> entities, TValid validator)
-        {
-            if (!entities.Validate(validator))
-                return false.GenerateResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
-            return await service.UpdateRangeAsync(entities);
         }
     }
 }
