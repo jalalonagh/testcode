@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace BaseBusiness
 {
-    public interface IFilter<TEntity, TValid, TSearchEntity, TDTO, TKey>
+    public interface IFilter<TEntity, TValid, TSearchEntity, TDTO>
         where TEntity : BaseEntity, new()
         where TValid : AbstractValidator<TEntity>, new()
         where TSearchEntity : BaseSearchEntity, new()
-        where TDTO : BaseDTO<TDTO, TEntity, TKey>, new()
-        where TKey : struct
+        where TDTO : BaseDTO<TDTO, TEntity, int>, new()
     {
         public Task<IServiceResult<IEnumerable<TEntity>>> FilterRangeAsync(FilterRangeModel<TSearchEntity> filter);
         public Task<IServiceResult<TEntity>> ItemSync(TEntity Target, TEntity Origin, TValid validator);

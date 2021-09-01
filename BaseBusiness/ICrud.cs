@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace BaseBusiness
 {
-    public interface ICrud<TEntity, TValid, TSearchEntity, TDTO, TKey>
+    public interface ICrud<TEntity, TValid, TSearchEntity, TDTO>
         where TEntity : BaseEntity, new()
         where TValid : AbstractValidator<TEntity>, new()
         where TSearchEntity : BaseSearchEntity, new()
-        where TDTO : BaseDTO<TDTO, TEntity, TKey>, new()
-        where TKey : struct
+        where TDTO : BaseDTO<TDTO, TEntity, int>, new()
     {
         public Task<IServiceResult<TEntity>> AddAsync(TEntity entity, TValid validator);
         public Task<IServiceResult<TEntity>> DeleteAsync(TEntity entity, TValid validator);
