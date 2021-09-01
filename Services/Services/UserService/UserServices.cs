@@ -1,5 +1,6 @@
 ﻿using Common;
 using Data;
+using Data.User;
 using Entities.User;
 using ManaBaseData.Repositories;
 using ManaBaseEntity.Common;
@@ -24,14 +25,14 @@ namespace Services.Services.UserService
 {
     public class UserServices : BaseService<User>, IUserServices, IScopedDependency
     {
-        public IRepository<User> repository { get; set; }
+        public IUserRepository repository { get; set; }
         private TimeDurationTrackerSingleton tester;
         private ResourceManagerSingleton resource;
         private IUserTokenApi tokenApi;
         private readonly SiteSettings settings;
         private readonly IHostingEnvironment env;
 
-        public UserServices(IRepository<User> repository,
+        public UserServices(IUserRepository repository,
             IUserTokenApi _tokenApi,
             IHostingEnvironment _env,
             IOptions<SiteSettings> _settings) : base(repository)
