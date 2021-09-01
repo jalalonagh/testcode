@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Data.User
 {
-    public interface IUserRepository : IRepository<Entities.User.User, Entities.User.UserSearch>
+    public interface IUserRepository : IRepository<Entities.User.User>
     {
         Task<Entities.User.User> GetByUserAndPass(string username, string password);
         Task UpdateSecuirtyStampAsync(Entities.User.User user);

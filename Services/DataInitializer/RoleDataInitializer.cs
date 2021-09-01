@@ -6,9 +6,9 @@ namespace Services.DataInitializer
 {
     public class RoleDataInitializer : IDataInitializer
     {
-        private readonly IRepository<Role, RoleSearch> repository;
+        private readonly IRepository<Role> repository;
 
-        public RoleDataInitializer(IRepository<Role, RoleSearch> repository)
+        public RoleDataInitializer(IRepository<Role> repository)
         {
             this.repository = repository;
         }

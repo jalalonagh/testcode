@@ -13,15 +13,14 @@ using System.Threading.Tasks;
 
 namespace BaseBusiness
 {
-    public class CrudRange<TEntity, TValid, TSearchEntity, TDTO> : ICrudRange<TEntity, TValid, TSearchEntity, TDTO>, IScopedDependency
+    public class CrudRange<TEntity, TValid, TDTO> : ICrudRange<TEntity, TValid, TDTO>, IScopedDependency
         where TEntity : BaseEntity, new()
         where TValid : AbstractValidator<TEntity>, new()
-        where TSearchEntity : BaseSearchEntity, new()
         where TDTO : BaseDTO<TDTO, TEntity, int>, new()
     {
-        public IBaseService<TEntity, TSearchEntity> service { get; set; }
+        public IBaseRangeService<TEntity> service { get; set; }
         ResourceManagerSingleton resource;
-        public CrudRange(IBaseService<TEntity, TSearchEntity> _service)
+        public CrudRange(IBaseRangeService<TEntity> _service)
         {
             service = _service;
             resource = ResourceManagerSingleton.GetInstance();

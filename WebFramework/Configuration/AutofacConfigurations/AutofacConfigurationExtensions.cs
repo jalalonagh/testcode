@@ -22,9 +22,9 @@ namespace WebFramework.Configuration.AutofacConfigurations
     {
         public static void AddServices(this ContainerBuilder containerBuilder)
         {
-            containerBuilder.RegisterGeneric(typeof(Repository<,>)).As(typeof(IRepository<,>)).InstancePerLifetimeScope();
+            containerBuilder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
             var list = new List<Assembly>() { typeof(ApiResult).Assembly, typeof(SiteSettings).Assembly, typeof(ISMSEntities).Assembly, typeof(ApplicationDbContext).Assembly,
-                typeof(IDataInitializer).Assembly, typeof(IBL).Assembly, typeof(AccessToken).Assembly, typeof(Crud<,,,>).Assembly };
+                typeof(IDataInitializer).Assembly, typeof(IBL).Assembly, typeof(AccessToken).Assembly, typeof(Crud<,>).Assembly };
             containerBuilder.RegisterAssemblyTypes(list.ToArray())
                 .AssignableTo<IScopedDependency>()
                 .AsImplementedInterfaces()

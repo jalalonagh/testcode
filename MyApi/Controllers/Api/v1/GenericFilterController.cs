@@ -15,17 +15,16 @@ using WebFramework.Api;
 namespace MyApi.Controllers.Api.v1
 {
     //[ApiVersion("1")]
-    public class GenericFilterController<TEntity, TValid, TSearch, TVM, TDTO> : BaseController
+    public class GenericFilterController<TEntity, TValid, TSearch, TVM> : BaseController
         where TEntity : BaseEntity, new()
         where TValid : AbstractValidator<TEntity>, new()
         where TSearch : BaseSearchEntity, new()
         where TVM : BaseVM<TVM, TEntity, int>, new()
-        where TDTO : BaseDTO<TDTO, TEntity, int>, new()
     {
-        private IFilter<TEntity, TValid, TSearch, TDTO> crud;
+        private IFilter<TEntity, TValid, TSearch> crud;
         ResourceManagerSingleton resource;
 
-        public GenericFilterController(IFilter<TEntity, TValid, TSearch, TDTO> _crud)
+        public GenericFilterController(IFilter<TEntity, TValid, TSearch> _crud)
         {
             crud = _crud;
             resource = ResourceManagerSingleton.GetInstance();

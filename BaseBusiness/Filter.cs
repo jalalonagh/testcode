@@ -13,15 +13,14 @@ using System.Threading.Tasks;
 
 namespace BaseBusiness
 {
-    public class Filter<TEntity, TValid, TSearchEntity, TDTO> : IFilter<TEntity, TValid, TSearchEntity, TDTO>, IScopedDependency
+    public class Filter<TEntity, TValid, TSearchEntity> : IFilter<TEntity, TValid, TSearchEntity>, IScopedDependency
         where TEntity : BaseEntity, new()
         where TValid : AbstractValidator<TEntity>, new()
         where TSearchEntity : BaseSearchEntity, new()
-        where TDTO : BaseDTO<TDTO, TEntity, int>, new()
     {
-        public IBaseService<TEntity, TSearchEntity> service { get; set; }
+        public IBaseFilterService<TEntity, TSearchEntity> service { get; set; }
         ResourceManagerSingleton resource;
-        public Filter(IBaseService<TEntity, TSearchEntity> _service)
+        public Filter(IBaseFilterService<TEntity, TSearchEntity> _service)
         {
             service = _service;
             resource = ResourceManagerSingleton.GetInstance();

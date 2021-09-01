@@ -15,17 +15,16 @@ using WebFramework.Api;
 namespace MyApi.Controllers.Api.v1
 {
     //[ApiVersion("1")]
-    public class GenericRangeController<TEntity, TValid, TSearch, TVM, TDTO> : BaseController
+    public class GenericRangeController<TEntity, TValid, TVM, TDTO> : BaseController
         where TEntity : BaseEntity, new()
         where TValid : AbstractValidator<TEntity>, new()
-        where TSearch : BaseSearchEntity, new()
         where TVM : BaseVM<TVM, TEntity, int>, new()
         where TDTO : BaseDTO<TDTO, TEntity, int>, new()
     {
-        private ICrudRange<TEntity, TValid, TSearch, TDTO> crud;
+        private ICrudRange<TEntity, TValid, TDTO> crud;
         ResourceManagerSingleton resource;
 
-        public GenericRangeController(ICrudRange<TEntity, TValid, TSearch, TDTO> _crud)
+        public GenericRangeController(ICrudRange<TEntity, TValid, TDTO> _crud)
         {
             crud = _crud;
             resource = ResourceManagerSingleton.GetInstance();

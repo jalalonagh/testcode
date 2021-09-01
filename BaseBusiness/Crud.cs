@@ -13,15 +13,13 @@ using System.Threading.Tasks;
 
 namespace BaseBusiness
 {
-    public class Crud<TEntity, TValid, TSearchEntity, TDTO> : ICrud<TEntity, TValid, TSearchEntity, TDTO>, IScopedDependency
+    public class Crud<TEntity, TValid> : ICrud<TEntity, TValid>, IScopedDependency
         where TEntity : BaseEntity, new()
         where TValid : AbstractValidator<TEntity>, new()
-        where TSearchEntity : BaseSearchEntity, new()
-        where TDTO : BaseDTO<TDTO, TEntity, int>, new()
     {
-        public IBaseService<TEntity, TSearchEntity> service { get; set; }
+        public IBaseService<TEntity> service { get; set; }
         ResourceManagerSingleton resource;
-        public Crud(IBaseService<TEntity, TSearchEntity> _service)
+        public Crud(IBaseService<TEntity> _service)
         {
             service = _service;
             resource = ResourceManagerSingleton.GetInstance();

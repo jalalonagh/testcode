@@ -22,17 +22,16 @@ using System.Threading.Tasks;
 
 namespace Services.Services.UserService
 {
-    public class UserServices : BaseService<User, UserSearch>, IUserServices, IScopedDependency
+    public class UserServices : BaseService<User>, IUserServices, IScopedDependency
     {
-        public IRepository<User, UserSearch> repository { get; set; }
+        public IRepository<User> repository { get; set; }
         private TimeDurationTrackerSingleton tester;
         private ResourceManagerSingleton resource;
         private IUserTokenApi tokenApi;
         private readonly SiteSettings settings;
         private readonly IHostingEnvironment env;
 
-        public UserServices(IRepository<User,
-            UserSearch> repository,
+        public UserServices(IRepository<User> repository,
             IUserTokenApi _tokenApi,
             IHostingEnvironment _env,
             IOptions<SiteSettings> _settings) : base(repository)
@@ -71,7 +70,7 @@ namespace Services.Services.UserService
                 query = query.Include(property.Name);
             query = query.ClearDeletedOrNotActiveEntity<User>();
             var feilds = query.GetOrderFeilds<User>();
-            query = query.SetOrder<User, UserSearch>(feilds);
+            query = query.SetOrder<User>(feilds);
             var result = await query.FirstOrDefaultAsync();
             tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), username));      // SAVE SPEEDT TEST RESULT
             return api;
@@ -87,7 +86,7 @@ namespace Services.Services.UserService
                 query = query.Include(property.Name);
             query = query.ClearDeletedOrNotActiveEntity<User>();
             var feilds = query.GetOrderFeilds<User>();
-            query = query.SetOrder<User, UserSearch>(feilds);
+            query = query.SetOrder<User>(feilds);
             var result = await query.FirstOrDefaultAsync();
             tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), email));      // SAVE SPEEDT TEST RESULT
             return true.GenerateResult<User>(ApiResultStatus.SUCCESS, result, "");

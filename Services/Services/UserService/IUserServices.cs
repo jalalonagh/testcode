@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Services.Services.UserService
 {
-    public interface IUserServices : IBaseService<Entities.User.User, UserSearch>
+    public interface IUserServices : IBaseService<Entities.User.User>
     {
         Task<IServiceResult> Autorization();
         Task<IServiceResult<Entities.User.User>> GetByUsername(string username);
