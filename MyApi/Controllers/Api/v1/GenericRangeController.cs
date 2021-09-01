@@ -21,10 +21,10 @@ namespace MyApi.Controllers.Api.v1
         where TVM : BaseVM<TVM, TEntity, int>, new()
         where TDTO : BaseDTO<TDTO, TEntity, int>, new()
     {
-        private ICrudRange<TEntity, TValid, TDTO> crud;
+        private ICrudRange<TEntity, TValid> crud;
         ResourceManagerSingleton resource;
 
-        public GenericRangeController(ICrudRange<TEntity, TValid, TDTO> _crud)
+        public GenericRangeController(ICrudRange<TEntity, TValid> _crud)
         {
             crud = _crud;
             resource = ResourceManagerSingleton.GetInstance();

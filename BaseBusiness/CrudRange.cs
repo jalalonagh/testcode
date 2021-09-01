@@ -13,10 +13,9 @@ using System.Threading.Tasks;
 
 namespace BaseBusiness
 {
-    public class CrudRange<TEntity, TValid, TDTO> : ICrudRange<TEntity, TValid, TDTO>, IScopedDependency
+    public class CrudRange<TEntity, TValid> : ICrudRange<TEntity, TValid>, IScopedDependency
         where TEntity : BaseEntity, new()
         where TValid : AbstractValidator<TEntity>, new()
-        where TDTO : BaseDTO<TDTO, TEntity, int>, new()
     {
         public IBaseRangeService<TEntity> service { get; set; }
         ResourceManagerSingleton resource;

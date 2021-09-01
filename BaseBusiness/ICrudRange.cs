@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace BaseBusiness
 {
-    public interface ICrudRange<TEntity, TValid, TDTO>
+    public interface ICrudRange<TEntity, TValid>
         where TEntity : BaseEntity, new()
         where TValid : AbstractValidator<TEntity>, new()
-        where TDTO : BaseDTO<TDTO, TEntity, int>, new()
     {
         public Task<IServiceResult<IEnumerable<TEntity>>> AddRangeAsync(IEnumerable<TEntity> entities, TValid validator);
         public Task<IServiceResult<IEnumerable<TEntity>>> DeleteRangeAsync(IEnumerable<TEntity> entities, TValid validator);
