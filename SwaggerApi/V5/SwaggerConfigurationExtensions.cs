@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
-using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
 using System.IO;
 
@@ -31,17 +29,6 @@ namespace SwaggerApi.V5
                 {
                     return new SwaggerTools().ProccessDocInclusionPredicate(docName, apiDesc);
                 });
-            });
-        }
-
-        public static void UseSwaggerAndUI(this IApplicationBuilder app)
-        {
-            app.UseSwagger(options => { });
-            app.UseSwaggerUI(options =>
-            {
-                options.DocExpansion(DocExpansion.None);
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "V1 Docs");
-                options.SwaggerEndpoint("/swagger/v2/swagger.json", "V2 Docs");
             });
         }
     }
