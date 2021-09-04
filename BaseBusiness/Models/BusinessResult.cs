@@ -5,7 +5,7 @@ using Services.Models;
 
 namespace BaseBusiness.Models
 {
-    public class BusinessResult : IBusinessResult, ISingletonDependency
+    public class BusinessResult
     {
         public bool IsSuccess { get; set; }
         public ApiResultStatus StatusCode { get; set; }
@@ -26,7 +26,7 @@ namespace BaseBusiness.Models
         }
     }
 
-    public class BusinessResult<TData> : BusinessResult, IBusinessResult<TData>, ISingletonDependency
+    public class BusinessResult<TData> : BusinessResult
         where TData : class
     {
         public TData Data { get; set; }

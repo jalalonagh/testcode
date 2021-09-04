@@ -16,7 +16,7 @@ namespace BaseBusiness.Models
             return new BusinessResult<TData>(isSuccess, statusCode, data, message);
         }
 
-        public static BusinessResult<TData> ToBusinessResult<TData>(this IServiceResult<TData> result)
+        public static BusinessResult<TData> ToBusinessResult<TData>(this ServiceResult<TData> result)
             where TData : class
         {
             return new BusinessResult<TData>(result?.GetIsSuccess() ?? false, result?.GetStatus() ?? ApiResultStatus.BAD_REQUEST, result?.GetData() ?? null, result?.GetMessage() ?? "");

@@ -45,7 +45,7 @@ namespace Services.Services.UserService
             env = _env;
         }
 
-        public async Task<IServiceResult> Autorization()
+        public async Task<ServiceResult> Autorization()
         {
             var token = await Token(new TokenRequest
             {
@@ -59,7 +59,7 @@ namespace Services.Services.UserService
             });
             return new ServiceResult(true, ApiResultStatus.SUCCESS);
         }
-        public async Task<IServiceResult<Entities.User.User>> GetByUsername(string username)
+        public async Task<ServiceResult<Entities.User.User>> GetByUsername(string username)
         {
             var start = DateTime.Now;       // START SPEED TEST
             var api = await tokenApi.GetUserFormServer(username, settings.UriUserInfo);
@@ -76,7 +76,7 @@ namespace Services.Services.UserService
             tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), username));      // SAVE SPEEDT TEST RESULT
             return api;
         }
-        public async Task<IServiceResult<Entities.User.User>> GetByEmail(string email)
+        public async Task<ServiceResult<Entities.User.User>> GetByEmail(string email)
         {
             var start = DateTime.Now;       // START SPEED TEST
             var query = repository
@@ -92,7 +92,7 @@ namespace Services.Services.UserService
             tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), email));      // SAVE SPEEDT TEST RESULT
             return true.GenerateResult<User>(ApiResultStatus.SUCCESS, result, "");
         }
-        public async Task<IServiceResult<JWTAuthModel>> Token(TokenRequest tokenRequest, string url)
+        public async Task<ServiceResult<JWTAuthModel>> Token(TokenRequest tokenRequest, string url)
         {
             var api = await tokenApi.GetToken(tokenRequest.Username, tokenRequest.Password, settings.UriUserInfo);
             if (api.IsSuccess)
@@ -109,7 +109,7 @@ namespace Services.Services.UserService
             }
             return api;
         }
-        public async Task<IServiceResult<Entities.User.User>> SyncUser(string username, Entities.User.User userData)
+        public async Task<ServiceResult<Entities.User.User>> SyncUser(string username, Entities.User.User userData)
         {
             var userServer = await GetByUsername(username);
             if (!userServer.GetIsSuccess())
@@ -119,7 +119,7 @@ namespace Services.Services.UserService
             }
             return new ServiceResult<User>(false, ApiResultStatus.SERVER_ERROR, null, resource.FetchResource("errorinuserdatasync").GetMessage());
         }
-        public async Task<IServiceResult<Entities.User.User>> SyncUser(TokenRequest tokenRequest, Entities.User.User userData)
+        public async Task<ServiceResult<Entities.User.User>> SyncUser(TokenRequest tokenRequest, Entities.User.User userData)
         {
             var userServer = await GetByUsername(tokenRequest.Username);
             if (!userServer.GetIsSuccess())
@@ -129,7 +129,7 @@ namespace Services.Services.UserService
             }
             return new ServiceResult<User>(false, ApiResultStatus.SERVER_ERROR, null, resource.FetchResource("errorinuserdatasync").GetMessage());
         }
-        public async Task<IServiceResult<Entities.User.User>> Create(User userData, string url)
+        public async Task<ServiceResult<Entities.User.User>> Create(User userData, string url)
         {
             var response = await tokenApi.CreateUserIntoServer(userData, url);
             if (response.IsSuccess)
@@ -160,14 +160,14 @@ namespace Services.Services.UserService
             }
             return response;
         }
-        public async Task<IServiceResult<User>> ResetPassword(string userName)
+        public async Task<ServiceResult<User>> ResetPassword(string userName)
         {
             var user = await GetByUsername(userName);
             if (user.GetIsSuccess())
                 return await tokenApi.ResetPasswordIntoServer(user.GetData(), settings.UriUserInfo);
             return false.GenerateResult<User>(ApiResultStatus.SERVER_ERROR, null, resource.FetchResource("usernotfound").GetMessage());
         }
-        public async Task<IServiceResult<Entities.User.User>> ChangeThePassword(string userName, string currentPassword, string newPassword)
+        public async Task<ServiceResult<Entities.User.User>> ChangeThePassword(string userName, string currentPassword, string newPassword)
         {
             List<ManaResourceManager.Models.ResourceItemPack> messages = new List<ManaResourceManager.Models.ResourceItemPack>();
             if (!string.IsNullOrEmpty(userName))

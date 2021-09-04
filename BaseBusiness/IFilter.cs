@@ -12,8 +12,8 @@ namespace BaseBusiness
         where TValid : AbstractValidator<TEntity>, new()
         where TSearchEntity : BaseSearchEntity, new()
     {
-        public Task<IBusinessResult<IEnumerable<TEntity>>> FilterRangeAsync(FilterRangeModel<TSearchEntity> filter);
-        public Task<IBusinessResult<TEntity>> ItemSync(TEntity Target, TEntity Origin, TValid validator);
-        public Task<IBusinessResult<IEnumerable<TEntity>>> SearchRangeAsync(SearchRangeModel<TEntity> search);
+        public Task<BusinessResult<IEnumerable<TEntity>>> FilterRangeAsync(FilterRangeModel<TSearchEntity> filter);
+        public Task<BusinessResult<TEntity>> ItemSync(TEntity Target, TEntity Origin, TValid validator);
+        public Task<BusinessResult<IEnumerable<TEntity>>> SearchRangeAsync(SearchRangeModel<TEntity> search);
     }
 }

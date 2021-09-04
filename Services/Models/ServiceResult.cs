@@ -1,10 +1,9 @@
-﻿using Common;
-using ManaEnums.Api;
+﻿using ManaEnums.Api;
 using ManaEnums.Extensions;
 
 namespace Services.Models
 {
-    public class ServiceResult : IServiceResult, ISingletonDependency
+    public class ServiceResult
     {
         public bool IsSuccess { get; set; }
         public ApiResultStatus StatusCode { get; set; }
@@ -18,7 +17,7 @@ namespace Services.Models
         }
     }
 
-    public class ServiceResult<TData> : ServiceResult, IServiceResult<TData>, ISingletonDependency
+    public class ServiceResult<TData> : ServiceResult
         where TData : class
     {
         public TData Data { get; set; }

@@ -26,7 +26,7 @@ namespace Services.Base.Services
             tester = TimeDurationTrackerSingleton.Instance;
         }
 
-        public async Task<IServiceResult<IEnumerable<TEntity>>> AddRangeAsync(IEnumerable<TEntity> entities)
+        public async Task<ServiceResult<IEnumerable<TEntity>>> AddRangeAsync(IEnumerable<TEntity> entities)
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.AddRangeAsync(entities);
@@ -37,7 +37,7 @@ namespace Services.Base.Services
                 return false.GenerateResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.NOT_FOUND, null, "موردی یافت نشد");
             return false.GenerateResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "مشکلی در سرور رخ داده است");
         }
-        public async Task<IServiceResult<IEnumerable<TEntity>>> DeleteRangeAsync(IEnumerable<TEntity> entities)
+        public async Task<ServiceResult<IEnumerable<TEntity>>> DeleteRangeAsync(IEnumerable<TEntity> entities)
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.DeleteRangeAsync(entities);
@@ -48,7 +48,7 @@ namespace Services.Base.Services
                 return false.GenerateResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.NOT_FOUND, null, "موردی یافت نشد");
             return false.GenerateResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "مشکلی در سرور رخ داده است");
         }
-        public async Task<IServiceResult<IEnumerable<TEntity>>> DeleteRangeByIdsAsync(IEnumerable<int> ids)
+        public async Task<ServiceResult<IEnumerable<TEntity>>> DeleteRangeByIdsAsync(IEnumerable<int> ids)
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.DeleteRangeByIdsAsync(ids);
@@ -59,7 +59,7 @@ namespace Services.Base.Services
                 return false.GenerateResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.NOT_FOUND, null, "موردی یافت نشد");
             return false.GenerateResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "مشکلی در سرور رخ داده است");
         }
-        public async Task<IServiceResult<IEnumerable<TEntity>>> GetAllAsync(int total = 0, int more = int.MaxValue)
+        public async Task<ServiceResult<IEnumerable<TEntity>>> GetAllAsync(int total = 0, int more = int.MaxValue)
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.GetAllAsync(total, more);
@@ -70,7 +70,7 @@ namespace Services.Base.Services
                 return false.GenerateResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.NOT_FOUND, null, "موردی یافت نشد");
             return false.GenerateResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "مشکلی در سرور رخ داده است");
         }
-        public async Task<IServiceResult<IEnumerable<TEntity>>> UpdateRangeAsync(IEnumerable<TEntity> entities)
+        public async Task<ServiceResult<IEnumerable<TEntity>>> UpdateRangeAsync(IEnumerable<TEntity> entities)
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.UpdateRangeAsync(entities);
