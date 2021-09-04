@@ -30,43 +30,43 @@ namespace MyApi.Controllers.Api.v1
         }
 
         [HttpPost("[action]")]
-        public async Task<IApiResult<IEnumerable<TVM>>> AddRangeAsync(IEnumerable<TDTO> models, TValid validator)
+        public async Task<ApiResult> AddRangeAsync(IEnumerable<TDTO> models, TValid validator)
         {
             if (!ModelState.IsValid)
-                return false.Generate<IEnumerable<TVM>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await crud.AddRangeAsync(models.MapTo<IEnumerable<TEntity>>(), validator);
             var entities = result.MapTo<BusinessResult<IEnumerable<TVM>>>();
             return entities.ToApiResult();
         }
         [HttpDelete("[action]")]
-        public async Task<IApiResult<IEnumerable<TVM>>> DeleteRangeAsync(IEnumerable<TDTO> models, TValid validator)
+        public async Task<ApiResult> DeleteRangeAsync(IEnumerable<TDTO> models, TValid validator)
         {
             if (!ModelState.IsValid)
-                return false.Generate<IEnumerable<TVM>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await crud.DeleteRangeAsync(models.MapTo<IEnumerable<TEntity>>(), validator);
             var entities = result.MapTo<BusinessResult<IEnumerable<TVM>>>();
             return entities.ToApiResult();
         }
         [HttpDelete("[action]")]
-        public async Task<IApiResult<IEnumerable<TVM>>> DeleteRangeByIdsAsync(IEnumerable<int> ids)
+        public async Task<ApiResult> DeleteRangeByIdsAsync(IEnumerable<int> ids)
         {
             if (!ModelState.IsValid)
-                return false.Generate<IEnumerable<TVM>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await crud.DeleteRangeByIdsAsync(ids);
             var entities = resource.MapTo<BusinessResult<IEnumerable<TVM>>>();
             return entities.ToApiResult();
         }
         [HttpPut("[action]")]
-        public async Task<IApiResult<IEnumerable<TVM>>> UpdateRangeAsync(IEnumerable<TDTO> models, TValid validator)
+        public async Task<ApiResult> UpdateRangeAsync(IEnumerable<TDTO> models, TValid validator)
         {
             if (!ModelState.IsValid)
-                return false.Generate<IEnumerable<TVM>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
+                return false.Generate(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await crud.UpdateRangeAsync(models.MapTo<IEnumerable<TEntity>>(), validator);
             var entities = result.MapTo<BusinessResult<IEnumerable<TVM>>>();
             return entities.ToApiResult();
         }
         [HttpGet("[action]")]
-        public async Task<IApiResult<IEnumerable<TVM>>> GetAllAsync(int total = 0, int more = int.MaxValue)
+        public async Task<ApiResult> GetAllAsync(int total = 0, int more = int.MaxValue)
         {
             var result = await crud.GetAllAsync(total, more);
             var entities = result.MapTo<BusinessResult<IEnumerable<TVM>>>();

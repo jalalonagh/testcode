@@ -10,10 +10,10 @@ namespace BaseBusiness
         where TEntity : BaseEntity, new()
         where TValid : AbstractValidator<TEntity>, new()
     {
-        public Task<BusinessResult<IEnumerable<TEntity>>> AddRangeAsync(IEnumerable<TEntity> entities, TValid validator);
-        public Task<BusinessResult<IEnumerable<TEntity>>> DeleteRangeAsync(IEnumerable<TEntity> entities, TValid validator);
-        public Task<BusinessResult<IEnumerable<TEntity>>> DeleteRangeByIdsAsync(IEnumerable<int> ids);
-        public Task<BusinessResult<IEnumerable<TEntity>>> GetAllAsync(int total = 0, int more = int.MaxValue);
-        public Task<BusinessResult<IEnumerable<TEntity>>> UpdateRangeAsync(IEnumerable<TEntity> entities, TValid validator);
+        public Task<BusinessResult> AddRangeAsync(IEnumerable<TEntity> entities, TValid validator);
+        public Task<BusinessResult> DeleteRangeAsync(IEnumerable<TEntity> entities, TValid validator);
+        public Task<BusinessResult> DeleteRangeByIdsAsync(IEnumerable<int> ids);
+        public Task<BusinessResult> GetAllAsync(int total = 0, int more = int.MaxValue);
+        public Task<BusinessResult> UpdateRangeAsync(IEnumerable<TEntity> entities, TValid validator);
     }
 }

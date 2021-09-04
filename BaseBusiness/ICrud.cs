@@ -10,12 +10,12 @@ namespace BaseBusiness
         where TEntity : BaseEntity, new()
         where TValid : AbstractValidator<TEntity>, new()
     {
-        public Task<BusinessResult<TEntity>> AddAsync(TEntity entity, TValid validator);
-        public Task<BusinessResult<TEntity>> DeleteAsync(TEntity entity, TValid validator);
-        public Task<BusinessResult<TEntity>> DeleteByIdAsync(int id);
-        public Task<BusinessResult<TEntity>> GetByIdAsync(params object[] ids);
-        public Task<BusinessResult<TEntity>> UpdateAsync(TEntity entity, TValid validator);
-        public Task<BusinessResult<TEntity>> UpdateFieldRangeAsync(TEntity entity, TValid validator, params string[] fields);
-        public Task<BusinessResult<TEntity>> UpdateFieldRangeByIdAsync(int Id, params KeyValuePair<string, dynamic>[] fields);
+        public Task<BusinessResult> AddAsync(TEntity entity, TValid validator);
+        public Task<BusinessResult> DeleteAsync(TEntity entity, TValid validator);
+        public Task<BusinessResult> DeleteByIdAsync(int id);
+        public Task<BusinessResult> GetByIdAsync(params object[] ids);
+        public Task<BusinessResult> UpdateAsync(TEntity entity, TValid validator);
+        public Task<BusinessResult> UpdateFieldRangeAsync(TEntity entity, TValid validator, params string[] fields);
+        public Task<BusinessResult> UpdateFieldRangeByIdAsync(int Id, params KeyValuePair<string, dynamic>[] fields);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BaseBusiness;
+using BaseBusiness.Models;
 using Common;
 using FluentValidation;
 using ManaBaseData.Repositories.Models;
@@ -30,17 +31,17 @@ namespace MyApi.Controllers.Api.v1
         }
 
         [HttpPost("[action]")]
-        public async Task<IApiResult<IEnumerable<TVM>>> FilterRangeAsync(FilterRangeModel<TSearch> model)
+        public async Task<ApiResult> FilterRangeAsync(FilterRangeModel<TSearch> model)
         {
             var result = await crud.FilterRangeAsync(model);
-            var entities = result.MapTo<ServiceResult<IEnumerable<TVM>>>();
+            var entities = result.MapTo<BusinessResult<IEnumerable<TVM>>>();
             return entities.ToApiResult();
         }
         [HttpPost("[action]")]
-        public async Task<IApiResult<IEnumerable<TVM>>> SearchRangeAsync(SearchRangeModel<TEntity> model)
+        public async Task<ApiResult> SearchRangeAsync(SearchRangeModel<TEntity> model)
         {
             var result = await crud.SearchRangeAsync(model);
-            var entities = result.MapTo<ServiceResult<IEnumerable<TVM>>>();
+            var entities = result.MapTo<BusinessResult<IEnumerable<TVM>>>();
             return entities.ToApiResult();
         }
     }

@@ -24,24 +24,24 @@ namespace BaseBusiness
             resource = ResourceManagerSingleton.GetInstance();
         }
 
-        public async Task<BusinessResult<IEnumerable<TEntity>>> FilterRangeAsync(FilterRangeModel<TSearchEntity> filter)
+        public async Task<BusinessResult> FilterRangeAsync(FilterRangeModel<TSearchEntity> filter)
         {
             if (filter == null)
-                return false.GenerateBusinessResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
+                return false.GenerateBusinessResult(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
             var result = await service.FilterRangeAsync(filter);
             return result.ToBusinessResult();
         }
-        public async Task<BusinessResult<TEntity>> ItemSync(TEntity Target, TEntity Origin, TValid validator)
+        public async Task<BusinessResult> ItemSync(TEntity Target, TEntity Origin, TValid validator)
         {
             if (!Target.Validate(validator) || !Origin.Validate(validator))
-                return false.GenerateBusinessResult<TEntity>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
+                return false.GenerateBusinessResult(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
             var result = await service.ItemSync(Target, Origin);
             return result.ToBusinessResult();
         }
-        public async Task<BusinessResult<IEnumerable<TEntity>>> SearchRangeAsync(SearchRangeModel<TEntity> search)
+        public async Task<BusinessResult> SearchRangeAsync(SearchRangeModel<TEntity> search)
         {
             if (search == null)
-                return false.GenerateBusinessResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
+                return false.GenerateBusinessResult(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
             var result = await service.SearchRangeAsync(search);
             return result.ToBusinessResult();
         }

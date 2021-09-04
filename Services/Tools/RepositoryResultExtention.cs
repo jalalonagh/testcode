@@ -9,9 +9,9 @@ namespace Services.Tools
         {
             return new ServiceResult(result.IsSuccess, result.StatusCode, result.Message);
         }
-        public static ServiceResult<TData> ToServiceResult<TData>(this RepositoryResult<TData> result) where TData : class
+        public static ServiceResult ToServiceResult<TData>(this RepositoryResult<TData> result) where TData : class
         {
-            return new ServiceResult<TData>(result.IsSuccess, result.StatusCode, result.Data, result.Message);
+            return new ServiceResult(result.IsSuccess, result.StatusCode, result.Data, result.Message);
         }
     }
 }

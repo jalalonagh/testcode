@@ -8,13 +8,13 @@ namespace Services.Services.UserService
     public interface IUserServices : IBaseService<Entities.User.User>
     {
         Task<ServiceResult> Autorization();
-        Task<ServiceResult<Entities.User.User>> GetByUsername(string username);
-        Task<ServiceResult<Entities.User.User>> GetByEmail(string email);
-        Task<ServiceResult<JWTAuthModel>> Token(TokenRequest tokenRequest, string url);
-        Task<ServiceResult<Entities.User.User>> SyncUser(string username, Entities.User.User userData);
-        Task<ServiceResult<Entities.User.User>> SyncUser(TokenRequest tokenRequest, Entities.User.User userData);
-        Task<ServiceResult<Entities.User.User>> Create(User userData, string url);
-        Task<ServiceResult<User>> ResetPassword(string userName);
-        Task<ServiceResult<Entities.User.User>> ChangeThePassword(string userName, string currentPassword, string newPassword);
+        Task<ServiceResult> GetByUsername(string username);
+        Task<ServiceResult> GetByEmail(string email);
+        Task<ServiceResult> Token(TokenRequest tokenRequest, string url);
+        Task<ServiceResult> SyncUser(string username, Entities.User.User userData);
+        Task<ServiceResult> SyncUser(TokenRequest tokenRequest, Entities.User.User userData);
+        Task<ServiceResult> Create(User userData, string url);
+        Task<ServiceResult> ResetPassword(string userName);
+        Task<ServiceResult> ChangeThePassword(string userName, string currentPassword, string newPassword);
     }
 }

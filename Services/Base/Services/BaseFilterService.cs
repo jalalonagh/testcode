@@ -26,7 +26,7 @@ namespace Services.Base.Services
             tester = TimeDurationTrackerSingleton.Instance;
         }
 
-        public async Task<ServiceResult<IEnumerable<TEntity>>> FilterRangeAsync(FilterRangeModel<TSearchEntity> filter)
+        public async Task<ServiceResult> FilterRangeAsync(FilterRangeModel<TSearchEntity> filter)
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.FilterRangeAsync(filter);
@@ -37,14 +37,14 @@ namespace Services.Base.Services
                 return false.GenerateResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.NOT_FOUND, null, "موردی یافت نشد");
             return false.GenerateResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, "مشکلی در سرور رخ داده است");
         }
-        public async Task<ServiceResult<TEntity>> ItemSync(TEntity Target, TEntity Origin)
+        public async Task<ServiceResult> ItemSync(TEntity Target, TEntity Origin)
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await ItemSync(Target, Origin);
             tester.SaveServiceSpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), Target, Origin));      // SAVE SPEEDT TEST RESULT
             return result;
         }
-        public async Task<ServiceResult<IEnumerable<TEntity>>> SearchRangeAsync(SearchRangeModel<TEntity> search)
+        public async Task<ServiceResult> SearchRangeAsync(SearchRangeModel<TEntity> search)
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.SearchRangeAsync(search);

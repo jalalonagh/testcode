@@ -55,11 +55,11 @@ namespace Services.Services.UserService
             }, settings.UriUserInfo);
             new ConnectionApi(env).saveToken(new AccessToken
             {
-                access_token = token.GetData().jwt.access_token
+                access_token = token.GetData<JWTAuthModel>().jwt.access_token
             });
             return new ServiceResult(true, ApiResultStatus.SUCCESS);
         }
-        public async Task<ServiceResult<Entities.User.User>> GetByUsername(string username)
+        public async Task<ServiceResult> GetByUsername(string username)
         {
             var start = DateTime.Now;       // START SPEED TEST
             var api = await tokenApi.GetUserFormServer(username, settings.UriUserInfo);
@@ -76,7 +76,7 @@ namespace Services.Services.UserService
             tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), username));      // SAVE SPEEDT TEST RESULT
             return api;
         }
-        public async Task<ServiceResult<Entities.User.User>> GetByEmail(string email)
+        public async Task<ServiceResult> GetByEmail(string email)
         {
             var start = DateTime.Now;       // START SPEED TEST
             var query = repository
@@ -92,24 +92,25 @@ namespace Services.Services.UserService
             tester.SaveRepositoySpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), email));      // SAVE SPEEDT TEST RESULT
             return true.GenerateResult<User>(ApiResultStatus.SUCCESS, result, "");
         }
-        public async Task<ServiceResult<JWTAuthModel>> Token(TokenRequest tokenRequest, string url)
+        public async Task<ServiceResult> Token(TokenRequest tokenRequest, string url)
         {
             var api = await tokenApi.GetToken(tokenRequest.Username, tokenRequest.Password, settings.UriUserInfo);
+            var apiUser = api.GetData<JWTAuthModel>().user;
             if (api.IsSuccess)
             {
-                var user2 = await repository.Entities.FindAsync(api.Data.user.Id);
+                var user2 = await repository.Entities.FindAsync(apiUser.Id);
                 if (user2 == null)
                 {
                     return api;
                 }
                 if (user2 != null)
-                    api.Data.user.UserType = user2.UserType;
-                if (!string.IsNullOrWhiteSpace(api.Data.user.Avatar))
-                    api.Data.user.Avatar = api.Data.user.Avatar.Replace("C:\\inetpub\\wwwroot\\User\\wwwroot\\uploads\\", "https://token.dinavision.org/uploads/");
+                    apiUser.UserType = user2.UserType;
+                if (!string.IsNullOrWhiteSpace(apiUser.Avatar))
+                    apiUser.Avatar = apiUser.Avatar.Replace("C:\\inetpub\\wwwroot\\User\\wwwroot\\uploads\\", "https://token.dinavision.org/uploads/");
             }
             return api;
         }
-        public async Task<ServiceResult<Entities.User.User>> SyncUser(string username, Entities.User.User userData)
+        public async Task<ServiceResult> SyncUser(string username, Entities.User.User userData)
         {
             var userServer = await GetByUsername(username);
             if (!userServer.GetIsSuccess())
@@ -117,9 +118,9 @@ namespace Services.Services.UserService
                 var result = await AddAsync(userData);
                 return result;
             }
-            return new ServiceResult<User>(false, ApiResultStatus.SERVER_ERROR, null, resource.FetchResource("errorinuserdatasync").GetMessage());
+            return new ServiceResult(false, ApiResultStatus.SERVER_ERROR, null, resource.FetchResource("errorinuserdatasync").GetMessage());
         }
-        public async Task<ServiceResult<Entities.User.User>> SyncUser(TokenRequest tokenRequest, Entities.User.User userData)
+        public async Task<ServiceResult> SyncUser(TokenRequest tokenRequest, Entities.User.User userData)
         {
             var userServer = await GetByUsername(tokenRequest.Username);
             if (!userServer.GetIsSuccess())
@@ -127,9 +128,9 @@ namespace Services.Services.UserService
                 var result = await AddAsync(userData);
                 return result;
             }
-            return new ServiceResult<User>(false, ApiResultStatus.SERVER_ERROR, null, resource.FetchResource("errorinuserdatasync").GetMessage());
+            return new ServiceResult(false, ApiResultStatus.SERVER_ERROR, null, resource.FetchResource("errorinuserdatasync").GetMessage());
         }
-        public async Task<ServiceResult<Entities.User.User>> Create(User userData, string url)
+        public async Task<ServiceResult> Create(User userData, string url)
         {
             var response = await tokenApi.CreateUserIntoServer(userData, url);
             if (response.IsSuccess)
@@ -138,7 +139,7 @@ namespace Services.Services.UserService
                 var code = random.Next(56793, 99999);
                 var user = new Entities.User.User
                 {
-                    Id = response.Data.Id,
+                    Id = response.GetData<User>().Id,
                     Age = userData.Age,
                     Email = userData.Email,
                     FullName = userData.FullName,
@@ -160,14 +161,14 @@ namespace Services.Services.UserService
             }
             return response;
         }
-        public async Task<ServiceResult<User>> ResetPassword(string userName)
+        public async Task<ServiceResult> ResetPassword(string userName)
         {
             var user = await GetByUsername(userName);
             if (user.GetIsSuccess())
-                return await tokenApi.ResetPasswordIntoServer(user.GetData(), settings.UriUserInfo);
+                return await tokenApi.ResetPasswordIntoServer(user.GetData<User>(), settings.UriUserInfo);
             return false.GenerateResult<User>(ApiResultStatus.SERVER_ERROR, null, resource.FetchResource("usernotfound").GetMessage());
         }
-        public async Task<ServiceResult<Entities.User.User>> ChangeThePassword(string userName, string currentPassword, string newPassword)
+        public async Task<ServiceResult> ChangeThePassword(string userName, string currentPassword, string newPassword)
         {
             List<ManaResourceManager.Models.ResourceItemPack> messages = new List<ManaResourceManager.Models.ResourceItemPack>();
             if (!string.IsNullOrEmpty(userName))
@@ -177,7 +178,7 @@ namespace Services.Services.UserService
             if (!string.IsNullOrEmpty(newPassword))
                 messages.Add(resource.FetchResource("newpasswordisrequired"));
             if (messages.Count() > 0)
-                return new ServiceResult<User>(false, ApiResultStatus.BAD_REQUEST, null, string.Join(", ", messages.Select(s => s.GetMessage())));
+                return new ServiceResult(false, ApiResultStatus.BAD_REQUEST, null, string.Join(", ", messages.Select(s => s.GetMessage())));
             return await tokenApi.ChangeThePassword(userName, currentPassword, newPassword, settings.UriUserInfo);
         }
     }

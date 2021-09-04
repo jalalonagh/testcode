@@ -13,8 +13,8 @@ namespace Services.Base.Contracts
     {
         IFilterRepository<TEntity, TSearchEntity> repository { get; }
 
-        Task<ServiceResult<IEnumerable<TEntity>>> FilterRangeAsync(FilterRangeModel<TSearchEntity> filter);
-        Task<ServiceResult<IEnumerable<TEntity>>> SearchRangeAsync(SearchRangeModel<TEntity> search);
-        Task<ServiceResult<TEntity>> ItemSync(TEntity Target, TEntity Origin);
+        Task<ServiceResult> FilterRangeAsync(FilterRangeModel<TSearchEntity> filter);
+        Task<ServiceResult> SearchRangeAsync(SearchRangeModel<TEntity> search);
+        Task<ServiceResult> ItemSync(TEntity Target, TEntity Origin);
     }
 }

@@ -11,12 +11,12 @@ namespace Services.Base.Contracts
     {
         IRepository<TEntity> repository { get; }
 
-        Task<ServiceResult<TEntity>> AddAsync(TEntity entity);
-        Task<ServiceResult<TEntity>> DeleteAsync(TEntity entity);
-        Task<ServiceResult<TEntity>> DeleteByIdAsync(int id);
-        Task<ServiceResult<TEntity>> GetByIdAsync(params object[] ids);
-        Task<ServiceResult<TEntity>> UpdateAsync(TEntity entity);
-        Task<ServiceResult<TEntity>> UpdateFieldRangeAsync(TEntity entity, params string[] fields);
-        Task<ServiceResult<TEntity>> UpdateFieldRangeByIdAsync(int Id, params KeyValuePair<string, dynamic>[] fields);
+        Task<ServiceResult> AddAsync(TEntity entity);
+        Task<ServiceResult> DeleteAsync(TEntity entity);
+        Task<ServiceResult> DeleteByIdAsync(int id);
+        Task<ServiceResult> GetByIdAsync(params object[] ids);
+        Task<ServiceResult> UpdateAsync(TEntity entity);
+        Task<ServiceResult> UpdateFieldRangeAsync(TEntity entity, params string[] fields);
+        Task<ServiceResult> UpdateFieldRangeByIdAsync(int Id, params KeyValuePair<string, dynamic>[] fields);
     }
 }

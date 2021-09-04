@@ -24,15 +24,15 @@ namespace Services.Services.UserService.ApiService
             resource = ResourceManagerSingleton.GetInstance();
             env = _env;
         }
-        public async Task<ServiceResult<Entities.User.User>> GetUserFormServer(string username, string url)
+        public async Task<ServiceResult> GetUserFormServer(string username, string url)
         {
             var http = client.CreateClient();
             var request = new HttpRequestMessage(HttpMethod.Get, url + $"/{username}");
             var response = await http.SendAsync(request);
-            var api = JsonConvert.DeserializeObject<ServiceResult<Entities.User.User>>(await response.Content.ReadAsStringAsync());
+            var api = JsonConvert.DeserializeObject<ServiceResult>(await response.Content.ReadAsStringAsync());
             return api;
         }
-        public async Task<ServiceResult<JWTAuthModel>> GetToken(string username, string password, string url)
+        public async Task<ServiceResult> GetToken(string username, string password, string url)
         {
             var http = client.CreateClient();
             var request = new HttpRequestMessage(HttpMethod.Post, url);
@@ -46,10 +46,10 @@ namespace Services.Services.UserService.ApiService
             request.Content = content;
             var response = await http.SendAsync(request);
             var json = await response.Content.ReadAsStringAsync();
-            var api = JsonConvert.DeserializeObject<ServiceResult<JWTAuthModel>>(json ?? "");
+            var api = JsonConvert.DeserializeObject<ServiceResult>(json ?? "");
             return api;
         }
-        public async Task<ServiceResult<User>> CreateUserIntoServer(User user, string url)
+        public async Task<ServiceResult> CreateUserIntoServer(User user, string url)
         {
             user.Email = $"{user.UserName}@dinawin.com";
             var http = client.CreateClient();
@@ -63,13 +63,15 @@ namespace Services.Services.UserService.ApiService
                 if (!string.IsNullOrEmpty(json))
                 {
                     user = JsonConvert.DeserializeObject<User>(json);
-                    return user;
+                    if (user != null)
+                        return new ServiceResult(true, ManaEnums.Api.ApiResultStatus.SUCCESS, user, "");
+                    return new ServiceResult(false, ManaEnums.Api.ApiResultStatus.NOT_FOUND, null, resource.FetchResource("usernotfound").GetMessage());
                 }
-                return new ServiceResult<User>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, resource.FetchResource("errorincreateuserfromjson").GetMessage());
+                return new ServiceResult(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, resource.FetchResource("errorincreateuserfromjson").GetMessage());
             }
-            return new ServiceResult<User>(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, resource.FetchResource("errorincreateusertoserver").GetMessage());
+            return new ServiceResult(false, ManaEnums.Api.ApiResultStatus.SERVER_ERROR, null, resource.FetchResource("errorincreateusertoserver").GetMessage());
         }
-        public async Task<ServiceResult<User>> ResetPasswordIntoServer(User user, string url)
+        public async Task<ServiceResult> ResetPasswordIntoServer(User user, string url)
         {
             url = url + "/ResetPassword";
             var http = client.CreateClient();
@@ -79,12 +81,17 @@ namespace Services.Services.UserService.ApiService
             {
                 var json = await response.Content.ReadAsStringAsync();
                 if (!string.IsNullOrEmpty(json))
-                    return JsonConvert.DeserializeObject<User>(json);
-                return new ServiceResult<User>(false, ManaEnums.Api.ApiResultStatus.LOGIC_ERROR, null, resource.FetchResource("errorinconvertjsontouser").GetMessage());
+                {
+                    var data = JsonConvert.DeserializeObject<User>(json);
+                    if (data != null)
+                        return new ServiceResult(true, ManaEnums.Api.ApiResultStatus.SUCCESS, data, "");
+                    return new ServiceResult(false, ManaEnums.Api.ApiResultStatus.NOT_FOUND, null, resource.FetchResource("usernotfound").GetMessage());
+                }
+                return new ServiceResult(false, ManaEnums.Api.ApiResultStatus.LOGIC_ERROR, null, resource.FetchResource("errorinconvertjsontouser").GetMessage());
             }
-            return new ServiceResult<User>(false, ManaEnums.Api.ApiResultStatus.LOGIC_ERROR, null, resource.FetchResource("errorinresetpassword").GetMessage());
+            return new ServiceResult(false, ManaEnums.Api.ApiResultStatus.LOGIC_ERROR, null, resource.FetchResource("errorinresetpassword").GetMessage());
         }
-        public async Task<ServiceResult<Entities.User.User>> ChangeThePassword(string userName, string currentPassword, string newPassword, string url)
+        public async Task<ServiceResult> ChangeThePassword(string userName, string currentPassword, string newPassword, string url)
         {
             url = url + "/ChangeThePassword";
             var http = client.CreateClient();
@@ -97,10 +104,15 @@ namespace Services.Services.UserService.ApiService
             {
                 var json = await response.Content.ReadAsStringAsync();
                 if (!string.IsNullOrEmpty(json))
-                    return JsonConvert.DeserializeObject<User>(json);
-                return new ServiceResult<User>(false, ManaEnums.Api.ApiResultStatus.LOGIC_ERROR, null, resource.FetchResource("errorinconvertjsontouser").GetMessage());
+                {
+                    var data = JsonConvert.DeserializeObject<User>(json);
+                    if (data != null)
+                        return new ServiceResult(true, ManaEnums.Api.ApiResultStatus.SUCCESS, data, "");
+                    return new ServiceResult(false, ManaEnums.Api.ApiResultStatus.NOT_FOUND, null, resource.FetchResource("usernotfound").GetMessage());
+                }
+                return new ServiceResult(false, ManaEnums.Api.ApiResultStatus.LOGIC_ERROR, null, resource.FetchResource("errorinconvertjsontouser").GetMessage());
             }
-            return new ServiceResult<User>(false, ManaEnums.Api.ApiResultStatus.LOGIC_ERROR, null, resource.FetchResource("errorinchangepassword").GetMessage());
+            return new ServiceResult(false, ManaEnums.Api.ApiResultStatus.LOGIC_ERROR, null, resource.FetchResource("errorinchangepassword").GetMessage());
         }
     }
 }

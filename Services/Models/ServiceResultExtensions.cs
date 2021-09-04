@@ -9,10 +9,9 @@ namespace Services.Models
             return new ServiceResult(isSuccess, statusCode, message);
         }
 
-        public static ServiceResult<TData> GenerateResult<TData>(this bool isSuccess, ApiResultStatus statusCode, TData data, string message = null)
-            where TData : class
+        public static ServiceResult GenerateResult<TData>(this bool isSuccess, ApiResultStatus statusCode, TData data, string message = null)
         {
-            return new ServiceResult<TData>(isSuccess, statusCode, data, message);
+            return new ServiceResult(isSuccess, statusCode, data, message);
         }
     }
 }

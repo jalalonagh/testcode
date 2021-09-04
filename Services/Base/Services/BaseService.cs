@@ -1,5 +1,4 @@
 ﻿using ManaBaseData.Repositories;
-using ManaBaseData.Repositories.Models;
 using ManaBaseEntity.Common;
 using ManaSpeedTester;
 using ManaSpeedTester.Models;
@@ -8,7 +7,6 @@ using Services.Models;
 using Services.Tools;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -26,49 +24,49 @@ namespace Services.Base.Services
             tester = TimeDurationTrackerSingleton.Instance;
         }
 
-        public async Task<ServiceResult<TEntity>> AddAsync(TEntity entity)
+        public async Task<ServiceResult> AddAsync(TEntity entity)
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.AddAsync(entity);
             tester.SaveServiceSpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), entity));      // SAVE SPEEDT TEST RESULT
             return result.ToServiceResult();
         }
-        public async Task<ServiceResult<TEntity>> DeleteAsync(TEntity entity)
+        public async Task<ServiceResult> DeleteAsync(TEntity entity)
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.DeleteAsync(entity);
             tester.SaveServiceSpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), entity));      // SAVE SPEEDT TEST RESULT
             return result.ToServiceResult();
         }
-        public async Task<ServiceResult<TEntity>> DeleteByIdAsync(int id)
+        public async Task<ServiceResult> DeleteByIdAsync(int id)
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.DeleteByIdAsync(id);
             tester.SaveServiceSpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), id));      // SAVE SPEEDT TEST RESULT
             return result.ToServiceResult();
         }
-        public async Task<ServiceResult<TEntity>> GetByIdAsync(params object[] ids)
+        public async Task<ServiceResult> GetByIdAsync(params object[] ids)
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.GetByIdAsync(ids);
             tester.SaveServiceSpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), ids));      // SAVE SPEEDT TEST RESULT
             return result.ToServiceResult();
         }
-        public async Task<ServiceResult<TEntity>> UpdateAsync(TEntity entity)
+        public async Task<ServiceResult> UpdateAsync(TEntity entity)
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.UpdateAsync(entity);
             tester.SaveServiceSpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), entity));      // SAVE SPEEDT TEST RESULT
             return result.ToServiceResult();
         }
-        public async Task<ServiceResult<TEntity>> UpdateFieldRangeAsync(TEntity entity, params string[] fields)
+        public async Task<ServiceResult> UpdateFieldRangeAsync(TEntity entity, params string[] fields)
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.UpdateFieldRangeAsync(entity, fields);
             tester.SaveServiceSpeed(new TestInput(start, DateTime.Now, MethodInfo.GetCurrentMethod(), entity, fields));      // SAVE SPEEDT TEST RESULT
             return result.ToServiceResult();
         }
-        public async Task<ServiceResult<TEntity>> UpdateFieldRangeByIdAsync(int Id, params KeyValuePair<string, dynamic>[] fields)
+        public async Task<ServiceResult> UpdateFieldRangeByIdAsync(int Id, params KeyValuePair<string, dynamic>[] fields)
         {
             var start = DateTime.Now;       // START SPEED TEST
             var result = await repository.UpdateFieldRangeAsync(Id, fields);
