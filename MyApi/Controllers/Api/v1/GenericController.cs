@@ -1,4 +1,5 @@
 ﻿using BaseBusiness;
+using BaseBusiness.Models;
 using Common;
 using FluentValidation;
 using ManaBaseEntity.Common;
@@ -35,8 +36,8 @@ namespace MyApi.Controllers.Api.v1
             if (!ModelState.IsValid)
                 return false.Generate<TVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await crud.AddAsync(model.MapTo<TEntity>(), validator);
-            var entity = result.MapTo<ServiceResult<TEntity>>();
-            return entity.ToApiResult<TEntity, TDTO, TVM, int>();
+            var entity = result.MapTo<BusinessResult<TVM>>();
+            return entity.ToApiResult();
         }
         [HttpDelete("[action]")]
         public async Task<IApiResult<TVM>> DeleteAsync(TDTO model, TValid validator)
@@ -44,7 +45,7 @@ namespace MyApi.Controllers.Api.v1
             if (!ModelState.IsValid)
                 return false.Generate<TVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await crud.DeleteAsync(model.MapTo<TEntity>(), validator);
-            var entity = result.MapTo<ServiceResult<TVM>>();
+            var entity = result.MapTo<BusinessResult<TVM>>();
             return entity.ToApiResult();
         }
         [HttpDelete("[action]")]
@@ -53,7 +54,7 @@ namespace MyApi.Controllers.Api.v1
             if (!ModelState.IsValid)
                 return false.Generate<TVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await crud.DeleteByIdAsync(id);
-            var entity = resource.MapTo<ServiceResult<TVM>>();
+            var entity = resource.MapTo<BusinessResult<TVM>>();
             return entity.ToApiResult();
         }
         [HttpPut("[action]")]
@@ -62,7 +63,7 @@ namespace MyApi.Controllers.Api.v1
             if (!ModelState.IsValid)
                 return false.Generate<TVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await crud.UpdateAsync(model.MapTo<TEntity>(), validator);
-            var entity = result.MapTo<ServiceResult<TVM>>();
+            var entity = result.MapTo<BusinessResult<TVM>>();
             return entity.ToApiResult();
         }
         [HttpPut("[action]")]
@@ -71,7 +72,7 @@ namespace MyApi.Controllers.Api.v1
             if (!ModelState.IsValid)
                 return false.Generate<TVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await crud.UpdateFieldRangeAsync(model.MapTo<TEntity>(), validator, fields);
-            var entity = result.MapTo<ServiceResult<TVM>>();
+            var entity = result.MapTo<BusinessResult<TVM>>();
             return entity.ToApiResult();
         }
         [HttpPut("[action]")]
@@ -80,14 +81,14 @@ namespace MyApi.Controllers.Api.v1
             if (!ModelState.IsValid)
                 return false.Generate<TVM>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("modelnotvalid").GetMessage());
             var result = await crud.UpdateFieldRangeByIdAsync(id, fields);
-            var entity = result.MapTo<ServiceResult<TVM>>();
+            var entity = result.MapTo<BusinessResult<TVM>>();
             return entity.ToApiResult();
         }
         [HttpPost("[action]")]
         public async Task<IApiResult<TVM>> GetByIdAsync(int[] ids)
         {
             var result = await crud.GetByIdAsync(ids);
-            var entity = result.MapTo<ServiceResult<TVM>>();
+            var entity = result.MapTo<BusinessResult<TVM>>();
             return entity.ToApiResult();
         }
     }

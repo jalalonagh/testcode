@@ -3,7 +3,6 @@ using Common;
 using FluentValidation;
 using ManaBaseData.Repositories.Models;
 using ManaBaseEntity.Common;
-using ManaDataTransferObject.Common;
 using ManaResourceManager;
 using ManaViewModel.Common;
 using Microsoft.AspNetCore.Mvc;

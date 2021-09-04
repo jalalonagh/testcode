@@ -1,7 +1,7 @@
-﻿using FluentValidation;
+﻿using BaseBusiness.Models;
+using FluentValidation;
 using ManaBaseData.Repositories.Models;
 using ManaBaseEntity.Common;
-using Services.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,8 +12,8 @@ namespace BaseBusiness
         where TValid : AbstractValidator<TEntity>, new()
         where TSearchEntity : BaseSearchEntity, new()
     {
-        public Task<IServiceResult<IEnumerable<TEntity>>> FilterRangeAsync(FilterRangeModel<TSearchEntity> filter);
-        public Task<IServiceResult<TEntity>> ItemSync(TEntity Target, TEntity Origin, TValid validator);
-        public Task<IServiceResult<IEnumerable<TEntity>>> SearchRangeAsync(SearchRangeModel<TEntity> search);
+        public Task<IBusinessResult<IEnumerable<TEntity>>> FilterRangeAsync(FilterRangeModel<TSearchEntity> filter);
+        public Task<IBusinessResult<TEntity>> ItemSync(TEntity Target, TEntity Origin, TValid validator);
+        public Task<IBusinessResult<IEnumerable<TEntity>>> SearchRangeAsync(SearchRangeModel<TEntity> search);
     }
 }

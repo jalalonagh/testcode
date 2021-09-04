@@ -1,8 +1,7 @@
-﻿using Common;
+﻿using BaseBusiness.Models;
+using Common;
 using FluentValidation;
-using ManaBaseData.Repositories.Models;
 using ManaBaseEntity.Common;
-using ManaDataTransferObject.Common;
 using ManaEntitiesValidation.Extensions;
 using ManaResourceManager;
 using Services.Base.Contracts;
@@ -25,33 +24,38 @@ namespace BaseBusiness
             resource = ResourceManagerSingleton.GetInstance();
         }
 
-        public async Task<IServiceResult<IEnumerable<TEntity>>> AddRangeAsync(IEnumerable<TEntity> entities, TValid validator)
+        public async Task<IBusinessResult<IEnumerable<TEntity>>> AddRangeAsync(IEnumerable<TEntity> entities, TValid validator)
         {
             if (!entities.Validate(validator))
-                return false.GenerateResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
-            return await service.AddRangeAsync(entities);
+                return false.GenerateBusinessResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
+            var result = await service.AddRangeAsync(entities);
+            return result.ToBusinessResult();
         }
-        public async Task<IServiceResult<IEnumerable<TEntity>>> DeleteRangeAsync(IEnumerable<TEntity> entities, TValid validator)
+        public async Task<IBusinessResult<IEnumerable<TEntity>>> DeleteRangeAsync(IEnumerable<TEntity> entities, TValid validator)
         {
             if (!entities.Validate(validator))
-                return false.GenerateResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
-            return await service.DeleteRangeAsync(entities);
+                return false.GenerateBusinessResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
+            var result = await service.DeleteRangeAsync(entities);
+            return result.ToBusinessResult();
         }
-        public async Task<IServiceResult<IEnumerable<TEntity>>> DeleteRangeByIdsAsync(IEnumerable<int> ids)
+        public async Task<IBusinessResult<IEnumerable<TEntity>>> DeleteRangeByIdsAsync(IEnumerable<int> ids)
         {
             if (ids == null || !ids.Any())
-                return false.GenerateResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
-            return await service.DeleteRangeByIdsAsync(ids);
+                return false.GenerateBusinessResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
+            var result = await service.DeleteRangeByIdsAsync(ids);
+            return result.ToBusinessResult();
         }
-        public async Task<IServiceResult<IEnumerable<TEntity>>> GetAllAsync(int total = 0, int more = int.MaxValue)
+        public async Task<IBusinessResult<IEnumerable<TEntity>>> GetAllAsync(int total = 0, int more = int.MaxValue)
         {
-            return await service.GetAllAsync(total, more);
+            var result = await service.GetAllAsync(total, more);
+            return result.ToBusinessResult();
         }
-        public async Task<IServiceResult<IEnumerable<TEntity>>> UpdateRangeAsync(IEnumerable<TEntity> entities, TValid validator)
+        public async Task<IBusinessResult<IEnumerable<TEntity>>> UpdateRangeAsync(IEnumerable<TEntity> entities, TValid validator)
         {
             if (!entities.Validate(validator))
-                return false.GenerateResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
-            return await service.UpdateRangeAsync(entities);
-        }
+                return false.GenerateBusinessResult<IEnumerable<TEntity>>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
+            var result = await service.UpdateRangeAsync(entities);
+            return result.ToBusinessResult();
+         }
     }
 }

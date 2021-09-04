@@ -1,12 +1,10 @@
-﻿using Common;
+﻿using BaseBusiness.Models;
+using Common;
 using FluentValidation;
-using ManaBaseData.Repositories.Models;
 using ManaBaseEntity.Common;
-using ManaDataTransferObject.Common;
 using ManaEntitiesValidation.Extensions;
 using ManaResourceManager;
 using Services.Base.Contracts;
-using Services.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,47 +23,54 @@ namespace BaseBusiness
             resource = ResourceManagerSingleton.GetInstance();
         }
 
-        public async Task<IServiceResult<TEntity>> AddAsync(TEntity entity, TValid validator)
+        public async Task<IBusinessResult<TEntity>> AddAsync(TEntity entity, TValid validator)
         {
             if (!entity.Validate(validator))
-                return false.GenerateResult<TEntity>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
-            return await service.AddAsync(entity);
+                return false.GenerateBusinessResult<TEntity>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
+            var result = await service.AddAsync(entity);
+            return result.ToBusinessResult();
         }
-        public async Task<IServiceResult<TEntity>> DeleteAsync(TEntity entity, TValid validator)
+        public async Task<IBusinessResult<TEntity>> DeleteAsync(TEntity entity, TValid validator)
         {
             if (!entity.Validate(validator))
-                return false.GenerateResult<TEntity>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
-            return await service.DeleteAsync(entity);
+                return false.GenerateBusinessResult<TEntity>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
+            var result = await service.DeleteAsync(entity);
+            return result.ToBusinessResult();
         }
-        public async Task<IServiceResult<TEntity>> DeleteByIdAsync(int id)
+        public async Task<IBusinessResult<TEntity>> DeleteByIdAsync(int id)
         {
             if (id <= 0)
-                return false.GenerateResult<TEntity>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
-            return await service.DeleteByIdAsync(id);
+                return false.GenerateBusinessResult<TEntity>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
+            var result = await service.DeleteByIdAsync(id);
+            return result.ToBusinessResult();
         }
-        public async Task<IServiceResult<TEntity>> GetByIdAsync(params object[] ids)
+        public async Task<IBusinessResult<TEntity>> GetByIdAsync(params object[] ids)
         {
             if (ids == null || !ids.Any())
-                return false.GenerateResult<TEntity>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
-            return await service.GetByIdAsync(ids);
+                return false.GenerateBusinessResult<TEntity>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
+            var result = await service.GetByIdAsync(ids);
+            return result.ToBusinessResult();
         }
-        public async Task<IServiceResult<TEntity>> UpdateAsync(TEntity entity, TValid validator)
+        public async Task<IBusinessResult<TEntity>> UpdateAsync(TEntity entity, TValid validator)
         {
             if (!entity.Validate(validator))
-                return false.GenerateResult<TEntity>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
-            return await service.UpdateAsync(entity);
+                return false.GenerateBusinessResult<TEntity>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
+            var result = await service.UpdateAsync(entity);
+            return result.ToBusinessResult();
         }
-        public async Task<IServiceResult<TEntity>> UpdateFieldRangeAsync(TEntity entity, TValid validator, params string[] fields)
+        public async Task<IBusinessResult<TEntity>> UpdateFieldRangeAsync(TEntity entity, TValid validator, params string[] fields)
         {
             if (!entity.Validate(validator) || fields == null || !fields.Any())
-                return false.GenerateResult<TEntity>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
-            return await service.UpdateFieldRangeAsync(entity, fields);
+                return false.GenerateBusinessResult<TEntity>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
+            var result = await service.UpdateFieldRangeAsync(entity, fields);
+            return result.ToBusinessResult();
         }
-        public async Task<IServiceResult<TEntity>> UpdateFieldRangeByIdAsync(int Id, params KeyValuePair<string, dynamic>[] fields)
+        public async Task<IBusinessResult<TEntity>> UpdateFieldRangeByIdAsync(int Id, params KeyValuePair<string, dynamic>[] fields)
         {
             if (Id <= 0 || fields == null || !fields.Any())
-                return false.GenerateResult<TEntity>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
-            return await service.UpdateFieldRangeByIdAsync(Id, fields);
+                return false.GenerateBusinessResult<TEntity>(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
+            var result = await service.UpdateFieldRangeByIdAsync(Id, fields);
+            return result.ToBusinessResult();
         }
     }
 }

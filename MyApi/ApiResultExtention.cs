@@ -1,4 +1,5 @@
-﻿using ManaBaseEntity.Common;
+﻿using BaseBusiness.Models;
+using ManaBaseEntity.Common;
 using ManaDataTransferObject.Common;
 using ManaViewModel.Common;
 using Services.Models;
@@ -15,6 +16,12 @@ namespace MyApi
             return new WebFramework.Api.ApiResult(result.IsSuccess, result.StatusCode, result.Message);
         }
         public static ApiResult<TData> ToApiResult<TData>(this ServiceResult<TData> result)
+            where TData : class
+        {
+            return new WebFramework.Api.ApiResult<TData>(result.IsSuccess, result.StatusCode, result.Data, result.Message);
+        }
+
+        public static ApiResult<TData> ToApiResult<TData>(this BusinessResult<TData> result)
             where TData : class
         {
             return new WebFramework.Api.ApiResult<TData>(result.IsSuccess, result.StatusCode, result.Data, result.Message);

@@ -39,6 +39,16 @@ namespace Services.Models
             return IsSuccess;
         }
 
+        public ApiResultStatus GetStatus()
+        {
+            return StatusCode;
+        }
+
+        public string GetMessage()
+        {
+            return Message;
+        }
+
         public static implicit operator ServiceResult<TData>(TData data)
         {
             if (data == null)
