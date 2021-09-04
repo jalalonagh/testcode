@@ -25,14 +25,14 @@ namespace BaseBusiness
 
         public async Task<BusinessResult> AddRangeAsync(IEnumerable<TEntity> entities, TValid validator)
         {
-            if (!entities.Validate(validator))
+            if (!entities.Validates(validator))
                 return false.GenerateBusinessResult(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
             var result = await service.AddRangeAsync(entities);
             return result.ToBusinessResult();
         }
         public async Task<BusinessResult> DeleteRangeAsync(IEnumerable<TEntity> entities, TValid validator)
         {
-            if (!entities.Validate(validator))
+            if (!entities.Validates(validator))
                 return false.GenerateBusinessResult(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
             var result = await service.DeleteRangeAsync(entities);
             return result.ToBusinessResult();
@@ -51,7 +51,7 @@ namespace BaseBusiness
         }
         public async Task<BusinessResult> UpdateRangeAsync(IEnumerable<TEntity> entities, TValid validator)
         {
-            if (!entities.Validate(validator))
+            if (!entities.Validates(validator))
                 return false.GenerateBusinessResult(ManaEnums.Api.ApiResultStatus.BAD_REQUEST, null, resource.FetchResource("invalidphonedata").GetMessage());
             var result = await service.UpdateRangeAsync(entities);
             return result.ToBusinessResult();

@@ -1,23 +1,10 @@
-﻿
-using Common;
-using ElmahCore;
-using ElmahCore.Mvc;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace WebFramework.Configuration
 {
-    public static class ServiceCollectionExtensions
+    public static class AddCustomApiVersioningServiceExtensions
     {
-        public static void AddElmah(this IServiceCollection services, IConfiguration configuration, SiteSettings siteSetting)
-        {
-            services.AddElmah<XmlFileErrorLog>(options =>
-            {
-                options.Path = siteSetting.ElmahPath;
-                options.LogPath = "~/Elmahlogs";
-            });
-        }
         public static void AddCustomApiVersioning(this IServiceCollection services)
         {
             services.AddApiVersioning(options =>

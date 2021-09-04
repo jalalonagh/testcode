@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Converters;
 using WebFramework.Permission;
@@ -8,15 +7,12 @@ namespace WebFramework.Configuration
 {
     public static class MVCServiceCollectionExtensions
     {
-        readonly static string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public static void AddMinimalMvc(this IServiceCollection services)
         {
             services.AddMvcCore(options =>
             {
                 options.EnableEndpointRouting = false;
             })
-                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-                .AddDataAnnotationsLocalization()
                 .AddApiExplorer()
                 .AddAuthorization(options =>
                 {

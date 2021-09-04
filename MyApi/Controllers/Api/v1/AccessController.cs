@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Services.Models;
-using Services.Tools;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -90,8 +89,6 @@ namespace MyApi.Controllers.Api.v1
             request.Content = content;
             var response = await client.SendAsync(request);
             var api = Newtonsoft.Json.JsonConvert.DeserializeObject<ServiceResult>(await response.Content.ReadAsStringAsync());
-            if (api.IsSuccess)
-                new ConnectionApi(_env).saveToken(api.GetData<JWTAuthModel>().jwt);
             return api;
         }
 
@@ -181,9 +178,6 @@ namespace MyApi.Controllers.Api.v1
             string url = siteSettings.UriUserInfo;
             var client = _clientFactory.CreateClient();
             var request = new HttpRequestMessage(HttpMethod.Get, url);
-            var JWToken = new ConnectionApi(_env).openToken()?.access_token;
-            if (!string.IsNullOrEmpty(JWToken))
-                request.Headers.Add("Authorization", "Bearer " + JWToken.Replace("\"", ""));
             var response = await client.SendAsync(request);
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {

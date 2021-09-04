@@ -15,7 +15,6 @@ namespace Entities.User.ChairToUser
             builder.Property(p => p.DateDm).HasDefaultValue(DateTime.Now);
             builder.Property(p => p.DateDs).HasDefaultValue(DateTime.Now.ToPersian());
             builder.Property(p => p.DateDs).HasMaxLength(10);
-            builder.HasOne(x => x.User).WithMany(z => z.Chairs).HasForeignKey(z => z.UserId);
         }
     }
 }

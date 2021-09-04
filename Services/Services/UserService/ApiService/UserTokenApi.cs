@@ -4,7 +4,6 @@ using ManaResourceManager;
 using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
 using Services.Models;
-using Services.Tools;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
@@ -96,9 +95,6 @@ namespace Services.Services.UserService.ApiService
             url = url + "/ChangeThePassword";
             var http = client.CreateClient();
             var request = new HttpRequestMessage(HttpMethod.Delete, url + $"?userName={userName}&currentPassword={currentPassword}&newPassword={newPassword}");
-            var jWToken = new ConnectionApi(env).openToken().access_token;
-            if (!string.IsNullOrEmpty(jWToken))
-                request.Headers.Add("Authorization", "Bearer " + jWToken.Replace("\"", ""));
             var response = await http.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {

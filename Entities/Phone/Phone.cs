@@ -1,5 +1,4 @@
 ﻿using ManaBaseEntity.Common;
-using System.Collections.Generic;
 
 namespace Entities.Phone
 {

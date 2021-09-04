@@ -1,10 +1,7 @@
 ﻿using FluentValidation;
 using ManaBaseEntity.Common;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ManaEntitiesValidation.Extensions
 {
@@ -19,7 +16,7 @@ namespace ManaEntitiesValidation.Extensions
             return false;
         }
 
-        public static bool Validate<TEntity, TValid>(this IEnumerable<TEntity> entities, TValid valid)
+        public static bool Validates<TEntity, TValid>(this IEnumerable<TEntity> entities, TValid valid)
             where TEntity : BaseEntity, new()
             where TValid : AbstractValidator<TEntity>
         {

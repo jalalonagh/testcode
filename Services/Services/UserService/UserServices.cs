@@ -14,7 +14,6 @@ using Microsoft.Extensions.Options;
 using Services.Base.Services;
 using Services.Models;
 using Services.Services.UserService.ApiService;
-using Services.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,10 +52,6 @@ namespace Services.Services.UserService
                 Username = settings.UserName,
                 GrantType = "password"
             }, settings.UriUserInfo);
-            new ConnectionApi(env).saveToken(new AccessToken
-            {
-                access_token = token.GetData<JWTAuthModel>().jwt.access_token
-            });
             return new ServiceResult(true, ApiResultStatus.SUCCESS);
         }
         public async Task<ServiceResult> GetByUsername(string username)
@@ -146,14 +141,9 @@ namespace Services.Services.UserService
                     UserName = userData.UserName,
                     Gender = userData.Gender,
                     PhoneNumber = userData.PhoneNumber,
-                    NikName = userData.NikName,
                     ValidCode = code.ToString(),
                     ValidCodeExpired = DateTime.Now.AddMinutes(settings.ValidCodeExpired),
-                    IsPerson = userData.IsPerson,
-                    IsActive = true,
-                    SalcustTp = userData.SalcustTp,
-                    SalcustSi = userData.SalcustSi,
-                    SalcustCu = userData.SalcustCu
+                    IsActive = true
                 };
                 if ((await GetByIdAsync(user.Id)).GetIsSuccess())
                     await AddAsync(user);

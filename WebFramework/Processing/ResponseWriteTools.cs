@@ -1,7 +1,8 @@
-﻿using ManaEnums.Api;
+﻿using Common;
+using ManaEnums.Api;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System;
@@ -9,7 +10,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebFramework.Api;
 using WebFramework.Resolvers;
-using Common;
 
 namespace WebFramework.Processing
 {
