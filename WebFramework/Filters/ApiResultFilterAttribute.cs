@@ -13,17 +13,17 @@ namespace WebFramework.Filters
         {
             if (context.Result is OkObjectResult okObjectResult)
             {
-                var apiResult = new ApiResult<object>(true, ApiResultStatus.SUCCESS, okObjectResult.Value);
+                var apiResult = new ApiResult(true, ApiResultStatus.SUCCESS, okObjectResult.Value, "");
                 context.Result = new JsonResult(apiResult) { StatusCode = okObjectResult.StatusCode };
             }
             else if (context.Result is OkResult okResult)
             {
-                var apiResult = new ApiResult(true, ApiResultStatus.SUCCESS);
+                var apiResult = new ApiResult(true, ApiResultStatus.SUCCESS, null, "");
                 context.Result = new JsonResult(apiResult) { StatusCode = okResult.StatusCode };
             }
             else if (context.Result is BadRequestResult badRequestResult)
             {
-                var apiResult = new ApiResult(false, ApiResultStatus.BAD_REQUEST);
+                var apiResult = new ApiResult(false, ApiResultStatus.BAD_REQUEST, null, "Your request is not valid");
                 context.Result = new JsonResult(apiResult) { StatusCode = badRequestResult.StatusCode };
             }
             else if (context.Result is BadRequestObjectResult badRequestObjectResult)
@@ -43,18 +43,18 @@ namespace WebFramework.Filters
             }
             else if (context.Result is NotFoundResult notFoundResult)
             {
-                var apiResult = new ApiResult(false, ApiResultStatus.NOT_FOUND);
+                var apiResult = new ApiResult(false, ApiResultStatus.NOT_FOUND, null, "Data is not found");
                 context.Result = new JsonResult(apiResult) { StatusCode = notFoundResult.StatusCode };
             }
             else if (context.Result is NotFoundObjectResult notFoundObjectResult)
             {
-                var apiResult = new ApiResult<object>(false, ApiResultStatus.NOT_FOUND, notFoundObjectResult.Value);
+                var apiResult = new ApiResult(false, ApiResultStatus.NOT_FOUND, notFoundObjectResult.Value, "Data is not found");
                 context.Result = new JsonResult(apiResult) { StatusCode = notFoundObjectResult.StatusCode };
             }
             else if (context.Result is ObjectResult objectResult && objectResult.StatusCode == null
                 && !(objectResult.Value is ApiResult))
             {
-                var apiResult = new ApiResult<object>(true, ApiResultStatus.SUCCESS, objectResult.Value);
+                var apiResult = new ApiResult(true, ApiResultStatus.SUCCESS, objectResult.Value, "");
                 context.Result = new JsonResult(apiResult) { StatusCode = objectResult.StatusCode };
             }
             base.OnResultExecuting(context);

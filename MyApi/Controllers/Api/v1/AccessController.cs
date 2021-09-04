@@ -77,7 +77,7 @@ namespace MyApi.Controllers.Api.v1
         }
 
         [Obsolete]
-        private async Task<ServiceResult<JWTAuthModel>> Token(TokenRequest tokenRequest, CancellationToken cancellationToken)
+        private async Task<ServiceResult> Token(TokenRequest tokenRequest, CancellationToken cancellationToken)
         {
             string url = siteSettings.UriUserInfo + "/TokenWithModel";
             var client = _clientFactory.CreateClient();
@@ -89,9 +89,9 @@ namespace MyApi.Controllers.Api.v1
             FormUrlEncodedContent content = new FormUrlEncodedContent(formVariables);
             request.Content = content;
             var response = await client.SendAsync(request);
-            var api = Newtonsoft.Json.JsonConvert.DeserializeObject<ServiceResult<JWTAuthModel>>(await response.Content.ReadAsStringAsync());
+            var api = Newtonsoft.Json.JsonConvert.DeserializeObject<ServiceResult>(await response.Content.ReadAsStringAsync());
             if (api.IsSuccess)
-                new ConnectionApi(_env).saveToken(api.Data.jwt);
+                new ConnectionApi(_env).saveToken(api.GetData<JWTAuthModel>().jwt);
             return api;
         }
 
