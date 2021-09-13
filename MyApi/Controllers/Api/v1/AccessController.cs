@@ -1,96 +1,26 @@
 ﻿using Common;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.Extensions.Configuration;
-using Services.Models;
-using System;
+using MyApi.Models.Access;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using WebFramework.Api;
 
 namespace MyApi.Controllers.Api.v1
 {
-
-    public class NavigationMenu
-    {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string ParentMenuId { get; set; }
-        public virtual NavigationMenu ParentNavigationMenu { get; set; }
-        public string Area { get; set; }
-        public string ControllerName { get; set; }
-        public string ActionName { get; set; }
-        public bool IsExternal { get; set; }
-        public string ExternalUrl { get; set; }
-        public int DisplayOrder { get; set; }
-        public bool Permitted { get; set; }
-        public bool Visible { get; set; }
-        public string Domain { get; set; }
-    }
-
-    public class MvcActionInfo
-    {
-        public string Id => $"{ControllerId}:{Name}";
-        public string Name { get; set; }
-        public string DisplayName { get; set; }
-        public string ControllerId { get; set; }
-    }
-    public class MvcControllerInfo
-    {
-        public string Id => $"{AreaName}:{Name}";
-        public string Name { get; set; }
-        public string DisplayName { get; set; }
-        public string AreaName { get; set; }
-        public IEnumerable<MvcActionInfo> Actions { get; set; }
-    }
-
-
     [ApiVersion("1")]
     public class AccessController : BaseController
     {
         private IActionDescriptorCollectionProvider _actionDescriptorCollectionProvider;
         private readonly IHttpClientFactory _clientFactory;
-        [Obsolete]
-        private readonly IHostingEnvironment _env;
         private readonly SiteSettings siteSettings;
-
-        [Obsolete]
-        public AccessController(IHttpClientFactory clientFactory,
-            IConfiguration configuration,
-           [FromServices] IActionDescriptorCollectionProvider actionDescriptorCollectionProvider,
-                    IHostingEnvironment env)
-        {
-            _clientFactory = clientFactory;
-            _actionDescriptorCollectionProvider = actionDescriptorCollectionProvider;
-            _env = env;
-            siteSettings = configuration.GetSection(nameof(SiteSettings)).Get<SiteSettings>();
-        }
-
-        [Obsolete]
-        private async Task<ServiceResult> Token(TokenRequest tokenRequest, CancellationToken cancellationToken)
-        {
-            string url = siteSettings.UriUserInfo + "/TokenWithModel";
-            var client = _clientFactory.CreateClient();
-            var request = new HttpRequestMessage(HttpMethod.Post, url);
-            var formVariables = new List<KeyValuePair<string, string>>();
-            formVariables.Add(new KeyValuePair<string, string>("grant_type", "password"));
-            formVariables.Add(new KeyValuePair<string, string>("username", tokenRequest.Username));
-            formVariables.Add(new KeyValuePair<string, string>("password", tokenRequest.Password));
-            FormUrlEncodedContent content = new FormUrlEncodedContent(formVariables);
-            request.Content = content;
-            var response = await client.SendAsync(request);
-            var api = Newtonsoft.Json.JsonConvert.DeserializeObject<ServiceResult>(await response.Content.ReadAsStringAsync());
-            return api;
-        }
 
         [HttpGet("[action]")]
         [AllowAnonymous]
@@ -170,23 +100,5 @@ namespace MyApi.Controllers.Api.v1
                 return true;
             return false;
         }
-
-        [Obsolete]
-        async Task sendToTokenService()
-        {
-        again:
-            string url = siteSettings.UriUserInfo;
-            var client = _clientFactory.CreateClient();
-            var request = new HttpRequestMessage(HttpMethod.Get, url);
-            var response = await client.SendAsync(request);
-            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-            {
-                //await Autorization();
-                goto again;
-            }
-
-            var api = Newtonsoft.Json.JsonConvert.DeserializeObject<ServiceResult>(await response.Content.ReadAsStringAsync());
-        }
-
     }
 }

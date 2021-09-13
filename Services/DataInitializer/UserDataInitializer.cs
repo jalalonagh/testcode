@@ -19,24 +19,6 @@ namespace Services.DataInitializer
 
         public void InitializeData()
         {
-            //if (!userRepository.TableNoTracking.Any(p => p.UserName == "Admin"))
-            //{
-
-            //    var result = manager.CreateAsync(new User
-            //    {
-            //        EmailConfirmed = false,
-            //        PhoneNumber = "09354320819",
-            //        TwoFactorEnabled = false,
-            //        LockoutEnabled = false,
-            //        AccessFailedCount = 0,
-            //        IsActive = true,
-            //        UserName = "Admin",
-            //        Email = "admin@site.com",
-            //        Age = 25,
-            //        FullName = "administrator",
-            //        Gender = ManaEnums.Entity.User.UserGenderType.MALE,
-            //    }, "1234567").Result;
-            //}
         }
     }
 }
