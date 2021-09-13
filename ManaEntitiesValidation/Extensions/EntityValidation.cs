@@ -22,10 +22,8 @@ namespace ManaEntitiesValidation.Extensions
         {
             if (entities != null && entities.Any())
                 foreach (var item in entities)
-                {
                     if (!valid.Validate(item).IsValid)
                         return false;
-                }
             return true;
         }
     }

@@ -6,7 +6,7 @@ namespace WebFramework.Api
 {
     [ApiController]
     [ApiResultFilter]
-    [Route("api/v{version:apiVersion}/[controller]")]// api/v1/[controller]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [Authorize("Authorization")]
     public class BaseController : Controller
     {
