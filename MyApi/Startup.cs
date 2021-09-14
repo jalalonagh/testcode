@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Converters;
@@ -47,7 +48,12 @@ namespace MyApi
             services.AddHttpClient();
             services.AddSession();
             services.Configure<SiteSettings>(Configuration.GetSection(nameof(SiteSettings)));
-            services.AddDbContext(Configuration);
+            services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options
+                    .UseSqlServer(Configuration.GetConnectionString("SqlServer"));
+                options.EnableSensitiveDataLogging();
+            }, ServiceLifetime.Transient);
             services.AddIdentity<User, Role>(identityOptions =>
             {
                 identityOptions.Password.RequireDigit = _siteSetting.IdentitySettings.PasswordRequireDigit;
