@@ -44,7 +44,7 @@ namespace MyApi
             services.AddMinimalMvc();
             services.AddControllersWithViews();
             services.AddElmah(Configuration, _siteSetting);
-            services.AddJwtAuthentication(_siteSetting.JwtSettings);
+            new JWTServiceCollectionExtensions().AddJwtAuthentication(services, _siteSetting.JwtSettings);
             services.AddCustomApiVersioning();
             services.AddSwagger();
             services.AddSessionService();

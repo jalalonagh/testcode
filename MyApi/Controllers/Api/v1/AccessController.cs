@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.Extensions.Configuration;
 using MyApi.Models.Access;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,6 +22,14 @@ namespace MyApi.Controllers.Api.v1
         private IActionDescriptorCollectionProvider _actionDescriptorCollectionProvider;
         private readonly IHttpClientFactory _clientFactory;
         private readonly SiteSettings siteSettings;
+
+        public AccessController(IHttpClientFactory clientFactory, IConfiguration configuration,
+            IActionDescriptorCollectionProvider actionDescriptorCollectionProvider)
+        {
+            _clientFactory = clientFactory;
+            _actionDescriptorCollectionProvider = actionDescriptorCollectionProvider;
+            siteSettings = configuration.GetSection(nameof(SiteSettings)).Get<SiteSettings>();
+        }
 
         [HttpGet("[action]")]
         [AllowAnonymous]
