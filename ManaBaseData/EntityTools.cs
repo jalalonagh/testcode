@@ -104,18 +104,16 @@ namespace Data
 
             return newEntities;
         }
-        public static IQueryable<TEntity> SetOrder<TEntity, TSearch>(this IQueryable<TEntity> query, IEnumerable<PropertyInfo> fields)
+        public static IQueryable<TEntity> SetOrder<TEntity>(this IQueryable<TEntity> query, IEnumerable<PropertyInfo> fields)
             where TEntity : class, IEntity
-            where TSearch : class, ISearchEntity
         {
             if (fields != null && fields.Any())
                 foreach (var item in fields)
                     query = query.OrderByDescending(item.Order<TEntity>());
             return query;
         }
-        public static IQueryable<TEntity> SetOrder<TEntity, TSearch>(this IEnumerable<TEntity> entities, IEnumerable<PropertyInfo> fields)
+        public static IQueryable<TEntity> SetOrder<TEntity>(this IEnumerable<TEntity> entities, IEnumerable<PropertyInfo> fields)
             where TEntity : class, IEntity
-            where TSearch : class, ISearchEntity
         {
             var query = entities.AsQueryable();
 
