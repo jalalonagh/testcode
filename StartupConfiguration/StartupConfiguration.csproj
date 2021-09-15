@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Jalal Onagh</Authors>
+    <Company>Managostar Ara</Company>
+    <Description>web api app default managostar ara configurations</Description>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

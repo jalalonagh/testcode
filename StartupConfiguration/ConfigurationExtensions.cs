@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StartupConfiguration.Models;
-using System.Text;
 
 namespace StartupConfiguration
 {
@@ -41,10 +39,11 @@ namespace StartupConfiguration
             }).AddApiExplorer()
             .AddFormatterMappings()
             .AddDataAnnotations()
+            .SetStartupAddMVCCoreNewtonsoftJson()
             .SetCompatibilityVersion(CompatibilityVersion.Latest);
         }
 
-        public static void SetStartupAddMVCCoreNewtonsoftJson(this IMvcCoreBuilder builder)
+        public static IMvcCoreBuilder SetStartupAddMVCCoreNewtonsoftJson(this IMvcCoreBuilder builder)
         {
             builder.AddNewtonsoftJson(option =>
             {
@@ -53,25 +52,22 @@ namespace StartupConfiguration
                 option.SerializerSettings.MaxDepth = 7;
                 option.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.None;
             });
+            return builder;
         }
 
-        public static void SetStartupAddAuthentication(this IServiceCollection services, JWTSettings settings)
+        public static void SetStartupAddCors(this IServiceCollection services, string name)
         {
-            services.AddAuthentication(options =>
+            services.AddCors(options =>
             {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                var secretkey = Encoding.UTF8.GetBytes(settings.SecretKey);
-                var encryptionkey = Encoding.UTF8.GetBytes(settings.Encryptkey);
-                var validationParameters = settings.JwtSettings.GenerateValidationParameters(secretkey, encryptionkey);
-                options.RequireHttpsMetadata = false;
-                options.SaveToken = true;
-                options.TokenValidationParameters = validationParameters;
-                options.Events = _siteSetting.JwtSettings.GenerateJWTBearerEvent();
+                options.AddPolicy(name,
+                builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyHeader()
+                           .AllowAnyMethod();
+                });
             });
         }
+
     }
 }
