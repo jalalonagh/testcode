@@ -48,23 +48,13 @@ namespace MyApi.Controllers.Api.v1
                     continue;
                 var actionDescriptor = actionDescriptors.First();
                 var controllerTypeInfo = actionDescriptor.ControllerTypeInfo;
-                var currentController = new MvcControllerInfo
-                {
-                    AreaName = controllerTypeInfo.GetCustomAttribute<AreaAttribute>()?.RouteValue,
-                    DisplayName = controllerTypeInfo.GetCustomAttribute<DisplayNameAttribute>()?.DisplayName,
-                    Name = actionDescriptor.ControllerName,
-                };
+                var currentController = new MvcControllerInfo(actionDescriptor.ControllerName, controllerTypeInfo.GetCustomAttribute<AreaAttribute>()?.RouteValue, controllerTypeInfo.GetCustomAttribute<DisplayNameAttribute>()?.DisplayName);
                 var actions = new List<MvcActionInfo>();
                 foreach (var descriptor in actionDescriptors.GroupBy(a => a.ActionName).Select(g => g.First()))
                 {
                     var methodInfo = descriptor.MethodInfo;
                     if (IsProtectedAction(controllerTypeInfo, methodInfo))
-                        actions.Add(new MvcActionInfo
-                        {
-                            ControllerId = currentController.Id,
-                            Name = descriptor.ActionName,
-                            DisplayName = methodInfo.GetCustomAttribute<DisplayNameAttribute>()?.DisplayName,
-                        });
+                        actions.Add(new MvcActionInfo(descriptor.ActionName, currentController.Id, methodInfo.GetCustomAttribute<DisplayNameAttribute>()?.DisplayName));
                 }
                 if (actions.Any())
                 {
@@ -72,29 +62,14 @@ namespace MyApi.Controllers.Api.v1
                     _mvcControllers.Add(currentController);
                 }
             }
-            List<NavigationMenu> ls = new List<NavigationMenu>();
+            List<NavigationMenu> menus = new List<NavigationMenu>();
             foreach (var item in _mvcControllers)
-            {
-                ls.AddRange(item.Actions.Select(x => new NavigationMenu
-                {
-                    ActionName = x.Name,
-                    Name = x.DisplayName,
-                    Area = item.AreaName,
-                    ControllerName = item.Name,
-                    ParentNavigationMenu = new NavigationMenu
-                    {
-                        ControllerName = item.Name,
-                        Name = item.DisplayName,
-                        Area = item.AreaName
-                    }
-                }));
-            }
-            var lll = ls.ToList();
-            lll.ForEach(x => x.Domain = HttpContext.Request.Host.Value);
+                menus.AddRange(item.Actions.ToNavigationMenus(item.Name, item.AreaName, item.DisplayName));
+            menus.ForEach(x => x.Domain = HttpContext.Request.Host.Value);
             string url = siteSettings.UriTokenService;
             var client = _clientFactory.CreateClient();
             var request = new HttpRequestMessage(HttpMethod.Post, url + $"/Access/SetController");
-            StringContent content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(lll), Encoding.UTF8, "application/json");
+            StringContent content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(menus), Encoding.UTF8, "application/json");
             request.Content = content;
             var response = await client.SendAsync(request);
         }
