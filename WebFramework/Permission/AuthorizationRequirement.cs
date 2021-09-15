@@ -12,14 +12,6 @@ using System.Threading.Tasks;
 
 namespace WebFramework.Permission
 {
-    public class ChairModel
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public object? Roles { get; set; }
-        public object? ChairToUsers { get; set; }
-    }
-
     public class AuthorizationRequirement : IAuthorizationRequirement { }
 
     public class PermissionHandler : AuthorizationHandler<AuthorizationRequirement>
@@ -33,18 +25,12 @@ namespace WebFramework.Permission
         {
             if (context.Resource is DefaultHttpContext resource)
             {
-                if (resource.Request.HttpContext.Request.Host.Value.ToLower().Contains("localhost"))
-                {
-                    context.Succeed(requirement);
-                    return;
-                }
                 var endpoint = resource.GetEndpoint() as RouteEndpoint;
                 endpoint.RoutePattern.RequiredValues.TryGetValue("controller", out var _controller);
                 endpoint.RoutePattern.RequiredValues.TryGetValue("action", out var _action);
                 endpoint.RoutePattern.RequiredValues.TryGetValue("page", out var _page);
                 endpoint.RoutePattern.RequiredValues.TryGetValue("area", out var _area);
                 var isAuthenticated = context.User.Identity.IsAuthenticated;
-                HttpContext httpContext = _httpContextAccessor.HttpContext; // Access context here
                 var access = context.User.Claims.Where(x => x.Type == ClaimTypes.Authentication).ToList();
                 var chairs = new List<ChairModel>();
                 foreach (var item in access.Select(x => x.Value))
@@ -62,8 +48,7 @@ namespace WebFramework.Permission
                         permisions = json.FromJson<List<DapperPermission>>();
                         var permited = permisions.Where(x => x.NavigationMenusControllerName == _controller.ToString() &&
                           x.NavigationMenusActionName == _action.ToString() && x.Permitted && chairs.Select(x => x.Id).Contains(x.ChairsId)
-                          && x.NavigationMenusDomain.ToLower() == resource.Request.HttpContext.Request.Host.Value.ToLower()
-                         ).Any();
+                          && x.NavigationMenusDomain.ToLower() == resource.Request.HttpContext.Request.Host.Value.ToLower()).Any();
                         if (isAuthenticated && permited && _controller != null && _action != null)
                         {
                             context.Succeed(requirement);

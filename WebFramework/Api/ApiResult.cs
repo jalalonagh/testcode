@@ -1,19 +1,12 @@
-﻿using ManaEnums.Api;
+﻿using Common.Models;
+using ManaEnums.Api;
 using ManaEnums.Extensions;
-using Newtonsoft.Json;
 
 namespace WebFramework.Api
 {
-    public class ApiResult
+    public class ApiResult : MethodResponseModel
     {
-        public bool IsSuccess { get; set; }
-        public ApiResultStatus StatusCode { get; set; }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string Message { get; set; }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public object Data { get; set; }
-
-        public ApiResult(bool isSuccess, ApiResultStatus statusCode, object data, string message = null)
+        public ApiResult(bool isSuccess, ApiResultStatus statusCode, object data, string message = null): base(isSuccess, statusCode, data, message)
         {
             IsSuccess = isSuccess;
             StatusCode = statusCode;

@@ -1,22 +1,18 @@
-﻿using ManaEnums.Api;
+﻿using Common.Models;
+using ManaEnums.Api;
 using ManaEnums.Extensions;
 
 namespace Services.Models
 {
-    public class ServiceResult
+    public class ServiceResult : MethodResponseModel
     {
-        public bool IsSuccess { get; set; }
-        public ApiResultStatus StatusCode { get; set; }
-        public string Message { get; set; }
-        public object Data { get; set; }
-
-        public ServiceResult(bool isSuccess, ApiResultStatus statusCode, string message = null)
+        public ServiceResult(bool isSuccess, ApiResultStatus statusCode, string message = null) : base(isSuccess, statusCode, message)
         {
             IsSuccess = isSuccess;
             StatusCode = statusCode;
             Message = message ?? statusCode.ToDisplay();
         }
-        public ServiceResult(bool isSuccess, ApiResultStatus statusCode, object data, string message = null)
+        public ServiceResult(bool isSuccess, ApiResultStatus statusCode, object data, string message = null) : base(isSuccess, statusCode, data, message)
         {
             IsSuccess = isSuccess;
             StatusCode = statusCode;
