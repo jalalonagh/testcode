@@ -21,13 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyApi", "MyApi\MyApi.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManaDataTransferObjectValidator", "ManaDataTransferObjectValidator\ManaDataTransferObjectValidator.csproj", "{EAFD06D1-2C81-4AEB-BADC-C77FE9DC60EF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwaggerApi", "SwaggerApi\SwaggerApi.csproj", "{15D5ECFF-2677-45DE-8635-F2B72E38BCD6}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseBusiness", "BaseBusiness\BaseBusiness.csproj", "{68624FA4-D2EC-4248-9DA7-56E0821379AB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{092A3C66-6CEA-43DB-8D89-017F44B5C2F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataTest", "Tests\DataTest\DataTest.csproj", "{4B534ED7-8ABD-4FA3-B58C-A26F4BC972D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataTest", "Tests\DataTest\DataTest.csproj", "{4B534ED7-8ABD-4FA3-B58C-A26F4BC972D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,10 +69,6 @@ Global
 		{EAFD06D1-2C81-4AEB-BADC-C77FE9DC60EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAFD06D1-2C81-4AEB-BADC-C77FE9DC60EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAFD06D1-2C81-4AEB-BADC-C77FE9DC60EF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{15D5ECFF-2677-45DE-8635-F2B72E38BCD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15D5ECFF-2677-45DE-8635-F2B72E38BCD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15D5ECFF-2677-45DE-8635-F2B72E38BCD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15D5ECFF-2677-45DE-8635-F2B72E38BCD6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{68624FA4-D2EC-4248-9DA7-56E0821379AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{68624FA4-D2EC-4248-9DA7-56E0821379AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68624FA4-D2EC-4248-9DA7-56E0821379AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
