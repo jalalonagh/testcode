@@ -6,7 +6,6 @@ using ManaBaseData;
 using ManaDataTransferObjectValidator;
 using ManaEntitiesValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -14,7 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json.Converters;
 using SwaggerApi.V5;
 using System;
 using System.Globalization;
@@ -24,7 +22,6 @@ using WebFramework.Configuration.AutofacConfigurations;
 using WebFramework.Configuration.JWTConfigurations;
 using WebFramework.Extensions;
 using WebFramework.MiddleWares;
-using WebFramework.Permission;
 using WebFramework.Session;
 
 namespace MyApi
@@ -44,7 +41,6 @@ namespace MyApi
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IAuthorizationHandler, PermissionHandler>();
             services.AddHttpClient();
             services.AddSession();
             services.Configure<SiteSettings>(Configuration.GetSection(nameof(SiteSettings)));
@@ -71,10 +67,10 @@ namespace MyApi
                             .AddApiExplorer()
                             .AddAuthorization(options =>
                             {
-                                options.AddPolicy("Authorization", policyCorrectUser =>
-                                {
-                                    policyCorrectUser.Requirements.Add(new AuthorizationRequirement());
-                                });
+                                //options.AddPolicy("Authorization", policyCorrectUser =>
+                                //{
+                                //    policyCorrectUser.Requirements.Add(new AuthorizationRequirement());
+                                //});
                             })
                             .AddFormatterMappings()
                             .AddDataAnnotations()

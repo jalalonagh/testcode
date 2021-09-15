@@ -13,6 +13,7 @@
     <PackageReference Include="ElmahCore.Sql" Version="2.0.7" />
     <PackageReference Include="Hangfire" Version="1.7.25" />
     <PackageReference Include="Hangfire.SqlServer" Version="1.7.25" />
+    <PackageReference Include="ManaRedis" Version="1.0.1" />
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="5.0.10" />
@@ -26,6 +27,7 @@
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.19" />
     <PackageReference Include="RabbitMQ.Client" Version="6.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.10" />
+    <PackageReference Include="SwaggerApi" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,7 +37,6 @@
     <ProjectReference Include="..\SMSBusiness\SMSBusiness.csproj" />
     <ProjectReference Include="..\SMSConfirmationBusiness\SMSConfirmationBusiness.csproj" />
     <ProjectReference Include="..\SMSRegexBusiness\SMSRegexBusiness.csproj" />
-    <ProjectReference Include="..\SwaggerApi\SwaggerApi.csproj" />
     <ProjectReference Include="..\TransactionBusiness\TransactionBusiness.csproj" />
     <ProjectReference Include="..\UserBusiness\UserBusiness.csproj" />
   </ItemGroup>
