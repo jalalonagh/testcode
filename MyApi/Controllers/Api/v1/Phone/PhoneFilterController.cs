@@ -2,13 +2,13 @@
 using Entities.Phone;
 using ManaEntitiesValidation.Phone;
 using ManaResourceManager;
-using ManaViewModel.Phone;
 using Microsoft.AspNetCore.Mvc;
+using WebFramework.Api;
 
 namespace MyApi.Controllers.Api.v1
 {
     [ApiVersion("1")]
-    public class PhoneFilterController //: GenericFilterController<Phone, PhoneValidator, PhoneSearch, PhoneVM>
+    public class PhoneFilterController : BaseController
     {
         private IFilter<Phone, PhoneValidator, PhoneSearch> crud;
         ResourceManagerSingleton resource;
