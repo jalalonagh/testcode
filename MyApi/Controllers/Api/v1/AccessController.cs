@@ -42,26 +42,7 @@ namespace MyApi.Controllers.Api.v1
                 .Select(descriptor => descriptor)
                 .GroupBy(descriptor => descriptor.ControllerTypeInfo.FullName)
                 .ToList();
-            foreach (var actionDescriptors in items)
-            {
-                if (!actionDescriptors.Any())
-                    continue;
-                var actionDescriptor = actionDescriptors.First();
-                var controllerTypeInfo = actionDescriptor.ControllerTypeInfo;
-                var currentController = new MvcControllerInfo(actionDescriptor.ControllerName, controllerTypeInfo.GetCustomAttribute<AreaAttribute>()?.RouteValue, controllerTypeInfo.GetCustomAttribute<DisplayNameAttribute>()?.DisplayName);
-                var actions = new List<MvcActionInfo>();
-                foreach (var descriptor in actionDescriptors.GroupBy(a => a.ActionName).Select(g => g.First()))
-                {
-                    var methodInfo = descriptor.MethodInfo;
-                    if (IsProtectedAction(controllerTypeInfo, methodInfo))
-                        actions.Add(new MvcActionInfo(descriptor.ActionName, currentController.Id, methodInfo.GetCustomAttribute<DisplayNameAttribute>()?.DisplayName));
-                }
-                if (actions.Any())
-                {
-                    currentController.Actions = actions;
-                    _mvcControllers.Add(currentController);
-                }
-            }
+            _mvcControllers = GenerateControllerList(items, _mvcControllers);
             List<NavigationMenu> menus = new List<NavigationMenu>();
             foreach (var item in _mvcControllers)
                 menus.AddRange(item.Actions.ToNavigationMenus(item.Name, item.AreaName, item.DisplayName));
@@ -83,6 +64,31 @@ namespace MyApi.Controllers.Api.v1
             if (actionMethodInfo.GetCustomAttribute<AuthorizeAttribute>(true) != null)
                 return true;
             return false;
+        }
+
+        private List<MvcControllerInfo> GenerateControllerList(List<IGrouping<string, ControllerActionDescriptor>> items, List<MvcControllerInfo> _mvcControllers)
+        {
+            foreach (var actionDescriptors in items)
+            {
+                if (!actionDescriptors.Any())
+                    continue;
+                var actionDescriptor = actionDescriptors.First();
+                var controllerTypeInfo = actionDescriptor.ControllerTypeInfo;
+                var currentController = new MvcControllerInfo(actionDescriptor.ControllerName, controllerTypeInfo.GetCustomAttribute<AreaAttribute>()?.RouteValue, controllerTypeInfo.GetCustomAttribute<DisplayNameAttribute>()?.DisplayName);
+                var actions = new List<MvcActionInfo>();
+                foreach (var descriptor in actionDescriptors.GroupBy(a => a.ActionName).Select(g => g.First()))
+                {
+                    var methodInfo = descriptor.MethodInfo;
+                    if (IsProtectedAction(controllerTypeInfo, methodInfo))
+                        actions.Add(new MvcActionInfo(descriptor.ActionName, currentController.Id, methodInfo.GetCustomAttribute<DisplayNameAttribute>()?.DisplayName));
+                }
+                if (actions.Any())
+                {
+                    currentController.Actions = actions;
+                    _mvcControllers.Add(currentController);
+                }
+            }
+            return _mvcControllers;
         }
     }
 }
