@@ -78,15 +78,7 @@ namespace Services.Services.UserService.ApiService
             var response = await http.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
-                var json = await response.Content.ReadAsStringAsync();
-                if (!string.IsNullOrEmpty(json))
-                {
-                    var data = JsonConvert.DeserializeObject<User>(json);
-                    if (data != null)
-                        return new ServiceResult(true, ManaEnums.Api.ApiResultStatus.SUCCESS, data, "");
-                    return new ServiceResult(false, ManaEnums.Api.ApiResultStatus.NOT_FOUND, null, resource.FetchResource("usernotfound").GetMessage());
-                }
-                return new ServiceResult(false, ManaEnums.Api.ApiResultStatus.LOGIC_ERROR, null, resource.FetchResource("errorinconvertjsontouser").GetMessage());
+                return await GetUserDataFromJson(response);
             }
             return new ServiceResult(false, ManaEnums.Api.ApiResultStatus.LOGIC_ERROR, null, resource.FetchResource("errorinresetpassword").GetMessage());
         }
@@ -98,17 +90,22 @@ namespace Services.Services.UserService.ApiService
             var response = await http.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
-                var json = await response.Content.ReadAsStringAsync();
-                if (!string.IsNullOrEmpty(json))
-                {
-                    var data = JsonConvert.DeserializeObject<User>(json);
-                    if (data != null)
-                        return new ServiceResult(true, ManaEnums.Api.ApiResultStatus.SUCCESS, data, "");
-                    return new ServiceResult(false, ManaEnums.Api.ApiResultStatus.NOT_FOUND, null, resource.FetchResource("usernotfound").GetMessage());
-                }
-                return new ServiceResult(false, ManaEnums.Api.ApiResultStatus.LOGIC_ERROR, null, resource.FetchResource("errorinconvertjsontouser").GetMessage());
+                return await GetUserDataFromJson(response);
             }
             return new ServiceResult(false, ManaEnums.Api.ApiResultStatus.LOGIC_ERROR, null, resource.FetchResource("errorinchangepassword").GetMessage());
+        }
+
+        private async Task<ServiceResult> GetUserDataFromJson(HttpResponseMessage response)
+        {
+            var json = await response.Content.ReadAsStringAsync();
+            if (!string.IsNullOrEmpty(json))
+            {
+                var data = JsonConvert.DeserializeObject<User>(json);
+                if (data != null)
+                    return new ServiceResult(true, ManaEnums.Api.ApiResultStatus.SUCCESS, data, "");
+                return new ServiceResult(false, ManaEnums.Api.ApiResultStatus.NOT_FOUND, null, resource.FetchResource("usernotfound").GetMessage());
+            }
+            return new ServiceResult(false, ManaEnums.Api.ApiResultStatus.LOGIC_ERROR, null, resource.FetchResource("errorinconvertjsontouser").GetMessage());
         }
     }
 }
