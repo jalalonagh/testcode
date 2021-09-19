@@ -1,24 +1,23 @@
 ﻿using Common;
+using Data.User;
 using ElmahCore.Mvc;
 using Entities.User;
 using Entities.User.Role;
 using ManaBaseData;
 using ManaDataTransferObjectValidator;
 using ManaEntitiesValidation;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StartupConfiguration;
+using StartupConfiguration.Models;
 using SwaggerApi.V5;
 using System;
 using System.Globalization;
-using System.Text;
 using WebFramework.Configuration;
 using WebFramework.Configuration.AutofacConfigurations;
-using WebFramework.Configuration.JWTConfigurations;
 using WebFramework.Extensions;
 using WebFramework.MiddleWares;
 using WebFramework.Session;
@@ -52,21 +51,7 @@ namespace MyApi
             services.SetStartupAddMVCCoreBase();
             services.AddControllersWithViews();
             services.AddElmah(Configuration, _siteSetting);
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                var secretkey = Encoding.UTF8.GetBytes(_siteSetting.JwtSettings.SecretKey);
-                var encryptionkey = Encoding.UTF8.GetBytes(_siteSetting.JwtSettings.Encryptkey);
-                var validationParameters = _siteSetting.JwtSettings.GenerateValidationParameters(secretkey, encryptionkey);
-                options.RequireHttpsMetadata = false;
-                options.SaveToken = true;
-                options.TokenValidationParameters = validationParameters;
-                options.Events = _siteSetting.JwtSettings.GenerateJWTBearerEvent();
-            });
+            services.SetJWTAuthentication<User, IUserRepository>(_siteSetting.JwtSettings.MapTo<JWTSettings>(), "GetByIdAsync");
             services.AddCustomApiVersioning();
             services.AddSwagger();
             services.AddSessionService();
