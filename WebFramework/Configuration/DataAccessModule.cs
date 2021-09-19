@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using ManaBaseData;
-using ManaDapper;
 using Microsoft.EntityFrameworkCore;
+using System.Data.Entity.Infrastructure;
 
 namespace WebFramework.Configuration
 {

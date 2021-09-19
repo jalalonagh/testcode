@@ -1,5 +1,4 @@
 ﻿using BaseBusiness;
-using BusinessBaseConfig;
 using System.Reflection;
 
 namespace WebFramework.Configuration.AutofacConfigurations
