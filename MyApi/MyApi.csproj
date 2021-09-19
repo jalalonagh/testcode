@@ -81,7 +81,6 @@
   
   <ItemGroup>
     <PackageReference Include="Dapper-QueryBuilder" Version="1.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -117,10 +116,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WebFramework\WebFramework.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="System.ServiceModel" />
   </ItemGroup>
 
   <ItemGroup>

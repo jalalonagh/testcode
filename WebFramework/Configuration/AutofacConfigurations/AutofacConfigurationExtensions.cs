@@ -14,7 +14,6 @@ namespace WebFramework.Configuration.AutofacConfigurations
             var containerBuilder = new ContainerBuilder();
             containerBuilder.Populate(services);
             containerBuilder.AddServices();
-            containerBuilder.RegisterModule(new MediatorModule());
             containerBuilder.RegisterModule(new DataAccessModule(configuration.GetConnectionString("SqlServer")));
             var container = containerBuilder.Build();
             return new AutofacServiceProvider(container);

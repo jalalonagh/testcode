@@ -15,18 +15,15 @@ namespace WebFramework.Configuration
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<SqlConnectionFactory>()
-                .As<ISqlConnectionFactory>()
+                .As<IDbConnectionFactory>()
                 .WithParameter("connectionString", _databaseConnectionString)
                 .InstancePerLifetimeScope();
-            builder
-                .Register(c =>
+            builder.Register(c =>
                 {
                     var dbContextOptionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
                     dbContextOptionsBuilder.UseSqlServer(_databaseConnectionString);
-
                     return new ApplicationDbContext(dbContextOptionsBuilder.Options);
-                })
-                .AsSelf()
+                }).AsSelf()
                 .As<DbContext>()
                 .InstancePerLifetimeScope();
         }
