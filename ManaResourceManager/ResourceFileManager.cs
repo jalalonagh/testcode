@@ -41,9 +41,7 @@ namespace ManaResourceManager
                         {
                             string s = "";
                             while ((s = sr.ReadLine()) != null)
-                            {
                                 text += s;
-                            }
                         }
                         items.AddRange(TextToResources(text));
                     }
@@ -54,7 +52,6 @@ namespace ManaResourceManager
         {
             if (!string.IsNullOrEmpty(jsonText))
                 return Newtonsoft.Json.JsonConvert.DeserializeObject<List<ResourceItem>>(jsonText);
-
             return new List<ResourceItem>();
         }
         private void CreateFolder(params string[] parts)
@@ -62,7 +59,6 @@ namespace ManaResourceManager
             if (parts != null && parts.Any())
             {
                 var path = Path.Combine(parts);
-
                 if (!Directory.Exists(path))
                     Directory.CreateDirectory(path);
             }
@@ -73,7 +69,6 @@ namespace ManaResourceManager
             if (!string.IsNullOrEmpty(path) && !string.IsNullOrEmpty(fileName))
             {
                 var pathFile = Path.Combine(path, fileName + ".json");
-
                 if (!File.Exists(pathFile))
                 {
                     using (FileStream sw = File.Create(pathFile))
@@ -96,11 +91,8 @@ namespace ManaResourceManager
         {
             IEnumerable<FileInfo> files = new List<FileInfo>();
             if (!string.IsNullOrEmpty(root) && languages != null && languages.Any())
-            {
                 foreach (var item in languages)
                     files = files.Append(new FileInfo(Path.Combine(dir, root, item.Name, item.Name + ".json")));
-            }
-
             return files;
         }
         public void UpdateResource(ManaResourceLanguage language, IEnumerable<ResourceItem> items, string root)
@@ -108,7 +100,6 @@ namespace ManaResourceManager
             if (language != null && items != null && items.Any() && !string.IsNullOrEmpty(root))
             {
                 var json = Newtonsoft.Json.JsonConvert.SerializeObject(items);
-
                 File.WriteAllText(Path.Combine(dir, root, language.Name, language.Name + ".json"), json);
             }
         }

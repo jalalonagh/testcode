@@ -76,12 +76,9 @@ namespace ManaResourceManager
                 lock (_myLock)
                 {
                     if (instance is null)
-                    {
                         instance = new ResourceManagerSingleton();
-                    }
                 }
             }
-
             return instance;
         }
     }

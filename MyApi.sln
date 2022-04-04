@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManaAutoMapper", "ManaAutoM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManaDapper", "ManaDapper\ManaDapper.csproj", "{27AC3266-EA35-47FD-B83D-8586D4933070}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManaResourceManager", "ManaResourceManager\ManaResourceManager.csproj", "{4096443D-34A3-4B4F-B371-81B5328551D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LanternetResourceManager", "ManaResourceManager\LanternetResourceManager.csproj", "{4096443D-34A3-4B4F-B371-81B5328551D8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManaSpeedTester", "ManaSpeedTester\ManaSpeedTester.csproj", "{9AB258D1-6912-4CF2-A439-87FDF7AC4F3A}"
 EndProject
@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManaBaseData", "ManaBaseDat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManaRedis", "ManaRedis\ManaRedis.csproj", "{D5220DC6-0435-4CA4-8B74-8862E2F28C93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartupConfiguration", "StartupConfiguration\StartupConfiguration.csproj", "{8BBF569B-55B1-4C26-AEFE-6CEAE370AEF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StartupConfiguration", "StartupConfiguration\StartupConfiguration.csproj", "{8BBF569B-55B1-4C26-AEFE-6CEAE370AEF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
