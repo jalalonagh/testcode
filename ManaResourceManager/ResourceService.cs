@@ -6,11 +6,16 @@ using System.Linq;
 
 namespace ManaResourceManager
 {
-    public class ResourceService
+    public interface IResourceService
+    {
+        ResourceItemPack FetchResource(string name);
+        ResourceItemPack FetchResource(string name, string language);
+    }
+
+    public class ResourceService: IResourceService
     {
         private static ResourceManagerSettings settings;
         private static IEnumerable<ResourceItem> book;
-
         private ResourceService(IConfiguration configuration)
         {
             settings = configuration.GetSection(nameof(ResourceManagerSettings)).Get<ResourceManagerSettings>();
@@ -18,7 +23,6 @@ namespace ManaResourceManager
             manager.GenerateFoldersAndFiles(settings.Languages, settings.RootDirectoryName);
             book = manager.GetAllResources(settings.Languages, settings.RootDirectoryName);
         }
-
         public ResourceItemPack FetchResource(string name)
         {
             var language = settings.DefaultLanguageCode;
@@ -36,7 +40,6 @@ namespace ManaResourceManager
             book = manager.GetAllResources(settings.Languages, settings.RootDirectoryName);
             return FetchResource(name);
         }
-
         public ResourceItemPack FetchResource(string name, string language)
         {
             if (!string.IsNullOrEmpty(language))
