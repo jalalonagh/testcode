@@ -16,7 +16,8 @@ namespace ManaResourceManager
     {
         private static ResourceManagerSettings settings;
         private static IEnumerable<ResourceItem> book;
-        private ResourceService(IConfiguration configuration)
+
+        public ResourceService(IConfiguration configuration)
         {
             settings = configuration.GetSection(nameof(ResourceManagerSettings)).Get<ResourceManagerSettings>();
             ResourceFileManager manager = new ResourceFileManager();
