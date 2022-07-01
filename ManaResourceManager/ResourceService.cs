@@ -1,20 +1,19 @@
 ﻿using ManaResourceManager.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace ManaResourceManager
 {
-    public sealed class ResourceManagerSingleton
+    public class ResourceService
     {
         private static ResourceManagerSettings settings;
         private static IEnumerable<ResourceItem> book;
-        private static ResourceManagerSingleton instance;
-        private static object _myLock = new object();
 
-        private ResourceManagerSingleton()
+        private ResourceService(IConfiguration configuration)
         {
-            settings = new ResourceManagerSettings(true);
+            settings = configuration.GetSection(nameof(ResourceManagerSettings)).Get<ResourceManagerSettings>();
             ResourceFileManager manager = new ResourceFileManager();
             manager.GenerateFoldersAndFiles(settings.Languages, settings.RootDirectoryName);
             book = manager.GetAllResources(settings.Languages, settings.RootDirectoryName);
@@ -67,19 +66,6 @@ namespace ManaResourceManager
             });
             ResourceFileManager manager = new ResourceFileManager();
             manager.UpdateResource(settings.Languages.Where(w => w.Code == language).FirstOrDefault(), languageResources, settings.RootDirectoryName);
-        }
-
-        public static ResourceManagerSingleton GetInstance()
-        {
-            if (instance is null)
-            {
-                lock (_myLock)
-                {
-                    if (instance is null)
-                        instance = new ResourceManagerSingleton();
-                }
-            }
-            return instance;
         }
     }
 }

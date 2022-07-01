@@ -63,7 +63,6 @@ namespace ManaResourceManager
                     Directory.CreateDirectory(path);
             }
         }
-
         private void CreateFileWithTemplate(string path, string fileName, string languageCode)
         {
             if (!string.IsNullOrEmpty(path) && !string.IsNullOrEmpty(fileName))
