@@ -73,12 +73,14 @@ namespace ManaResourceManager
                     using (FileStream sw = File.Create(pathFile))
                     {
                         var list = new List<ResourceItem>();
-                        list.Add(new ResourceItem(){
-                        Category = "base",
-                        Language = languageCode,
-                        Message = "به سیستم مدیریت پیغام های ما خوش آمدید",
-                        Name = "WELLCOME",
-                        Title = "خوش آمد گویی"});
+                        list.Add(new ResourceItem()
+                        {
+                            Category = "base",
+                            Language = languageCode,
+                            Message = "به سیستم مدیریت پیغام های ما خوش آمدید",
+                            Name = "WELLCOME",
+                            Title = "خوش آمد گویی"
+                        });
                         var json = Newtonsoft.Json.JsonConvert.SerializeObject(list);
                         byte[] bytes = new UTF8Encoding(true).GetBytes(json);
                         sw.Write(bytes, 0, bytes.Length);
@@ -98,8 +100,12 @@ namespace ManaResourceManager
         {
             if (language != null && items != null && items.Any() && !string.IsNullOrEmpty(root))
             {
-                var json = Newtonsoft.Json.JsonConvert.SerializeObject(items);
-                File.WriteAllText(Path.Combine(dir, root, language.Name, language.Name + ".json"), json);
+                using (FileStream sw = File.Create(Path.Combine(dir, root, language.Name, language.Name + ".json")))
+                {
+                    var json = Newtonsoft.Json.JsonConvert.SerializeObject(items);
+                    byte[] bytes = new UTF8Encoding(true).GetBytes(json);
+                    sw.Write(bytes);
+                }
             }
         }
     }

@@ -10,6 +10,8 @@ namespace ManaResourceManager
     {
         ResourceItemPack FetchResource(string name);
         ResourceItemPack FetchResource(string name, string language);
+        List<ResourceItemPack> FetchResources(List<string> names);
+        List<ResourceItemPack> FetchResources(List<string> names, string language);
     }
 
     public class ResourceService : IResourceService

@@ -6,7 +6,7 @@
     <Authors>Jalal Onagh</Authors>
     <Company>Lanternet.ir</Company>
     <Description>dynamic multi language resource manager</Description>
-    <Version>1.0.4</Version>
+    <Version>1.0.6</Version>
     <PackageLicenseFile>license.txt</PackageLicenseFile>
     <PackageProjectUrl>https://lanternet.ir</PackageProjectUrl>
   </PropertyGroup>
