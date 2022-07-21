@@ -12,7 +12,7 @@ namespace ManaResourceManager
         ResourceItemPack FetchResource(string name, string language);
     }
 
-    public class ResourceService: IResourceService
+    public class ResourceService : IResourceService
     {
         private static ResourceManagerSettings settings;
         private static IEnumerable<ResourceItem> book;
@@ -58,6 +58,49 @@ namespace ManaResourceManager
             book = manager.GetAllResources(settings.Languages, settings.RootDirectoryName);
             return pack;
         }
+        public List<ResourceItemPack> FetchResources(List<string> names)
+        {
+            var language = settings.DefaultLanguageCode;
+            if (book != null && book.Any())
+            {
+                var resources = book.Where(w => names.Contains(w.Name)).ToList();
+                List<ResourceItemPack> packs = new List<ResourceItemPack>();
+                foreach (var item in resources)
+                {
+                    var pack = new ResourceItemPack();
+                    pack.Item = resources.Where(w => w.Language == language).FirstOrDefault();
+                    pack.Others = resources.Where(w => w.Language != language).ToList();
+                }
+                if (packs.Count > 0)
+                    return packs;
+            }
+            CreateSources(names, language);
+            ResourceFileManager manager = new ResourceFileManager();
+            book = manager.GetAllResources(settings.Languages, settings.RootDirectoryName);
+            return FetchResources(names);
+        }
+        public List<ResourceItemPack> FetchResources(List<string> names, string language)
+        {
+            if (!string.IsNullOrEmpty(language))
+                language = settings.DefaultLanguageCode;
+            if (book != null && book.Any())
+            {
+                var resources = book.Where(w => names.Contains(w.Name)).ToList();
+                List<ResourceItemPack> packs = new List<ResourceItemPack>();
+                foreach (var item in resources)
+                {
+                    var pack = new ResourceItemPack();
+                    pack.Item = resources.Where(w => w.Language == language).FirstOrDefault();
+                    pack.Others = resources.Where(w => w.Language != language).ToList();
+                }
+                if (packs.Count > 0)
+                    return packs;
+            }
+            CreateSources(names, language);
+            ResourceFileManager manager = new ResourceFileManager();
+            book = manager.GetAllResources(settings.Languages, settings.RootDirectoryName);
+            return FetchResources(names);
+        }
         private void CreateSource(string name, string language)
         {
             IEnumerable<ResourceItem> languageResources = book.Where(w => w.Language == language).ToList();
@@ -68,6 +111,20 @@ namespace ManaResourceManager
                 Message = $"new {name} resource created",
                 Title = name
             });
+            ResourceFileManager manager = new ResourceFileManager();
+            manager.UpdateResource(settings.Languages.Where(w => w.Code == language).FirstOrDefault(), languageResources, settings.RootDirectoryName);
+        }
+        private void CreateSources(List<string> names, string language)
+        {
+            IEnumerable<ResourceItem> languageResources = book.Where(w => w.Language == language).ToList();
+            foreach (string name in names)
+                languageResources = languageResources.Append(new ResourceItem()
+                {
+                    Name = name,
+                    Language = language,
+                    Message = $"new {name} resource created",
+                    Title = name
+                });
             ResourceFileManager manager = new ResourceFileManager();
             manager.UpdateResource(settings.Languages.Where(w => w.Code == language).FirstOrDefault(), languageResources, settings.RootDirectoryName);
         }
