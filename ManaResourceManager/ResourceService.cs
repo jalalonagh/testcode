@@ -84,17 +84,18 @@ namespace ManaResourceManager
         }
         public List<ResourceItemPack> FetchResources(List<string> names, string language)
         {
-            if (!string.IsNullOrEmpty(language))
+            if (string.IsNullOrEmpty(language))
                 language = settings.DefaultLanguageCode;
             if (book != null && book.Any())
             {
                 var resources = book.Where(w => names.Contains(w.Name)).ToList();
                 List<ResourceItemPack> packs = new List<ResourceItemPack>();
-                foreach (var item in resources)
+                foreach (var name in names)
                 {
                     var pack = new ResourceItemPack();
-                    pack.Item = resources.Where(w => w.Language == language).FirstOrDefault();
-                    pack.Others = resources.Where(w => w.Language != language).ToList();
+                    pack.Item = resources.Where(w => w.Name == name && w.Language == language).FirstOrDefault();
+                    pack.Others = resources.Where(w => w.Name == name && w.Language != language).ToList();
+                    packs.Add(pack);
                 }
                 if (packs.Count > 0)
                     return packs;
@@ -121,7 +122,7 @@ namespace ManaResourceManager
         {
             IEnumerable<ResourceItem> languageResources = book.Where(w => w.Language == language).ToList();
             foreach (string name in names)
-                if (!book.Where(w => w.Name == name).Any())
+                if (!languageResources.Where(w => w.Name == name).Any())
                     languageResources = languageResources.Append(new ResourceItem()
                     {
                         Name = name,
