@@ -72,7 +72,8 @@ namespace ManaResourceManager
                     var pack = new ResourceItemPack();
                     pack.Item = resources.Where(w => w.Name == name && w.Language == language).FirstOrDefault();
                     pack.Others = resources.Where(w => w.Name == name && w.Language != language).ToList();
-                    packs.Add(pack);
+                    if (pack.Item != null && !string.IsNullOrEmpty(pack.Item.Message))
+                        packs.Add(pack);
                 }
                 if (packs.Count > 0)
                     return packs;
